@@ -134,8 +134,32 @@ node scripts/manual-post.mjs
 | `scripts/manual-post.mjs` | 跑呢個 |
 | `assets/data/news.json` | 自動生成，網站讀呢個 |
 | `assets/data/news.local.json` | 自動生成（手動貼文部分）+ 手動維護（翻譯、置頂） |
+| `assets/data/site.json` | Facebook / Instagram 帳號（全站唯一真相來源） |
 
 測試：`node --test scripts/manual-post.test.mjs`
+
+---
+
+## 改帳號名？
+
+社交平台帳號全部喺 `assets/data/site.json` 一個地方：
+
+```json
+{
+  "facebook": "https://www.facebook.com/Tzerohk",
+  "instagram": "https://www.instagram.com/tzerojp"
+}
+```
+
+改完之後跑一行，網站所有連結（包括 footer、JSON-LD、卡片啲「追蹤」按鈕）
+就會一齊更新：
+
+```bash
+node scripts/sync-social-links.mjs
+```
+
+`scripts/lib/site.test.mjs` 會守住呢個規則 —— 如果有邊個連結唔啱，測試就會
+話你知係邊個檔案。
 
 ---
 

@@ -101,7 +101,8 @@ Development mode，你（App Admin）就已經有 Standard Access 讀到個 Page
    自動開始同步 IG，**唔使另外設定 token**。
 
 > 如果未綁好，但你想同步指定 IG：喺 GitHub **Variables** 加 `FB_IG_USERNAME`
-> （例如 `tzerohk`），script 會試住用 `ig_<username>` 嘅方式攞返個媒體庫 ID。
+> （本網站就係 `tzerojp`，喺 `assets/data/site.json` 度），script 會試住用
+> `ig_<username>` 嘅方式攞返個媒體庫 ID。
 > 呢個方法好處係唔使 Business 類型，但只支援 Business/Creator 帳號。
 
 ### 4. 換成長效 token（60 日）
@@ -152,10 +153,13 @@ curl -s "https://graph.facebook.com/v24.0/IG_ID?fields=instagram_business_accoun
 
 | Variable | 預設 | 用途 |
 |---|---|---|
-| `FB_PAGE_USERNAME` | `Tzerohk` | 用嚟砌 permalink |
-| `FB_IG_USERNAME` | （空） | IG 未連結專頁時，用嚟指定要同步嘅帳號 |
+| `FB_PAGE_USERNAME` | `assets/data/site.json` 入面嘅 FB 帳號 | 用嚟砌 permalink |
+| `FB_IG_USERNAME` | `assets/data/site.json` 入面嘅 IG 帳號 | IG 未連結專頁時，用嚟指定要同步嘅帳號 |
 | `FB_GRAPH_VERSION` | `v24.0` | Graph API 版本 |
 | `FB_POST_LIMIT` | `8` | 每次保留幾多張卡 |
+
+> 社交帳號本身喺 `assets/data/site.json`，唔使填 Variable。
+> 改咗個檔之後跑 `node scripts/sync-social-links.mjs`，全站連結就會一齊更新。
 
 > **Token 一定要放喺 GitHub Secrets，唔可以放喺網站任何地方。**
 > 呢個網站係純靜態，任何寫入前端 JS 嘅 token 全部人睇到，
@@ -395,12 +399,16 @@ Production 環境另一條路：喺 Business Portfolio 開 System User，
 |---|---|
 | `scripts/sync-facebook.mjs` | 拉貼文、落圖、寫 JSON |
 | `scripts/manual-post.mjs` | 手動路線：將 `manual.json` 變成 feed（唔使 token） |
+| `scripts/sync-social-links.mjs` | 改咗 `site.json` 之後，將 HTML 同 JSON-LD 嘅連結一齊更新 |
 | `scripts/lib/feed.mjs` | 純函數（標題／摘要／合併／pinned），可單獨測試 |
 | `scripts/lib/feed.test.mjs` | 上面嗰啲函數嘅單元測試 |
+| `scripts/lib/site.mjs` | 讀 `site.json`（社交帳號嘅唯一真相來源） |
+| `scripts/lib/site.test.mjs` | 連結同 `site.json` 唔一致就 fail |
 | `scripts/sync.test.mjs` | 用 mock Graph API 行一次真 script 嘅端到端測試 |
 | `scripts/manual-post.test.mjs` | 手動路線嘅端到端測試 |
 | `assets/data/news.json` | **自動生成** —— 前端讀呢個 |
 | `assets/data/manual.json` | **手動維護** —— 手動路線貼文放喺呢度 |
+| `assets/data/site.json` | **手動維護** —— Facebook / Instagram 帳號 |
 | `assets/data/news.local.json` | **手動維護** —— 翻譯、自訂貼文、隱藏、pinned |
 | `assets/js/news.js` | 前端渲染 |
 | `.github/workflows/sync-facebook.yml` | 排程同步 |

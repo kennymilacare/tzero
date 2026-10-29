@@ -21,6 +21,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { applyOverride, curatedPosts, deriveExcerpt, deriveTitle, sortByDate } from './lib/feed.mjs';
+import { loadSite, usernameOf } from './lib/site.mjs';
 
 const HERE       = path.dirname(fileURLToPath(import.meta.url));
 const ROOT       = path.resolve(HERE, '..');
@@ -30,8 +31,12 @@ const MANUAL_FILE = path.join(DATA_DIR, 'manual.json');
 const LOCAL_FILE  = path.join(DATA_DIR, 'news.local.json');
 const OUT_FILE    = path.join(DATA_DIR, 'news.json');
 
-const PAGE_USERNAME = process.env.FB_PAGE_USERNAME || 'Tzerohk';
+/* The accounts the site advertises live in assets/data/site.json —
+   one place to change when the handles move. */
+const SITE = await loadSite();
+const PAGE_USERNAME = process.env.FB_PAGE_USERNAME || usernameOf(SITE.facebook);
 const PAGE_URL = `https://www.facebook.com/${PAGE_USERNAME}`;
+const INSTAGRAM_URL = SITE.instagram;
 
 /* ---------- helpers ---------- */
 
@@ -52,6 +57,7 @@ function followUrl(post) {
   if (post.source === 'Instagram') {
     const m = String(post.url || '').match(/instagram\.com\/([^/]+)\//i);
     if (m) return `https://www.instagram.com/${m[1]}/`;
+    return INSTAGRAM_URL;
   }
   return PAGE_URL;
 }

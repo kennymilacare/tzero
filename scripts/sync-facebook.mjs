@@ -14,7 +14,7 @@
    Optional:
      FB_APP_ID         enables token refresh (long-lived exchange)
      FB_APP_SECRET     enables token refresh (long-lived exchange)
-     FB_PAGE_USERNAME  used to build permalinks (default: Tzerohk)
+     FB_PAGE_USERNAME  used to build permalinks (default: from site.json)
      FB_GRAPH_VERSION  Graph API version (default: v24.0)
      FB_POST_LIMIT     how many posts to keep (default: 8)
      FB_GRAPH_BASE     Graph API host (default: graph.facebook.com).
@@ -43,6 +43,7 @@ import {
   pickImage,
   sortByDate,
 } from './lib/feed.mjs';
+import { loadSite, usernameOf } from './lib/site.mjs';
 
 const HERE      = path.dirname(fileURLToPath(import.meta.url));
 const ROOT      = path.resolve(HERE, '..');
@@ -58,8 +59,12 @@ const PAGE_TOKEN     = process.env.FB_PAGE_TOKEN;
 const USER_TOKEN     = process.env.FB_USER_TOKEN;
 const APP_ID         = process.env.FB_APP_ID;
 const APP_SECRET     = process.env.FB_APP_SECRET;
-const PAGE_USERNAME  = process.env.FB_PAGE_USERNAME || 'Tzerohk';
-const IG_USERNAME    = process.env.FB_IG_USERNAME || '';
+
+/* The accounts the site advertises live in assets/data/site.json —
+   one place to change when the handles move. */
+const SITE           = await loadSite();
+const PAGE_USERNAME  = process.env.FB_PAGE_USERNAME || usernameOf(SITE.facebook);
+const IG_USERNAME    = process.env.FB_IG_USERNAME || usernameOf(SITE.instagram);
 const INCLUDE_IG     = process.env.FB_INCLUDE_IG !== '0';
 const POST_LIMIT     = Number(process.env.FB_POST_LIMIT || 8);
 const PAGE_URL       = `https://www.facebook.com/${PAGE_USERNAME}`;

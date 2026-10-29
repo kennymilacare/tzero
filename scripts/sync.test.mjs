@@ -109,6 +109,8 @@ async function runSync(env = {}) {
   await rm(WORK, { recursive: true, force: true });
   await mkdir(path.join(WORK, 'assets/data'), { recursive: true });
   await cp(path.join(ROOT, 'scripts'), path.join(WORK, 'scripts'), { recursive: true });
+  // The scripts read the site's accounts from site.json.
+  await cp(path.join(ROOT, 'assets/data/site.json'), path.join(WORK, 'assets/data/site.json'));
 
   // Hand-written overrides: a curated post, a pinned post, a hidden post.
   await writeFile(

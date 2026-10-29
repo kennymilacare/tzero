@@ -34,6 +34,7 @@ Built with plain **HTML / CSS / JavaScript** — no build step, no framework, no
 │   │   ├── components.css # Buttons, cards, badges, accordion, forms
 │   │   └── pages.css      # Page-specific overrides
 │   ├── data/
+│   │   ├── site.json      # The Facebook Page + Instagram profile — the only place the handles live
 │   │   ├── news.json      # Generated — the Facebook / Instagram feed the site renders
 │   │   ├── manual.json    # Hand-written — paste posts here for the manual route
 │   │   └── news.local.json# Hand-written — translations, curated posts
@@ -53,8 +54,11 @@ Built with plain **HTML / CSS / JavaScript** — no build step, no framework, no
 ├── scripts/
 │   ├── sync-facebook.mjs  # Pulls the Facebook + Instagram feed, writes news.json
 │   ├── manual-post.mjs    # Turns assets/data/manual.json into the feed — no token needed
+│   ├── sync-social-links.mjs # Rewrites every social link to match site.json
 │   ├── lib/feed.mjs       # Pure helpers (unit-tested)
+│   ├── lib/site.mjs       # Reads the accounts from site.json
 │   ├── lib/feed.test.mjs  # Unit tests for the helpers
+│   ├── lib/site.test.mjs  # Fails if any social link drifts from site.json
 │   ├── sync.test.mjs      # End-to-end test — runs the real script against a mock Graph API
 │   └── manual-post.test.mjs # End-to-end test for the manual route
 ├── docs/
@@ -115,6 +119,27 @@ i18n.en.my.key = 'English default';
 
 The "最新動態" pages are driven by `assets/data/news.json`. There are two ways
 to fill it, and you can mix them.
+
+### The accounts
+
+Both social accounts live in one file — `assets/data/site.json`:
+
+```json
+{
+  "facebook": "https://www.facebook.com/Tzerohk",
+  "instagram": "https://www.instagram.com/tzerojp"
+}
+```
+
+Nothing else hardcodes a handle. The scripts read this file to build feed
+links, and `node scripts/sync-social-links.mjs` rewrites the links in the
+HTML and the JSON-LD to match. A test fails if any link drifts, so you can
+never end up with the site pointing at an account that no longer exists.
+
+```bash
+# after editing site.json
+node scripts/sync-social-links.mjs
+```
 
 ### Manual — no token, no CI, no GitHub
 
@@ -192,13 +217,15 @@ developer account does not own — see `docs/facebook-sync.md` §2.
 ### Tests
 
 ```bash
-node --test scripts/lib/feed.test.mjs scripts/sync.test.mjs scripts/manual-post.test.mjs
+node --test scripts/lib/feed.test.mjs scripts/lib/site.test.mjs scripts/sync.test.mjs scripts/manual-post.test.mjs
 ```
 
 `sync.test.mjs` starts a mock `graph.facebook.com` and runs the **real** sync
 script against it — token exchange, feed pull, Instagram pull, image download,
 overrides, pinning and pruning all get exercised with no credentials and no
 internet access. `manual-post.test.mjs` does the same for the manual route.
+`site.test.mjs` fails if any social link in the HTML or the JSON-LD drifts
+from `assets/data/site.json`.
 
 > **Never put a Facebook token in client-side code.** This site is fully
 > static, so anything in a front-end file is public. Tokens live only in

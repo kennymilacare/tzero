@@ -27,6 +27,8 @@ async function run(manual, local = { posts: {} }) {
   await mkdir(path.join(WORK, 'assets/data'), { recursive: true });
   await mkdir(path.join(WORK, 'assets/images/news'), { recursive: true });
   await cp(path.join(ROOT, 'scripts'), path.join(WORK, 'scripts'), { recursive: true });
+  // The script reads the site's accounts from site.json.
+  await cp(path.join(ROOT, 'assets/data/site.json'), path.join(WORK, 'assets/data/site.json'));
 
   await writeFile(path.join(WORK, 'assets/data/manual.json'), JSON.stringify(manual, null, 2), 'utf8');
   await writeFile(path.join(WORK, 'assets/data/news.local.json'), JSON.stringify(local, null, 2), 'utf8');
