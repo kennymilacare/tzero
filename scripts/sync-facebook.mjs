@@ -298,6 +298,13 @@ async function main() {
     fail('Set FB_PAGE_TOKEN, or FB_USER_TOKEN so the page can be looked up. See docs/facebook-sync.md.');
   }
 
+  // A page token can't say which page it belongs to — the id is what the
+  // feed URL is built from. Fail here with a clear message rather than
+  // requesting "undefined/feed" and reporting a confusing 404.
+  if (PAGE_TOKEN && !PAGE_ID) {
+    fail('FB_PAGE_TOKEN also needs FB_PAGE_ID — the numeric Page id, from /me/accounts. See docs/facebook-sync.md §5.');
+  }
+
   let token = PAGE_TOKEN;
   let pageId = PAGE_ID;
 

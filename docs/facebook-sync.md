@@ -141,8 +141,8 @@ curl -s "https://graph.facebook.com/v24.0/IG_ID?fields=instagram_business_accoun
 | `FB_USER_TOKEN` | ✅（或用 `FB_PAGE_TOKEN` 二選一） | 第 4 步拎到嘅長效 token |
 | `FB_APP_ID` | 建議 | App ID（用嚟自動續期 token） |
 | `FB_APP_SECRET` | 建議 | App Secret（同上） |
-| `FB_PAGE_ID` | 選填 | 專頁數字 ID。想自己指定 Page token 就必填 |
-| `FB_PAGE_TOKEN` | 選填 | 想直接俾 Page token（唔想 script 自己搵）就用呢個代替 `FB_USER_TOKEN` |
+| `FB_PAGE_ID` | 選填 | 專頁數字 ID。用 `FB_PAGE_TOKEN` 就必填 |
+| `FB_PAGE_TOKEN` | 選填 | 想直接俾 Page token（唔想 script 自己搵）就用呢個代替 `FB_USER_TOKEN`，**一定要同時填 `FB_PAGE_ID`** |
 
 **Variables**（選填）：
 
@@ -184,6 +184,27 @@ git push -u origin main
 > 如果你用緊 Netlify / Vercel / Cloudflare Pages hosting，
 > 删咗 `deploy-pages.yml`，改為喺嗰邊連接 repo 就得。
 
+#### 點解同步 workflow 嘅 commit 都會自動部署
+
+GitHub 有個刻意嘅限制：**用預設 `GITHUB_TOKEN` 推嘅 commit唔會觸發其他
+workflow**（防止 workflow 互相觸發成死循環）。所以同步 job 推上嚟嗰次，
+`push` event 係唔會行嘅。
+
+`deploy-pages.yml` 因此加咗第二個 trigger：
+
+```yaml
+workflow_run:
+  workflows: ['Sync Facebook news']
+  types: [completed]
+```
+
+`workflow_run` 係 GitHub 官方俾呢個情況用嘅方法 —— 同步 workflow 完咗之後
+先觸發部署，而嗰時 `main` 已經有咗新嘅 `news.json`。
+（同步失敗就唔會部署，避免發佈半份 feed。）
+
+> 如果你想改用 Personal Access Token 推（`DEPLOY_TOKEN`），
+> 咁 `push` event 就會正常觸發，`workflow_run` 就唔使。
+
 ---
 
 ## 日常運作
@@ -191,6 +212,8 @@ git push -u origin main
 - 排程：**每日 09:00 同 21:00（香港時間）**
 - 每次同步會：拉最新 FB + IG 貼文 → 下載圖片 → 寫 `news.json` → commit → 自動部署
 - `sync-facebook.yml` 同 `deploy-pages.yml` 會接力：前者 commit，後者 publish
+  （同步 bot 嘅 commit 用 `GITHUB_TOKEN` 推，唔會觸發 `push` event，
+  所以部署 workflow 靠 `workflow_run` 接力 —— 詳見第 8 節）
 
 ### 手動觸發
 

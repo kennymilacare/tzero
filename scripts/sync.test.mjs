@@ -243,6 +243,13 @@ test('the script fails loudly when no token is set', async () => {
   assert.match(stderr, /FB_PAGE_TOKEN|FB_USER_TOKEN/);
 });
 
+test('a page token without a page id fails with a clear message', async () => {
+  const { code, stderr } = await runSync({ FB_USER_TOKEN: '', FB_PAGE_TOKEN: 'page-token', FB_PAGE_ID: '' });
+  assert.equal(code, 1);
+  assert.match(stderr, /FB_PAGE_ID/);
+  assert.doesNotMatch(stderr, /undefined\/feed/);
+});
+
 test.after(async () => {
   await rm(WORK, { recursive: true, force: true });
 });

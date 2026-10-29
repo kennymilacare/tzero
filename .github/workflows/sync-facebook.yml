@@ -28,6 +28,10 @@ jobs:
     steps:
       - name: Check out the site
         uses: actions/checkout@v4
+        with:
+          # The commit step rebases onto the branch before pushing, and a
+          # shallow clone can't rebase. Fetch the whole history.
+          fetch-depth: 0
 
       - name: Set up Node
         uses: actions/setup-node@v4

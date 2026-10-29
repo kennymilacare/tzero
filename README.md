@@ -138,7 +138,11 @@ Two workflows run in sequence:
 | Workflow | When | What it does |
 |---|---|---|
 | `sync-facebook.yml` | 09:00 & 21:00 HK time, or manually | Pulls the feed and commits `news.json` + images |
-| `deploy-pages.yml` | On every push to `main` | Publishes the repo as-is to GitHub Pages |
+| `deploy-pages.yml` | On every push to `main`, and after each sync run | Publishes the repo as-is to GitHub Pages |
+
+The deploy workflow also listens for `workflow_run`, because GitHub
+deliberately does not start a workflow run for a push made with the
+default `GITHUB_TOKEN` — which is exactly how the sync job commits.
 
 Because there is no build step, "deploying" just means publishing the folder.
 If the site is hosted on Netlify / Vercel / Cloudflare Pages instead, delete
