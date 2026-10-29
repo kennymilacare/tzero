@@ -1,5 +1,8 @@
+# The whole site may be crawled, including the CSS, the JavaScript and the
+# product photos. The pages render through JavaScript, so a crawler that
+# cannot fetch /assets/ sees an empty page — and the product photos never
+# reach Google Images.
 User-agent: *
 Allow: /
-Disallow: /assets/
 
 Sitemap: https://www.tzero-jp.com/sitemap.xml

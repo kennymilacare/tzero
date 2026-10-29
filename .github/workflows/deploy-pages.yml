@@ -49,10 +49,12 @@ jobs:
 
       - name: Prepare the site
         run: |
-          # Only the site itself is published — not the git history or the
-          # workflow definitions.
-          rm -rf .git .github .tmp-test
-          rm -f screenshots/*.png
+          # Only the site itself is published — not the git history, the
+          # workflow definitions, the internal docs, the scripts, or the
+          # editor's own settings. Everything under /assets/ IS published:
+          # the pages need the CSS and the JavaScript to render at all.
+          rm -rf .git .github .claude .tmp-test .tmp-verify docs scripts
+          rm -f screenshots/*.png README.md .gitignore
 
       - name: Upload the site
         uses: actions/upload-pages-artifact@v3
