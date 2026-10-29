@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /assets/
 
-Sitemap: https://kennymilacare.github.io/tzero/sitemap.xml
+Sitemap: https://www.tzero-jp.com/sitemap.xml

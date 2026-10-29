@@ -10,7 +10,7 @@
     "就會把每頁嘅 canonical / hreflang / og:url、sitemap.xml、robots.txt 一次過改齊。",
     "測試 (scripts/lib/siteurl.test.mjs) 會守住呢個規則。"
   ],
-  "url": "https://kennymilacare.github.io/tzero/",
+  "url": "https://www.tzero-jp.com/",
   "facebook": "https://www.facebook.com/Tzerohk",
   "instagram": "https://www.instagram.com/tzerojp"
 }

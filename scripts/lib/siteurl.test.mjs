@@ -41,6 +41,12 @@ test('the trailing slash of the home page survives the move', () => {
   assert.equal(out, 'https://new.com/');
 });
 
+test('the address shown as plain text moves too', () => {
+  const text = '聯絡表:old.com/contact 及 www.old.com';
+  const out = rewriteText(text, 'https://old.com/', 'https://www.new.com/');
+  assert.equal(out, '聯絡表:www.new.com/contact 及 www.new.com');
+});
+
 test('the address is read out of each kind of file', () => {
   assert.equal(canonicalOf('<link rel="canonical" href="https://x.com/a.html">'), 'https://x.com/a.html');
   assert.equal(canonicalOf('<p>no canonical here</p>'), null);
@@ -79,4 +85,21 @@ test('no page, sitemap or robots.txt is left on the old address', async () => {
   assert.deepEqual(problems, [],
     `the site address drifted from assets/data/site.json:\n  ${problems.join('\n  ')}\n` +
     'Run: node scripts/set-site-url.mjs <the address in site.json>');
+});
+
+test('no placeholder domain is left anywhere on the site', async () => {
+  /* The address used to be a placeholder. Nothing may still point at
+     it — not in a link, and not in the text a visitor reads. */
+  const files = (await readdir(ROOT)).filter((f) => f.endsWith('.html') || f.endsWith('.xml'));
+  files.push('robots.txt');
+
+  const problems = [];
+  for (const name of files) {
+    const text = await readFile(path.join(ROOT, name), 'utf8');
+    if (/example\.com/i.test(text)) problems.push(name);
+  }
+
+  assert.deepEqual(problems, [],
+    `a placeholder domain is still on the site:\n  ${problems.join('\n  ')}\n` +
+    'Run: node scripts/set-site-url.mjs <the real address>');
 });

@@ -59,16 +59,47 @@ export function baseOf(pageUrl) {
   return u.origin + p;
 }
 
+/** The host part of a URL, or ''. */
+export function hostOf(url) {
+  try {
+    return new URL(String(url || '')).host;
+  } catch (e) {
+    return '';
+  }
+}
+
+/** Replace a host only where it stands on its own — not inside another host. */
+function replaceHost(text, from, to) {
+  const esc = String(from).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const re = new RegExp(`(?<![A-Za-z0-9.-])${esc}(?![A-Za-z0-9.-])`, 'g');
+  return text.replace(re, to);
+}
+
 /**
  * Point every URL that belongs to the old base at the new one.
  * Third-party links (Facebook, Instagram, HKTVmall) are left alone —
  * only this site's own address moves.
+ *
+ * The address is also shown as plain text in places ("tzero-jp.com/contact"
+ * in the terms page), so the host moves there too — as the new host,
+ * exactly, so the text a visitor reads is an address that works.
  */
 export function rewriteText(text, oldBase, newBase) {
   const oldKey = String(oldBase || '').replace(/\/+$/, '');
   const newKey = String(newBase || '').replace(/\/+$/, '');
   if (!oldKey || !newKey || oldKey === newKey) return String(text || '');
-  return String(text || '').split(oldKey).join(newKey);
+
+  let out = String(text || '').split(oldKey).join(newKey);
+
+  const oldHost = hostOf(oldBase);
+  const newHost = hostOf(newBase);
+  if (oldHost && newHost && oldHost !== newHost) {
+    const oldBare = oldHost.replace(/^www\./, '');
+    /* "www.old.com" first, so the bare rule cannot bite into it. */
+    if (`www.${oldBare}` !== oldHost) out = replaceHost(out, `www.${oldBare}`, newHost);
+    out = replaceHost(out, oldBare, newHost);
+  }
+  return out;
 }
 
 /** The canonical URL declared in a page, or null. */
