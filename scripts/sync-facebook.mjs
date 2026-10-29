@@ -422,6 +422,9 @@ async function main() {
   for (const post of curatedPosts(overrides, PAGE_URL)) {
     if (posts.some((p) => p.id === post.id)) continue;
     posts.push(post);
+    // Its image was downloaded (or hand-placed) on an earlier run — keep
+    // the file, or the pruner below would delete it.
+    if (post.image) keepImages.add(path.basename(post.image));
     console.log(`[sync-facebook] curated post ${post.id} kept`);
   }
 

@@ -3,7 +3,7 @@
    (no copyrighted brand imagery)
    =========================================================== */
 
-import { brands } from './data.js?v=21';
+import { brands } from './data.js?v=22';
 import { getLang as realGetLang, pickByLang, t } from './i18n.js?v=5';
 
 const W = 200;

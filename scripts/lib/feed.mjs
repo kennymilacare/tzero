@@ -47,8 +47,11 @@ export function deriveExcerpt(message, title) {
 
   let body = lines.join(' ');
   body = body.replace(/https?:\/\/\S+/g, '');           // drop bare links
+  body = body.replace(/(^|\s)#\S+/g, ' ');              // drop hashtags
   body = body.replace(/\s+/g, ' ').trim();              // then collapse whitespace
-  if (!body) body = message.replace(/\s+/g, ' ').trim();
+  if (!body) {
+    body = message.replace(/https?:\/\/\S+/g, '').replace(/(^|\s)#\S+/g, ' ').replace(/\s+/g, ' ').trim();
+  }
   if (body.length > EXCERPT_MAX) body = body.slice(0, EXCERPT_MAX - 1).trimEnd() + '…';
   return body;
 }

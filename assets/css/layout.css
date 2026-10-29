@@ -763,6 +763,14 @@
   transition: transform var(--d-slow) var(--ease);
 }
 
+/* A post with no photo still needs a panel, not a blank cream block. */
+.news-card__media--empty {
+  background:
+    radial-gradient(110% 110% at 18% 18%, rgba(15, 110, 120, 0.18), transparent 62%),
+    radial-gradient(110% 110% at 82% 82%, rgba(255, 138, 122, 0.22), transparent 62%),
+    var(--bg);
+}
+
 .news-card__media:hover img { transform: scale(1.04); }
 
 .news-card__source {

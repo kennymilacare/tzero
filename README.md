@@ -34,7 +34,8 @@ Built with plain **HTML / CSS / JavaScript** — no build step, no framework, no
 │   │   ├── components.css # Buttons, cards, badges, accordion, forms
 │   │   └── pages.css      # Page-specific overrides
 │   ├── data/
-│   │   ├── news.json      # Generated — the Facebook feed the site renders
+│   │   ├── news.json      # Generated — the Facebook / Instagram feed the site renders
+│   │   ├── manual.json    # Hand-written — paste posts here for the manual route
 │   │   └── news.local.json# Hand-written — translations, curated posts
 │   ├── js/
 │   │   ├── data.js        # Products, FAQs, brands, translations
@@ -51,10 +52,14 @@ Built with plain **HTML / CSS / JavaScript** — no build step, no framework, no
 │   └── images/            # banners, brand, couples, hero, icons, products
 ├── scripts/
 │   ├── sync-facebook.mjs  # Pulls the Facebook + Instagram feed, writes news.json
+│   ├── manual-post.mjs    # Turns assets/data/manual.json into the feed — no token needed
 │   ├── lib/feed.mjs       # Pure helpers (unit-tested)
 │   ├── lib/feed.test.mjs  # Unit tests for the helpers
-│   └── sync.test.mjs      # End-to-end test — runs the real script against a mock Graph API
-├── docs/facebook-sync.md  # Facebook / Instagram / Graph API setup guide
+│   ├── sync.test.mjs      # End-to-end test — runs the real script against a mock Graph API
+│   └── manual-post.test.mjs # End-to-end test for the manual route
+├── docs/
+│   ├── facebook-sync.md   # Facebook / Instagram / Graph API setup guide
+│   └── manual-posts.md    # Updating the feed by hand — no token, no CI
 └── .github/workflows/
     ├── sync-facebook.yml  # Scheduled feed sync
     └── deploy-pages.yml   # Publishes the repo to GitHub Pages on every push
@@ -106,13 +111,32 @@ i18n.en.my.key = 'English default';
 
 `i18n.js` walks the DOM at load and on language change, swapping every `data-i18n`, `data-i18n-placeholder`, and `data-i18n-aria` element.
 
-## Social Feed Auto-Sync (Facebook + Instagram)
+## Social Feed (Facebook + Instagram)
 
-The "最新動態" pages are driven by `assets/data/news.json`, which is generated
-from the T-ZERO Facebook Page and the Instagram Business account linked to it.
-A scheduled GitHub Actions job pulls the latest posts, downloads their images
-into the repo, and commits the result — the site itself stays fully static,
-with no backend and no build step.
+The "最新動態" pages are driven by `assets/data/news.json`. There are two ways
+to fill it, and you can mix them.
+
+### Manual — no token, no CI, no GitHub
+
+Paste the caption into `assets/data/manual.json`, run one command:
+
+```bash
+node scripts/manual-post.mjs
+```
+
+The first line of `text` becomes the headline (emoji and hashtags are
+stripped), the rest becomes the excerpt, and the post is dated and linked.
+Images can be a local path or an `https://` URL — a remote one is downloaded
+into the repo, because Facebook's CDN links are signed and expire.
+
+Full guide: [`docs/manual-posts.md`](docs/manual-posts.md).
+
+### Automatic — GitHub Actions + Graph API
+
+A scheduled job pulls the latest posts from the T-ZERO Facebook Page and the
+Instagram Business account linked to it, downloads their images into the repo,
+and commits the result — the site itself stays fully static, with no backend
+and no build step.
 
 ```
 Facebook Page ┐
@@ -131,6 +155,14 @@ the site never breaks because of the feed. Instagram cards get their own icon,
 heading and "view post" wording, and their *follow* button points at the
 Instagram profile rather than the Facebook Page.
 
+`news.html` currently shows **Instagram posts only**. Each `[data-news-list]`
+container filters with `data-news-source` (`instagram`, `facebook`, or
+`facebook,instagram`); drop the attribute to show everything. Curated brand
+cards (HKTVmall) ignore the filter and always appear.
+
+Manual posts are written back into `news.local.json`, so the two routes
+coexist: a post added by hand survives the automatic sync.
+
 ### Deploying
 
 Two workflows run in sequence:
@@ -148,8 +180,8 @@ Because there is no build step, "deploying" just means publishing the folder.
 If the site is hosted on Netlify / Vercel / Cloudflare Pages instead, delete
 `deploy-pages.yml` and connect that host to the repository.
 
-**Setup is not finished yet** — the repo has been initialised but not pushed.
-Follow `docs/facebook-sync.md` §7 to push it, then add the secrets
+**The automatic route still needs setup** — the repo has been initialised but
+not pushed. Follow `docs/facebook-sync.md` §7 to push it, then add the secrets
 (`FB_USER_TOKEN`, `FB_APP_ID`, `FB_APP_SECRET`, optionally `FB_PAGE_ID` /
 `FB_PAGE_TOKEN`) and run the workflow once by hand.
 
@@ -160,13 +192,13 @@ developer account does not own — see `docs/facebook-sync.md` §2.
 ### Tests
 
 ```bash
-node --test scripts/lib/feed.test.mjs scripts/sync.test.mjs
+node --test scripts/lib/feed.test.mjs scripts/sync.test.mjs scripts/manual-post.test.mjs
 ```
 
 `sync.test.mjs` starts a mock `graph.facebook.com` and runs the **real** sync
 script against it — token exchange, feed pull, Instagram pull, image download,
 overrides, pinning and pruning all get exercised with no credentials and no
-internet access.
+internet access. `manual-post.test.mjs` does the same for the manual route.
 
 > **Never put a Facebook token in client-side code.** This site is fully
 > static, so anything in a front-end file is public. Tokens live only in

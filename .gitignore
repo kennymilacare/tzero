@@ -18,3 +18,4 @@ screenshots/*.png
 # Local test scratch
 .tmp-test/
 .tmp-verify/
+.tmp-manual-test/

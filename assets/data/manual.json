@@ -1,0 +1,40 @@
+{
+  "_readme": [
+    "手動貼文 —— 唔用 GitHub、唔用 token 想更新網站就改呢個檔。",
+    "改完跑: node scripts/manual-post.mjs",
+    "",
+    "每一個 post object = 一張卡:",
+    "  date   貼文日期 YYYY-MM-DD (必需)",
+    "  text   貼文全文 (必需)。第一行會自動變標題, 其餘變摘要, 所以",
+    "        直接將 Facebook / Instagram 個 caption 貼落嚟就得, 唔使改。",
+    "  url    貼文連結 (必需) —— 撳「查看貼文」會跳去呢度",
+    "  source Facebook (預設) 或者 Instagram",
+    "  image  選填。本機圖片路徑 (assets/images/news/xxx.jpg),",
+    "        或者直接填 https:// 圖片網址 (script 會下載返存喺 repo)",
+    "  title_en / excerpt_en / title_ja / excerpt_ja  選填, 英文日文版文案",
+    "",
+    "news.html 而家只顯示 Instagram 貼文 (source 係 Instagram 先會出現)。",
+    "想 Facebook 貼文都出現: 喺 news.html 個 data-news-list 容器度",
+    "改返 data-news-source=\"facebook,instagram\", 或者刪走佢就全部顯示。",
+    "詳情見 docs/manual-posts.md。",
+    "",
+    "最新嘅放最前面 —— 卡片係按 date 排序, 唔係按呢個檔嘅次序。",
+    "想刪一張卡, 刪走佢個 object 就得, 再跑一次 script。"
+  ],
+  "posts": [
+    {
+      "date": "2026-10-24",
+      "text": "限時優惠 #Tzero\n即日起全線產品買一送一。",
+      "url": "https://www.instagram.com/tzerohk/p/17890000000000001/",
+      "source": "Instagram",
+      "image": "assets/images/banners/carousel/9.png"
+    },
+    {
+      "date": "2026-10-28",
+      "text": "新裝上市 🎉\n全線產品換上全新包裝，樽身更透明，凸點一目了然。\n#Tzero",
+      "url": "https://www.instagram.com/tzerohk/p/17890000000000002/",
+      "source": "Instagram",
+      "image": "assets/images/banners/carousel/11.png"
+    }
+  ]
+}

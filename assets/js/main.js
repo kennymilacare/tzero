@@ -4,7 +4,7 @@
    =========================================================== */
 
 import { initI18n, t, getLang } from './i18n.js?v=5';
-import { products } from './data.js?v=21';
+import { products } from './data.js?v=22';
 
 /* ---------- Header shadow on scroll ---------- */
 function initHeaderScroll() {

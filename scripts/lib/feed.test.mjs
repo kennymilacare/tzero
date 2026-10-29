@@ -30,6 +30,14 @@ test('deriveTitle drops trailing hashtags too', () => {
   assert.equal(deriveTitle('#Tzero 限時優惠'), '限時優惠');
 });
 
+test('deriveExcerpt drops hashtags and bare links', () => {
+  const text = '新裝上市 🎉\n全線產品換上全新包裝。\n#Tzero';
+  const title = deriveTitle(text);
+  assert.equal(title, '新裝上市');
+  assert.equal(deriveExcerpt(text, title), '全線產品換上全新包裝。');
+  assert.equal(deriveExcerpt('詳情 https://example.com/x #Tzero', '詳情'), '詳情');
+});
+
 test('deriveTitle returns empty when there is nothing usable', () => {
   assert.equal(deriveTitle(''), '');
   assert.equal(deriveTitle(null), '');

@@ -63,6 +63,37 @@ const state = {
   loaded: false,
 };
 
+/* The networks a post can come from. Curated brand cards (HKTVmall,
+   Watsons) are not social posts — a page that filters by network
+   still shows those. */
+const SOCIAL_SOURCES = ['facebook', 'instagram'];
+
+/**
+ * The posts a given list should show.
+ *
+ * The list container can narrow the feed with
+ *   data-news-source="instagram"          — only Instagram
+ *   data-news-source="facebook,instagram"— both
+ * With no attribute, everything is shown.
+ */
+function postsFor(list) {
+  const limit = Number(list.getAttribute('data-news-limit')) || MAX_POSTS;
+  const wanted = (list.getAttribute('data-news-source') || '')
+    .split(',')
+    .map((s) => s.trim().toLowerCase())
+    .filter(Boolean);
+
+  const posts = wanted.length
+    ? state.posts.filter((p) => {
+        const src = String(p.source || '').toLowerCase();
+        if (!SOCIAL_SOURCES.includes(src)) return true;
+        return wanted.includes(src);
+      })
+    : state.posts;
+
+  return posts.slice(0, limit);
+}
+
 /* ---------- render ---------- */
 
 function buildCard(post) {
@@ -92,6 +123,9 @@ function buildCard(post) {
     img.loading = 'lazy';
     img.decoding = 'async';
     media.appendChild(img);
+  } else {
+    // No photo — the media panel still needs to look deliberate.
+    media.classList.add('news-card__media--empty');
   }
 
   const source = document.createElement('span');
@@ -163,8 +197,7 @@ function render() {
   if (!lists.length) return;
 
   lists.forEach((list) => {
-    const limit = Number(list.getAttribute('data-news-limit')) || MAX_POSTS;
-    const posts = state.posts.slice(0, limit);
+    const posts = postsFor(list);
     if (!posts.length) return;
 
     // Replace the built-in cards in place — the container also holds
@@ -223,7 +256,11 @@ function updateJsonLd() {
     if (mode === 'list') {
       const list = graph.find((n) => n['@type'] === 'ItemList');
       if (!list) return;
-      list.itemListElement = state.posts.map((post, i) => newsArticle(post, i + 1));
+      // Use the same filter the page shows, so the structured data
+      // matches what a visitor sees.
+      const el = document.querySelector('[data-news-list]');
+      const posts = el ? postsFor(el) : state.posts;
+      list.itemListElement = posts.map((post, i) => newsArticle(post, i + 1));
     } else {
       const node = newsArticle(state.posts[0], 1);
       const at = graph.findIndex((n) => n['@type'] === 'NewsArticle');

@@ -2,7 +2,7 @@
    product.js — product detail page (reads ?id= from URL)
    =========================================================== */
 
-import { products } from './data.js?v=21';
+import { products } from './data.js?v=22';
 import { productCardHTML, productMediaHTML } from './product-svg.js?v=6';
 import { initI18n, getLang, t, pickByLang } from './i18n.js?v=5';
 

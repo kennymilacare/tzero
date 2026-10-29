@@ -2,6 +2,10 @@
 
 把 T-ZERO 第九感 Facebook 專頁（連同連結住嘅 Instagram Business 帳號）嘅貼文自動同步到網站。
 
+> **淨係想手動更新？** 唔想開 GitHub、唔想搞 token 嘅話，用
+> [`manual-posts.md`](manual-posts.md) —— 貼落一個 JSON、跑一行 command 就得。
+> 兩條路可以共存：手動加嘅貼文會被寫入 `news.local.json`，唔會被自動同步蓋走。
+
 ```
 Facebook 專頁 ──┐
                 ├─  Graph API（排程job，密碼存在 GitHub Secrets）
@@ -322,6 +326,27 @@ Graph API 每次只會俾最近 N 條貼文，舊咗嘅重要貼文會喺下一�
 
 自訂貼文（curated）本身就係永久保留，`pinned` 對佢嚟講冇分別。
 
+### 邊個頁顯示邊啲貼文
+
+每個 `[data-news-list]` 容器可以用三個 attribute 控制顯示乜：
+
+| Attribute | 效果 |
+|---|---|
+| `data-news-limit="8"` | 最多顯示幾多張卡（預設 8） |
+| `data-news-source="instagram"` | **淨係顯示 Instagram 貼文** |
+| `data-news-source="facebook,instagram"` | Facebook 同 Instagram 都顯示 |
+| 冇呢個 attribute | 全部都顯示 |
+
+而家 [news.html](../news.html) 用緊 `data-news-source="instagram"`，
+即係呢一頁淨係出 Instagram 貼文。想 Facebook 貼文都出，刪走呢個
+attribute 或者改成 `facebook,instagram` 就得。
+
+自訂卡片（例如 HKTVmall 嗰張）**唔受**呢個 filter 影響 —— 佢哋唔係
+社交平台貼文，任何一頁都會顯示。
+
+> `index.html` 嘅最新動態欄用 `data-news-limit="1"`，冇 source filter，
+> 所以顯示最新嗰張卡（無論係 FB 定 IG）。
+
 ---
 
 ## 出事點睇
@@ -369,10 +394,13 @@ Production 環境另一條路：喺 Business Portfolio 開 System User，
 | 檔案 | 用途 |
 |---|---|
 | `scripts/sync-facebook.mjs` | 拉貼文、落圖、寫 JSON |
+| `scripts/manual-post.mjs` | 手動路線：將 `manual.json` 變成 feed（唔使 token） |
 | `scripts/lib/feed.mjs` | 純函數（標題／摘要／合併／pinned），可單獨測試 |
 | `scripts/lib/feed.test.mjs` | 上面嗰啲函數嘅單元測試 |
 | `scripts/sync.test.mjs` | 用 mock Graph API 行一次真 script 嘅端到端測試 |
+| `scripts/manual-post.test.mjs` | 手動路線嘅端到端測試 |
 | `assets/data/news.json` | **自動生成** —— 前端讀呢個 |
+| `assets/data/manual.json` | **手動維護** —— 手動路線貼文放喺呢度 |
 | `assets/data/news.local.json` | **手動維護** —— 翻譯、自訂貼文、隱藏、pinned |
 | `assets/js/news.js` | 前端渲染 |
 | `.github/workflows/sync-facebook.yml` | 排程同步 |
