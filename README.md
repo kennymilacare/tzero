@@ -34,7 +34,7 @@ Built with plain **HTML / CSS / JavaScript** — no build step, no framework, no
 │   │   ├── components.css # Buttons, cards, badges, accordion, forms
 │   │   └── pages.css      # Page-specific overrides
 │   ├── data/
-│   │   ├── site.json      # The Facebook Page + Instagram profile — the only place the handles live
+│   │   ├── site.json      # The Facebook Page + Instagram profile + the site's own address
 │   │   ├── news.json      # Generated — the Facebook / Instagram feed the site renders
 │   │   ├── manual.json    # Hand-written — paste posts here for the manual route
 │   │   └── news.local.json# Hand-written — translations, curated posts
@@ -56,10 +56,13 @@ Built with plain **HTML / CSS / JavaScript** — no build step, no framework, no
 │   ├── manual-post.mjs    # Turns assets/data/manual.json into the feed — no token needed
 │   ├── ig-fetch.mjs       # Reads an IG post link → caption, image and date
 │   ├── sync-social-links.mjs # Rewrites every social link to match site.json
+│   ├── set-site-url.mjs  # Moves the site to a new address — canonical, sitemap, robots
 │   ├── lib/feed.mjs       # Pure helpers (unit-tested)
 │   ├── lib/site.mjs       # Reads the accounts from site.json
+│   ├── lib/siteurl.mjs    # Pure helpers for the site's own address
 │   ├── lib/feed.test.mjs  # Unit tests for the helpers
 │   ├── lib/site.test.mjs  # Fails if any social link drifts from site.json
+│   ├── lib/siteurl.test.mjs # Fails if any page drifts from the address in site.json
 │   ├── sync.test.mjs      # End-to-end test — runs the real script against a mock Graph API
 │   └── manual-post.test.mjs # End-to-end test for the manual route
 ├── docs/
@@ -227,8 +230,13 @@ Because there is no build step, "deploying" just means publishing the folder.
 If the site is hosted on Netlify / Vercel / Cloudflare Pages instead, delete
 `deploy-pages.yml` and connect that host to the repository.
 
-**The automatic route still needs setup** — the repo has been initialised but
-not pushed. Follow `docs/facebook-sync.md` §7 to push it, then add the secrets
+**First time only:** in the repo, **Settings → Pages → Source → GitHub
+Actions** (not "Deploy from a branch"), then Save. The first deploy runs on
+the next push, and the site lands at `https://<user>.github.io/<repo>/`.
+
+**The automatic route still needs setup** — the repo has been initialised and
+the `origin` remote points at GitHub, but the history has not been pushed yet.
+Follow `docs/facebook-sync.md` §7 to push it, then add the secrets
 (`FB_USER_TOKEN`, `FB_APP_ID`, `FB_APP_SECRET`, optionally `FB_PAGE_ID` /
 `FB_PAGE_TOKEN`) and run the workflow once by hand.
 
@@ -236,10 +244,24 @@ If the app is owned by whoever administers the Page, Business Verification is
 *not* required. It only becomes mandatory when the app serves assets the
 developer account does not own — see `docs/facebook-sync.md` §2.
 
+### The site's own address
+
+The site is static, so its address is written literally into every page
+(`canonical`, `hreflang`, `og:url`), into `sitemap.xml` and into `robots.txt`.
+It lives in one place — `assets/data/site.json` — and one command moves it:
+
+```bash
+node scripts/set-site-url.mjs https://tzerohk.com
+```
+
+That rewrites all of them at once and records the new address in `site.json`.
+`scripts/lib/siteurl.test.mjs` fails if any page is left pointing at the old
+one, so a half-finished move cannot slip through.
+
 ### Tests
 
 ```bash
-node --test scripts/lib/feed.test.mjs scripts/lib/site.test.mjs scripts/lib/ig.test.mjs scripts/sync.test.mjs scripts/manual-post.test.mjs
+node --test scripts/lib/feed.test.mjs scripts/lib/site.test.mjs scripts/lib/siteurl.test.mjs scripts/lib/ig.test.mjs scripts/sync.test.mjs scripts/manual-post.test.mjs
 ```
 
 `sync.test.mjs` starts a mock `graph.facebook.com` and runs the **real** sync

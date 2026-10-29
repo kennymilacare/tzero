@@ -14,6 +14,8 @@ import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import { normalizeBase } from './siteurl.mjs';
+
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 export const ROOT = path.resolve(HERE, '..', '..');
 export const SITE_FILE = path.join(ROOT, 'assets', 'data', 'site.json');
@@ -23,6 +25,8 @@ export async function loadSite() {
   return {
     facebook: String(raw.facebook || '').replace(/\/+$/, ''),
     instagram: String(raw.instagram || '').replace(/\/+$/, ''),
+    /* The site's own address — where it is published. */
+    url: normalizeBase(raw.url) || '',
   };
 }
 

@@ -3,8 +3,14 @@
     "社交平台帳號 —— 全站唯一真相來源。",
     "改咗呢個檔之後跑: node scripts/sync-social-links.mjs",
     "就會把 HTML 入面所有 facebook.com / instagram.com 嘅連結改返一致。",
-    "測試 (scripts/lib/site.test.mjs) 會守住呢個規則。"
+    "測試 (scripts/lib/site.test.mjs) 會守住呢個規則。",
+    "",
+    "url —— 網站自己嘅地址 (公開網址)。",
+    "改咗之後跑: node scripts/set-site-url.mjs <新地址>",
+    "就會把每頁嘅 canonical / hreflang / og:url、sitemap.xml、robots.txt 一次過改齊。",
+    "測試 (scripts/lib/siteurl.test.mjs) 會守住呢個規則。"
   ],
+  "url": "https://kennymilacare.github.io/tzero/",
   "facebook": "https://www.facebook.com/Tzerohk",
   "instagram": "https://www.instagram.com/tzerojp"
 }
