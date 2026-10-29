@@ -62,6 +62,9 @@ node scripts/manual-post.mjs
 - **有本機圖**：放低喺 `assets/images/news/`，然後填 `"image": "assets/images/news/xxx.jpg"`。
 - **淨係有 FB / IG 個 CDN 網址**：直接填落 `image`，script 會自動下載。
   一定要咁做 —— 嗰啲網址係簽名過嘅，幾個星期後就 403 死咗。
+- **下載完之後**：記得返去 `manual.json` 將 `image` 改成 script 話你知嗰條
+  本機路徑（`assets/images/news/xxx.jpg`）。咁下次再跑就唔會再上網，
+  就算 IG 個連結過期咗都唔會有問題。
 - **冇圖都得**：卡片會顯示一個品牌色嘅漸層面板，唔會有空雞。
 
 ---
@@ -98,6 +101,70 @@ node scripts/manual-post.mjs
 
 ---
 
+## 一頁出幾多張？
+
+`data-news-limit` 一個數字就夠：
+
+| 頁面 | 而家 | 改點樣 |
+|---|---|---|
+| `news.html` | `4` | 改 `data-news-limit="4"` 個數字 |
+| `index.html` | `1` | 改 `data-news-limit="1"` 個數字 |
+
+**超出去嘅貼文唔會冇咗** —— 全部仲喺 `manual.json` 同 `news.local.json` 度，
+只係頁面淨係顯示最新嗰幾張。想改顯示數量就撳 `data-news-limit` 個數字。
+
+---
+
+## 淨係想俾條連結就得
+
+如果你只有 IG 貼文連結（唔想或者唔記得抄 caption）：
+
+```bash
+node scripts/ig-fetch.mjs https://www.instagram.com/p/De_a7-Yks0Z/
+```
+
+可以一次過俾多條：
+
+```bash
+node scripts/ig-fetch.mjs \
+  https://www.instagram.com/p/AAAA/ \
+  https://www.instagram.com/p/BBBB/ \
+  https://www.instagram.com/p/CCCC/
+```
+
+或者將連結一條行一條寫入個 txt 檔再跑：
+
+```bash
+node scripts/ig-fetch.mjs --file urls.txt
+```
+
+Script 會自己讀到：
+
+- **caption**（全文，帳號名嗰行會自動剝走）
+- **圖片**（下載咗存喺 `assets/images/news/ig-<日期>-<編號>.jpg`，唔會過期）
+- **日期**（由貼文短碼解出嚟，準確唔使估）
+- **帳號**（`assets/data/site.json` 入面嗰個）
+
+跟住自動寫入 `manual.json`。**跟住記得跑 `node scripts/manual-post.mjs`**
+（或者用下面呢個一條龍版本）：
+
+```bash
+node scripts/ig-fetch.mjs <連結> && node scripts/manual-post.mjs
+```
+
+> **標題同摘要：script 唔會寫入 `manual.json`。** 佢哋係由 caption 推導出嚟
+> （`manual-post.mjs` 嚟做），所以第一行係「【返工已經夠乾…】」嘅話，
+> 標題會變成「返工已經夠乾…」（【】同 emoji 自動剝走）。
+> 如果你自己改過 `title_zh` / `excerpt_zh` / `title_en` / `excerpt_en`，
+> **下次再跑 `ig-fetch` 唔會洗走你寫嘅字** —— 佢只會更新 caption 同圖片。
+
+> **要部 Chrome。** Instagram 嘅公開頁面要 JavaScript 先 render 到內容，
+> 所以呢個 script 會開一個無頭 Chrome（用 DevTools Protocol，唔使 npm
+> install 任何嘢）。冇 Chrome 嘅話佢會直接話你知。
+> `CHROME_PATH` 環境變數可以指定 Chrome 嘅位置。
+
+---
+
 ## 常用操作
 
 | 你想 | 點做 |
@@ -106,6 +173,7 @@ node scripts/manual-post.mjs
 | 刪一張卡 | 刪走佢個 object，跑 script |
 | 改字 | 直接改 `text`，跑 script |
 | 換張圖 | 改 `image` 個值，跑 script |
+| 由連結自動入 | `node scripts/ig-fetch.mjs <連結>` |
 
 **Id 係自動生成嘅**（用貼文連結計），所以次序唔影響 —— 你可以隨便擺。
 同一條連結永遠得同一個 id，掂咗佢就係更新，唔會重複出卡。
@@ -132,6 +200,7 @@ node scripts/manual-post.mjs
 |---|---|
 | `assets/data/manual.json` | **你改呢個** |
 | `scripts/manual-post.mjs` | 跑呢個 |
+| `scripts/ig-fetch.mjs` | 淨係有連結嗰陣用 —— 自動抓 caption／圖／日期 |
 | `assets/data/news.json` | 自動生成，網站讀呢個 |
 | `assets/data/news.local.json` | 自動生成（手動貼文部分）+ 手動維護（翻譯、置頂） |
 | `assets/data/site.json` | Facebook / Instagram 帳號（全站唯一真相來源） |

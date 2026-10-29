@@ -103,6 +103,33 @@ test('an Instagram post follows the profile, not the post', async () => {
   assert.equal(post.followUrl, 'https://www.instagram.com/tzerohk/');
 });
 
+test('a share link with no account name still follows the right profile', async () => {
+  // instagram.com/p/<code>/ carries no account — the site knows it.
+  const { feed } = await run({
+    posts: [{
+      date: '2026-10-27',
+      text: '返工已經夠乾',
+      url: 'https://www.instagram.com/p/De_a7-Yks0Z/?img_index=1',
+      source: 'Instagram',
+    }],
+  });
+  const post = feed.posts[0];
+  assert.equal(post.followUrl, 'https://www.instagram.com/tzerojp/');
+  assert.equal(post.permalink, 'https://www.instagram.com/p/De_a7-Yks0Z/');
+});
+
+test('tracking parameters are dropped from the permalink', async () => {
+  const { feed } = await run({
+    posts: [{
+      date: '2026-10-27',
+      text: '新貼文',
+      url: 'https://www.instagram.com/tzerojp/p/De_a7-Yks0Z/?igshid=abc&utm_source=ig_web',
+      source: 'Instagram',
+    }],
+  });
+  assert.equal(feed.posts[0].permalink, 'https://www.instagram.com/tzerojp/p/De_a7-Yks0Z/');
+});
+
 test('curated posts are kept alongside the manual ones', async () => {
   const { feed } = await run(ONE_POST, {
     posts: {

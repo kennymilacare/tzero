@@ -24,6 +24,12 @@ test('deriveTitle drops a leading hashtag', () => {
   assert.equal(deriveTitle('#Tzero 全新配方'), '全新配方');
 });
 
+test('deriveTitle drops the brackets Instagram captions wrap the headline in', () => {
+  assert.equal(deriveTitle('【返工已經夠乾，拍拖想潤返啲 💧】'), '返工已經夠乾，拍拖想潤返啲');
+  assert.equal(deriveTitle('〔新品上市〕'), '新品上市');
+  assert.equal(deriveTitle('（限時優惠）'), '限時優惠');
+});
+
 test('deriveTitle drops trailing hashtags too', () => {
   // Instagram puts its hashtags at the end of the caption.
   assert.equal(deriveTitle('限時優惠 #Tzero #安全套'), '限時優惠');

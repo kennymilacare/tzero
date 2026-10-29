@@ -26,6 +26,9 @@ export function deriveTitle(message) {
   // Hashtags are noise in a headline. Instagram puts them at the end of the
   // caption, Facebook often at the start — drop them wherever they sit.
   s = s.replace(/(^|\s)#\S+/g, ' ').replace(/\s+/g, ' ').trim();
+  // Instagram captions wrap the headline in 【】 or 〔〕. That is decoration
+  // for the caption, not part of the headline.
+  s = s.replace(/^[\s【〔（(「『]+/, '').replace(/[\s】〕）)」』]+$/, '').trim();
   if (!s) return '';
   if (s.length > TITLE_MAX) s = s.slice(0, TITLE_MAX - 1).trimEnd() + '…';
   return s;

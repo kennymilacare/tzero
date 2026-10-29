@@ -51,15 +51,28 @@ function postId(post) {
 }
 
 /* Where the card's "follow" button should point. For Instagram that is
-   the profile, not the post — https://www.instagram.com/<user>/p/<id>/ */
+   the profile, not the post — https://www.instagram.com/<user>/p/<id>/
+
+   Two shapes of Instagram URL exist. A named link carries the account:
+   instagram.com/<user>/p/<id>/. A share link does not:
+   instagram.com/p/<id>/. Only the first can tell us the account, so the
+   second falls back to the account the site advertises. */
 function followUrl(post) {
   if (post.followUrl) return post.followUrl;
   if (post.source === 'Instagram') {
-    const m = String(post.url || '').match(/instagram\.com\/([^/]+)\//i);
+    const m = String(post.url || '')
+      .match(/instagram\.com\/([^/?#]+)\/(?:p|reel|reels|tv|stories)\//i);
     if (m) return `https://www.instagram.com/${m[1]}/`;
-    return INSTAGRAM_URL;
+    return INSTAGRAM_URL ? `${INSTAGRAM_URL}/` : '';
   }
   return PAGE_URL;
+}
+
+/* Social post URLs are often share links carrying tracking parameters
+   (?igshid=…, ?img_index=1, ?utm_source=…). They add nothing to a
+   card's permalink, and they expire, so drop them. */
+function cleanUrl(url) {
+  return String(url || '').replace(/[?#].*$/, '');
 }
 
 /* An image may be a local path (kept as-is) or an http URL (downloaded
@@ -130,7 +143,7 @@ async function main() {
 
     const post = {
       id,
-      permalink: entry.url || entry.permalink || `${PAGE_URL}/posts/${id}`,
+      permalink: cleanUrl(entry.url || entry.permalink) || `${PAGE_URL}/posts/${id}`,
       datePublished: entry.date || entry.datePublished || '',
       title,
       message: text,

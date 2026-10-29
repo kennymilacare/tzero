@@ -54,6 +54,7 @@ Built with plain **HTML / CSS / JavaScript** — no build step, no framework, no
 ├── scripts/
 │   ├── sync-facebook.mjs  # Pulls the Facebook + Instagram feed, writes news.json
 │   ├── manual-post.mjs    # Turns assets/data/manual.json into the feed — no token needed
+│   ├── ig-fetch.mjs       # Reads an IG post link → caption, image and date
 │   ├── sync-social-links.mjs # Rewrites every social link to match site.json
 │   ├── lib/feed.mjs       # Pure helpers (unit-tested)
 │   ├── lib/site.mjs       # Reads the accounts from site.json
@@ -149,10 +150,25 @@ Paste the caption into `assets/data/manual.json`, run one command:
 node scripts/manual-post.mjs
 ```
 
-The first line of `text` becomes the headline (emoji and hashtags are
-stripped), the rest becomes the excerpt, and the post is dated and linked.
-Images can be a local path or an `https://` URL — a remote one is downloaded
-into the repo, because Facebook's CDN links are signed and expire.
+The first line of `text` becomes the headline (emoji, hashtags and the 【】
+brackets Instagram likes are stripped), the rest becomes the excerpt, and
+the post is dated and linked. Images can be a local path or an `https://` URL
+— a remote one is downloaded into the repo, because Facebook's CDN links are
+signed and expire.
+
+If you only have the post link, `scripts/ig-fetch.mjs` reads the caption,
+image and date for you:
+
+```bash
+node scripts/ig-fetch.mjs https://www.instagram.com/p/<code>/ && node scripts/manual-post.mjs
+```
+
+It takes as many links as you like in one go. Instagram's pages need
+JavaScript to render, so it drives a headless Chrome over the DevTools
+Protocol — Node's built-in WebSocket, no npm packages. The date comes out
+of the post's own code, so it is exact rather than guessed. Re-running it
+on the same link refreshes that post's caption and image without
+touching any wording you wrote by hand.
 
 Full guide: [`docs/manual-posts.md`](docs/manual-posts.md).
 
@@ -217,7 +233,7 @@ developer account does not own — see `docs/facebook-sync.md` §2.
 ### Tests
 
 ```bash
-node --test scripts/lib/feed.test.mjs scripts/lib/site.test.mjs scripts/sync.test.mjs scripts/manual-post.test.mjs
+node --test scripts/lib/feed.test.mjs scripts/lib/site.test.mjs scripts/lib/ig.test.mjs scripts/sync.test.mjs scripts/manual-post.test.mjs
 ```
 
 `sync.test.mjs` starts a mock `graph.facebook.com` and runs the **real** sync
@@ -225,7 +241,8 @@ script against it — token exchange, feed pull, Instagram pull, image download,
 overrides, pinning and pruning all get exercised with no credentials and no
 internet access. `manual-post.test.mjs` does the same for the manual route.
 `site.test.mjs` fails if any social link in the HTML or the JSON-LD drifts
-from `assets/data/site.json`.
+from `assets/data/site.json`. `ig.test.mjs` covers the link and date
+arithmetic behind `ig-fetch.mjs`.
 
 > **Never put a Facebook token in client-side code.** This site is fully
 > static, so anything in a front-end file is public. Tokens live only in
