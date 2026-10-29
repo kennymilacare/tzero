@@ -89,9 +89,13 @@ test('no page, sitemap or robots.txt is left on the old address', async () => {
 
 test('no placeholder domain is left anywhere on the site', async () => {
   /* The address used to be a placeholder. Nothing may still point at
-     it — not in a link, and not in the text a visitor reads. */
+     it — not in a link, not in the text a visitor reads, and not in
+     the JSON-LD the front-end builds. */
   const files = (await readdir(ROOT)).filter((f) => f.endsWith('.html') || f.endsWith('.xml'));
   files.push('robots.txt');
+  for (const f of await readdir(path.join(ROOT, 'assets', 'js'))) {
+    if (f.endsWith('.js')) files.push(path.join('assets', 'js', f));
+  }
 
   const problems = [];
   for (const name of files) {

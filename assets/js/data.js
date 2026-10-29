@@ -436,11 +436,11 @@ export const faqs = [
     q_en: 'Do you offer wholesale or corporate plans?',
     q_ja: '卸売りや法人プランはありますか?',
     a_zh:
-      '有的。如有 50 盒以上訂單或企業禮品需求,請電郵至 wholesale@example.com 與我們聯絡。',
+      '有的。如有 50 盒以上訂單或企業禮品需求,請電郵至 info@tzero-jp.com 與我們聯絡。',
     a_en:
-      'Yes. For orders over 50 boxes or corporate gifting, please email wholesale@example.com.',
+      'Yes. For orders over 50 boxes or corporate gifting, please email info@tzero-jp.com.',
     a_ja:
-      'はい、ございます。50箱以上のご注文や法人ギフトのご相談は、wholesale@example.com までご連絡ください。',
+      'はい、ございます。50箱以上のご注文や法人ギフトのご相談は、info@tzero-jp.com までご連絡ください。',
     cat: 'order',
   },
 ];
@@ -697,18 +697,18 @@ export const i18n = {
     'seo.jsonld.home': JSON.stringify({
       "@context": "https://schema.org",
       "@graph": [
-        { "@type": "Organization", "@id": "https://tzero.example.com/#org",
+        { "@type": "Organization", "@id": "https://www.tzero-jp.com/#org",
           "name": "T-ZERO 第九感", "alternateName": "T-ZERO NINTH SENSE · 玻尿酸安全套",
-          "url": "https://tzero.example.com/",
-          "logo": "https://tzero.example.com/assets/images/icons/android-chrome-512.png",
+          "url": "https://www.tzero-jp.com/",
+          "logo": "https://www.tzero-jp.com/assets/images/icons/android-chrome-512.png",
           "telephone": "+852-6897-1473", "email": "info@tzero-jp.com",
           "sameAs": ["https://www.instagram.com/tzerojp", "https://www.facebook.com/Tzerohk"] },
-        { "@type": "WebSite", "@id": "https://tzero.example.com/#site",
-          "url": "https://tzero.example.com/", "name": "T-ZERO 第九感",
+        { "@type": "WebSite", "@id": "https://www.tzero-jp.com/#site",
+          "url": "https://www.tzero-jp.com/", "name": "T-ZERO 第九感",
           "inLanguage": ["zh-HK", "en", "ja-JP"],
-          "publisher": { "@id": "https://tzero.example.com/#org" } },
+          "publisher": { "@id": "https://www.tzero-jp.com/#org" } },
         { "@type": "BreadcrumbList", "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "首頁", "item": "https://tzero.example.com/" }
+          { "@type": "ListItem", "position": 1, "name": "首頁", "item": "https://www.tzero-jp.com/" }
         ] },
         { "@type": "FAQPage", "mainEntity": [
           { "@type": "Question", "name": "包裝會否標明產品名稱?",
@@ -726,7 +726,7 @@ export const i18n = {
           { "@type": "Question", "name": "產品應如何存放?",
             "acceptedAnswer": { "@type": "Answer", "text": "請存放於陰涼乾燥處,避免陽光直射及高溫;最佳保存溫度為 10–30°C。" } },
           { "@type": "Question", "name": "有沒有批發或企業客戶方案?",
-            "acceptedAnswer": { "@type": "Answer", "text": "有的。如有 50 盒以上訂單或企業禮品需求,請電郵至 wholesale@example.com 與我們聯絡。" } }
+            "acceptedAnswer": { "@type": "Answer", "text": "有的。如有 50 盒以上訂單或企業禮品需求,請電郵至 info@tzero-jp.com 與我們聯絡。" } }
         ] }
       ]
     }),
@@ -735,17 +735,17 @@ export const i18n = {
       "@context": "https://schema.org",
       "@graph": [
         { "@type": "BreadcrumbList", "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "首頁", "item": "https://tzero.example.com/" },
-          { "@type": "ListItem", "position": 2, "name": "全部產品", "item": "https://tzero.example.com/products.html" }
+          { "@type": "ListItem", "position": 1, "name": "首頁", "item": "https://www.tzero-jp.com/" },
+          { "@type": "ListItem", "position": 2, "name": "全部產品", "item": "https://www.tzero-jp.com/products.html" }
         ] },
         { "@type": "ItemList", "name": "T-ZERO 第九感 系列",
           "numberOfItems": 4,
           "itemListOrder": "https://schema.org/ItemListOrderAscending",
           "itemListElement": [
-            { "@type": "ListItem", "position": 1, "url": "https://tzero.example.com/product.html?id=tzero-extra-lub",   "name": "T-ZERO 加倍潤滑" },
-            { "@type": "ListItem", "position": 2, "url": "https://tzero.example.com/product.html?id=tzero-extended",    "name": "T-ZERO 持久" },
-            { "@type": "ListItem", "position": 3, "url": "https://tzero.example.com/product.html?id=tzero-studded",      "name": "T-ZERO 顆粒" },
-            { "@type": "ListItem", "position": 4, "url": "https://tzero.example.com/product.html?id=tzero-ultra-thin",  "name": "T-ZERO 超薄" }
+            { "@type": "ListItem", "position": 1, "url": "https://www.tzero-jp.com/product.html?id=tzero-extra-lub",   "name": "T-ZERO 加倍潤滑" },
+            { "@type": "ListItem", "position": 2, "url": "https://www.tzero-jp.com/product.html?id=tzero-extended",    "name": "T-ZERO 持久" },
+            { "@type": "ListItem", "position": 3, "url": "https://www.tzero-jp.com/product.html?id=tzero-studded",      "name": "T-ZERO 顆粒" },
+            { "@type": "ListItem", "position": 4, "url": "https://www.tzero-jp.com/product.html?id=tzero-ultra-thin",  "name": "T-ZERO 超薄" }
           ] }
       ]
     }),
@@ -754,8 +754,8 @@ export const i18n = {
       "@context": "https://schema.org",
       "@graph": [
         { "@type": "BreadcrumbList", "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "首頁", "item": "https://tzero.example.com/" },
-          { "@type": "ListItem", "position": 2, "name": "最新動態", "item": "https://tzero.example.com/news.html" }
+          { "@type": "ListItem", "position": 1, "name": "首頁", "item": "https://www.tzero-jp.com/" },
+          { "@type": "ListItem", "position": 2, "name": "最新動態", "item": "https://www.tzero-jp.com/news.html" }
         ] },
         { "@type": "ItemList", "name": "T-ZERO 第九感 最新動態",
           "itemListOrder": "https://schema.org/itemListOrderDescending",
@@ -1053,18 +1053,18 @@ export const i18n = {
     'seo.jsonld.home': JSON.stringify({
       "@context": "https://schema.org",
       "@graph": [
-        { "@type": "Organization", "@id": "https://tzero.example.com/#org",
+        { "@type": "Organization", "@id": "https://www.tzero-jp.com/#org",
           "name": "T-ZERO NINTH SENSE", "alternateName": "T-ZERO 第九感 · Hyaluronic Condom",
-          "url": "https://tzero.example.com/",
-          "logo": "https://tzero.example.com/assets/images/icons/android-chrome-512.png",
+          "url": "https://www.tzero-jp.com/",
+          "logo": "https://www.tzero-jp.com/assets/images/icons/android-chrome-512.png",
           "telephone": "+852-6897-1473", "email": "info@tzero-jp.com",
           "sameAs": ["https://www.instagram.com/tzerojp", "https://www.facebook.com/Tzerohk"] },
-        { "@type": "WebSite", "@id": "https://tzero.example.com/#site",
-          "url": "https://tzero.example.com/", "name": "T-ZERO NINTH SENSE",
+        { "@type": "WebSite", "@id": "https://www.tzero-jp.com/#site",
+          "url": "https://www.tzero-jp.com/", "name": "T-ZERO NINTH SENSE",
           "inLanguage": ["en", "zh-HK", "ja-JP"],
-          "publisher": { "@id": "https://tzero.example.com/#org" } },
+          "publisher": { "@id": "https://www.tzero-jp.com/#org" } },
         { "@type": "BreadcrumbList", "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://tzero.example.com/" }
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.tzero-jp.com/" }
         ] },
         { "@type": "FAQPage", "mainEntity": [
           { "@type": "Question", "name": "Does the packaging show the product name?",
@@ -1082,7 +1082,7 @@ export const i18n = {
           { "@type": "Question", "name": "How should I store the product?",
             "acceptedAnswer": { "@type": "Answer", "text": "Store in a cool, dry place away from direct sunlight and heat. The ideal storage temperature is 10–30°C." } },
           { "@type": "Question", "name": "Do you offer wholesale or corporate plans?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Yes. For orders of 50+ boxes or corporate gifting, please email wholesale@example.com." } }
+            "acceptedAnswer": { "@type": "Answer", "text": "Yes. For orders of 50+ boxes or corporate gifting, please email info@tzero-jp.com." } }
         ] }
       ]
     }),
@@ -1091,17 +1091,17 @@ export const i18n = {
       "@context": "https://schema.org",
       "@graph": [
         { "@type": "BreadcrumbList", "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://tzero.example.com/" },
-          { "@type": "ListItem", "position": 2, "name": "All Products", "item": "https://tzero.example.com/products.html" }
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.tzero-jp.com/" },
+          { "@type": "ListItem", "position": 2, "name": "All Products", "item": "https://www.tzero-jp.com/products.html" }
         ] },
         { "@type": "ItemList", "name": "T-ZERO NINTH SENSE Lineup",
           "numberOfItems": 4,
           "itemListOrder": "https://schema.org/ItemListOrderAscending",
           "itemListElement": [
-            { "@type": "ListItem", "position": 1, "url": "https://tzero.example.com/product.html?id=tzero-extra-lub",   "name": "T-ZERO Extra Lubricant" },
-            { "@type": "ListItem", "position": 2, "url": "https://tzero.example.com/product.html?id=tzero-extended",    "name": "T-ZERO Extended" },
-            { "@type": "ListItem", "position": 3, "url": "https://tzero.example.com/product.html?id=tzero-studded",      "name": "T-ZERO Studded" },
-            { "@type": "ListItem", "position": 4, "url": "https://tzero.example.com/product.html?id=tzero-ultra-thin",  "name": "T-ZERO Ultra Thin" }
+            { "@type": "ListItem", "position": 1, "url": "https://www.tzero-jp.com/product.html?id=tzero-extra-lub",   "name": "T-ZERO Extra Lubricant" },
+            { "@type": "ListItem", "position": 2, "url": "https://www.tzero-jp.com/product.html?id=tzero-extended",    "name": "T-ZERO Extended" },
+            { "@type": "ListItem", "position": 3, "url": "https://www.tzero-jp.com/product.html?id=tzero-studded",      "name": "T-ZERO Studded" },
+            { "@type": "ListItem", "position": 4, "url": "https://www.tzero-jp.com/product.html?id=tzero-ultra-thin",  "name": "T-ZERO Ultra Thin" }
           ] }
       ]
     }),
@@ -1110,8 +1110,8 @@ export const i18n = {
       "@context": "https://schema.org",
       "@graph": [
         { "@type": "BreadcrumbList", "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://tzero.example.com/" },
-          { "@type": "ListItem", "position": 2, "name": "Latest News", "item": "https://tzero.example.com/news.html" }
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.tzero-jp.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Latest News", "item": "https://www.tzero-jp.com/news.html" }
         ] },
         { "@type": "ItemList", "name": "T-ZERO NINTH SENSE Updates",
           "itemListOrder": "https://schema.org/itemListOrderDescending",
@@ -1425,18 +1425,18 @@ export const i18n = {
     'seo.jsonld.home': JSON.stringify({
       "@context": "https://schema.org",
       "@graph": [
-        { "@type": "Organization", "@id": "https://tzero.example.com/#org",
+        { "@type": "Organization", "@id": "https://www.tzero-jp.com/#org",
           "name": "T-ZERO 第九感", "alternateName": "T-ZERO NINTH SENSE · ヒアルロン酸コンドーム",
-          "url": "https://tzero.example.com/",
-          "logo": "https://tzero.example.com/assets/images/icons/android-chrome-512.png",
+          "url": "https://www.tzero-jp.com/",
+          "logo": "https://www.tzero-jp.com/assets/images/icons/android-chrome-512.png",
           "telephone": "+852-6897-1473", "email": "info@tzero-jp.com",
           "sameAs": ["https://www.instagram.com/tzerojp", "https://www.facebook.com/Tzerohk"] },
-        { "@type": "WebSite", "@id": "https://tzero.example.com/#site",
-          "url": "https://tzero.example.com/", "name": "T-ZERO 第九感",
+        { "@type": "WebSite", "@id": "https://www.tzero-jp.com/#site",
+          "url": "https://www.tzero-jp.com/", "name": "T-ZERO 第九感",
           "inLanguage": ["ja-JP", "zh-HK", "en"],
-          "publisher": { "@id": "https://tzero.example.com/#org" } },
+          "publisher": { "@id": "https://www.tzero-jp.com/#org" } },
         { "@type": "BreadcrumbList", "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://tzero.example.com/" }
+          { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://www.tzero-jp.com/" }
         ] },
         { "@type": "FAQPage", "mainEntity": [
           { "@type": "Question", "name": "パッケージに商品名は記載されますか?",
@@ -1454,7 +1454,7 @@ export const i18n = {
           { "@type": "Question", "name": "保管方法は?",
             "acceptedAnswer": { "@type": "Answer", "text": "直射日光・高温を避け、涼しく乾燥した場所に保管してください。最適保存温度は 10〜30°C です。" } },
           { "@type": "Question", "name": "法人・卸売りプランはありますか?",
-            "acceptedAnswer": { "@type": "Answer", "text": "はい、ございます。50 箱以上のご注文、法人ギフトなどについては wholesale@example.com までご連絡ください。" } }
+            "acceptedAnswer": { "@type": "Answer", "text": "はい、ございます。50 箱以上のご注文、法人ギフトなどについては info@tzero-jp.com までご連絡ください。" } }
         ] }
       ]
     }),
@@ -1463,17 +1463,17 @@ export const i18n = {
       "@context": "https://schema.org",
       "@graph": [
         { "@type": "BreadcrumbList", "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://tzero.example.com/" },
-          { "@type": "ListItem", "position": 2, "name": "全製品", "item": "https://tzero.example.com/products.html" }
+          { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://www.tzero-jp.com/" },
+          { "@type": "ListItem", "position": 2, "name": "全製品", "item": "https://www.tzero-jp.com/products.html" }
         ] },
         { "@type": "ItemList", "name": "T-ZERO 第九感 シリーズ",
           "numberOfItems": 4,
           "itemListOrder": "https://schema.org/ItemListOrderAscending",
           "itemListElement": [
-            { "@type": "ListItem", "position": 1, "url": "https://tzero.example.com/product.html?id=tzero-extra-lub",   "name": "T-ZERO エクストラ潤滑" },
-            { "@type": "ListItem", "position": 2, "url": "https://tzero.example.com/product.html?id=tzero-extended",    "name": "T-ZERO エクステンド" },
-            { "@type": "ListItem", "position": 3, "url": "https://tzero.example.com/product.html?id=tzero-studded",      "name": "T-ZERO スタッド" },
-            { "@type": "ListItem", "position": 4, "url": "https://tzero.example.com/product.html?id=tzero-ultra-thin",  "name": "T-ZERO ウルトラシン" }
+            { "@type": "ListItem", "position": 1, "url": "https://www.tzero-jp.com/product.html?id=tzero-extra-lub",   "name": "T-ZERO エクストラ潤滑" },
+            { "@type": "ListItem", "position": 2, "url": "https://www.tzero-jp.com/product.html?id=tzero-extended",    "name": "T-ZERO エクステンド" },
+            { "@type": "ListItem", "position": 3, "url": "https://www.tzero-jp.com/product.html?id=tzero-studded",      "name": "T-ZERO スタッド" },
+            { "@type": "ListItem", "position": 4, "url": "https://www.tzero-jp.com/product.html?id=tzero-ultra-thin",  "name": "T-ZERO ウルトラシン" }
           ] }
       ]
     }),
@@ -1482,8 +1482,8 @@ export const i18n = {
       "@context": "https://schema.org",
       "@graph": [
         { "@type": "BreadcrumbList", "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://tzero.example.com/" },
-          { "@type": "ListItem", "position": 2, "name": "最新ニュース", "item": "https://tzero.example.com/news.html" }
+          { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://www.tzero-jp.com/" },
+          { "@type": "ListItem", "position": 2, "name": "最新ニュース", "item": "https://www.tzero-jp.com/news.html" }
         ] },
         { "@type": "ItemList", "name": "T-ZERO 第九感 最新情報",
           "itemListOrder": "https://schema.org/itemListOrderDescending",

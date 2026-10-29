@@ -32,6 +32,8 @@ async function targetFiles() {
     ...html,
     path.join(ROOT, 'sitemap.xml'),
     path.join(ROOT, 'robots.txt'),
+    /* The JSON-LD in here names the site by address. */
+    path.join(ROOT, 'assets', 'js', 'data.js'),
   ];
 }
 
