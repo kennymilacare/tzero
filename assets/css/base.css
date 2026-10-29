@@ -1,0 +1,243 @@
+/* ===========================================================
+   base.css — design tokens, reset, typography, utilities
+   =========================================================== */
+
+:root {
+  /* Color palette — Bonnie Blue (PANTONE 16-4132 TCX) × ocean blue */
+  --color-01: #0E3A66;   /* ocean blue    — primary ink / headings */
+  --color-02: #86ABCA;   /* Bonnie Blue   — primary CTA (PANTONE 16-4132 TCX) */
+  --color-03: #FFFFFF;   /* pure white    — page bg */
+  --color-04: #F2C94C;   /* amber yellow  — secondary accent (warm contrast) */
+  --color-05: #062B4D;   /* deep navy     — strong ink / dark surface */
+  --color-06: #1A4D80;   /* mid ocean     — secondary headings */
+  --color-07: #DDE7F0;   /* light blue    — borders */
+  --color-08: #EEF5FB;   /* mist blue     — section surfaces */
+  --color-09: #DCE9F1;   /* pale blue     — accent backgrounds */
+  --color-10: #38BDF8;   /* sky blue      — tertiary highlight */
+
+  /* Semantic aliases — single source for components */
+  --bg:               var(--color-03);
+  --surface:          #FFFFFF;
+  --surface-2:        var(--color-08);
+  --ink:              var(--color-01);
+  --ink-soft:         #345E84;
+  --ink-muted:        #6E89A6;
+  --primary:          var(--color-02);
+  --primary-dark:     #5C8FAB;
+  --primary-soft:     #C8DAE5;
+  --accent:           var(--color-04);
+  --accent-soft:      #FFF6D9;
+  --border:           var(--color-07);
+  --border-strong:    #B8C8D8;
+  --ink-deep:         var(--color-05);
+  --success:          #2A8B6A;
+  --warning:          #5C8FAB;
+  --danger:           #C73A52;
+
+  /* Translucent surfaces (over hero, sticky header, scrims) */
+  --bg-translucent:        rgba(255, 255, 255, 0.85);
+  --bg-translucent-soft:   rgba(255, 255, 255, 0.10);
+  --ink-translucent:       rgba(14, 58, 102, 0.78);
+
+  /* Footer cool-off-white tokens (unused after light-footer change) */
+  --footer-text-soft:   rgba(232, 235, 237, 0.78);
+  --footer-text-faint:  rgba(232, 235, 237, 0.55);
+  --footer-border-soft: rgba(232, 235, 237, 0.15);
+
+  /* Typography */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+               'PingFang HK', 'PingFang TC', 'Microsoft JhengHei',
+               'Helvetica Neue', Arial, sans-serif;
+  --font-display: 'Inter', -apple-system, 'Segoe UI', 'PingFang HK', sans-serif;
+
+  --fs-xs: 0.75rem;     /* 12 */
+  --fs-sm: 0.875rem;    /* 14 */
+  --fs-base: 1rem;      /* 16 */
+  --fs-md: 1.125rem;    /* 18 */
+  --fs-lg: 1.375rem;    /* 22 */
+  --fs-xl: 1.75rem;     /* 28 */
+  --fs-2xl: 2.25rem;    /* 36 */
+  --fs-3xl: 3.25rem;    /* 52 */
+
+  --lh-tight: 1.15;
+  --lh-snug: 1.3;
+  --lh-base: 1.6;
+
+  /* Spacing */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+  --space-9: 6rem;
+
+  /* Layout */
+  --max-w: 1200px;
+  --gutter: 24px;
+  --header-h: 72px;
+
+  /* Radius & shadow */
+  --r-sm: 6px;
+  --r-md: 12px;
+  --r-lg: 20px;
+  --r-xl: 28px;
+  --shadow-sm: 0 1px 2px rgba(26, 31, 44, 0.06),
+               0 1px 3px rgba(26, 31, 44, 0.04);
+  --shadow-md: 0 4px 12px rgba(26, 31, 44, 0.08),
+               0 2px 4px rgba(26, 31, 44, 0.05);
+  --shadow-lg: 0 18px 40px rgba(26, 31, 44, 0.12),
+               0 6px 16px rgba(26, 31, 44, 0.06);
+
+  /* Motion */
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --d-fast: 150ms;
+  --d-base: 240ms;
+  --d-slow: 420ms;
+}
+
+/* ---------- Reset ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body, h1, h2, h3, h4, h5, h6, p, figure, blockquote, dl, dd, ul, ol {
+  margin: 0;
+}
+
+ul, ol { padding-left: 0; list-style: none; }
+
+img, svg { display: block; max-width: 100%; height: auto; }
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+a { color: inherit; text-decoration: none; }
+
+input, textarea, select { font: inherit; color: inherit; }
+
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ---------- Body & typography ---------- */
+html, body {
+  background: var(--bg);
+  color: var(--ink);
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: var(--fs-base);
+  line-height: var(--lh-base);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--bg);
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: var(--lh-tight);
+  letter-spacing: -0.01em;
+}
+
+h1 { font-size: var(--fs-3xl); }
+h2 { font-size: var(--fs-2xl); }
+h3 { font-size: var(--fs-xl); }
+h4 { font-size: var(--fs-lg); }
+
+p { line-height: var(--lh-base); color: var(--ink-soft); }
+
+.eyebrow {
+  display: inline-block;
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--primary);
+  margin-bottom: var(--space-3);
+}
+
+/* ---------- Utilities ---------- */
+.container {
+  width: 100%;
+  max-width: var(--max-w);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.section {
+  padding-block: clamp(56px, 8vw, 96px);
+}
+
+.section--muted { background: var(--surface-2); }
+
+.section-head {
+  text-align: center;
+  margin-bottom: var(--space-7);
+  max-width: 640px;
+  margin-inline: auto;
+}
+
+.section-head .eyebrow { display: inline-block; }
+
+.section-head h2 { margin-bottom: var(--space-3); }
+
+.section-head p { color: var(--ink-soft); }
+
+.grid { display: grid; gap: var(--space-5); }
+
+.hidden-mobile { display: none !important; }
+
+@media (min-width: 768px) {
+  .hidden-mobile { display: initial !important; }
+  .hidden-desktop { display: none !important; }
+}
+
+/* Reveal animation hook (toggled by main.js) */
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity var(--d-slow) var(--ease),
+              transform var(--d-slow) var(--ease);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Visually hidden but accessible */
+.sr-only,
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.contact-section__title {
+  font-size: var(--fs-xl);
+  font-weight: 600;
+  color: var(--ink);
+  margin: 0 0 var(--space-5);
+  text-align: center;
+}

@@ -1,0 +1,2 @@
+# Facebook post images downloaded by scripts/sync-facebook.mjs are committed
+# here so the site never hotlinks Facebook's expiring CDN URLs.

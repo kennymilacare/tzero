@@ -1,0 +1,20 @@
+# Dependencies / tooling
+node_modules/
+package-lock.json
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Local env
+.env
+.env.local
+
+# Screenshot / scratch output from local tooling
+screenshots/*.png
+
+# Local test scratch
+.tmp-test/
+.tmp-verify/

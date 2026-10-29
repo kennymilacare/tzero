@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FAEBEB"/>
+      <stop offset="100%" stop-color="#F2E5CC"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <!-- T-ZERO logo (re-scaled from 685 viewBox to ~360 wide, centered-left) -->
+  <g transform="translate(80,135) scale(0.6)">
+    <g fill="#E8B4B4">
+      <rect x="120" y="130" width="445" height="80" rx="6"/>
+      <rect x="297" y="210" width="91"  height="380" rx="6"/>
+    </g>
+    <text x="342" y="460"
+          text-anchor="middle"
+          font-family="'Inter','Helvetica Neue',Arial,sans-serif"
+          font-weight="900"
+          font-style="italic"
+          font-size="195"
+          letter-spacing="-8"
+          fill="#B584C8">ZERO</text>
+  </g>
+  <!-- Right side copy -->
+  <text x="540" y="280"
+        font-family="'Inter','Helvetica Neue',Arial,sans-serif"
+        font-weight="800"
+        font-size="76"
+        fill="#2B1F18">第九感 玻尿酸安全套</text>
+  <text x="540" y="350"
+        font-family="'Inter','Helvetica Neue',Arial,sans-serif"
+        font-weight="500"
+        font-size="34"
+        fill="#6E5944">天然潤滑 ・ 長效水潤 ・ 長效滑</text>
+  <text x="540" y="500"
+        font-family="'Inter','Helvetica Neue',Arial,sans-serif"
+        font-weight="700"
+        font-size="28"
+        letter-spacing="2"
+        fill="#86ABCA">T-ZERO ・ NINTH SENSE</text>
+</svg>

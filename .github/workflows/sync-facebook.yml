@@ -1,0 +1,64 @@
+name: Sync Facebook news
+
+# Pulls the latest posts from the T-ZERO Facebook Page (and the Instagram
+# Business account linked to it) and commits them to assets/data/news.json
+# plus the post images. The site reads that file at runtime, so a push here
+# is all it takes to publish a new post.
+#
+# Setup: see docs/facebook-sync.md. The secrets below must be added under
+# Settings -> Secrets and variables -> Actions.
+
+on:
+  schedule:
+    # 09:00 and 21:00 Hong Kong time (GitHub cron runs on UTC).
+    - cron: '0 1,13 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-facebook
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out the site
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Pull the latest Facebook and Instagram posts
+        env:
+          # FB_USER_TOKEN is the one the setup guide asks for — the script
+          # exchanges it for a Page token. FB_PAGE_TOKEN is an alternative
+          # for anyone who already has one.
+          FB_USER_TOKEN: ${{ secrets.FB_USER_TOKEN }}
+          FB_PAGE_TOKEN: ${{ secrets.FB_PAGE_TOKEN }}
+          FB_PAGE_ID: ${{ secrets.FB_PAGE_ID }}
+          # App id + secret let the script renew the token on every run.
+          FB_APP_ID: ${{ secrets.FB_APP_ID }}
+          FB_APP_SECRET: ${{ secrets.FB_APP_SECRET }}
+          FB_PAGE_USERNAME: ${{ vars.FB_PAGE_USERNAME }}
+          FB_IG_USERNAME: ${{ vars.FB_IG_USERNAME }}
+          FB_GRAPH_VERSION: ${{ vars.FB_GRAPH_VERSION }}
+        run: node scripts/sync-facebook.mjs
+
+      - name: Commit the updated feed
+        run: |
+          if [ -z "$(git status --porcelain -- assets/data/news.json assets/images/news)" ]; then
+            echo "No changes — the feed has not moved since the last run."
+            exit 0
+          fi
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A assets/data/news.json assets/images/news
+          git commit -m "chore: sync Facebook news"
+          git pull --rebase --autostash origin "$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"

@@ -1,0 +1,60 @@
+{
+  "_readme": [
+    "Hand-written overrides for the Facebook feed. scripts/sync-facebook.mjs reads",
+    "this file and merges it into assets/data/news.json on every run, so anything",
+    "here survives the sync — use it for English / Japanese copy, custom titles,",
+    "and curated posts that are not Facebook posts at all.",
+    "",
+    "Key = the Facebook post id (visible in assets/data/news.json).",
+    "Add title_en / title_ja / message_en / message_ja / excerpt_en / excerpt_ja",
+    "for translations; set \"hidden\": true to drop a post; set \"pinned\": true to",
+    "keep a post even after it scrolls past the feed limit.",
+    "",
+    "Curated posts (not from Facebook) just need their own id plus title_zh /",
+    "excerpt_zh — everything else is optional."
+  ],
+  "posts": {
+    "curated-hktv-launch": {
+      "source": "HKTVmall",
+      "permalink": "https://www.hktvmall.com",
+      "link": "https://www.hktvmall.com",
+      "datePublished": "2026-09-15",
+      "image": "assets/images/banners/carousel/9.png",
+      "title_zh": "正式登陸 HKTVmall",
+      "title_en": "Now on HKTVmall",
+      "title_ja": "HKTVmall に登場",
+      "excerpt_zh": "T-ZERO 第九感全系列 4 款產品正式於 HKTVmall 上架,香港本地 1–2 個工作天送達,即買即用更方便。",
+      "excerpt_en": "All 4 T-ZERO NINTH SENSE products are now on HKTVmall — local Hong Kong delivery in 1–2 working days, ready when you are.",
+      "excerpt_ja": "T-ZERO 第九感の全 4 製品が HKTVmall に登場。香港本地 1〜2 営業日で配送、すぐにお届けします。",
+      "cta_zh": "前往 HKTVmall 選購",
+      "cta_en": "Shop on HKTVmall",
+      "cta_ja": "HKTVmall で購入する",
+      "follow": false,
+      "pinned": true
+    },
+    "seed-fb-2026-10-06": {
+      "title_en": "Latest Facebook Post",
+      "title_ja": "最新 Facebook 投稿",
+      "excerpt_en": "Check our latest Facebook post for first-hand news, limited offers and new product launch notifications from T-ZERO NINTH SENSE.",
+      "excerpt_ja": "T-ZERO 第九感の最新 Facebook 投稿をチェックして、ニュース・限定オファー・新商品情報を入手しましょう。",
+      "cta_en": "View Facebook post",
+      "cta_ja": "Facebook投稿を見る"
+    },
+    "seed-fb-2026-08-20": {
+      "title_en": "Hyaluronic formula upgrade",
+      "title_ja": "ヒアルロン酸処方を進化",
+      "excerpt_en": "The full range now uses a higher-concentration, skincare-grade hyaluronic acid — longer-lasting glide, gentler on sensitive skin.",
+      "excerpt_ja": "全製品に高濃度のスキンケアグレードヒアルロン酸を採用。より持続する潤滑と、敏感肌にも優しい使い心地に。",
+      "cta_en": "View products",
+      "cta_ja": "製品を見る"
+    },
+    "seed-fb-2026-07-10": {
+      "title_en": "New T-ZERO brand identity",
+      "title_ja": "T-ZERO ブランドビジュアル刷新",
+      "excerpt_en": "NINTH SENSE unveils a new logo and packaging system — a cleaner, more modern visual language for natural intimacy.",
+      "excerpt_ja": "第九感は新しいロゴとパッケージデザインを発表。「自然な親密さ」を、よりクリーンでモダンなビジュアルで伝えます。",
+      "cta_en": "Read more",
+      "cta_ja": "詳細を見る"
+    }
+  }
+}
