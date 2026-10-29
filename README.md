@@ -170,6 +170,12 @@ of the post's own code, so it is exact rather than guessed. Re-running it
 on the same link refreshes that post's caption and image without
 touching any wording you wrote by hand.
 
+Instagram hides some posts behind an age restriction, and a condom brand
+gets flagged more often than not. `node scripts/ig-fetch.mjs --login`
+opens a visible Chrome window once so you can sign in; the session is
+kept in `.ig-profile/` (gitignored — it holds cookies) and every later run
+picks it up.
+
 Full guide: [`docs/manual-posts.md`](docs/manual-posts.md).
 
 ### Automatic — GitHub Actions + Graph API

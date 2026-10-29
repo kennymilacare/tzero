@@ -23,6 +23,17 @@ export function shortcodeOf(url) {
   return m ? m[1] : null;
 }
 
+/** The media id behind a post code, as a BigInt. */
+function mediaIdBigInt(shortcode) {
+  let id = 0n;
+  for (const c of String(shortcode || '')) {
+    const v = ALPHABET.indexOf(c);
+    if (v < 0) return null;
+    id = id * 64n + BigInt(v);
+  }
+  return id === 0n ? null : id;
+}
+
 /**
  * The post's date, taken from its shortcode.
  *
@@ -34,18 +45,24 @@ export function shortcodeOf(url) {
  * Returns 'YYYY-MM-DD', or null if the code does not look like one.
  */
 export function dateFromShortcode(shortcode) {
-  let id = 0n;
-  for (const c of String(shortcode || '')) {
-    const v = ALPHABET.indexOf(c);
-    if (v < 0) return null;
-    id = id * 64n + BigInt(v);
-  }
-  if (id === 0n) return null;
+  const id = mediaIdBigInt(shortcode);
+  if (id === null) return null;
 
   const ms = Number(id >> 23n) + 1314220021721;
   const d = new Date(ms);
   if (Number.isNaN(d.getTime()) || d.getUTCFullYear() < 2010) return null;
   return d.toISOString().slice(0, 10);
+}
+
+/**
+ * The media id behind a post code, as a string.
+ *
+ * Instagram's own web endpoints address a post by this id rather than
+ * by its code. Returns null when the code is not a post code.
+ */
+export function mediaIdOf(shortcode) {
+  const id = mediaIdBigInt(shortcode);
+  return id === null ? null : id.toString();
 }
 
 /** The canonical post URL for an account and a code. */
@@ -85,17 +102,23 @@ export function cleanCaption(text, account) {
  *
  *   ig-fetch.mjs https://…  https://…
  *   ig-fetch.mjs --file urls.txt
+ *   ig-fetch.mjs --login
+ *
+ * `--login` is a mode, not a link: it opens Instagram so you can sign
+ * in, which the script needs for posts marked age-restricted.
  */
 export function parseArgs(argv) {
   const urls = [];
   const files = [];
+  let login = false;
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
     if (a === '--file') {
       if (argv[i + 1]) files.push(argv[++i]);
       continue;
     }
+    if (a === '--login') { login = true; continue; }
     for (const m of String(a).matchAll(/https?:\/\/\S+/g)) urls.push(m[0]);
   }
-  return { urls, files };
+  return { urls, files, login };
 }

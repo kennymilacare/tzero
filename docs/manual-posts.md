@@ -92,7 +92,8 @@ node scripts/manual-post.mjs
 | `facebook,instagram` | 兩個都要 |
 | 唔填 | 全部都要 |
 
-**自訂卡片唔受影響** —— 例如「正式登陸 HKTVmall」嗰張，任何情況都會顯示。
+**自訂卡片唔受影響** —— 例如「正式登陸 HKTVmall」嗰張，source 唔係 Facebook /
+Instagram，所以唔會俾呢個 filter 篩走。
 
 `index.html` 嘅「最新動態」欄冇呢個 filter（只係 `data-news-limit="1"`），
 所以最新嗰張貼文係 FB 定 IG 都照顯示。
@@ -112,6 +113,20 @@ node scripts/manual-post.mjs
 
 **超出去嘅貼文唔會冇咗** —— 全部仲喺 `manual.json` 同 `news.local.json` 度，
 只係頁面淨係顯示最新嗰幾張。想改顯示數量就撳 `data-news-limit` 個數字。
+
+### 自訂卡片唔會俾新貼文推走
+
+`news.html` 個列表有 `data-news-keep-curated`：
+
+```html
+<div class="container" data-news-list data-news-limit="4" data-news-source="instagram" data-news-keep-curated>
+```
+
+有咗呢個 attribute，`data-news-limit` 就**淨係計社交貼文** —— 自訂卡片
+（例如「正式登陸 HKTVmall」）另外計，無論幾多新貼文都照顯示。
+即係話 `data-news-limit="4"` = 最多 4 張 IG 貼文 + 自訂卡片。
+
+`index.html` 冇呢個 attribute，所以「最新動態」永遠淨係顯示 1 張。
 
 ---
 
@@ -165,6 +180,42 @@ node scripts/ig-fetch.mjs <連結> && node scripts/manual-post.mjs
 
 ---
 
+## 啲貼文成日讀唔到？可能係「有年齡限制」
+
+Instagram 會將部分貼文標記做 sensitive（有年齡限制）—— 性健康品牌好常見中招。
+未登入嘅訪客完全睇唔到：
+
+- 貼文頁淨係見到「有年齡限制的內容……登入並繼續」
+- embed 頁會話「這張照片或視頻的連結可能已損壞」
+
+`ig-fetch.mjs` 會自動試晒幾種公開頁面（embed → 具名 embed → `/embed/` → 貼文頁 → IG 個
+web API）。如果貼文係咁，上面全部都讀唔到 caption —— **呢個唔係 script 壞咗**，
+係 Instagram 唔俾未登入嘅人睇。
+
+解法係登入一次：
+
+```bash
+node scripts/ig-fetch.mjs --login
+```
+
+- 會開一個**睇得見**嘅 Chrome 視窗，停喺 instagram.com 個登入頁
+- 撳「以 Instagram 帳戶登入」，或者用手機 App 掃 QR code
+- 登入成功之後視窗會自己閂埋
+- session 存喺 `.ig-profile/`（已經加咗落 `.gitignore`，**唔會** commit 入去）
+
+跟住照舊跑：
+
+```bash
+node scripts/ig-fetch.mjs <連結>
+```
+
+**之後唔使再登入** —— session 留喺 `.ig-profile/` 度，下次一樣用得。
+（要重新登入就 `rm -rf .ig-profile` 再跑 `--login`。）
+
+> 呢個 folder 有 cookie，等同你份登入狀態。唔好 commit、唔好分享。
+
+---
+
 ## 常用操作
 
 | 你想 | 點做 |
@@ -174,6 +225,7 @@ node scripts/ig-fetch.mjs <連結> && node scripts/manual-post.mjs
 | 改字 | 直接改 `text`，跑 script |
 | 換張圖 | 改 `image` 個值，跑 script |
 | 由連結自動入 | `node scripts/ig-fetch.mjs <連結>` |
+| 貼文有年齡限制、讀唔到 | `node scripts/ig-fetch.mjs --login`（登入一次，之後唔使再登） |
 
 **Id 係自動生成嘅**（用貼文連結計），所以次序唔影響 —— 你可以隨便擺。
 同一條連結永遠得同一個 id，掂咗佢就係更新，唔會重複出卡。

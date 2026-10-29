@@ -7,7 +7,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 
-import { cleanCaption, dateFromShortcode, parseArgs, postUrl, shortcodeOf } from './ig.mjs';
+import { cleanCaption, dateFromShortcode, mediaIdOf, parseArgs, postUrl, shortcodeOf } from './ig.mjs';
 
 test('a share link still yields the post code', () => {
   assert.equal(shortcodeOf('https://www.instagram.com/p/De_a7-Yks0Z/?img_index=1'), 'De_a7-Yks0Z');
@@ -36,6 +36,12 @@ test('a code that is not a post code has no date', () => {
   assert.equal(dateFromShortcode('AAAA'), null); // 1969 — before Instagram
 });
 
+test('the media id behind a post code', () => {
+  assert.equal(mediaIdOf('De_a7-Yks0Z'), '4017047863280454937');
+  assert.equal(mediaIdOf(''), null);
+  assert.equal(mediaIdOf('not a code!'), null);
+});
+
 test('postUrl builds the canonical link', () => {
   assert.equal(postUrl('tzerojp', 'De_a7-Yks0Z'), 'https://www.instagram.com/tzerojp/p/De_a7-Yks0Z/');
 });
@@ -52,6 +58,14 @@ test('links are picked out of arguments and files', () => {
     'https://www.instagram.com/p/BBB/?img_index=2',
   ]);
   assert.deepEqual(files, ['urls.txt']);
+});
+
+test('--login is a mode, not a link', () => {
+  const { urls, files, login } = parseArgs(['--login']);
+  assert.equal(login, true);
+  assert.deepEqual(urls, []);
+  assert.deepEqual(files, []);
+  assert.equal(parseArgs(['https://x.test/p/A/']).login, false);
 });
 
 test('the account name is dropped off the top of the caption', () => {

@@ -68,6 +68,13 @@ const state = {
    still shows those. */
 const SOCIAL_SOURCES = ['facebook', 'instagram'];
 
+/* A curated card is written by hand (news.local.json) and is not part of
+   the chronological feed — a launch announcement, a shop-where-to-find-us
+   card. It is page furniture, not news. */
+function isCurated(post) {
+  return !SOCIAL_SOURCES.includes(String(post.source || '').toLowerCase());
+}
+
 /**
  * The posts a given list should show.
  *
@@ -75,6 +82,12 @@ const SOCIAL_SOURCES = ['facebook', 'instagram'];
  *   data-news-source="instagram"          — only Instagram
  *   data-news-source="facebook,instagram"— both
  * With no attribute, everything is shown.
+ *
+ * data-news-limit caps the feed. A list that also carries
+ *   data-news-keep-curated
+ * keeps its curated brand cards however busy the feed gets, so a
+ * hand-written launch card is never pushed off the page by a week of
+ * posts.
  */
 function postsFor(list) {
   const limit = Number(list.getAttribute('data-news-limit')) || MAX_POSTS;
@@ -91,7 +104,20 @@ function postsFor(list) {
       })
     : state.posts;
 
-  return posts.slice(0, limit);
+  if (!list.hasAttribute('data-news-keep-curated')) {
+    return posts.slice(0, limit);
+  }
+
+  /* The limit counts feed posts; curated cards ride along with them. */
+  let feedLeft = limit;
+  return posts.filter((p) => {
+    if (isCurated(p)) return true;
+    if (feedLeft > 0) {
+      feedLeft -= 1;
+      return true;
+    }
+    return false;
+  });
 }
 
 /* ---------- render ---------- */

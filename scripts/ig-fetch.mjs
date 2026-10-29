@@ -26,13 +26,12 @@
 
 import { spawn } from 'node:child_process';
 import { existsSync } from 'node:fs';
-import { mkdir, mkdtemp, readFile, writeFile, rm } from 'node:fs/promises';
-import { tmpdir } from 'node:os';
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { deriveExcerpt, deriveTitle } from './lib/feed.mjs';
-import { cleanCaption, dateFromShortcode, parseArgs, postUrl, shortcodeOf } from './lib/ig.mjs';
+import { cleanCaption, dateFromShortcode, mediaIdOf, parseArgs, postUrl, shortcodeOf } from './lib/ig.mjs';
 import { loadSite, usernameOf } from './lib/site.mjs';
 
 const HERE        = path.dirname(fileURLToPath(import.meta.url));
@@ -40,6 +39,13 @@ const ROOT        = path.resolve(HERE, '..');
 const DATA_DIR    = path.join(ROOT, 'assets', 'data');
 const IMG_DIR     = path.join(ROOT, 'assets', 'images', 'news');
 const MANUAL_FILE = path.join(DATA_DIR, 'manual.json');
+
+/* The browser profile that holds the Instagram session. It is kept
+   between runs so a signed-in session survives — Instagram hides
+   age-restricted posts from anyone who is not signed in, and posts
+   from a condom brand get flagged as sensitive often. It holds
+   cookies, so it is gitignored. */
+const PROFILE_DIR = path.join(ROOT, '.ig-profile');
 
 const CHROME_PATHS = [
   process.env.CHROME_PATH,
@@ -86,9 +92,14 @@ async function connect(wsUrl) {
 
 /**
  * Read one post from its public embed page.
- * Returns { caption, images: [url], account }.
+ * Returns { caption, images: [url], account, page }.
+ *
+ * `page` is a short excerpt of what the embed actually showed. It is
+ * only used to explain a failure — Instagram changes its markup from
+ * time to time, and a silent "no caption" is impossible to fix without
+ * seeing what arrived.
  */
-async function readPost(chrome, port, url) {
+async function readPost(chrome, port, url, waitMs = 8000) {
   const target = await (await fetch(
     `http://127.0.0.1:${port}/json/new?${encodeURIComponent(url)}`, { method: 'PUT' })).json();
   const cdp = await connect(target.webSocketDebuggerUrl);
@@ -97,28 +108,120 @@ async function readPost(chrome, port, url) {
     await cdp.send('Runtime.enable');
     await cdp.send('Page.navigate', { url });
     // The embed renders client-side; give it time to fill in.
-    await sleep(8000);
+    await sleep(waitMs);
 
     const r = await cdp.send('Runtime.evaluate', {
       returnByValue: true,
-      expression: `(() => {
-        const text = (sel) => { const e = document.querySelector(sel); return e ? e.innerText : ''; };
-        let caption = '';
-        for (const sel of ['[class*=Caption]', 'header + div', 'blockquote div']) {
-          const t = text(sel);
-          if (t && t.length > caption.length) caption = t;
+      awaitPromise: true,
+      expression: `(async () => {
+        const body = () => (document.body ? document.body.innerText : '');
+        /* Two kinds of wall: the age gate (Instagram asks a signed-out
+           visitor to log in) and the "page not available" notice. Both
+           leave a menu and the whole language list on the page, so a
+           naive "longest text on the page" would pick that up instead
+           of a caption. Note the wall down and ignore the page. */
+        const isGated = () => /年龄限制|Age.restricted|age restricted|登录并继续|Log in and continue|Sign up to see|注册 Instagram 以|Register to see|很抱歉，无法访问此页面|页面已被移除|Sorry, this page isn|may have been removed|link you clicked may be broken/i.test(body());
+
+        const read = () => {
+          const b = body();
+          const gated = isGated();
+          const text = (sel) => { const e = document.querySelector(sel); return e ? e.innerText : ''; };
+          const SELECTORS = ['[class*=Caption]', 'header + div', 'blockquote div',
+                             '[data-testid*=caption]', '[class*="_a7p"]'];
+          let caption = '';
+          let hits = {};
+          for (const sel of SELECTORS) {
+            const t = text(sel);
+            hits[sel] = t.length;
+            if (t && t.length > caption.length) caption = t;
+          }
+          /* The plain post page keeps the caption in a span inside the
+             caption block, not in the block itself. */
+          let spans = [];
+          if (!gated && caption.length < 40) {
+            /* Score a candidate by how much it reads like prose. The
+               language menu is one long span of short lines — long in
+               total, but with nothing worth reading. A caption has a
+               line you could actually read. */
+            const score = (t) => {
+              const lines = t.split('\\n').map((l) => l.trim()).filter(Boolean);
+              return {
+                count: lines.length,
+                longest: lines.reduce((n, l) => Math.max(n, l.length), 0),
+                total: t.length,
+              };
+            };
+            spans = [...document.querySelectorAll('span')]
+              .map((s) => s.innerText || '')
+              .filter((t) => t.length > 30 && t.length < 4000)
+              .filter((t) => {
+                const s = score(t);
+                return s.count <= 3 || s.longest > 25;
+              })
+              /* Prefer the caption over the block that wraps it with
+                 the account name, so the shorter one wins a tie. */
+              .sort((a, b) => {
+                const sa = score(a), sb = score(b);
+                if (sb.longest !== sa.longest) return sb.longest - sa.longest;
+                return sa.total - sb.total;
+              });
+            const best = spans[0] || '';
+            if (best.length > caption.length) { caption = best; hits['span'] = best.length; }
+          }
+
+          /* A post page also states its caption in a JSON-LD block. */
+          let jsonLd = '';
+          for (const s of document.querySelectorAll('script[type="application/ld+json"]')) {
+            try {
+              const j = JSON.parse(s.textContent || '');
+              const one = (o) => o && (o.description || o.caption || '');
+              const d = one(j)
+                || (Array.isArray(j['@graph']) ? j['@graph'].map(one).filter(Boolean).join('\\n') : '');
+              if (d) { jsonLd = d.trim(); break; }
+            } catch (e) { /* not valid JSON — ignore */ }
+          }
+          if (jsonLd.length > caption.length) { caption = jsonLd; hits['json-ld'] = jsonLd.length; }
+
+          if (gated) caption = '';
+
+          const images = [...new Set([...document.querySelectorAll('img')]
+            .filter((i) => i.naturalWidth > 300)
+            .map((i) => i.currentSrc || i.src))];
+          /* The account name lives on a link to the profile. The first
+             instagram.com link on the page is often the logo, so look
+             for one whose text is a bare handle. */
+          const account = [...document.querySelectorAll('a')]
+            .map((a) => ({ href: a.getAttribute('href') || '', text: (a.textContent || '').trim() }))
+            .find((a) => /^[A-Za-z0-9._]{2,30}$/.test(a.text)
+                      && /instagram\\.com\\/[^/?#]+\\/?$/.test(a.href));
+          return {
+            caption, images, hits, spans, gated,
+            account: account ? account.text : '',
+            page: b.replace(/\\s+/g, ' ').trim().slice(0, 300),
+            imgCount: document.querySelectorAll('img').length,
+            title: document.title || '',
+          };
+        };
+
+        let out = read();
+
+        /* A signed-in visitor still gets a "sensitive content" notice
+           in front of an age-restricted post. Click through it. */
+        if (out.gated) {
+          const want = /显示|顯示|show|view|查看|更多|more|继续|continue/i;
+          const skip = /登录|log ?in|sign ?up|注册/i;
+          for (const b of document.querySelectorAll('button, [role=button]')) {
+            const t = (b.innerText || '').trim();
+            if (t && want.test(t) && !skip.test(t)) {
+              b.click();
+              await new Promise((r) => setTimeout(r, 3000));
+              const after = read();
+              if (after.caption || !after.gated) { after.bypassed = t; out = after; }
+              break;
+            }
+          }
         }
-        const images = [...new Set([...document.querySelectorAll('img')]
-          .filter((i) => i.naturalWidth > 300)
-          .map((i) => i.currentSrc || i.src))];
-        /* The account name lives on a link to the profile. The first
-           instagram.com link on the page is often the logo, so look for
-           one whose text is a bare handle. */
-        const account = [...document.querySelectorAll('a')]
-          .map((a) => ({ href: a.getAttribute('href') || '', text: (a.textContent || '').trim() }))
-          .find((a) => /^[A-Za-z0-9._]{2,30}$/.test(a.text)
-                    && /instagram\\.com\\/[^/?#]+\\/?$/.test(a.href));
-        return { caption, images, account: account ? account.text : '' };
+        return out;
       })()`,
     });
     return r.result.value;
@@ -126,6 +229,233 @@ async function readPost(chrome, port, url) {
     cdp.close();
     await fetch(`http://127.0.0.1:${port}/json/close/${target.id}`).catch(() => {});
   }
+}
+
+/**
+ * The pages to try, in order, for one post.
+ *
+ * The captioned embed is the best source — it renders the caption, the
+ * images and the account name with no login. But Instagram sometimes
+ * answers it with "this link is broken" for a post it has not finished
+ * publishing, so there are fallbacks: the same embed under the account
+ * name, and finally the post page itself.
+ */
+function candidateUrls(shortcode, username) {
+  return [
+    { url: `https://www.instagram.com/p/${shortcode}/embed/captioned/`, wait: 8000 },
+    { url: `https://www.instagram.com/${username}/p/${shortcode}/embed/captioned/`, wait: 8000 },
+    { url: `https://www.instagram.com/p/${shortcode}/embed/`, wait: 8000 },
+    { url: `https://www.instagram.com/${username}/p/${shortcode}/`, wait: 10000 },
+  ];
+}
+
+/* Instagram's own web app id. It is a constant in Instagram's public
+   JavaScript bundle — the id of the web player, not a secret and not
+   anyone's account. It tells the endpoint which app is asking; it
+   grants no access on its own. */
+const IG_APP_ID = '936619743392459';
+
+/**
+ * Ask Instagram's own web endpoint for the post.
+ *
+ * The rendered pages are for people. This is the endpoint the website
+ * calls to draw a post, so it is the same public data — and unlike the
+ * page it is not blocked by the age gate, which only stops anonymous
+ * *viewers* from seeing age-restricted posts.
+ *
+ * Returns { caption, images, account } or null.
+ */
+async function readViaApi(chrome, port, shortcode) {
+  const id = mediaIdOf(shortcode);
+  if (!id) return null;
+
+  const target = await (await fetch(
+    `http://127.0.0.1:${port}/json/new?${encodeURIComponent('https://www.instagram.com/')}`,
+    { method: 'PUT' })).json();
+  const cdp = await connect(target.webSocketDebuggerUrl);
+  try {
+    await cdp.send('Runtime.enable');
+    await sleep(1500);
+
+    const r = await cdp.send('Runtime.evaluate', {
+      returnByValue: true,
+      awaitPromise: true,
+      expression: `(async () => {
+        /* The session cookie is sent, because Instagram answers this
+           endpoint with the post only for a signed-in visitor — it is
+           the endpoint the website itself uses to draw a post. */
+        const headers = {
+          'X-IG-App-ID': '${IG_APP_ID}',
+          'Accept': '*/*',
+          'Referer': 'https://www.instagram.com/',
+        };
+        const grab = async (url) => {
+          const res = await fetch(url, { headers, credentials: 'include' });
+          const text = await res.text();
+          try { return { ok: res.ok, status: res.status, json: JSON.parse(text) }; }
+          catch (e) { return { ok: res.ok, status: res.status, text: text.slice(0, 200) }; }
+        };
+        const a = await grab('https://www.instagram.com/api/v1/media/${id}/info/');
+        const b = await grab('https://www.instagram.com/api/v1/media/${id}/info/?__a=1&__d=dis');
+        const pick = (o) => {
+          if (!o || typeof o !== 'object') return null;
+          /* The response wraps the post in different shapes depending
+             on the endpoint: an array, a single object, or {items:[...]}. */
+          const list = Array.isArray(o.items) ? o.items
+                     : (o.items && typeof o.items === 'object') ? [o.items]
+                     : Array.isArray(o) ? o : [o];
+          for (const it of list) {
+            const media = it && (Array.isArray(it.media) ? it.media[0] : (it.media || it));
+            if (!media || typeof media !== 'object') continue;
+            const cap = (media.caption && (media.caption.text || media.caption))
+                     || (media.edge_media_to_caption
+                         && media.edge_media_to_caption.edges
+                         && media.edge_media_to_caption.edges[0]
+                         && media.edge_media_to_caption.edges[0].node.text)
+                     || '';
+            if (!cap) continue;
+            const owner = media.owner || media.user || {};
+            const resources = media.display_resources || [];
+            const pic = resources[resources.length - 1] || {};
+            const candidates = (media.image_versions2 && media.image_versions2.candidates) || [];
+            return {
+              caption: String(cap),
+              account: owner.username || '',
+              image: pic.src || (candidates[0] || {}).url || '',
+            };
+          }
+          return null;
+        };
+        const got = pick(a.json) || pick(b.json);
+        return {
+          got,
+          aStatus: a.status,
+          aKeys: a.json && typeof a.json === 'object' ? Object.keys(a.json).slice(0, 12) : [],
+          aBody: a.json ? (a.json.message || a.json.status || 'json') : (a.text || ''),
+          bStatus: b.status,
+          bBody: b.json ? (b.json.message || b.json.status || 'json') : (b.text || ''),
+        };
+      })()`,
+    });
+    const v = r.result && r.result.value;
+    if (v && v.got && v.got.caption) return v.got;
+    if (r.exceptionDetails) {
+      console.warn(`[ig-fetch]   api error: ${r.exceptionDetails.text} ${(r.exceptionDetails.exception || {}).description || ''}`);
+    }
+    console.warn(`[ig-fetch]   api said: ${JSON.stringify(v)}`);
+    return null;
+  } catch (e) {
+    console.warn(`[ig-fetch]   api error: ${e.message}`);
+    return null;
+  } finally {
+    cdp.close();
+    await fetch(`http://127.0.0.1:${port}/json/close/${target.id}`).catch(() => {});
+  }
+}
+
+/**
+ * Wait for Chrome's debugging endpoint and connect to its first page.
+ * Returns null if it never comes up.
+ */
+async function waitForBrowser(port) {
+  for (let i = 0; i < 120; i++) {
+    try {
+      const res = await fetch(`http://127.0.0.1:${port}/json/list`);
+      if (res.ok) {
+        const list = await res.json();
+        const page = list.find((t) => t.type === 'page' && t.webSocketDebuggerUrl);
+        if (page) return await connect(page.webSocketDebuggerUrl);
+      }
+    } catch { /* not up yet */ }
+    await sleep(250);
+  }
+  return null;
+}
+
+/* ---------- signing in ---------- */
+
+/**
+ * Open Instagram in a real browser window and wait for the sign-in.
+ *
+ * Age-restricted posts are hidden from signed-out visitors: the page
+ * shows a login wall and the embed says the link is broken. Signing in
+ * once is the only way to read them, so this opens a normal Chrome
+ * window, waits until the session works, and keeps the session in a
+ * local profile folder for the next run.
+ */
+async function login(chromePath, port) {
+  await mkdir(PROFILE_DIR, { recursive: true });
+  const chrome = spawn(chromePath, [
+    `--remote-debugging-port=${port}`, `--user-data-dir=${PROFILE_DIR}`,
+    '--no-first-run', '--no-default-browser-check',
+    '--window-size=1000,900', 'https://www.instagram.com/accounts/login/',
+  ], { stdio: 'ignore' });
+
+  const cdp = await waitForBrowser(port);
+  if (!cdp) {
+    chrome.kill();
+    console.error('\n[ig-fetch] Chrome did not start.\n');
+    process.exit(1);
+  }
+
+  console.log('\n[ig-fetch] A Chrome window just opened on instagram.com.');
+  console.log('[ig-fetch] Sign in there — you can scan the QR code with the');
+  console.log('[ig-fetch] Instagram app, or type your password.');
+  console.log('[ig-fetch] The window stays open until it works, or you close it.\n');
+
+  const deadline = Date.now() + 15 * 60 * 1000;
+  let name = null;
+  while (Date.now() < deadline) {
+    await sleep(3000);
+
+    /* Did the user close the window? Then stop waiting. */
+    if (chrome.exitCode !== null) {
+      console.log('\n[ig-fetch] The browser was closed — stopping.\n');
+      return false;
+    }
+
+    try {
+      const r = await cdp.send('Runtime.evaluate', {
+        returnByValue: true,
+        awaitPromise: true,
+        expression: `(async () => {
+          const out = { cookie: false, username: null, status: 0 };
+          /* The session cookie is the plainest proof. */
+          out.cookie = /(^|;\\s*)sessionid=/.test(document.cookie || '');
+          /* The account endpoint answers with the signed-in user. It
+             404s for a signed-out visitor. */
+          try {
+            const res = await fetch('/api/v1/accounts/edit/web_form_data/?__a=1&__d=dis',
+              { credentials: 'include' });
+            out.status = res.status;
+            if (res.ok) {
+              const j = await res.json();
+              const u = j && j.data && (j.data.user || j.data);
+              if (u && typeof u.username === 'string') out.username = u.username;
+            }
+          } catch (e) { /* not signed in */ }
+          return out;
+        })()`,
+      });
+      const v = r.result && r.result.value;
+      if (v && typeof v.username === 'string' && v.username) { name = v.username; break; }
+      if (v && v.cookie && !name) { name = 'your account'; break; }
+    } catch (e) {
+      /* The page navigated — try again. */
+    }
+  }
+
+  if (name) {
+    console.log(`[ig-fetch] Signed in${name === 'your account' ? '' : ' as ' + name}.`);
+    console.log('[ig-fetch] The session is saved in .ig-profile/ — do not delete');
+    console.log('[ig-fetch] it, or you will have to sign in again.\n');
+  } else {
+    console.log('\n[ig-fetch] No sign-in detected. Run it again when you are ready.\n');
+  }
+
+  chrome.kill();
+  await sleep(800);
+  return Boolean(name);
 }
 
 /* ---------- images ---------- */
@@ -161,7 +491,16 @@ async function main() {
     process.exit(1);
   }
 
-  const { urls, files } = parseArgs(process.argv.slice(2));
+  const { urls, files, login: wantLogin } = parseArgs(process.argv.slice(2));
+
+  /* Signing in is its own mode: it opens a browser window for you and
+     waits. It needs no links. */
+  if (wantLogin) {
+    const port = 9400 + Math.floor(Math.random() * 400);
+    await login(chromePath, port);
+    return;
+  }
+
   const all = [...urls];
   for (const f of files.filter(Boolean)) {
     const text = await readFile(f, 'utf8');
@@ -171,18 +510,20 @@ async function main() {
     }
   }
   if (!all.length) {
-    console.error('\n[ig-fetch] give me at least one Instagram post URL.\n');
+    console.error('\n[ig-fetch] give me at least one Instagram post URL.');
+    console.error('[ig-fetch] (or run with --login to sign in to Instagram)\n');
     process.exit(1);
   }
 
   const site = await loadSite();
   const igUser = usernameOf(site.instagram);
 
-  /* One browser for the whole batch. */
+  /* One browser for the whole batch. It keeps the saved Instagram
+     session, so age-restricted posts can be read. */
   const port = 9400 + Math.floor(Math.random() * 400);
-  const profile = await mkdtemp(path.join(tmpdir(), 'tz-ig-'));
+  await mkdir(PROFILE_DIR, { recursive: true });
   const chrome = spawn(chromePath, [
-    '--headless=new', `--remote-debugging-port=${port}`, `--user-data-dir=${profile}`,
+    '--headless=new', `--remote-debugging-port=${port}`, `--user-data-dir=${PROFILE_DIR}`,
     '--no-first-run', '--no-default-browser-check', '--disable-gpu',
     '--window-size=900,1400', 'about:blank',
   ], { stdio: 'ignore' });
@@ -212,20 +553,60 @@ async function main() {
         continue;
       }
 
-      const embed = `https://www.instagram.com/p/${shortcode}/embed/captioned/`;
       console.log(`[ig-fetch] reading ${shortcode}…`);
-      let post;
-      try {
-        post = await readPost(chrome, port, embed);
-      } catch (e) {
-        console.warn(`[ig-fetch] could not read ${shortcode}: ${e.message}`);
+      let post = null;
+      let lastReport = null;
+
+      for (const candidate of candidateUrls(shortcode, igUser)) {
+        try {
+          post = await readPost(chrome, port, candidate.url, candidate.wait);
+        } catch (e) {
+          console.warn(`[ig-fetch]   ${candidate.url} — ${e.message}`);
+          continue;
+        }
+        if (String(post.caption || '').trim()) break;
+        lastReport = { url: candidate.url, post };
+        console.warn(post.gated
+          ? `[ig-fetch]   ${candidate.url} — age-restricted, Instagram wants a login`
+          : `[ig-fetch]   no caption at ${candidate.url}`);
+        if (process.env.IG_DEBUG) console.log(`[ig-fetch]     page: ${post.page}`);
+      }
+
+      let caption = String(post && post.caption || '').trim();
+
+      /* Age-restricted posts: Instagram hides them from anonymous
+         visitors — the page shows a login wall and the embed says the
+         link is broken. The web API the site itself calls still
+         answers for a public post, so try that. */
+      if (!caption) {
+        console.warn(`[ig-fetch]   trying Instagram's web API…`);
+        const api = await readViaApi(chrome, port, shortcode);
+        if (api) {
+          caption = cleanCaption(api.caption, api.account);
+          post = post || { images: [], account: api.account };
+          if (!post.images) post.images = [];
+          if (api.image) post.images.unshift(api.image);
+          if (api.account && !post.account) post.account = api.account;
+          console.log(`[ig-fetch]   the API answered.`);
+        }
+      }
+
+      if (!caption) {
+        console.warn(`[ig-fetch] no caption on ${shortcode} — skipping.`);
+        if (lastReport) {
+          console.warn(`[ig-fetch]   selectors: ${JSON.stringify(lastReport.post.hits)}`);
+          console.warn(`[ig-fetch]   images on page: ${lastReport.post.imgCount}, title: ${JSON.stringify(lastReport.post.title)}`);
+          console.warn(`[ig-fetch]   page said: ${lastReport.post.page || '(nothing)'}`);
+        }
         continue;
       }
 
-      const caption = String(post.caption || '').trim();
-      if (!caption) {
-        console.warn(`[ig-fetch] no caption on ${shortcode} — skipping (Instagram may want a login).`);
-        continue;
+      if (process.env.IG_DEBUG) {
+        console.log(`[ig-fetch]   caption: ${JSON.stringify(caption.slice(0, 400))}`);
+        console.log(`[ig-fetch]   page: ${post.page}`);
+        (post.spans || []).slice(0, 8).forEach((s, i) => {
+          console.log(`[ig-fetch]   span[${i}]: ${JSON.stringify(s.slice(0, 200))}`);
+        });
       }
 
       /* The embed prints the account name on its own line above the
@@ -274,7 +655,6 @@ async function main() {
   } finally {
     chrome.kill();
     await sleep(600);
-    await rm(profile, { recursive: true, force: true }).catch(() => {});
   }
 
   if (!added.length) {
