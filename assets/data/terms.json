@@ -111,7 +111,7 @@
         "items": [
           "所有產品售完即止,並以最終確認付款時的庫存為準。",
           "價格以港幣 (HK$) 結算,並已包含相關稅項。",
-          "我們接受 Visa、Mastercard、PayMe、AlipayHK、轉數快 (FPS) 及銀行轉帳。",
+          "付款方式因銷售平台而異,請於落單時向相關平台查詢。",
           "閣下須確保所提供的付款資料真實、正確及屬於閣下本人。"
         ]
       },
@@ -302,7 +302,7 @@
         "items": [
           "All products are sold while stocks last, and availability is determined by the stock we hold when your payment is finally confirmed.",
           "Prices are in Hong Kong dollars (HK$) and include all applicable taxes.",
-          "We accept Visa, Mastercard, PayMe, AlipayHK, FPS (Faster Payment System) and bank transfer.",
+          "Payment methods vary by sales platform. Please check with the relevant platform when placing your order.",
           "You must make sure that the payment details you give us are true, correct and belong to you."
         ]
       },
@@ -493,7 +493,7 @@
         "items": [
           "すべての商品は在庫がなくなり次第販売を終了し、お支払いの最終確認時点の在庫を基準といたします。",
           "価格は香港ドル（HK$）で表示し、税を含む価格です。",
-          "Visa、Mastercard、PayMe、AlipayHK、FPS（速払い）および銀行振込に対応しています。",
+          "お支払方法は販売プラットフォームによって異なります。ご注文の際に各プラットフォームにご確認ください。",
           "お支払い情報は正確であり、お客様ご本人のものであることを必ずご確認ください。"
         ]
       },

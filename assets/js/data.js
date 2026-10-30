@@ -368,11 +368,11 @@ export const faqs = [
     q_en: 'How long does delivery take?',
     q_ja: 'お届けまでにどのくらいかかりますか?',
     a_zh:
-      '香港本地訂單一般於 1–2 個工作天內送達;離島及偏遠地區或需額外 1–2 天。',
+      '香港本地訂單一般於 2–4 個工作天內送達;離島及偏遠地區或需額外 1–2 天, 主要視乎不同平台貨期。',
     a_en:
-      'Local Hong Kong orders typically arrive within 1–2 working days; outlying islands may take 1–2 extra days.',
+      'Local Hong Kong orders typically arrive within 2–4 working days; outlying islands and remote areas may take an extra 1–2 days, mainly depending on the delivery schedule of each platform.',
     a_ja:
-      '香港内のご注文は通常1〜2営業日でお届けします。離島および遠隔地域の場合はさらに1〜2日かかる場合があります。',
+      '香港内のご注文は通常2〜4営業日でお届けします。離島や遠隔地域ではさらに1〜2日かかる場合があり、主に各プラットフォームの配送便の都合によります。',
     cat: 'order',
   },
   {
@@ -381,11 +381,11 @@ export const faqs = [
     q_en: 'How do I choose the right size?',
     q_ja: '自分に合ったサイズはどのように選べばよいですか?',
     a_zh:
-      '亞洲男士一般闊度約 52 ± 2 mm,可參考產品頁的「闊度」欄目。如欲更貼合,我們另有大碼系列。',
+      '亞洲男士平均闊度大約在 52mm 至 54mm 之間,「闊度」指的是安全套壓平後的寬度, 也就是勃起後「圓周長的一半」。',
     a_en:
-      'Most Asian men fit 52 ± 2mm width. Refer to the "Width" column on each product page; we also carry big/big lines.',
+      'Asian men average a width of roughly 52mm to 54mm. "Width" means the flat width of the condom — half the circumference when erect.',
     a_ja:
-      'アジア人男性は一般的に幅 52 ± 2mm が目安です。各製品ページの「幅」欄をご参照ください。さらにフィット感を求める方にはビッグサイズシリーズもご用意しています。',
+      'アジア人男性の平均的な幅はおよそ52mm〜54mmです。「幅」とは、コンドームを平らに広げたときの幅、すなわち勃起時の円周の半分のことを指します。',
     cat: 'product',
   },
   {
@@ -394,11 +394,11 @@ export const faqs = [
     q_en: 'What\'s the difference between latex and PU?',
     q_ja: 'ラテックスとPUの違いは何ですか?',
     a_zh:
-      '乳膠 (Latex) 彈性較佳;PU (水性聚氨酯) 更薄、導熱更快,且不含乳膠蛋白,適合敏感體質。',
+      '乳膠 (Latex) 彈性較佳, 延展性高, 能緊密貼合包覆;PU (水性聚氨酯) 無彈性, 偏向固定形狀的薄膜。',
     a_en:
-      'Latex offers greater elasticity; PU (polyurethane) is thinner, transmits heat faster, and contains no latex protein — ideal for sensitive users.',
+      'Latex (Latex) is more elastic and stretches easily, fitting closely around you; PU (water-based polyurethane) has no elasticity and is more of a fixed-shape thin film.',
     a_ja:
-      'ラテックスは弾性に優れています。PU(ポリウレタン)はより薄く、熱伝導が速く、ラテックスプロテインを含まないため、敏感な体質の方にもおすすめです。',
+      'ラテックス (Latex) は弾性が高く伸びやすく、密着して全体を包み込みます。PU (水性ポリウレタン) は弾性がなく、形が固定された薄膜です。',
     cat: 'product',
   },
   {
@@ -420,11 +420,11 @@ export const faqs = [
     q_en: 'Which payment methods do you accept?',
     q_ja: '利用できる支払い方法は?',
     a_zh:
-      '我們接受 Visa、Mastercard、PayMe、AlipayHK、轉數快 FPS 及銀行轉帳。',
+      '不同平台收款方式各有不同, 詳情請向平台直接查詢。',
     a_en:
-      'We accept Visa, Mastercard, PayMe, AlipayHK, FPS, and bank transfer.',
+      'Payment methods differ from platform to platform. Please check directly with the platform you order from.',
     a_ja:
-      'Visa、Mastercard、PayMe、AlipayHK、FPS(快速支付)、銀行振込をご利用いただけます。',
+      'お支払方法はプラットフォームによって異なります。ご利用のプラットフォームにご確認ください。',
     cat: 'order',
   },
   {
@@ -446,11 +446,11 @@ export const faqs = [
     q_en: 'Do you offer wholesale or corporate plans?',
     q_ja: '卸売りや法人プランはありますか?',
     a_zh:
-      '有的。如有 50 盒以上訂單或企業禮品需求,請電郵至 info@tzero-jp.com 與我們聯絡。',
+      '有的。如有 50 盒以上訂單或企業禮品需求,請聯絡Whatsapp: (+852) 6010 1639與我們聯絡。',
     a_en:
-      'Yes. For orders over 50 boxes or corporate gifting, please email info@tzero-jp.com.',
+      'Yes. For orders over 50 boxes or corporate gifting, please contact us on Whatsapp: (+852) 6010 1639.',
     a_ja:
-      'はい、ございます。50箱以上のご注文や法人ギフトのご相談は、info@tzero-jp.com までご連絡ください。',
+      'はい、ございます。50箱以上のご注文や法人ギフトのご相談は、Whatsapp: (+852) 6010 1639 までご連絡ください。',
     cat: 'order',
   },
 ];
@@ -738,7 +738,6 @@ export const i18n = {
           "image": "https://www.tzero-jp.com/assets/images/og-image.png",
           "telephone": "+852-6897-1473", "email": "info@tzero-jp.com",
           "priceRange": "HK$98", "currenciesAccepted": "HKD",
-          "paymentAccepted": "Visa, Mastercard, PayMe, AlipayHK, FPS, Bank Transfer",
           "address": {
             "@type": "PostalAddress",
             "streetAddress": "5/F, D.J. Building, No.173 Hoi Bun Road",
@@ -1141,7 +1140,6 @@ export const i18n = {
           "image": "https://www.tzero-jp.com/assets/images/og-image.png",
           "telephone": "+852-6897-1473", "email": "info@tzero-jp.com",
           "priceRange": "HK$98", "currenciesAccepted": "HKD",
-          "paymentAccepted": "Visa, Mastercard, PayMe, AlipayHK, FPS, Bank Transfer",
           "address": {
             "@type": "PostalAddress",
             "streetAddress": "5/F, D.J. Building, No.173 Hoi Bun Road",
@@ -1562,7 +1560,6 @@ export const i18n = {
           "image": "https://www.tzero-jp.com/assets/images/og-image.png",
           "telephone": "+852-6897-1473", "email": "info@tzero-jp.com",
           "priceRange": "HK$98", "currenciesAccepted": "HKD",
-          "paymentAccepted": "Visa, Mastercard, PayMe, AlipayHK, FPS, Bank Transfer",
           "address": {
             "@type": "PostalAddress",
             "streetAddress": "5/F, D.J. Building, No.173 Hoi Bun Road",
