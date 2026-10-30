@@ -31,7 +31,8 @@ import { readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 
 import { i18n } from '../assets/js/data.js';
-import { ROOT } from './lib/site.mjs';
+import { plainGraph, t } from './lib/langpage.mjs';
+import { loadSite, ROOT } from './lib/site.mjs';
 
 /* The language the markup is written in. The other two are put in
    by the browser when the visitor switches. */
@@ -49,13 +50,10 @@ const PAGES = [
    page — its <title> and its description — so it is read from
    there rather than written out a second time. */
 const PLAIN_PAGES = [
-  { file: 'about.html', type: 'WebPage' },
-  { file: 'contact.html', type: 'ContactPage' },
-  { file: 'terms.html', type: 'WebPage' },
+  { file: 'about.html', type: 'WebPage', crumb: 'footer.link.about' },
+  { file: 'contact.html', type: 'ContactPage', crumb: 'footer.link.contact' },
+  { file: 'terms.html', type: 'WebPage', crumb: 'footer.link.terms' },
 ];
-
-/* The site's own address. */
-const SITE = 'https://www.tzero-jp.com';
 
 /**
  * Put the JSON into the block, keeping the attributes.
@@ -77,38 +75,23 @@ function fill(text, key, json) {
  *
  * The title and the description are read out of the page, so the
  * structured data cannot say something different from what the
- * page says.
+ * page says. The shape of the block is the one the language
+ * generator uses too, so the three versions agree.
  */
-function plainGraph(text, file, type) {
+function plainGraphFor(text, file, type, crumbKey, siteUrl) {
   const title = text.match(/<title>([^<]*)<\/title>/)?.[1]?.trim();
   const description = text.match(/<meta name="description" content="([^"]*)"/)?.[1]?.trim();
   if (!title) throw new Error(`${file} has no <title>`);
 
-  const page = {
-    '@type': type,
-    '@id': `${SITE}/${file}#webpage`,
-    url: `${SITE}/${file}`,
-    name: title,
-    isPartOf: { '@id': `${SITE}/#site` },
-    inLanguage: 'zh-HK',
-  };
-  if (description) page.description = description;
-  /* The contact page is about the shop, so it points at the shop. */
-  if (type === 'ContactPage') page.mainEntity = { '@id': `${SITE}/#org` };
-
-  return {
-    '@context': 'https://schema.org',
-    '@graph': [
-      {
-        '@type': 'BreadcrumbList',
-        itemListElement: [
-          { '@type': 'ListItem', position: 1, name: '首頁', item: `${SITE}/` },
-          { '@type': 'ListItem', position: 2, name: title, item: `${SITE}/${file}` },
-        ],
-      },
-      page,
-    ],
-  };
+  return plainGraph({
+    siteUrl,
+    lang: LANG,
+    path: file,
+    title,
+    description,
+    type,
+    crumb: t(LANG, crumbKey),
+  });
 }
 
 /**
@@ -125,6 +108,9 @@ function fillPlain(text, json) {
 }
 
 async function main() {
+  const site = await loadSite();
+  if (!site.url) throw new Error('[gen-jsonld] assets/data/site.json has no "url"');
+
   for (const { file, key } of PAGES) {
     const full = path.join(ROOT, file);
     const raw = await readFile(full, 'utf8');
@@ -151,13 +137,13 @@ async function main() {
     console.log(`[gen-jsonld] wrote the structured data into ${file}.`);
   }
 
-  for (const { file, type } of PLAIN_PAGES) {
+  for (const { file, type, crumb } of PLAIN_PAGES) {
     const full = path.join(ROOT, file);
     const raw = await readFile(full, 'utf8');
     const eol = raw.includes('\r\n') ? '\r\n' : '\n';
     const text = raw.replace(/\r\n/g, '\n');
 
-    const json = JSON.stringify(plainGraph(text, file, type), null, 2).replace(/<\//g, '<\\/');
+    const json = JSON.stringify(plainGraphFor(text, file, type, crumb, site.url), null, 2).replace(/<\//g, '<\\/');
     const out = fillPlain(text, json);
     const result = eol === '\r\n' ? out.replace(/\n/g, '\r\n') : out;
 

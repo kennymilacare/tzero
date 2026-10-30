@@ -13,21 +13,36 @@
 
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { readFile, readdir } from 'node:fs/promises';
+import { access, readFile, readdir } from 'node:fs/promises';
 import path from 'node:path';
 
 import { products, productUrl, faqs, i18n } from '../../assets/js/data.js';
 import { faqBlock, faqPageNode } from './seo.mjs';
+import { LANGS, PAGES, pageUrl } from './langs.mjs';
 import { ROOT } from './site.mjs';
 
 const SITE = 'https://www.tzero-jp.com';
-const LANGS = ['zh', 'en', 'ja'];
 
 /* The pages the site publishes. 404.html is checked apart — it is
-   the one page that asks not to be indexed. */
+   the one page that asks not to be indexed.
+
+   Every page has a version in every language, and the English and
+   Japanese ones live in a folder of their own. */
 async function sitePages() {
   const files = await readdir(ROOT);
-  return files.filter((f) => f.endsWith('.html'));
+  const out = files.filter((f) => f.endsWith('.html'));
+  for (const dir of ['en', 'ja']) {
+    const inner = await readdir(path.join(ROOT, dir)).catch(() => []);
+    for (const f of inner) {
+      if (f.endsWith('.html')) out.push(`${dir}/${f}`);
+    }
+  }
+  return out;
+}
+
+/* The comments are for people; a link inside one is not a link. */
+function withoutComments(html) {
+  return html.replace(/<!--[\s\S]*?-->/g, '');
 }
 
 async function readPage(name) {
@@ -154,7 +169,7 @@ test('every product has a page of its own', async () => {
 
 test('no page still links to the old product query string', async () => {
   for (const file of await sitePages()) {
-    const html = await readPage(file);
+    const html = withoutComments(await readPage(file));
     assert.doesNotMatch(html, /product\.html\?id=/, `${file}: still links to product.html?id=`);
   }
 });
@@ -267,19 +282,30 @@ test('the sitemap lists every page, and only pages that exist', async () => {
 
   assert.ok(!locs.some((u) => u.includes('?')), 'the sitemap still lists query-string URLs');
 
-  for (const file of await sitePages()) {
-    if (NOT_IN_SITEMAP.includes(file)) continue;
-    const url = file === 'index.html' ? `${SITE}/` : `${SITE}/${file}`;
-    assert.ok(locs.includes(url), `${file} is not in the sitemap`);
+  /* Every page, in every language. */
+  for (const page of PAGES) {
+    for (const lang of LANGS) {
+      const url = pageUrl(SITE, lang, page.path);
+      assert.ok(locs.includes(url), `${lang}: ${page.path || '/'} is not in the sitemap`);
+    }
   }
 
+  /* And nothing that is not there. */
   for (const loc of locs) {
-    const file = loc.replace(`${SITE}/`, '');
-    if (file === '') continue;
-    assert.ok(
-      (await readdir(ROOT)).includes(file),
-      `the sitemap lists ${loc}, which does not exist`,
-    );
+    const rest = loc.replace(`${SITE}/`, '');
+    const file = rest === '' ? 'index.html' : rest.endsWith('/') ? `${rest}index.html` : rest;
+    const there = await access(path.join(ROOT, file)).then(() => true, () => false);
+    assert.ok(there, `the sitemap lists ${loc}, which does not exist`);
+  }
+});
+
+test('the sitemap does not list the same address twice', async () => {
+  const xml = (await readFile(path.join(ROOT, 'sitemap.xml'), 'utf8')).replace(/\r\n/g, '\n');
+  const locs = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
+  const seen = new Set();
+  for (const loc of locs) {
+    assert.ok(!seen.has(loc), `${loc} is in the sitemap twice`);
+    seen.add(loc);
   }
 });
 

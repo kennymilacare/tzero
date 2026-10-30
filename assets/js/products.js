@@ -2,9 +2,9 @@
    products.js — catalog page: render, filter, sort, count
    =========================================================== */
 
-import { products, brands } from './data.js?v=24';
-import { productCardHTML } from './product-svg.js?v=7';
-import { t, initI18n } from './i18n.js?v=6';
+import { products, brands } from './data.js?v=25';
+import { productCardHTML } from './product-svg.js?v=8';
+import { t, initI18n } from './i18n.js?v=7';
 
 /* ---------- State ---------- */
 

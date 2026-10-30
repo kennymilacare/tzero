@@ -112,6 +112,9 @@
   border: 1px solid var(--border-strong);
   border-radius: var(--r-sm);
   background: transparent;
+  /* It is a link now — to the same page in the next language — so
+     it should not look like one. */
+  text-decoration: none;
   transition: background var(--d-fast) var(--ease),
               color var(--d-fast) var(--ease);
 }

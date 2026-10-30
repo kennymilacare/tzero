@@ -1,14 +1,32 @@
 /* ===========================================================
-   i18n.js — language switcher bound to data-i18n attributes.
-   Supports zh, en, ja. Falls back to zh, then to en, then key.
+   i18n.js — the page's language.
+
+   The language used to be a cookie: whichever one the visitor
+   picked last, kept in localStorage and swapped into the page
+   with JavaScript. A crawler has no cookie and never clicks the
+   button, so it only ever saw the Chinese version of every page —
+   and the English and Japanese versions could never be found.
+
+   Now the address decides. Every page says what language it is
+   in the markup:
+
+       <html lang="en" data-lang="en">
+
+   and the three versions of the site live at their own
+   addresses:
+
+       /            /products.html       Chinese
+       /en/         /en/products.html    English
+       /ja/         /ja/products.html    Japanese
+
+   The strings are still applied at run time, so the words a
+   visitor reads and the words a crawler reads are the same words.
    =========================================================== */
 
-import { i18n } from './data.js?v=24';
+import { i18n } from './data.js?v=25';
 
-const STORAGE_KEY = 'tzero.lang';
 const DEFAULT_LANG = 'zh';
 const SUPPORTED = ['zh', 'en', 'ja'];
-const NEXT_LANG = { zh: 'en', en: 'ja', ja: 'zh' };
 
 /* BCP-47 lang tags used on <html lang> and <meta>. */
 const HTML_LANG = { zh: 'zh-HK', en: 'en', ja: 'ja-JP' };
@@ -23,39 +41,24 @@ const TOGGLE_ARIA = {
   ja: '日本語から繁體中文へ切替',
 };
 
-function getStoredLang() {
-  try {
-    const v = localStorage.getItem(STORAGE_KEY);
-    return SUPPORTED.includes(v) ? v : DEFAULT_LANG;
-  } catch (e) {
-    return DEFAULT_LANG;
-  }
+/**
+ * The language the page is written in.
+ *
+ * The page says so itself: data-lang="en". The lang attribute is
+ * the fallback for a page that has not been given the extra
+ * attribute.
+ */
+function pageLang() {
+  const el = document.documentElement;
+  if (!el) return DEFAULT_LANG;
+  const said = el.getAttribute('data-lang');
+  if (SUPPORTED.includes(said)) return said;
+  const tag = (el.getAttribute('lang') || '').toLowerCase();
+  const byTag = SUPPORTED.find((l) => tag === l || tag.startsWith(`${l}-`));
+  return byTag || DEFAULT_LANG;
 }
 
-function setStoredLang(lang) {
-  try { localStorage.setItem(STORAGE_KEY, lang); } catch (e) { /* ignore */ }
-}
-
-/* Sync the URL hash to reflect the active language, e.g. #lang=en.
-   Only writes if it would actually change (avoids history spam). */
-function syncUrlHash(lang) {
-  if (typeof window === 'undefined' || !window.history) return;
-  const want = '#lang=' + lang;
-  if (window.location.hash === want) return;
-  try {
-    history.replaceState(null, '', window.location.pathname + window.location.search + want);
-  } catch (e) { /* ignore */ }
-}
-
-/* Read #lang=… from the URL on initial load. Returns null if absent. */
-function getHashLang() {
-  if (typeof window === 'undefined') return null;
-  const m = /#lang=([a-z]{2})/i.exec(window.location.hash || '');
-  if (!m) return null;
-  return SUPPORTED.includes(m[1]) ? m[1] : null;
-}
-
-let currentLang = getStoredLang() || getHashLang() || DEFAULT_LANG;
+let currentLang = pageLang();
 
 /* Translate a key. Fallback chain: current → zh → en → key. */
 export function t(key, lang = currentLang) {
@@ -130,40 +133,51 @@ function applyToDOM() {
 /* Public API */
 export function getLang() { return currentLang; }
 
-export function setLang(lang) {
-  if (!SUPPORTED.includes(lang)) lang = DEFAULT_LANG;
-  if (lang === currentLang) return;
-  currentLang = lang;
-  setStoredLang(lang);
-  syncUrlHash(lang);
-  applyToDOM();
-  document.dispatchEvent(new CustomEvent('lang:change', { detail: { lang } }));
+/**
+ * Read #lang=… from the URL. Returns null if absent.
+ *
+ * Old links were shared with a hash like #lang=en. The hash means
+ * nothing to a crawler, so it now means "go to that language's
+ * address" rather than "swap the words on this page".
+ */
+function getHashLang() {
+  if (typeof window === 'undefined') return null;
+  const m = /#lang=([a-z]{2})/i.exec(window.location.hash || '');
+  if (!m) return null;
+  return SUPPORTED.includes(m[1]) ? m[1] : null;
 }
 
-/* Cycle to the next supported language. */
-export function cycleLang() {
-  setLang(NEXT_LANG[currentLang] || DEFAULT_LANG);
-}
-
-/* Auto-init: bind language toggle buttons and apply current lang. */
-export function initI18n() {
-  // If the URL has a #lang=… override, sync storage + hash once on init.
-  const hashLang = getHashLang();
-  if (hashLang && hashLang !== currentLang) {
-    currentLang = hashLang;
-    setStoredLang(hashLang);
-  } else {
-    syncUrlHash(currentLang);
+/** Where each language's version of this page lives. */
+function langUrls() {
+  const raw = document.documentElement.getAttribute('data-lang-urls');
+  if (!raw) return null;
+  try {
+    const parsed = JSON.parse(raw);
+    return parsed && typeof parsed === 'object' ? parsed : null;
+  } catch (e) {
+    return null;
   }
+}
+
+/* Auto-init: apply the page's language and honour an old #lang=… link. */
+export function initI18n() {
+  /* An old shared link may still carry #lang=xx. It used to mean
+     "show me this language"; now it means "go to this language's
+     address", so what the visitor lands on can be shared again. */
+  const wanted = getHashLang();
+  if (wanted && wanted !== currentLang) {
+    const urls = langUrls();
+    const to = urls && urls[wanted];
+    if (to) {
+      window.location.replace(to);
+      return;
+    }
+  }
+
   applyToDOM();
-  document.querySelectorAll('[data-lang-toggle]').forEach((btn) => {
-    btn.addEventListener('click', cycleLang);
-  });
-  // React to back/forward navigation that changes the hash.
-  window.addEventListener('hashchange', () => {
-    const l = getHashLang();
-    if (l && l !== currentLang) setLang(l);
-  });
+
+  /* The language button is a link to the other language's address
+     now, so there is nothing to intercept — the browser does it. */
 }
 
 /* Pick a localised field on an object.

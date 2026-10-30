@@ -11,9 +11,10 @@
    page, so a crawler ends up on the right one.
    =========================================================== */
 
-import { products, productUrl } from './data.js?v=24';
-import { productCardHTML, productMediaHTML } from './product-svg.js?v=7';
-import { initI18n, getLang, t, pickByLang } from './i18n.js?v=6';
+import { products, productUrl } from './data.js?v=25';
+import { productCardHTML, productMediaHTML } from './product-svg.js?v=8';
+import { initI18n, getLang, t, pickByLang } from './i18n.js?v=7';
+import { productTitle, productDescription } from './product-copy.js?v=2';
 
 function readId() {
   const fromBody = document.body && document.body.dataset.productId;
@@ -28,12 +29,23 @@ function isLegacyPage() {
 
 /* The address the site is published at — read from the page's own
    canonical link, so a preview build points at the real address
-   rather than at wherever it happens to be served from. */
+   rather than at wherever it happens to be served from.
+
+   It keeps the folder the page sits in, because the English and
+   Japanese pages live in folders of their own: the product page at
+   /en/product-ultra-thin.html has to point at /en/… , not at the
+   Chinese one. */
 function siteBase() {
   const canonical = document.querySelector('link[rel="canonical"]');
   const href = canonical ? canonical.getAttribute('href') || '' : '';
-  const m = href.match(/^(https?:\/\/[^\/]+)\//);
-  return m ? `${m[1]}/` : `${window.location.origin}/`;
+  if (!href) return `${window.location.origin}/`;
+  try {
+    const url = new URL(href, window.location.href);
+    url.pathname = url.pathname.replace(/[^/]*$/, '');
+    return url.href;
+  } catch (e) {
+    return `${window.location.origin}/`;
+  }
 }
 
 /* The address of the product's own page. */
@@ -43,13 +55,12 @@ function pageUrlOf(product) {
 
 /** The title a search result should show for this product. */
 function titleOf(product) {
-  return `${pickByLang(product, 'name')} — ${pickByLang(product, 'subtitle')} | T-ZERO 第九感`;
+  return productTitle(product, getLang());
 }
 
 /** The description a search result should show for this product. */
 function descriptionOf(product) {
-  return `${pickByLang(product, 'description')} ${pickByLang(product, 'subtitle')}。`
-    + `每盒 ${product.pieces} 片,HK$${product.price_hkd},即日送貨,全黑啞面保密包裝。`;
+  return productDescription(product, getLang());
 }
 
 /**

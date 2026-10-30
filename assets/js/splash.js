@@ -8,6 +8,12 @@ console.log('[splash] script loaded, version v3');
 (function () {
   'use strict';
 
+  /* The site root, worked out from where this file sits. The English
+     and Japanese pages live one folder down, so a relative path would
+     be looked for in the wrong place. document.currentScript is only
+     good while this file is being read, so it is read now. */
+  const SITE_ROOT = new URL('../../', document.currentScript ? document.currentScript.src : location.href);
+
   if (window.__tzeroSplashLoaded) return;
   window.__tzeroSplashLoaded = true;
 
@@ -161,7 +167,7 @@ console.log('[splash] script loaded, version v3');
   const splashHtml = `
     <div class="splash__bubbles" aria-hidden="true">${bubblesHtml}</div>
     <div class="splash__content">
-      <img src="assets/images/brand/t-zero-logo.png"
+      <img src="${new URL('assets/images/brand/t-zero-logo.png', SITE_ROOT).href}"
            alt="T-ZERO 第九感"
            class="splash__logo"
            width="110" height="110"

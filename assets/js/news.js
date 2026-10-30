@@ -10,9 +10,12 @@
    never innerHTML, because Instagram post text is not authored here.
    =========================================================== */
 
-import { getLang, t } from './i18n.js?v=6';
+import { getLang, t } from './i18n.js?v=7';
+import { assetUrl } from './paths.js?v=2';
 
-const DATA_URL = 'assets/data/news.json';
+/* The feed lives in the site, not in the page's own folder — the
+   English and Japanese pages are one folder down. */
+const DATA_URL = assetUrl('assets/data/news.json');
 const MAX_POSTS = 8;
 const FALLBACK_PAGE_URL = 'https://www.facebook.com/Tzerohk';
 
@@ -144,7 +147,7 @@ function buildCard(post) {
 
   if (post.image) {
     const img = document.createElement('img');
-    img.src = post.image;
+    img.src = assetUrl(post.image);
     img.alt = title;
     img.loading = 'lazy';
     img.decoding = 'async';
@@ -257,7 +260,7 @@ function newsArticle(post) {
   const description = pickNews(post, 'excerpt');
   if (description) entry.description = description;
   if (post.image) {
-    try { entry.image = new URL(post.image, window.location.href).href; } catch (e) { /* leave it out */ }
+    try { entry.image = assetUrl(post.image); } catch (e) { /* leave it out */ }
   }
   return entry;
 }

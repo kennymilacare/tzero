@@ -2,7 +2,7 @@
 /* ===========================================================
    update-sitemap.mjs — write sitemap.xml from what is really there.
 
-   Two things were wrong with the sitemap:
+   Three things were wrong with the sitemap:
 
    1. It listed the products as product.html?id=… — four URLs that
       all carried the same canonical link, so a crawler could only
@@ -15,6 +15,13 @@
       sitemap a crawler trusts less. Each date is now the day the
       page (and the data it shows) was last changed.
 
+   3. It listed one address per page, even though every page now
+      exists in three languages at three addresses. A sitemap that
+      hides two thirds of the site is a sitemap that keeps two
+      thirds of it out of the search results — so every page is
+      listed once per language, and each entry names the other two
+      so the crawler knows they are the same page.
+
    Run: node scripts/update-sitemap.mjs
    =========================================================== */
 
@@ -23,7 +30,7 @@ import { promisify } from 'node:util';
 import { writeFile } from 'node:fs/promises';
 import path from 'node:path';
 
-import { products, productUrl } from '../assets/js/data.js';
+import { LANGS, PAGES, alternates, pageFile, pageUrl } from './lib/langs.mjs';
 import { loadSite, ROOT } from './lib/site.mjs';
 
 const run = promisify(execFile);
@@ -36,29 +43,51 @@ function pageList() {
   const feed = ['assets/data/news.json', 'assets/data/news.local.json'];
   const catalogue = ['assets/js/data.js'];
 
-  const list = [
-    { loc: '', files: ['index.html', ...feed], changefreq: 'weekly', priority: '1.0' },
-    { loc: 'products.html', files: ['products.html', ...catalogue], changefreq: 'weekly', priority: '0.9' },
-  ];
+  const list = [];
 
-  for (const p of products) {
-    list.push({
-      loc: productUrl(p.id),
-      files: [productUrl(p.id), ...catalogue],
-      changefreq: 'weekly',
-      priority: '0.8',
-    });
+  for (const page of PAGES) {
+    /* What the page shows, on top of the page itself. */
+    let extra = [];
+    if (page.kind === 'home' || page.kind === 'news') extra = feed;
+    if (page.kind === 'products' || page.kind === 'product') extra = catalogue;
+
+    for (const lang of LANGS) {
+      const file = pageFile(lang, page.path);
+      list.push({
+        lang,
+        path: page.path,
+        file,
+        files: [file, ...extra],
+        changefreq: CHANGEFREQ[page.kind] || 'weekly',
+        priority: PRIORITY[page.kind] || '0.5',
+      });
+    }
   }
-
-  list.push(
-    { loc: 'about.html', files: ['about.html'], changefreq: 'monthly', priority: '0.6' },
-    { loc: 'news.html', files: ['news.html', ...feed], changefreq: 'weekly', priority: '0.7' },
-    { loc: 'contact.html', files: ['contact.html'], changefreq: 'monthly', priority: '0.5' },
-    { loc: 'terms.html', files: ['terms.html'], changefreq: 'yearly', priority: '0.3' },
-  );
 
   return list;
 }
+
+/* How often a crawler should come back, and how important the page
+   is — the same for all three languages of a page. */
+const CHANGEFREQ = {
+  home: 'weekly',
+  products: 'weekly',
+  product: 'weekly',
+  news: 'weekly',
+  about: 'monthly',
+  contact: 'monthly',
+  terms: 'yearly',
+};
+
+const PRIORITY = {
+  home: '1.0',
+  products: '0.9',
+  product: '0.8',
+  news: '0.7',
+  about: '0.6',
+  contact: '0.5',
+  terms: '0.3',
+};
 
 /** The day a file was last changed, according to git. */
 async function changedOn(file) {
@@ -79,17 +108,17 @@ async function lastmodOf(files) {
 }
 
 function render(list, base) {
-  const url = (loc) => (loc ? `${base}${loc}` : base);
-
   const entries = list.map((entry) => {
-    const loc = url(entry.loc);
-    const alternates = ['zh-HK', 'en', 'ja-JP', 'x-default']
-      .map((lang) => `    <xhtml:link rel="alternate" hreflang="${lang}" href="${loc}"/>`)
+    const loc = pageUrl(base, entry.lang, entry.path);
+    /* The other two languages of this very page, and the Chinese
+       one as the default. */
+    const links = alternates(base, entry.path)
+      .map((alt) => `    <xhtml:link rel="alternate" hreflang="${alt.hreflang}" href="${alt.href}"/>`)
       .join('\n');
     return `  <url>
     <loc>${loc}</loc>
     <lastmod>${entry.lastmod}</lastmod>
-${alternates}
+${links}
     <changefreq>${entry.changefreq}</changefreq>
     <priority>${entry.priority}</priority>
   </url>`;
@@ -118,7 +147,7 @@ async function main() {
   await writeFile(SITEMAP, render(list, site.url), 'utf8');
   console.log(`[update-sitemap] wrote sitemap.xml — ${list.length} URL(s).`);
   for (const entry of list) {
-    console.log(`[update-sitemap]   ${entry.lastmod}  ${entry.loc || '/'}`);
+    console.log(`[update-sitemap]   ${entry.lastmod}  ${pageUrl(site.url, entry.lang, entry.path)}`);
   }
 }
 

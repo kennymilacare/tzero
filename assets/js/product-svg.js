@@ -3,8 +3,9 @@
    (no copyrighted brand imagery)
    =========================================================== */
 
-import { brands, productUrl } from './data.js?v=24';
-import { getLang as realGetLang, pickByLang, t } from './i18n.js?v=6';
+import { brands, productUrl } from './data.js?v=25';
+import { getLang as realGetLang, pickByLang, t } from './i18n.js?v=7';
+import { assetUrl } from './paths.js?v=2';
 
 const W = 200;
 const H = 280;
@@ -125,7 +126,7 @@ export function productMediaHTML(product, large = false) {
   if (product.image) {
     const altKey = `image_alt_${lang}`;
     const alt = product[altKey] || product.image_alt_zh || pickByLang(product, 'name');
-    return `<img class="product-image" src="${product.image}" alt="${escapeXml(alt)}" loading="lazy" decoding="async">`;
+    return `<img class="product-image" src="${assetUrl(product.image)}" alt="${escapeXml(alt)}" loading="lazy" decoding="async">`;
   }
   return productSVG(product, lang, large);
 }

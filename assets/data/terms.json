@@ -1,0 +1,576 @@
+{
+  "_note": "The legal page, in three languages. The Chinese page is the original; the English and Japanese ones are written from it. The generator puts the right language's words into terms.html, en/terms.html and ja/terms.html — see scripts/lib/terms.mjs.",
+  "zh": {
+    "h1": "細則與條款",
+    "lead": "T-ZERO 第九感 重視每一位顧客的私隱與權益。本頁載列我們處理個人資料的政策,以及使用本網站與購買產品的條款。",
+    "meta": [
+      {
+        "label": "生效日期",
+        "value": "2026 年 10 月 1 日"
+      },
+      {
+        "label": "負責方",
+        "value": "T-ZERO 第九感 ・ 香港"
+      },
+      {
+        "label": "聯絡",
+        "value": "info@tzero-jp.com<br>+852 6897 1473"
+      }
+    ],
+    "blocks": [
+      {
+        "tag": "h2",
+        "html": "一、私隱權政策"
+      },
+      {
+        "tag": "p",
+        "html": "我們一貫的方針是保障顧客及瀏覽本網站人士所提交的個人資料。請詳細閱讀以下政策,以便明確了解我們如何處理閣下的個人資料。我們保留以在網站上公佈修正本的形式不時更改此政策的權利。"
+      },
+      {
+        "tag": "h3",
+        "html": "1. 一般政策"
+      },
+      {
+        "tag": "p",
+        "html": "為保障顧客提交的資料,我們及公司職員會嚴格遵照《中華人民共和國香港特別行政區個人資料(私隱)條例》(香港法例第 486 章)所訂的守則和規定,務求盡力達到保護個人資料的認可標準。"
+      },
+      {
+        "tag": "h3",
+        "html": "2. 我們所收集的資料及其運用方法"
+      },
+      {
+        "tag": "p",
+        "html": "當閣下在本網站訂購產品或聯絡我們時,我們會收集閣下一些資料,包括<strong>姓名、聯絡電話、電郵地址、送貨地址及訂單備註</strong>,以便處理訂單及提供更高效率的售後服務。此外,我們會保存閣下對產品的喜好和購買紀錄,使我們能夠更了解閣下的需要,提升閣下的購物體驗,並能向閣下提供最新的產品、服務及推廣活動消息。"
+      },
+      {
+        "tag": "p",
+        "html": "我們或會不時向閣下收集匿名統計及瀏覽數據,並監測網站的使用及流量模式,目的為改善網站的設計、產品及網上的服務。在這方面,我們或需以總量統計為基準及不揭露閣下身份的情況下,與廣告客戶或推廣合夥人共用閣下的資料作為市場推廣用途。<strong>未經閣下許可,我們絕不會公開所提供的個人資料。閣下於任何時間均有權不同意個人資料被披露。</strong>"
+      },
+      {
+        "tag": "p",
+        "html": "如閣下不願意個人資料被收集,請不要向我們提交。如閣下已提供相關資訊後希望從記錄中刪除,請電郵至 <a href=\"mailto:info@tzero-jp.com\">info@tzero-jp.com</a>,我們會於 7 個工作天內為閣下處理。"
+      },
+      {
+        "tag": "h3",
+        "html": "3. 公眾資料"
+      },
+      {
+        "tag": "p",
+        "html": "假如閣下決定於公開渠道(如社交媒體、評論區)披露個人資料,請小心謹慎。任何以自願形式被公開的資料將成為公眾資訊,閣下可能會收到未經由本網站其他訪客傳送的訊息。至於密碼及賬戶資料的保密乃閣下的責任;若閣下自願披露個人資料及未能保障密碼和賬戶資料,我們概不負責任何損失。"
+      },
+      {
+        "tag": "h3",
+        "html": "4. 推廣訊息"
+      },
+      {
+        "tag": "p",
+        "html": "我們或不時透過電郵或 WhatsApp 通知閣下關於最新產品、服務、推廣活動等,或其他我們認為合適的資訊。閣下可於任何時間內要求停止接收此類訊息,方法包括:"
+      },
+      {
+        "tag": "ul",
+        "items": [
+          "點選任何推廣電郵底部的「取消訂閱」連結;",
+          "回覆訊息並輸入「STOP」或「取消」;",
+          "電郵至 <a href=\"mailto:info@tzero-jp.com\">info@tzero-jp.com</a> 提出要求。"
+        ]
+      },
+      {
+        "tag": "h3",
+        "html": "5. 聯絡我們"
+      },
+      {
+        "tag": "p",
+        "html": "如閣下對我們的私隱權政策有任何疑問,請以下列方式聯絡我們:"
+      },
+      {
+        "tag": "ul",
+        "items": [
+          "電郵:<a href=\"mailto:info@tzero-jp.com\">info@tzero-jp.com</a>",
+          "WhatsApp / 電話:+852 6897 1473",
+          "聯絡表:<a href=\"contact.html\">www.tzero-jp.com/contact</a>"
+        ]
+      },
+      {
+        "tag": "h2",
+        "html": "二、使用條款"
+      },
+      {
+        "tag": "h3",
+        "html": "6. 服務範圍"
+      },
+      {
+        "tag": "p",
+        "html": "T-ZERO 第九感 透過本網站(<a href=\"index.html\">www.tzero-jp.com</a>)及授權零售伙伴(包括 HKTVmall)銷售玻尿酸安全套及相關親密護理產品。所有產品均適合 18 歲或以上人士使用。閣下於本網站下單,即代表聲明閣下已年滿 18 歲。"
+      },
+      {
+        "tag": "h3",
+        "html": "7. 產品供應與付款"
+      },
+      {
+        "tag": "ul",
+        "items": [
+          "所有產品售完即止,並以最終確認付款時的庫存為準。",
+          "價格以港幣 (HK$) 結算,並已包含相關稅項。",
+          "我們接受 Visa、Mastercard、PayMe、AlipayHK、轉數快 (FPS) 及銀行轉帳。",
+          "閣下須確保所提供的付款資料真實、正確及屬於閣下本人。"
+        ]
+      },
+      {
+        "tag": "h3",
+        "html": "8. 運送服務"
+      },
+      {
+        "tag": "ul",
+        "items": [
+          "香港本地訂單一般於 <strong>1–2 個工作天</strong>內送達。",
+          "離島及偏遠地區或需額外 1–2 個工作天。",
+          "所有包裹以全啞面黑色紙盒包裝,<strong>包裝上絕無任何品牌或產品名稱字樣</strong>,以保障閣下的私隱。",
+          "運費將於結帳頁面顯示,並按推廣活動作相應調整。"
+        ]
+      },
+      {
+        "tag": "h3",
+        "html": "9. 退換貨政策"
+      },
+      {
+        "tag": "p",
+        "html": "基於衛生理由,<strong>所有產品一經拆封恕不退換</strong>。如收貨時發現包裝破損、漏氣或與訂單不符,請於收貨後 <strong>7 天內</strong>電郵至 <a href=\"mailto:info@tzero-jp.com\">info@tzero-jp.com</a> 並附上訂單編號及相片,客服會於 24 小時內回覆及安排補發或退款。"
+      },
+      {
+        "tag": "h3",
+        "html": "10. 智慧財產"
+      },
+      {
+        "tag": "p",
+        "html": "本網站所有內容(包括但不限於文字、圖片、商標、設計、產品圖像及程式碼)均屬 T-ZERO 第九感 或其授權方所有,未經事先書面許可,不得轉載、複製、修改或作任何商業用途。"
+      },
+      {
+        "tag": "h3",
+        "html": "11. 免責聲明"
+      },
+      {
+        "tag": "p",
+        "html": "T-ZERO 第九感 致力確保本網站資訊的準確性與可用性,但不就因網站暫停、資料傳輸錯誤或不可抗力因素所造成的任何損失承擔責任。本網站所載之產品功效描述僅供參考,實際體驗因人而異。"
+      },
+      {
+        "tag": "h3",
+        "html": "12. 條款修訂"
+      },
+      {
+        "tag": "p",
+        "html": "T-ZERO 第九感 保留不時修改本細則與條款的權利,修改後的版本將於本頁面發佈,並自發佈日起生效。如閣下於修改後繼續使用本網站或購買我們的產品,即代表接受修訂後的條款。"
+      },
+      {
+        "tag": "h3",
+        "html": "13. 適用法律"
+      },
+      {
+        "tag": "p",
+        "html": "本條款及細則根據中華人民共和國香港特別行政區法律詮釋及執行。如有任何爭議,雙方同意以香港法院為唯一管轄法院。"
+      },
+      {
+        "tag": "h3",
+        "html": "14. 聯絡"
+      },
+      {
+        "tag": "p",
+        "html": "如對本細則與條款或任何訂單存有疑問,歡迎隨時聯絡我們:"
+      },
+      {
+        "tag": "ul",
+        "items": [
+          "電郵:<a href=\"mailto:info@tzero-jp.com\">info@tzero-jp.com</a>",
+          "WhatsApp / 電話:+852 6897 1473",
+          "聯絡表:<a href=\"contact.html\">www.tzero-jp.com/contact</a>"
+        ]
+      },
+      {
+        "tag": "p",
+        "class": "muted",
+        "html": "© 2026 T-ZERO 第九感. 版權所有。 ・ 本頁面同時為私隱政策與使用條款之綜合版本。"
+      }
+    ]
+  },
+  "en": {
+    "h1": "Terms & Conditions",
+    "lead": "At T-ZERO NINTH SENSE we respect the privacy and the rights of every customer. This page sets out the policy we follow when we handle personal data, together with the terms that apply to your use of this website and to your purchases.",
+    "meta": [
+      {
+        "label": "Effective date",
+        "value": "1 October 2026"
+      },
+      {
+        "label": "Operated by",
+        "value": "T-ZERO NINTH SENSE ・ Hong Kong"
+      },
+      {
+        "label": "Contact",
+        "value": "info@tzero-jp.com<br>+852 6897 1473"
+      }
+    ],
+    "blocks": [
+      {
+        "tag": "h2",
+        "html": "1. Privacy Policy"
+      },
+      {
+        "tag": "p",
+        "html": "Our policy has always been to protect the personal data given to us by our customers and by visitors to this website. Please read the policy below carefully, so that you understand clearly how we handle your personal data. We reserve the right to amend this policy from time to time and to publish the amended version on this site."
+      },
+      {
+        "tag": "h3",
+        "html": "1. General policy"
+      },
+      {
+        "tag": "p",
+        "html": "To safeguard the data you submit, we and our staff work strictly to the code of practice and the requirements set out in the Personal Data (Privacy) Ordinance (Cap. 486) of the Hong Kong Special Administrative Region of the People's Republic of China, so as to attain the recognised standard for the protection of personal data."
+      },
+      {
+        "tag": "h3",
+        "html": "2. The information we collect and how we use it"
+      },
+      {
+        "tag": "p",
+        "html": "When you order products on this website or contact us, we collect certain information about you, including your <strong>name, contact telephone number, email address, delivery address and order notes</strong>, so that we can process your order and provide more efficient after-sales service. We also keep a record of your product preferences and your purchase history, so that we can understand your needs better, make your shopping experience better, and keep you informed of our latest products, services and promotions."
+      },
+      {
+        "tag": "p",
+        "html": "We may from time to time collect anonymous statistics and browsing data from you, and monitor how the website is used and what traffic it receives, in order to improve the design of the site, our products and our online services. In doing so, we may share your data with advertising clients or promotional partners on an aggregate basis and without identifying you. <strong>We will never disclose the personal data you have given us without your permission. You may refuse the disclosure of your personal data at any time.</strong>"
+      },
+      {
+        "tag": "p",
+        "html": "If you would rather we did not collect your personal data, please do not give it to us. If you have already given us the information and would like it removed from our records, please write to <a href=\"mailto:info@tzero-jp.com\">info@tzero-jp.com</a> and we will deal with your request within 7 working days."
+      },
+      {
+        "tag": "h3",
+        "html": "3. Public information"
+      },
+      {
+        "tag": "p",
+        "html": "If you choose to disclose personal information in public places — on social media, in review areas or anywhere else — please think carefully. Anything you publish voluntarily becomes public information, and you may receive messages from other visitors to this site that we did not send. Keeping your password and account details confidential is your own responsibility; if you volunteer personal information and fail to protect your password and account details, we cannot be held responsible for any loss."
+      },
+      {
+        "tag": "h3",
+        "html": "4. Marketing messages"
+      },
+      {
+        "tag": "p",
+        "html": "We may from time to time notify you by email or WhatsApp about our latest products, services and promotions, or about other information we think may be of interest to you. You may ask us to stop sending these messages at any time, in any of the following ways:"
+      },
+      {
+        "tag": "ul",
+        "items": [
+          "click the “unsubscribe” link at the bottom of any marketing email;",
+          "reply to the message with “STOP” or “unsubscribe”;",
+          "write to <a href=\"mailto:info@tzero-jp.com\">info@tzero-jp.com</a> and ask us to stop."
+        ]
+      },
+      {
+        "tag": "h3",
+        "html": "5. Contact us"
+      },
+      {
+        "tag": "p",
+        "html": "If you have any questions about our privacy policy, please contact us in any of the following ways:"
+      },
+      {
+        "tag": "ul",
+        "items": [
+          "Email: <a href=\"mailto:info@tzero-jp.com\">info@tzero-jp.com</a>",
+          "WhatsApp / phone: +852 6897 1473",
+          "Contact form: <a href=\"contact.html\">www.tzero-jp.com/contact</a>"
+        ]
+      },
+      {
+        "tag": "h2",
+        "html": "2. Terms of Use"
+      },
+      {
+        "tag": "h3",
+        "html": "6. Scope of service"
+      },
+      {
+        "tag": "p",
+        "html": "T-ZERO NINTH SENSE sells hyaluronic acid condoms and related intimate care products through this website (<a href=\"index.html\">www.tzero-jp.com</a>) and through authorised retail partners, including HKTVmall. All products are suitable for people aged 18 or over. By placing an order on this website you declare that you are 18 years of age or older."
+      },
+      {
+        "tag": "h3",
+        "html": "7. Product supply and payment"
+      },
+      {
+        "tag": "ul",
+        "items": [
+          "All products are sold while stocks last, and availability is determined by the stock we hold when your payment is finally confirmed.",
+          "Prices are in Hong Kong dollars (HK$) and include all applicable taxes.",
+          "We accept Visa, Mastercard, PayMe, AlipayHK, FPS (Faster Payment System) and bank transfer.",
+          "You must make sure that the payment details you give us are true, correct and belong to you."
+        ]
+      },
+      {
+        "tag": "h3",
+        "html": "8. Delivery"
+      },
+      {
+        "tag": "ul",
+        "items": [
+          "Local Hong Kong orders are usually delivered within <strong>1–2 working days</strong>.",
+          "Outlying islands and remote areas may take an extra 1–2 working days.",
+          "Every parcel is packed in a plain matt black box with <strong>no brand or product name printed on it whatsoever</strong>, so that your privacy is protected.",
+          "Delivery charges are shown at checkout and may be adjusted for promotions."
+        ]
+      },
+      {
+        "tag": "h3",
+        "html": "9. Returns and exchanges"
+      },
+      {
+        "tag": "p",
+        "html": "For hygiene reasons, <strong>no product can be returned or exchanged once it has been opened</strong>. If your parcel arrives damaged, leaking, or not as ordered, please write to <a href=\"mailto:info@tzero-jp.com\">info@tzero-jp.com</a> within <strong>7 days</strong> of delivery, with your order number and photographs. Our customer service team replies within 24 hours and arranges a replacement or a refund."
+      },
+      {
+        "tag": "h3",
+        "html": "10. Intellectual property"
+      },
+      {
+        "tag": "p",
+        "html": "All content on this website — including but not limited to text, images, trade marks, designs, product imagery and code — belongs to T-ZERO NINTH SENSE or its licensors, and may not be republished, copied, modified or used for any commercial purpose without our prior written permission."
+      },
+      {
+        "tag": "h3",
+        "html": "11. Disclaimer"
+      },
+      {
+        "tag": "p",
+        "html": "T-ZERO NINTH SENSE works to keep the information on this website accurate and available, but we accept no responsibility for any loss arising from the website being unavailable, from errors in the transmission of data, or from causes beyond our control. The product benefit descriptions on this website are for guidance only, and the experience varies from person to person."
+      },
+      {
+        "tag": "h3",
+        "html": "12. Amendments to these terms"
+      },
+      {
+        "tag": "p",
+        "html": "T-ZERO NINTH SENSE reserves the right to amend these terms and conditions from time to time. The amended version will be published on this page and takes effect from the date of publication. If you continue to use this website, or to buy our products, after an amendment, you are taken to have accepted the amended terms."
+      },
+      {
+        "tag": "h3",
+        "html": "13. Governing law"
+      },
+      {
+        "tag": "p",
+        "html": "These terms and conditions are construed and enforced in accordance with the laws of the Hong Kong Special Administrative Region of the People's Republic of China. In the event of any dispute, the parties agree that the courts of Hong Kong shall have exclusive jurisdiction."
+      },
+      {
+        "tag": "h3",
+        "html": "14. Contact"
+      },
+      {
+        "tag": "p",
+        "html": "If you have any questions about these terms and conditions, or about any order, please get in touch with us at any time:"
+      },
+      {
+        "tag": "ul",
+        "items": [
+          "Email: <a href=\"mailto:info@tzero-jp.com\">info@tzero-jp.com</a>",
+          "WhatsApp / phone: +852 6897 1473",
+          "Contact form: <a href=\"contact.html\">www.tzero-jp.com/contact</a>"
+        ]
+      },
+      {
+        "tag": "p",
+        "class": "muted",
+        "html": "© 2026 T-ZERO NINTH SENSE. All rights reserved. ・ This page is a combined version of our privacy policy and our terms of use."
+      }
+    ]
+  },
+  "ja": {
+    "h1": "利用規約・細則",
+    "lead": "T-ZERO 第九感は、すべてのお客様のプライバシーと権利を大切にしています。本ページには、個人情報の取り扱いに関するポリシーと、本サイトのご利用および商品購入に関する規約を掲載しています。",
+    "meta": [
+      {
+        "label": "生效日",
+        "value": "2026年10月1日"
+      },
+      {
+        "label": "運営",
+        "value": "T-ZERO 第九感 ・ 香港"
+      },
+      {
+        "label": "連絡先",
+        "value": "info@tzero-jp.com<br>+852 6897 1473"
+      }
+    ],
+    "blocks": [
+      {
+        "tag": "h2",
+        "html": "一、プライバシーポリシー"
+      },
+      {
+        "tag": "p",
+        "html": "当社は、お客様および本ウェブサイトをご利用になる方が当社に提供された個人情報を保護することを、一貫した方針としております。個人情報の取り扱いについては、以下のポリシーをよくお読みください。当社は、修正版を本ウェブサイト上に掲載する方法により、本ポリシーを随時変更する権利を留保します。"
+      },
+      {
+        "tag": "h3",
+        "html": "1. 一般方針"
+      },
+      {
+        "tag": "p",
+        "html": "お客様からお預かりするデータを保護するため、当社および社員一同は、香港特別行政区「個人資料（プライバシー）条例」（香港法例第486章）に定められた守則および規定を厳守し、個人資料保護の認定基準を確実に満たすよう努めております。"
+      },
+      {
+        "tag": "h3",
+        "html": "2. 取得する情報とその利用方法"
+      },
+      {
+        "tag": "p",
+        "html": "本ウェブサイトでご注文いただく際、または当社へお問い合わせいただく際に、当社は<strong>お名前、電話番号、メールアドレス、お届け先住所、ご注文の備考</strong>などを取得し、注文の処理と、より効率的なアフターサービスのために利用します。また、お客様のお好みや購入履歴を保存することで、より詳しくお客様のニーズを理解し、ショッピング体験をより良いものにいたします。商品・サービス・キャンペーンの最新情報などは、随時ご案内しております。"
+      },
+      {
+        "tag": "p",
+        "html": "当社は、随時、匿名の統計情報および閲覧データを取得し、本ウェブサイトの利用状況やトラフィックを監視することで、サイトのデザイン、商品およびオンラインサービスの改善を図ります。その際、個人が特定されない累積統計に基づいて、広告主や販売パートナーとデータを共有する場合があります。<strong>お客様の許可なく、提供された個人情報を公開することはありません。お客様は、いつでも個人情報の開示に同意しないことができます。</strong>"
+      },
+      {
+        "tag": "p",
+        "html": "個人情報の収集をご希望でない場合は、当社へ提供しないでください。すでにご提供いただいた情報を記録から削除をご希望の場合は、<a href=\"mailto:info@tzero-jp.com\">info@tzero-jp.com</a>までメールでご連絡ください。7営業日以内に手続きいたします。"
+      },
+      {
+        "tag": "h3",
+        "html": "3. 公開情報"
+      },
+      {
+        "tag": "p",
+        "html": "ソーシャルメディアやレビュー欄など、公開の場で個人情報を開示される場合には十分ご注意ください。自発的に公開された情報は公の情報となり、本サイトの他の訪問者からお送りいただいたメッセージを受け取る場合があり、これらは当社から送信したものではありません。パスワードやアカウント情報の管理はお客様の責任です。個人情報を自発的に開示されたにもかかわらず、パスワードやアカウント情報を守られなかった場合、当社はいかなる損害についても責任を負いません。"
+      },
+      {
+        "tag": "h3",
+        "html": "4. 販促メッセージ"
+      },
+      {
+        "tag": "p",
+        "html": "当社は、随時、メールまたはWhatsAppを通じて、最新商品・サービス・キャンペーンの情報や、当社が必要と考えるその他の情報をお送りすることがあります。お客様は、次のいずれかの方法で、いつでも配信停止を求めることができます："
+      },
+      {
+        "tag": "ul",
+        "items": [
+          "促销メール末尾にある「配信停止」リンクをクリックする；",
+          "メッセージに「STOP」または「配信停止」と返信する；",
+          "<a href=\"mailto:info@tzero-jp.com\">info@tzero-jp.com</a>宛に配信停止の申し出をする。"
+        ]
+      },
+      {
+        "tag": "h3",
+        "html": "5. お問い合わせ"
+      },
+      {
+        "tag": "p",
+        "html": "プライバシーポリシーについてご不明な点がございましたら、以下の方法でお問い合わせください。"
+      },
+      {
+        "tag": "ul",
+        "items": [
+          "メール: <a href=\"mailto:info@tzero-jp.com\">info@tzero-jp.com</a>",
+          "WhatsApp / 電話: +852 6897 1473",
+          "お問い合わせフォーム: <a href=\"contact.html\">www.tzero-jp.com/contact</a>"
+        ]
+      },
+      {
+        "tag": "h2",
+        "html": "二、利用規約"
+      },
+      {
+        "tag": "h3",
+        "html": "6. 適用範囲"
+      },
+      {
+        "tag": "p",
+        "html": "T-ZERO 第九感は、本ウェブサイト（<a href=\"index.html\">www.tzero-jp.com</a>）および正規の小売パートナー（HKTVmallを含む）を通じて、ヒアルロン酸コンドームおよび関連する親密ケア用品を販売しています。すべての商品は18歳以上の方にご使用いただけます。本ウェブサイトでご注文いただくことで、お客様が18歳以上であることを宣言したものとみなされます。"
+      },
+      {
+        "tag": "h3",
+        "html": "7. 商品のご提供とお支払い"
+      },
+      {
+        "tag": "ul",
+        "items": [
+          "すべての商品は在庫がなくなり次第販売を終了し、お支払いの最終確認時点の在庫を基準といたします。",
+          "価格は香港ドル（HK$）で表示し、税を含む価格です。",
+          "Visa、Mastercard、PayMe、AlipayHK、FPS（速払い）および銀行振込に対応しています。",
+          "お支払い情報は正確であり、お客様ご本人のものであることを必ずご確認ください。"
+        ]
+      },
+      {
+        "tag": "h3",
+        "html": "8. 配送について"
+      },
+      {
+        "tag": "ul",
+        "items": [
+          "香港内のご注文は通常<strong>1〜2営業日</strong>でお届けします。",
+          "離島および遠隔地域には追加で1〜2営業日いただく場合があります。",
+          "すべてのお荷物は無地の黒い箱で梱包し、<strong>箱にブランド名や商品名は一切記載しておりません</strong>。お客様のプライバシーを守るためです。",
+          "配送料はレジ画面に表示され、キャンペーンに応じて変更となる場合があります。"
+        ]
+      },
+      {
+        "tag": "h3",
+        "html": "9. 返品・交換について"
+      },
+      {
+        "tag": "p",
+        "html": "衛生上の理由により、<strong>開封済みの商品は返品・交換をお受けできません</strong>。商品到着時に破損、漏れ、またはご注文と異なる商品の場合は、<strong>到着後7日以内</strong>に注文番号と写真を添えて<a href=\"mailto:info@tzero-jp.com\">info@tzero-jp.com</a>までメールでご連絡ください。24時間以内に確認のご連絡を差し上げ、交換または返金の手続きを進めてまいります。"
+      },
+      {
+        "tag": "h3",
+        "html": "10. 知的財産権"
+      },
+      {
+        "tag": "p",
+        "html": "本ウェブサイトに掲載されているすべてのコンテンツ（文章、画像、商標、デザイン、商品画像、コードなどを含みますが、これらに限られません）は、T-ZERO 第九感またはその授権者に帰属し、事前の書面による許可なく、転載、複製、改変、商業利用を行うことはできません。"
+      },
+      {
+        "tag": "h3",
+        "html": "11. 免責事項"
+      },
+      {
+        "tag": "p",
+        "html": "T-ZERO 第九感は、本ウェブサイトに掲載する情報の正確性と利用可能性の確保に努めておりますが、サイトの停止、通信上のエラー、または当社の管理下にない事由によって生じた損害について、一切責任を負いません。本ウェブサイトに記載された商品の効果に関する説明は参考情報であり、体験には個人差があります。"
+      },
+      {
+        "tag": "h3",
+        "html": "12. 規約の改定"
+      },
+      {
+        "tag": "p",
+        "html": "T-ZERO 第九感は、随時、本規約および本細則を改定する権利を留保します。改定後の版は本ページに掲載し、掲載日から効力を生じます。改定後も本ウェブサイトのご利用または当社商品のご購入を継続された場合、改定後の規約に同意したものとみなされます。"
+      },
+      {
+        "tag": "h3",
+        "html": "13. 準拠法"
+      },
+      {
+        "tag": "p",
+        "html": "本規約および本細則は、中華人民共和国香港特別行政区の法律に基づいて解釈され、執行されます。紛争が生じた場合は、香港の裁判所を第一審かつ唯一の専属的合意管轄裁判所とします。"
+      },
+      {
+        "tag": "h3",
+        "html": "14. お問い合わせ"
+      },
+      {
+        "tag": "p",
+        "html": "本規約・細則またはご注文についてご不明な点がございましたら、いつでもお問い合わせください。"
+      },
+      {
+        "tag": "ul",
+        "items": [
+          "メール: <a href=\"mailto:info@tzero-jp.com\">info@tzero-jp.com</a>",
+          "WhatsApp / 電話: +852 6897 1473",
+          "お問い合わせフォーム: <a href=\"contact.html\">www.tzero-jp.com/contact</a>"
+        ]
+      },
+      {
+        "tag": "p",
+        "class": "muted",
+        "html": "© 2026 T-ZERO 第九感. All rights reserved. ・ 本ページはプライバシーポリシーと利用規約をまとめたものです。"
+      }
+    ]
+  }
+}

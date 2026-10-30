@@ -5,7 +5,7 @@ Built with plain **HTML / CSS / JavaScript** — no build step, no framework, no
 
 ## Features
 
-- **Traditional Chinese + English + 日本語** with a cycling 3-way in-header language switcher (persists across reloads)
+- **Traditional Chinese + English + 日本語** — each language has **its own URL** (`/`, `/en/`, `/ja/`), so a link you share always opens in the language you shared it in, and a crawler can actually reach the English and Japanese pages. The in-header switcher is a link to the same page in the next language. Every page's wording is written into the HTML at build time, not swapped in by JavaScript.
 - **Homepage** — hero, featured product grid (4 items), brand story, FAQ accordion, contact form, newsletter footer
 - **Catalog** (`products.html`) — full 4-product grid with type filters and sort dropdown
 - **Product detail** — one real page per product (`product-ultra-thin.html`, `product-studded.html`, `product-extended.html`, `product-extra-lub.html`), each with its own canonical link and Product structured data; `product.html?id=…` stays as the legacy fallback for old links
@@ -14,7 +14,7 @@ Built with plain **HTML / CSS / JavaScript** — no build step, no framework, no
 - **HKTVmall integration** — every product card has a "Buy on HKTVmall" button that opens the external listing
 - **Watsons retail badge** — the footer carries the Watsons logo and a "全線屈臣氏有售" line
 - **Mobile-first** responsive layout — collapsible hamburger menu, 2-column product grid on mobile
-- **SEO** — sitemap with automatic `lastmod`, structured data for the products, the FAQ, the news list and the business, one shared sharing image, and a FAQ that is in the markup rather than drawn by JavaScript. See [`docs/seo.md`](docs/seo.md)
+- **SEO** — sitemap with automatic `lastmod`, structured data for the products, the FAQ, the news list and the business, one shared sharing image, a FAQ that is in the markup rather than drawn by JavaScript, and one URL per language with proper `hreflang`. See [`docs/seo.md`](docs/seo.md)
 
 ## File Structure
 
@@ -34,6 +34,8 @@ Built with plain **HTML / CSS / JavaScript** — no build step, no framework, no
 ├── 404.html               # Not-found page
 ├── sitemap.xml            # Generated — the pages a crawler should read
 ├── robots.txt             # Generated — points at the sitemap
+├── en/                    # Generated — the English version of every page
+├── ja/                    # Generated — the Japanese version of every page
 ├── assets/
 │   ├── css/
 │   │   ├── base.css       # Variables, reset, typography
@@ -44,10 +46,12 @@ Built with plain **HTML / CSS / JavaScript** — no build step, no framework, no
 │   │   ├── site.json      # The Facebook Page + Instagram profile + the site's own address
 │   │   ├── news.json      # Generated — the Facebook / Instagram feed the site renders
 │   │   ├── manual.json    # Hand-written — paste posts here for the manual route
-│   │   └── news.local.json# Hand-written — translations, curated posts
+│   │   ├── news.local.json# Hand-written — translations, curated posts
+│   │   └── terms.json     # The legal page, in three languages (build time only)
 │   ├── js/
 │   │   ├── data.js        # Products, FAQs, brands, translations
 │   │   ├── i18n.js        # Language switcher
+│   │   ├── paths.js       # Builds asset URLs that work from /en/ and /ja/ too
 │   │   ├── main.js        # Header, mobile nav, reveal, newsletter
 │   │   ├── news.js        # Renders the Facebook feed into the page
 │   │   ├── products.js    # Catalog render/filter/sort
@@ -69,20 +73,29 @@ Built with plain **HTML / CSS / JavaScript** — no build step, no framework, no
 │   ├── gen-product-pages.mjs # Writes the four product pages
 │   ├── gen-faq-html.mjs   # Writes the FAQ into index.html
 │   ├── gen-jsonld.mjs     # Writes the structured data into the pages
+│   ├── gen-lang-pages.mjs # Writes the English and Japanese version of every page
 │   ├── gen-og-image.mjs   # Writes the sharing image
 │   ├── sync-og-image.mjs  # Keeps the sharing image in step with the pages
 │   ├── sync-news-jsonld.mjs # Writes the news ItemList into data.js
 │   ├── update-sitemap.mjs # Writes sitemap.xml with the lastmod dates from git
+│   ├── check-idempotent.mjs # Runs the generators twice and fails if the output changed
 │   ├── compress-images.py # Shrinks the images (--dry-run first!)
 │   ├── lib/feed.mjs       # Pure helpers (unit-tested)
 │   ├── lib/site.mjs       # Reads the accounts from site.json
 │   ├── lib/siteurl.mjs    # Pure helpers for the site's own address
 │   ├── lib/seo.mjs        # The FAQ block and the FAQPage node, one source for both
+│   ├── lib/html.mjs       # Reads and rewrites HTML without a parser
+│   ├── lib/langs.mjs      # The three languages, their URLs and the list of pages
+│   ├── lib/langpage.mjs   # Builds one language page out of the Chinese one
+│   ├── lib/terms.mjs      # The legal page, in three languages
+│   ├── lib/ig.mjs         # Pure helpers for the Instagram link and date arithmetic
 │   ├── lib/chrome.mjs     # Drives a headless Chrome over the DevTools Protocol
 │   ├── lib/feed.test.mjs  # Unit tests for the helpers
 │   ├── lib/site.test.mjs  # Fails if any social link drifts from site.json
 │   ├── lib/siteurl.test.mjs # Fails if any page drifts from the address in site.json
 │   ├── lib/seo.test.mjs   # Fails if the markup and the structured data drift apart
+│   ├── lib/ig.test.mjs    # Unit tests for the Instagram helpers
+│   ├── lib/lang.test.mjs  # Fails if a language page is not really in that language
 │   ├── sync.test.mjs      # End-to-end test — runs the real script against a mock Graph API
 │   └── manual-post.test.mjs # End-to-end test for the manual route
 ├── docs/
@@ -127,6 +140,22 @@ All product data lives in [`assets/js/data.js`](assets/js/data.js). Each product
 
 ## Translation
 
+**Each language has its own URL.** The URL decides what you see — there is no
+cookie and no auto-redirect, so a link you share always opens in the language
+you shared it in.
+
+| Language | URL |
+|---|---|
+| 繁體中文 | `/` |
+| English | `/en/` |
+| 日本語 | `/ja/` |
+
+The Chinese pages are the hand-written source. The English and Japanese pages
+are **generated** from them by `scripts/gen-lang-pages.mjs` — every page's
+wording is written into the HTML at build time, so a crawler that never runs
+JavaScript still reads the right language. Do not edit `en/` or `ja/` by hand;
+the generator overwrites them.
+
 Translation strings live in `assets/js/data.js` in the `i18n` export. To add a new string:
 
 ```html
@@ -136,9 +165,27 @@ Translation strings live in `assets/js/data.js` in the `i18n` export. To add a n
 ```js
 i18n.zh.my.key = '預設中文';
 i18n.en.my.key = 'English default';
+i18n.ja.my.key = 'デフォルト';
 ```
 
-`i18n.js` walks the DOM at load and on language change, swapping every `data-i18n`, `data-i18n-placeholder`, and `data-i18n-aria` element.
+`i18n.js` walks the DOM at load and swaps every `data-i18n`,
+`data-i18n-placeholder`, and `data-i18n-aria` element — that is what puts the
+Chinese text in place on the Chinese pages. The generator does the same thing
+at build time for the other two languages, so the two never disagree.
+
+After changing any string, regenerate the other languages:
+
+```bash
+npm run gen:lang
+```
+
+The legal page (`terms.html`) is a long piece of writing rather than a set of
+labels, so its three versions live in `assets/data/terms.json` and are
+rendered by `scripts/lib/terms.mjs`.
+
+`scripts/lib/lang.test.mjs` fails if a language page is not really in that
+language, if a translation marker was left in a generated page, or if the
+`hreflang` links do not point at three different addresses.
 
 ## Social Feed (Facebook + Instagram)
 
@@ -311,7 +358,7 @@ npm test
 which runs:
 
 ```bash
-node --test scripts/lib/feed.test.mjs scripts/lib/site.test.mjs scripts/lib/siteurl.test.mjs scripts/lib/ig.test.mjs scripts/lib/seo.test.mjs scripts/sync.test.mjs scripts/manual-post.test.mjs
+node --test scripts/lib/feed.test.mjs scripts/lib/site.test.mjs scripts/lib/siteurl.test.mjs scripts/lib/ig.test.mjs scripts/lib/seo.test.mjs scripts/lib/lang.test.mjs scripts/sync.test.mjs scripts/manual-post.test.mjs
 ```
 
 `sync.test.mjs` starts a mock `graph.facebook.com` and runs the **real** sync
@@ -323,6 +370,9 @@ from `assets/data/site.json`. `ig.test.mjs` covers the link and date
 arithmetic behind `ig-fetch.mjs`. `seo.test.mjs` fails if the markup and the
 structured data drift apart, if a page loses its canonical link or its
 sharing image, or if the sitemap lists a page that does not exist.
+`lang.test.mjs` fails if a language page is not really in that language, if a
+translation marker survived into a generated page, if the `hreflang` links
+point at the same address, or if a link leaves its own language folder.
 
 > **Never put a Facebook token in client-side code.** This site is fully
 > static, so anything in a front-end file is public. Tokens live only in
@@ -330,9 +380,9 @@ sharing image, or if the sitemap lists a page that does not exist.
 
 ### SEO
 
-The SEO work — one page per product, the shared sharing image, the FAQ in the
-markup, the structured data, the sitemap and the image compression — is
-written up in [`docs/seo.md`](docs/seo.md). The short version:
+The SEO work — one page per product, one URL per language, the shared sharing
+image, the FAQ in the markup, the structured data, the sitemap and the image
+compression — is written up in [`docs/seo.md`](docs/seo.md). The short version:
 
 ```bash
 npm run seo:check   # regenerate everything, then run the tests
@@ -358,7 +408,7 @@ All tokens live in [`base.css`](assets/css/base.css). Adjust there to retheme th
 ## Verification (manual)
 
 1. Hero, product grid, FAQ, contact form all visible on `index.html`.
-2. EN/中 toggle swaps every `data-i18n` string, persists across reloads.
+2. The language switcher is a link: from `/` it goes to `/en/`, from `/en/` to `/ja/`, from `/ja/` back to `/`. Each of those pages reads in its own language.
 3. `products.html` filters update the grid; sort dropdown reorders items.
 4. Each of `product-ultra-thin.html`, `product-studded.html`, `product-extended.html`, `product-extra-lub.html` renders its own product, with its own title and price.
 5. The FAQ questions are visible in `index.html` with JavaScript switched off (they are in the markup, not drawn by a script).

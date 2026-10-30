@@ -29,11 +29,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="assets/css/base.css?v=5">
-  <link rel="stylesheet" href="assets/css/layout.css?v=35">
+  <link rel="stylesheet" href="assets/css/layout.css?v=36">
   <link rel="stylesheet" href="assets/css/components.css?v=5">
   <link rel="stylesheet" href="assets/css/pages.css?v=20">
 
-  <script src="assets/js/splash.js?v=3" defer></script>
+  <script src="assets/js/splash.js?v=4" defer></script>
 
   <link rel="icon" type="image/png" sizes="32x32" href="assets/images/icons/favicon-32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="assets/images/icons/favicon-16.png">
@@ -45,7 +45,7 @@
 <body>
 
   <!-- ========== ANNOUNCEMENT BAR ========== -->
-  <div class="announcement" aria-label="公告">
+  <div class="announcement" aria-label="公告" data-i18n-aria="a11y.announcement">
     <div class="container">
       <p class="announcement__text" data-i18n="announcement.shipping">屈臣氏 / HKTVmall 同步上架</p>
     </div>
@@ -54,16 +54,16 @@
   <!-- HEADER (same as other pages) -->
   <header class="site-header">
     <div class="container site-header__inner">
-      <a href="index.html" class="brand" aria-label="T-ZERO 第九感">
-        <img src="assets/images/brand/t-zero-logo.png" alt="T-ZERO 第九感" class="brand__logo" width="32" height="32">
+      <a href="index.html" class="brand" aria-label="T-ZERO 第九感" data-i18n-aria="seo.brand.name">
+        <img src="assets/images/brand/t-zero-logo.png" alt="T-ZERO 第九感" data-i18n-attr="alt" data-i18n="seo.brand.name" class="brand__logo" width="32" height="32">
       </a>
-      <nav class="nav" aria-label="主選單">
+      <nav class="nav" aria-label="主選單" data-i18n-aria="a11y.menu">
         <a href="index.html" class="nav__link" data-i18n="nav.home">首頁</a>
         <a href="products.html" class="nav__link" data-i18n="nav.products">產品</a>
         <a href="news.html" class="nav__link" data-i18n="nav.news">最新動態</a>
         <a href="about.html" class="nav__link" data-i18n="nav.about">關於我們</a>
         <a href="contact.html" class="nav__link" data-i18n="nav.contact">聯絡</a>
-        <button class="nav__search" type="button" data-search-open aria-label="搜尋">
+        <button class="nav__search" type="button" data-search-open aria-label="搜尋" data-i18n-aria="a11y.search">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <circle cx="11" cy="11" r="8"/>
             <line x1="21" y1="21" x2="16.65" y2="16.65"/>
@@ -80,48 +80,48 @@
 
   <!-- ========== TOP BANNER (CAROUSEL) ========== -->
   <div class="top-banner top-banner--carousel" data-carousel>
-    <a class="top-banner__link" href="products.html" aria-label="瀏覽 T-ZERO 全系列產品">
+    <a class="top-banner__link" href="products.html" aria-label="瀏覽 T-ZERO 全系列產品" data-i18n-aria="a11y.browse">
       <img class="top-banner__img is-active"
            src="assets/images/banners/carousel/9.jpg?v=1"
-           alt="T-ZERO 第九感 — 玻尿酸安全套 (1/4)"
+           alt="T-ZERO 第九感 — 玻尿酸安全套 (1/4)" data-i18n-attr="alt" data-i18n="a11y.banner.studded"
            width="2658" height="984"
            loading="eager" decoding="async"
            fetchpriority="high"
            data-carousel-slide>
       <img class="top-banner__img"
            src="assets/images/banners/carousel/Tzero_website_banner.jpg?v=1"
-           alt="T-ZERO 第九感 — 玻尿酸滋潤 · 水份充足 (2/4)"
+           alt="T-ZERO 第九感 — 玻尿酸滋潤 · 水份充足 (2/4)" data-i18n-attr="alt" data-i18n="a11y.banner.extraLub"
            width="2658" height="984"
            loading="lazy" decoding="async"
            data-carousel-slide>
       <img class="top-banner__img"
            src="assets/images/banners/carousel/11.jpg?v=1"
-           alt="T-ZERO 第九感 — 玻尿酸安全套 (3/4)"
+           alt="T-ZERO 第九感 — 玻尿酸安全套 (3/4)" data-i18n-attr="alt" data-i18n="a11y.banner.extended"
            width="2658" height="984"
            loading="lazy" decoding="async"
            data-carousel-slide>
       <img class="top-banner__img"
            src="assets/images/banners/carousel/7.jpg?v=1"
-           alt="T-ZERO 第九感 — 玻尿酸安全套 (4/4)"
+           alt="T-ZERO 第九感 — 玻尿酸安全套 (4/4)" data-i18n-attr="alt" data-i18n="a11y.banner.ultraThin"
            width="2658" height="984"
            loading="lazy" decoding="async"
            data-carousel-slide>
     </a>
-    <button class="top-banner__arrow top-banner__arrow--prev" type="button" data-carousel-prev aria-label="上一張">
+    <button class="top-banner__arrow top-banner__arrow--prev" type="button" data-carousel-prev aria-label="上一張" data-i18n-aria="a11y.prevSlide">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <polyline points="15 18 9 12 15 6"/>
       </svg>
     </button>
-    <button class="top-banner__arrow top-banner__arrow--next" type="button" data-carousel-next aria-label="下一張">
+    <button class="top-banner__arrow top-banner__arrow--next" type="button" data-carousel-next aria-label="下一張" data-i18n-aria="a11y.nextSlide">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <polyline points="9 18 15 12 9 6"/>
       </svg>
     </button>
     <div class="top-banner__dots" data-carousel-dots aria-hidden="true">
-      <button class="top-banner__dot is-active" type="button" data-carousel-dot="0" aria-label="第 1 張"></button>
-      <button class="top-banner__dot" type="button" data-carousel-dot="1" aria-label="第 2 張"></button>
-      <button class="top-banner__dot" type="button" data-carousel-dot="2" aria-label="第 3 張"></button>
-      <button class="top-banner__dot" type="button" data-carousel-dot="3" aria-label="第 4 張"></button>
+      <button class="top-banner__dot is-active" type="button" data-carousel-dot="0" aria-label="第 1 張" data-i18n-aria="a11y.slide1"></button>
+      <button class="top-banner__dot" type="button" data-carousel-dot="1" aria-label="第 2 張" data-i18n-aria="a11y.slide2"></button>
+      <button class="top-banner__dot" type="button" data-carousel-dot="2" aria-label="第 3 張" data-i18n-aria="a11y.slide3"></button>
+      <button class="top-banner__dot" type="button" data-carousel-dot="3" aria-label="第 4 張" data-i18n-aria="a11y.slide4"></button>
     </div>
   </div>
 
@@ -144,7 +144,7 @@
     <div class="container">
       <div class="footer__top">
         <div class="footer__brand">
-          <h3>T-ZERO 第九感</h3>
+          <h3 data-i18n="seo.brand.name">T-ZERO 第九感</h3>
           <p data-i18n="site.tagline">玻尿酸安全套 ・ 日本品牌</p>
         </div>
         <div class="footer__col">
@@ -226,6 +226,6 @@
   </footer>
 
   <script src="assets/js/carousel.js?v=5" defer></script>
-  <script type="module" src="assets/js/main.js?v=11"></script>
+  <script type="module" src="assets/js/main.js?v=12"></script>
 </body>
 </html>

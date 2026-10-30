@@ -3,8 +3,9 @@
    newsletter form, header shadow on scroll, search.
    =========================================================== */
 
-import { initI18n, t, getLang } from './i18n.js?v=6';
-import { products, productUrl } from './data.js?v=24';
+import { initI18n, t, getLang } from './i18n.js?v=7';
+import { products, productUrl } from './data.js?v=25';
+import { assetUrl } from './paths.js?v=2';
 
 /* ---------- Header shadow on scroll ---------- */
 function initHeaderScroll() {
@@ -265,14 +266,14 @@ function initSearch() {
   modal.setAttribute('aria-hidden', 'true');
   modal.innerHTML = `
     <div class="search-modal__backdrop" data-search-close></div>
-    <div class="search-modal__panel" role="dialog" aria-label="搜尋">
+    <div class="search-modal__panel" role="dialog" aria-label="${t('a11y.search')}">
       <div class="search-modal__bar">
         <svg class="search-modal__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
         </svg>
         <input type="search" class="search-modal__input" data-search-input
-               placeholder="搜尋產品或頁面…" autocomplete="off" spellcheck="false">
-        <button class="search-modal__close" type="button" data-search-close aria-label="關閉">
+               placeholder="${t('search.placeholder')}" autocomplete="off" spellcheck="false">
+        <button class="search-modal__close" type="button" data-search-close aria-label="${t('a11y.close')}">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
           </svg>
@@ -328,7 +329,7 @@ function initSearch() {
   function search(q) {
     q = q.trim().toLowerCase();
     if (!q) {
-      results.innerHTML = `<div class="search-modal__empty">輸入關鍵字搜尋產品或頁面</div>`;
+      results.innerHTML = `<div class="search-modal__empty">${t('search.hint')}</div>`;
       current = [];
       activeIndex = -1;
       return;
@@ -345,11 +346,11 @@ function initSearch() {
       if (haystack.includes(q)) {
         items.push({
           type: 'product',
-          typeLabel: '產品',
+          typeLabel: t('search.typeProduct'),
           title: pickLocalized({ zh: p.name_zh, en: p.name_en, ja: p.name_ja }),
           subtitle: pickLocalized({ zh: p.subtitle_zh, en: p.subtitle_en, ja: p.subtitle_ja }),
           url: productUrl(p.id),
-          image: p.image,
+          image: assetUrl(p.image),
         });
       }
     });
@@ -360,7 +361,7 @@ function initSearch() {
       if (hay.includes(q)) {
         items.push({
           type: 'page',
-          typeLabel: '頁面',
+          typeLabel: t('search.typePage'),
           title: pickLocalized(p.title),
           subtitle: pickLocalized(p.desc),
           url: p.url,
@@ -387,7 +388,7 @@ function initSearch() {
     modal.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
     input.value = '';
-    results.innerHTML = `<div class="search-modal__empty">輸入關鍵字搜尋產品或頁面</div>`;
+    results.innerHTML = `<div class="search-modal__empty">${t('search.hint')}</div>`;
     current = [];
     activeIndex = -1;
   }

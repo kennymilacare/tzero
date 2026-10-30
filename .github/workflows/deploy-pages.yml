@@ -56,14 +56,18 @@ jobs:
 
       - name: Refresh the generated pages
         run: |
-          # The product pages, the FAQ block, the structured data and
-          # the sitemap are all written from files that are already in
-          # the repository. Running the generators here means what goes
-          # live is never out of date, even if a commit forgot to run
-          # them.
+          # The product pages, the FAQ block, the structured data, the
+          # English and Japanese pages and the sitemap are all written
+          # from files that are already in the repository. Running the
+          # generators here means what goes live is never out of date,
+          # even if a commit forgot to run them.
+          #
+          # The order matters: the language pages are made from the
+          # product pages and the structured data, so they come last.
           node scripts/gen-product-pages.mjs
           node scripts/gen-faq-html.mjs
           node scripts/gen-jsonld.mjs
+          node scripts/gen-lang-pages.mjs
           node scripts/update-sitemap.mjs
 
       - name: Prepare the site
