@@ -1,13 +1,13 @@
 /* ===========================================================
-   news.js — render the Facebook feed into [data-news-list].
+   news.js — render the Instagram feed into [data-news-list].
 
    Reads assets/data/news.json, which scripts/sync-facebook.mjs
-   writes (see docs/facebook-sync.md). If the file is missing or
+   writes (see docs/instagram-sync.md). If the file is missing or
    the fetch fails, the hand-written cards already in the HTML
    stay in place — this only ever upgrades the page.
 
    Every string coming out of the JSON is written with textContent,
-   never innerHTML, because Facebook post text is not authored here.
+   never innerHTML, because Instagram post text is not authored here.
    =========================================================== */
 
 import { getLang, t } from './i18n.js?v=5';

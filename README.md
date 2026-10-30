@@ -52,7 +52,7 @@ Built with plain **HTML / CSS / JavaScript** — no build step, no framework, no
 │   │   └── contact.js     # Form validation
 │   └── images/            # banners, brand, couples, hero, icons, products
 ├── scripts/
-│   ├── sync-facebook.mjs  # Pulls the Facebook + Instagram feed, writes news.json
+│   ├── sync-facebook.mjs  # Pulls the Instagram feed, writes news.json
 │   ├── manual-post.mjs    # Turns assets/data/manual.json into the feed — no token needed
 │   ├── ig-fetch.mjs       # Reads an IG post link → caption, image and date
 │   ├── sync-social-links.mjs # Rewrites every social link to match site.json
@@ -66,10 +66,10 @@ Built with plain **HTML / CSS / JavaScript** — no build step, no framework, no
 │   ├── sync.test.mjs      # End-to-end test — runs the real script against a mock Graph API
 │   └── manual-post.test.mjs # End-to-end test for the manual route
 ├── docs/
-│   ├── facebook-sync.md   # Facebook / Instagram / Graph API setup guide
+│   ├── instagram-sync.md  # Instagram / Graph API setup guide
 │   └── manual-posts.md    # Updating the feed by hand — no token, no CI
 └── .github/workflows/
-    ├── sync-facebook.yml  # Scheduled feed sync
+    ├── sync-instagram.yml # Scheduled feed sync
     └── deploy-pages.yml   # Publishes the repo to GitHub Pages on every push
 ```
 
@@ -189,16 +189,19 @@ and commits the result — the site itself stays fully static, with no backend
 and no build step.
 
 ```
-Facebook Page ┐
-              ├→ Graph API → assets/data/news.json → assets/js/news.js → page
-Instagram ────┘
+Instagram ─→ Graph API → assets/data/news.json → assets/js/news.js → page
 ```
 
 - `scripts/sync-facebook.mjs` — the sync job (Node 18+, no dependencies)
 - `assets/data/news.json` — generated; the page reads this
 - `assets/data/news.local.json` — hand-written; EN/JA copy, curated posts, `hidden`, `pinned`
 - `assets/js/news.js` — renders the cards and updates the JSON-LD
-- `docs/facebook-sync.md` — how to create the Meta App and get a token
+- `docs/instagram-sync.md` — how to create the Meta App and get a token
+
+Only Instagram is synced. The Facebook Page's own posts are not fetched
+(`FB_INCLUDE_FB=0`); the Page is still read, because that is how Meta links an
+Instagram account to a Page. The Facebook link itself stays on the site as a
+social button.
 
 The page keeps its built-in cards if `news.json` is missing or unreachable, so
 the site never breaks because of the feed. Instagram cards get their own icon,
@@ -219,7 +222,7 @@ Two workflows run in sequence:
 
 | Workflow | When | What it does |
 |---|---|---|
-| `sync-facebook.yml` | 09:00 & 21:00 HK time, or manually | Pulls the feed and commits `news.json` + images |
+| `sync-instagram.yml` | 09:00 & 21:00 HK time, or manually | Pulls the feed and commits `news.json` + images |
 | `deploy-pages.yml` | On every push to `main`, and after each sync run | Publishes the repo as-is to GitHub Pages |
 
 The deploy workflow also listens for `workflow_run`, because GitHub
@@ -232,17 +235,17 @@ If the site is hosted on Netlify / Vercel / Cloudflare Pages instead, delete
 
 **First time only:** in the repo, **Settings → Pages → Source → GitHub
 Actions** (not "Deploy from a branch"), then Save. The first deploy runs on
-the next push, and the site lands at `https://<user>.github.io/<repo>/`.
+the next push.
 
-**The automatic route still needs setup** — the repo has been initialised and
-the `origin` remote points at GitHub, but the history has not been pushed yet.
-Follow `docs/facebook-sync.md` §7 to push it, then add the secrets
-(`FB_USER_TOKEN`, `FB_APP_ID`, `FB_APP_SECRET`, optionally `FB_PAGE_ID` /
-`FB_PAGE_TOKEN`) and run the workflow once by hand.
+**The automatic route still needs its secrets.** The site is already deployed
+at <https://www.tzero-jp.com/> — but the sync job cannot pull anything until
+the secrets exist: add `FB_USER_TOKEN`, `FB_APP_ID`, `FB_APP_SECRET` (and
+optionally `FB_PAGE_ID`) under **Settings → Secrets and variables → Actions**,
+then run **Sync Instagram news** once by hand. See `docs/instagram-sync.md`.
 
 If the app is owned by whoever administers the Page, Business Verification is
 *not* required. It only becomes mandatory when the app serves assets the
-developer account does not own — see `docs/facebook-sync.md` §2.
+developer account does not own — see `docs/instagram-sync.md` §2.
 
 ### The site's own address
 
@@ -274,7 +277,7 @@ arithmetic behind `ig-fetch.mjs`.
 
 > **Never put a Facebook token in client-side code.** This site is fully
 > static, so anything in a front-end file is public. Tokens live only in
-> GitHub Secrets — see `docs/facebook-sync.md` §6.
+> GitHub Secrets — see `docs/instagram-sync.md` §6.
 
 ## Design System
 

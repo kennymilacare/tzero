@@ -15,8 +15,11 @@ on:
   # — so the "push" trigger above would never fire for it. workflow_run is
   # the documented way to catch those commits. It runs on the default
   # branch, which already contains the synced feed by then.
+  #
+  # The name below must match the workflow's `name:` exactly, or the
+  # handoff silently stops happening.
   workflow_run:
-    workflows: ['Sync Facebook news']
+    workflows: ['Sync Instagram news']
     types: [completed]
   workflow_dispatch:
 

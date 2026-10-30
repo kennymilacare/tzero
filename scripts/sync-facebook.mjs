@@ -3,7 +3,7 @@
    sync-facebook.mjs — pull the latest posts from a Facebook
    Page and write them to assets/data/news.json.
 
-   Run by .github/workflows/sync-facebook.yml on a schedule.
+   Run by .github/workflows/sync-instagram.yml on a schedule.
    Node 18+ (uses the built-in fetch). No dependencies.
 
    Required env vars:
@@ -20,12 +20,17 @@
      FB_GRAPH_BASE     Graph API host (default: graph.facebook.com).
                        Point this at a local mock to test without credentials.
      FB_INCLUDE_IG     set to "0" to skip Instagram (default: on)
+     FB_INCLUDE_FB     set to "0" to skip the Facebook Page feed (default: on)
 
    Instagram posts are picked up automatically when the Page has an
    Instagram Business account linked to it. Set FB_IG_USERNAME if the
    account is not linked.
 
-   See docs/facebook-sync.md for the full setup guide.
+   With FB_INCLUDE_FB=0 the script never asks for the Page's own posts:
+   it only reads Instagram. It then no longer needs a Page id — the
+   Instagram account can be found by its handle alone.
+
+   See docs/instagram-sync.md for the full setup guide.
    =========================================================== */
 
 import { mkdir, writeFile, readFile, readdir, unlink } from 'node:fs/promises';
@@ -66,6 +71,7 @@ const SITE           = await loadSite();
 const PAGE_USERNAME  = process.env.FB_PAGE_USERNAME || usernameOf(SITE.facebook);
 const IG_USERNAME    = process.env.FB_IG_USERNAME || usernameOf(SITE.instagram);
 const INCLUDE_IG     = process.env.FB_INCLUDE_IG !== '0';
+const INCLUDE_FB     = process.env.FB_INCLUDE_FB !== '0';
 const POST_LIMIT     = Number(process.env.FB_POST_LIMIT || 8);
 const PAGE_URL       = `https://www.facebook.com/${PAGE_USERNAME}`;
 
@@ -186,21 +192,24 @@ async function pageTokenFromUserToken(userToken) {
 
 /* An Instagram Business account linked to the Page shows up as a field on
    the Page object. When it is not linked (or the token cannot read it), the
-   feed simply skips Instagram rather than failing the whole run. */
+   feed simply skips Instagram rather than failing the whole run.
+   With FB_INCLUDE_FB=0 there may be no Page at all — then the account is
+   found by its handle instead. */
 async function instagramAccount(pageId, token) {
-  try {
-    const j = await graphGet(pageId, {
-      fields: 'instagram_business_account{id,username}',
-      access_token: token,
-    });
-    const ig = j.instagram_business_account;
-    if (ig && ig.id) {
-      console.log(`[sync-facebook] instagram: @${ig.username} (${ig.id})`);
-      return { id: ig.id, username: ig.username || IG_USERNAME };
+  if (pageId) {
+    try {
+      const j = await graphGet(pageId, {
+        fields: 'instagram_business_account{id,username}',
+        access_token: token,
+      });
+      const ig = j.instagram_business_account;
+      if (ig && ig.id) {
+        console.log(`[sync-facebook] instagram: @${ig.username} (${ig.id})`);
+        return { id: ig.id, username: ig.username || IG_USERNAME };
+      }
+    } catch (e) {
+      console.warn(`[sync-facebook] could not read the linked Instagram account (${e.message}); trying the handle instead.`);
     }
-  } catch (e) {
-    console.warn(`[sync-facebook] could not read the linked Instagram account (${e.message}); skipping Instagram.`);
-    return null;
   }
   if (IG_USERNAME) {
     // Not linked, but the account name is known — try the public media id lookup.
@@ -300,43 +309,62 @@ async function main() {
   warnIfVersionStale();
 
   if (!PAGE_TOKEN && !USER_TOKEN) {
-    fail('Set FB_PAGE_TOKEN, or FB_USER_TOKEN so the page can be looked up. See docs/facebook-sync.md.');
+    fail('Set FB_PAGE_TOKEN, or FB_USER_TOKEN so the page can be looked up. See docs/instagram-sync.md.');
   }
 
   // A page token can't say which page it belongs to — the id is what the
   // feed URL is built from. Fail here with a clear message rather than
   // requesting "undefined/feed" and reporting a confusing 404.
-  if (PAGE_TOKEN && !PAGE_ID) {
-    fail('FB_PAGE_TOKEN also needs FB_PAGE_ID — the numeric Page id, from /me/accounts. See docs/facebook-sync.md §5.');
+  // Instagram-only runs never read the Page feed, so they don't need it.
+  if (PAGE_TOKEN && !PAGE_ID && INCLUDE_FB) {
+    fail('FB_PAGE_TOKEN also needs FB_PAGE_ID — the numeric Page id, from /me/accounts. See docs/instagram-sync.md §5.');
   }
 
   let token = PAGE_TOKEN;
   let pageId = PAGE_ID;
 
   if (!token) {
-    const fromUser = await pageTokenFromUserToken(USER_TOKEN);
-    token = fromUser.token;
-    pageId = pageId || fromUser.id;
+    try {
+      const fromUser = await pageTokenFromUserToken(USER_TOKEN);
+      token = fromUser.token;
+      pageId = pageId || fromUser.id;
+    } catch (e) {
+      if (!INCLUDE_FB) {
+        // Instagram only: the account is found by its handle, so not being
+        // able to reach a Page is not fatal.
+        console.warn(`[sync-facebook] ${e.message}; continuing with Instagram only.`);
+        token = USER_TOKEN;
+        pageId = '';
+      } else {
+        throw e;
+      }
+    }
   }
 
   token = await refreshToken(token);
 
-  // Rich field set first; fall back to the minimal set if the token
-  // isn't allowed to read attachments.
-  const RICH = 'id,message,permalink_url,created_time,full_picture,attachments{media,subattachments{media,image}},media{media,image}';
-  const MINIMAL = 'id,message,permalink_url,created_time,full_picture';
+  const raw = [];
 
-  let feed;
-  try {
-    feed = await graphGet(`${pageId}/feed`, { fields: RICH, limit: POST_LIMIT, access_token: token });
-  } catch (e) {
-    console.warn(`[sync-facebook] rich field set failed (${e.message}); retrying with the minimal set.`);
-    feed = await graphGet(`${pageId}/feed`, { fields: MINIMAL, limit: POST_LIMIT, access_token: token });
-  }
+  if (INCLUDE_FB) {
+    // Rich field set first; fall back to the minimal set if the token
+    // isn't allowed to read attachments.
+    const RICH = 'id,message,permalink_url,created_time,full_picture,attachments{media,subattachments{media,image}},media{media,image}';
+    const MINIMAL = 'id,message,permalink_url,created_time,full_picture';
 
-  const raw = feed.data || [];
-  if (!raw.length) {
-    console.warn('[sync-facebook] the feed returned no posts — the token may not have pages_read_engagement.');
+    let feed;
+    try {
+      feed = await graphGet(`${pageId}/feed`, { fields: RICH, limit: POST_LIMIT, access_token: token });
+    } catch (e) {
+      console.warn(`[sync-facebook] rich field set failed (${e.message}); retrying with the minimal set.`);
+      feed = await graphGet(`${pageId}/feed`, { fields: MINIMAL, limit: POST_LIMIT, access_token: token });
+    }
+
+    raw.push(...(feed.data || []));
+    if (!raw.length) {
+      console.warn('[sync-facebook] the feed returned no posts — the token may not have pages_read_engagement.');
+    }
+  } else {
+    console.log('[sync-facebook] Facebook Page posts are switched off (FB_INCLUDE_FB=0) — Instagram only.');
   }
 
   await mkdir(DATA_DIR, { recursive: true });
@@ -404,7 +432,7 @@ async function main() {
   }
 
   // Instagram: the same cards, from the Business account linked to the Page.
-  if (INCLUDE_IG && pageId) {
+  if (INCLUDE_IG) {
     const ig = await instagramAccount(pageId, token);
     if (ig) {
       let media = [];
@@ -449,7 +477,7 @@ async function main() {
 
   const out = {
     updatedAt: new Date().toISOString(),
-    source: 'facebook',
+    source: INCLUDE_IG ? 'instagram' : 'facebook',
     page: { id: pageId || '', url: PAGE_URL },
     posts,
   };

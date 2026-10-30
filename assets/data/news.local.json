@@ -1,16 +1,17 @@
 {
   "_readme": [
-    "Hand-written overrides for the Facebook feed. scripts/sync-facebook.mjs reads",
+    "Hand-written overrides for the Instagram feed. scripts/sync-facebook.mjs reads",
     "this file and merges it into assets/data/news.json on every run, so anything",
     "here survives the sync — use it for English / Japanese copy, custom titles,",
-    "and curated posts that are not Facebook posts at all.",
+    "and curated posts that are not social posts at all.",
     "",
-    "Key = the Facebook post id (visible in assets/data/news.json).",
+    "Key = the post id (visible in assets/data/news.json). Instagram posts carry",
+    "an \"ig-\" prefix; curated posts use whatever id you give them.",
     "Add title_en / title_ja / message_en / message_ja / excerpt_en / excerpt_ja",
     "for translations; set \"hidden\": true to drop a post; set \"pinned\": true to",
     "keep a post even after it scrolls past the feed limit.",
     "",
-    "Curated posts (not from Facebook) just need their own id plus title_zh /",
+    "Curated posts (not from Instagram) just need their own id plus title_zh /",
     "excerpt_zh — everything else is optional."
   ],
   "posts": {

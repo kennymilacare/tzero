@@ -286,5 +286,5 @@ node scripts/sync-social-links.mjs
 
 ## 想要自動化？
 
-GitHub Actions + Graph API 嘅方案見 [`facebook-sync.md`](facebook-sync.md)。
+GitHub Actions + Graph API 嘅方案見 [`instagram-sync.md`](instagram-sync.md)。
 嗰個方案唔使你手動做任何嘢，但需要開 GitHub repo、開 Meta App、攞 token。

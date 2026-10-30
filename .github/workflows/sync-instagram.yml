@@ -1,11 +1,14 @@
-name: Sync Facebook news
+name: Sync Instagram news
 
-# Pulls the latest posts from the T-ZERO Facebook Page (and the Instagram
-# Business account linked to it) and commits them to assets/data/news.json
-# plus the post images. The site reads that file at runtime, so a push here
-# is all it takes to publish a new post.
+# Pulls the latest posts from the T-ZERO Instagram Business account and
+# commits them to assets/data/news.json plus the post images. The site reads
+# that file at runtime, so a push here is all it takes to publish a new post.
 #
-# Setup: see docs/facebook-sync.md. The secrets below must be added under
+# The Facebook Page's own posts are NOT synced — FB_INCLUDE_FB=0 stops the
+# script asking for them. The Page is still used to find the Instagram
+# account, because that is how Meta links the two.
+#
+# Setup: see docs/instagram-sync.md. The secrets below must be added under
 # Settings -> Secrets and variables -> Actions.
 
 on:
@@ -18,7 +21,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: sync-facebook
+  group: sync-instagram
   cancel-in-progress: false
 
 jobs:
@@ -38,11 +41,14 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Pull the latest Facebook and Instagram posts
+      - name: Pull the latest Instagram posts
         env:
+          # Instagram only. The Facebook Page feed is not read at all.
+          FB_INCLUDE_FB: '0'
           # FB_USER_TOKEN is the one the setup guide asks for — the script
-          # exchanges it for a Page token. FB_PAGE_TOKEN is an alternative
-          # for anyone who already has one.
+          # exchanges it for a Page token, and uses that to look up the
+          # Instagram account. FB_PAGE_TOKEN is an alternative for anyone who
+          # already has one.
           FB_USER_TOKEN: ${{ secrets.FB_USER_TOKEN }}
           FB_PAGE_TOKEN: ${{ secrets.FB_PAGE_TOKEN }}
           FB_PAGE_ID: ${{ secrets.FB_PAGE_ID }}
@@ -63,6 +69,6 @@ jobs:
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A assets/data/news.json assets/images/news
-          git commit -m "chore: sync Facebook news"
+          git commit -m "chore: sync Instagram news"
           git pull --rebase --autostash origin "$GITHUB_REF_NAME"
           git push origin "HEAD:$GITHUB_REF_NAME"

@@ -26,7 +26,7 @@ const IMAGE_BYTES = await readFile(path.join(ROOT, 'assets/images/brand/watsons-
 
 /* ---------- the mock Graph API ---------- */
 
-function mockServer() {
+function mockServer(opts = {}) {
   return createServer((req, res) => {
     // The port is only known once the server is listening, so build the
     // public base URL from the request itself.
@@ -43,9 +43,15 @@ function mockServer() {
       return res.end(IMAGE_BYTES);
     }
     if (p.includes('/me/accounts')) {
+      if (opts.noPages) return json({ data: [] });
       return json({
         data: [{ id: PAGE_ID, name: 'T-ZERO 第九感', access_token: 'page-token-from-user-token' }],
       });
+    }
+    // The Instagram account looked up by handle — the fallback when the
+    // Page carries no linked account (or no Page is reachable at all).
+    if (p.endsWith('/ig_tzerojp')) {
+      return json({ id: IG_ID, username: 'tzerojp' });
     }
     if (p.endsWith('/feed')) {
       return json({
@@ -105,7 +111,7 @@ function mockServer() {
 
 /* ---------- run the script against the mock ---------- */
 
-async function runSync(env = {}) {
+async function runSync(env = {}, opts = {}) {
   await rm(WORK, { recursive: true, force: true });
   await mkdir(path.join(WORK, 'assets/data'), { recursive: true });
   await cp(path.join(ROOT, 'scripts'), path.join(WORK, 'scripts'), { recursive: true });
@@ -148,7 +154,7 @@ async function runSync(env = {}) {
     'utf8'
   );
 
-  const server = mockServer();
+  const server = mockServer(opts);
   await new Promise((resolve) => server.listen(0, '127.0.0.1', resolve));
   const base = `http://127.0.0.1:${server.address().port}`;
 
@@ -254,4 +260,28 @@ test('a page token without a page id fails with a clear message', async () => {
 
 test.after(async () => {
   await rm(WORK, { recursive: true, force: true });
+});
+
+/* ---------- Instagram-only mode ---------- */
+
+test('the Facebook Page feed is skipped when FB_INCLUDE_FB is 0', async () => {
+  const { code, stdout, stderr, out } = await runSync({ FB_INCLUDE_FB: '0' });
+  assert.equal(code, 0, `script failed:\n${stdout}\n${stderr}`);
+
+  const ids = out.posts.map((p) => p.id);
+  assert.ok(!ids.some((id) => id.startsWith('fb-')), 'a Facebook post was synced anyway');
+  assert.ok(ids.includes('ig-17890000000000001'), 'Instagram post missing');
+  assert.ok(ids.includes('ig-17890000000000002'), 'Instagram video post missing');
+  assert.ok(ids.includes('curated-1'), 'curated post was dropped');
+  assert.match(stdout, /Instagram only/);
+});
+
+test('Instagram is found by handle when no Page can be reached', async () => {
+  const { code, stdout, stderr, out } = await runSync({ FB_INCLUDE_FB: '0' }, { noPages: true });
+  assert.equal(code, 0, `script failed:\n${stdout}\n${stderr}`);
+
+  const ids = out.posts.map((p) => p.id);
+  assert.ok(ids.includes('ig-17890000000000001'), 'Instagram post missing');
+  assert.match(stderr, /continuing with Instagram only/);
+  assert.match(stdout, /instagram: @tzerojp/);
 });
