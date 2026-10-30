@@ -12,5 +12,9 @@
   ],
   "url": "https://www.tzero-jp.com/",
   "facebook": "https://www.facebook.com/Tzerohk",
-  "instagram": "https://www.instagram.com/tzerojp"
+  "instagram": "https://www.instagram.com/tzerojp",
+  "verification": {
+    "google": "",
+    "bing": ""
+  }
 }

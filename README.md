@@ -34,6 +34,7 @@ Built with plain **HTML / CSS / JavaScript** — no build step, no framework, no
 ├── 404.html               # Not-found page
 ├── sitemap.xml            # Generated — the pages a crawler should read
 ├── robots.txt             # Generated — points at the sitemap
+├── 0e23179f….txt          # Built — the IndexNow key, at the site root where the search engine reads it
 ├── en/                    # Generated — the English version of every page
 ├── ja/                    # Generated — the Japanese version of every page
 ├── assets/
@@ -47,7 +48,8 @@ Built with plain **HTML / CSS / JavaScript** — no build step, no framework, no
 │   │   ├── news.json      # Generated — the Facebook / Instagram feed the site renders
 │   │   ├── manual.json    # Hand-written — paste posts here for the manual route
 │   │   ├── news.local.json# Hand-written — translations, curated posts
-│   │   └── terms.json     # The legal page, in three languages (build time only)
+│   │   ├── terms.json     # The legal page, in three languages (build time only)
+│   │   └── indexnow.json  # The IndexNow key — public, like a verification token
 │   ├── js/
 │   │   ├── data.js        # Products, FAQs, brands, translations
 │   │   ├── i18n.js        # Language switcher
@@ -79,6 +81,8 @@ Built with plain **HTML / CSS / JavaScript** — no build step, no framework, no
 │   ├── sync-news-jsonld.mjs # Writes the news ItemList into data.js
 │   ├── update-sitemap.mjs # Writes sitemap.xml with the lastmod dates from git
 │   ├── check-idempotent.mjs # Runs the generators twice and fails if the output changed
+│   ├── indexnow.mjs       # Tells Bing and Yandex which pages changed
+│   ├── set-verification.mjs # Puts the Search Console / Bing token in the home pages
 │   ├── compress-images.py # Shrinks the images (--dry-run first!)
 │   ├── lib/feed.mjs       # Pure helpers (unit-tested)
 │   ├── lib/site.mjs       # Reads the accounts from site.json
@@ -88,6 +92,9 @@ Built with plain **HTML / CSS / JavaScript** — no build step, no framework, no
 │   ├── lib/langs.mjs      # The three languages, their URLs and the list of pages
 │   ├── lib/langpage.mjs   # Builds one language page out of the Chinese one
 │   ├── lib/terms.mjs      # The legal page, in three languages
+│   ├── lib/pages.mjs      # Every page, and the files it shows
+│   ├── lib/sitemap.mjs    # What the sitemap should say
+│   ├── lib/indexnow.mjs   # The IndexNow request, in pure pieces
 │   ├── lib/ig.mjs         # Pure helpers for the Instagram link and date arithmetic
 │   ├── lib/chrome.mjs     # Drives a headless Chrome over the DevTools Protocol
 │   ├── lib/feed.test.mjs  # Unit tests for the helpers
@@ -96,6 +103,7 @@ Built with plain **HTML / CSS / JavaScript** — no build step, no framework, no
 │   ├── lib/seo.test.mjs   # Fails if the markup and the structured data drift apart
 │   ├── lib/ig.test.mjs    # Unit tests for the Instagram helpers
 │   ├── lib/lang.test.mjs  # Fails if a language page is not really in that language
+│   ├── lib/submit.test.mjs # Fails if a search engine could not find or trust the site
 │   ├── sync.test.mjs      # End-to-end test — runs the real script against a mock Graph API
 │   └── manual-post.test.mjs # End-to-end test for the manual route
 ├── docs/
@@ -358,7 +366,7 @@ npm test
 which runs:
 
 ```bash
-node --test scripts/lib/feed.test.mjs scripts/lib/site.test.mjs scripts/lib/siteurl.test.mjs scripts/lib/ig.test.mjs scripts/lib/seo.test.mjs scripts/lib/lang.test.mjs scripts/sync.test.mjs scripts/manual-post.test.mjs
+node --test scripts/lib/feed.test.mjs scripts/lib/site.test.mjs scripts/lib/siteurl.test.mjs scripts/lib/ig.test.mjs scripts/lib/seo.test.mjs scripts/lib/lang.test.mjs scripts/lib/submit.test.mjs scripts/sync.test.mjs scripts/manual-post.test.mjs
 ```
 
 `sync.test.mjs` starts a mock `graph.facebook.com` and runs the **real** sync
@@ -373,6 +381,9 @@ sharing image, or if the sitemap lists a page that does not exist.
 `lang.test.mjs` fails if a language page is not really in that language, if a
 translation marker survived into a generated page, if the `hreflang` links
 point at the same address, or if a link leaves its own language folder.
+`submit.test.mjs` fails if the sitemap on disk is not what the generator would
+write, if the IndexNow key file is not where a search engine looks for it, or
+if the verification token is on one home page and not the other two.
 
 > **Never put a Facebook token in client-side code.** This site is fully
 > static, so anything in a front-end file is public. Tokens live only in
@@ -392,6 +403,39 @@ Every generated file says so in a comment at the top. If a file says
 `GENERATED FILE — do not edit by hand`, change the script or the data it
 reads from and run it again — editing the file by hand is undone the next
 time anyone runs the generator.
+
+### Getting found
+
+Two things tell a search engine the site exists.
+
+**Proving the site is yours** — a token from Google Search Console or Bing
+Webmaster Tools, pasted in by one command:
+
+```bash
+node scripts/set-verification.mjs --google <token>
+node scripts/set-verification.mjs --bing <token>
+```
+
+It writes the token into all three home pages and keeps it in
+`assets/data/site.json`, so there is one place to change it. These tokens
+are public — they are meant to be read by the search engine on a public
+page. The tokens that must never be published are the Facebook token and
+the app secret, which live in GitHub Secrets.
+
+**Telling it what changed** — IndexNow, which needs no account at all:
+
+```bash
+npm run indexnow       # the pages that changed since the last commit
+npm run indexnow:all   # every address on the site
+```
+
+The deploy workflow runs it for you after every push, so Bing and Yandex
+hear about a change the moment it goes live. Google does not read
+IndexNow — it finds new pages through `sitemap.xml`, which `robots.txt`
+already points at.
+
+> The old "ping your sitemap" endpoints are dead: `bing.com/ping` answers
+> 410 and `google.com/ping` answers 404. IndexNow replaced them.
 
 ## Design System
 

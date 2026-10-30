@@ -21,6 +21,12 @@ screenshots/*.png
 .tmp-verify/
 .tmp-manual-test/
 
+# The IndexNow key file. It is written at the site root when the site
+# is published — the search engine fetches it over HTTP, so it has to
+# be public. It is built, not committed, so it can never drift from
+# the key in assets/data/indexnow.json.
+????????????????????????????????.txt
+
 # The browser profile that holds the Instagram session (see ig-fetch --login).
 # It holds cookies — it must never be committed.
 .ig-profile/

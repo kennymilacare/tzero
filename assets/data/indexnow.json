@@ -1,0 +1,17 @@
+{
+  "_readme": [
+    "IndexNow —— 話俾 Bing 同 Yandex 聽「呢啲頁啱啱改咗」。",
+    "",
+    "key 係公開嘅，唔係密碼：搜尋引擎要讀到",
+    "  https://www.tzero-jp.com/<key>.txt",
+    "先會信你。",
+    "",
+    "改咗 key 之後記得跑:",
+    "  node scripts/indexnow.mjs --write",
+    "佢會寫返個 key 檔喺站嘅 root，同埋刪走舊嗰個。",
+    "",
+    "傳送: node scripts/indexnow.mjs  （上次 commit 之後改咗嘅頁）",
+    "        node scripts/indexnow.mjs --all  （全部 30 條）"
+  ],
+  "key": "0e23179fd8cb989a7978b1a0557f64bb"
+}

@@ -12,6 +12,8 @@
 | 每件貨一個實體頁（4 個） | `product-extra-lub.html` / `product-extended.html` / `product-studded.html` / `product-ultra-thin.html` |
 | 三種語言各自一條 URL（10 頁 × 3 = 30 頁） | `scripts/gen-lang-pages.mjs` → `en/` `ja/` |
 | 全文翻譯嘅細則頁（三種語言） | `assets/data/terms.json` |
+| Search Console / Bing 驗證（一條命令） | `scripts/set-verification.mjs` |
+| IndexNow —— 自動話俾 Bing 同 Yandex 知啲頁改咗 | `scripts/indexnow.mjs` |
 | 全站共用一張 OG 圖（1200×630 PNG） | `assets/images/og-image.png` |
 | 每個產品頁有 Product + Breadcrumb 結構化資料 | `scripts/gen-product-pages.mjs` |
 | 常見問題寫死喺 HTML 入面（crawler 唔使跑 JS 都讀到） | `scripts/gen-faq-html.mjs` |
@@ -20,7 +22,7 @@
 | 最新動態嘅 ItemList | `scripts/sync-news-jsonld.mjs` |
 | sitemap + 自動 lastmod | `scripts/update-sitemap.mjs` |
 | 圖片壓縮（38 MB → 9 MB） | `scripts/compress-images.py` |
-| 防漂移測試 | `scripts/lib/seo.test.mjs`、`scripts/lib/lang.test.mjs` |
+| 防漂移測試 | `scripts/lib/seo.test.mjs`、`scripts/lib/lang.test.mjs`、`scripts/lib/submit.test.mjs` |
 
 ---
 
@@ -34,10 +36,11 @@ npm run gen:lang       # 英文版同日文版嘅每一頁（en/ 同 ja/）
 npm run seo:sync       # 最新動態嘅 ItemList
 npm run sitemap        # sitemap.xml + lastmod
 npm run seo:idempotent # 跑多次生成器，睇下會唔會變
+npm run indexnow       # 話俾 Bing 同 Yandex 知啲頁改咗
 npm run seo:check      # 上面全部 + 跑晒所有測試
 ```
 
-`npm run seo:check` 係最值得跑嗰條 —— 一句就做晒所有生成，再跑 93 個測試，
+`npm run seo:check` 係最值得跑嗰條 —— 一句就做晒所有生成，再跑 109 個測試，
 最後仲會確認生成器跑兩次出嚟嘅嘢一模一樣。
 改完任何 SEO 相關嘅嘢，跑一次佢。
 
@@ -96,7 +99,11 @@ node scripts/gen-product-pages.mjs
 
 ---
 
-## 四、Google / Bing 驗證
+## 四、點樣話俾搜尋引擎知
+
+分成兩件事：**證明個站係你嘅**（驗證 token），同**話畀佢知啲頁改咗**（IndexNow）。
+
+### 4.1 驗證 token
 
 `index.html` 入面 `<meta name="robots">` 下面有兩行註釋咗嘅 meta tag：
 
@@ -113,13 +120,70 @@ node scripts/gen-product-pages.mjs
 [bing.com/webmasters](https://www.bing.com/webmasters) →
 設定 → 網站驗證 → Meta 標記 → 貼 token 入去。
 
-貼完之後，刪走嗰行嘅 `<!--` 同 `-->` 就得，唔使郁其他嘢。
+攞到 token 之後，**唔使自己貼** —— 一條命令：
 
-**淨係貼喺 root 嗰份 `index.html`** 就夠 —— Google 同 Bing 都係攞網域嘅主頁嚟驗證，
-唔使喺 `en/` `ja/` 都加一份。
+```bash
+node scripts/set-verification.mjs --google <token>    # Google
+node scripts/set-verification.mjs --bing <token>      # Bing
+node scripts/set-verification.mjs --google-file <token>   # Google 嘅「檔案」驗證法
+node scripts/set-verification.mjs --show              # 睇下而家設定咗啲乜
+```
 
-**DNS 驗證亦得，而且唔使改呢個檔** —— 去 DNS 加一條 TXT 記錄就得，
-適合同時想驗證多個子網域嘅情況。
+佢會：
+
+- 將 token 記低喺 `assets/data/site.json`（一個地方，改嘅時候只改一次）
+- 將 meta tag 寫入 `index.html`、`en/index.html`、`ja/index.html` 三份主頁
+  （Google 同 Bing 都係睇主頁，所以三份一樣就夠，唔使每頁都加）
+
+> **呢個 token 唔係密碼。** 佢就係擺喺公開頁面畀搜尋引擎讀嘅，
+> 公開咗冇問題。**真正唔可以公開嘅係 Facebook token 同 app secret** ——
+  嗰啲只可以放 GitHub Secrets。
+
+**DNS 驗證亦得，而且唔使郁任何檔案** —— 去 DNS 加一條 TXT 記錄就得，
+適合同時想驗證多個子網域嘅情況。DNS 喺 GoDaddy。
+
+### 4.2 IndexNow —— 自動話畾 Bing 同 Yandex 知
+
+以前嘅「ping sitemap」endpoint 全部死咗：
+
+| endpoint | 而家 |
+|---|---|
+| `bing.com/ping?sitemap=…` | **410 Gone** |
+| `google.com/ping?sitemap=…` | **404** |
+| `api.indexnow.org/indexnow` | **200** ✅ |
+
+IndexNow 係而家唯一唔使帳戶、唔使登入、唔使 API key 就可以話「呢啲頁改咗」嘅辦法。
+Bing 同 Yandex 讀佢（Google 暫時唔讀）。
+
+**點樣行：**
+
+```bash
+node scripts/indexnow.mjs            # 上次 commit 之後改咗嘅頁
+node scripts/indexnow.mjs --all      # 全部 30 條
+node scripts/indexnow.mjs --dry-run  # 只睇會傳乜
+```
+
+**點解咁就夠：**
+
+- 一個 key 喺 `assets/data/indexnow.json`
+- 個 key 嘅檔案 `<key>.txt` 放喺**站嘅 root**。搜尋引擎會自己去
+  `https://www.tzero-jp.com/<key>.txt` 讀，讀到先會信你。
+  **冇呢個檔，IndexNow 會回 403。**
+- 個檔案**唔入 git** —— 係部署嘅時候由 `node scripts/indexnow.mjs --write`
+  寫出嚟（`deploy-pages.yml` 會自動行）。咁樣佢就唔會同
+  `assets/data/indexnow.json` 入面個 key 脫節。
+- 傳送嘅內容係「邊啲頁改咗」：
+  改咗 `assets/data/news.json` → 新聞頁同主頁（三種語言）；
+  改咗 `assets/js/data.js` → 產品頁同產品列表（三種語言）；
+  改咗 CSS、JS 或者圖片 → **全部** 30 條（因為每一頁都靠佢哋）
+
+**自動行：** `deploy-pages.yml` 有一個 `notify` job，喺部署**之後**行
+`node scripts/indexnow.mjs --changed` —— 即係話，每次 push 完，
+Bing 同 Yandex 即刻知新嘅英文版同日文版頁面出現咗，唔使等佢哋自己撞返嚟。
+
+> 所以 `en/` `ja/` 呢啲新 URL，**push 完就已經自動報咗知 Bing**。
+> Google 就要靠 sitemap —— 而 `robots.txt` 度已經有 `Sitemap:` 一行，
+> Google 自己會去讀。
 
 ---
 
@@ -243,6 +307,9 @@ Google 唔理 hash，所以呢個改動對 SEO 冇影響。
 
 `scripts/check-idempotent.mjs` 會跑多次生成器，確認輸出 byte-for-byte 一樣。
 
+`scripts/lib/submit.test.mjs`（15 個測試）守住「搜尋引擎搵到個站」嗰部分：
+key 檔真係喺站嘅 root、token 三份主頁一樣、sitemap 喺磁碟上同生成器會寫出嚟嘅一樣。
+
 ---
 
 ## 七、圖片壓縮
@@ -335,3 +402,11 @@ node scripts/gen-og-image.mjs
   嘅搜尋框仍然係中文
 - **Core Web Vitals** —— 圖片壓完之後 LCP 應該大幅改善，
   上線後可以用 PageSpeed Insights 實測
+- **Search Console / Bing Webmaster 嘅帳戶** —— 呢兩樣要用人手開，要用自己嘅
+  Google / Microsoft 帳戶登入，script 做唔到。開咗之後攞 token，再跑
+  `node scripts/set-verification.mjs --google <token>` 就得 —— 一步搞掂。
+  喺 Google 嗰邊仲要「提交 sitemap」（`https://www.tzero-jp.com/sitemap.xml`），
+  不過 `robots.txt` 度已經有 `Sitemap:` 一行，Google 自己都會讀，
+  手動提交只係快啲
+- **Google 唔讀 IndexNow** —— 而家只有 Bing 同 Yandex 收到即時通知。
+  Google 靠 `sitemap.xml` 同內部連結，大約幾日之後自己會發現新頁

@@ -19,7 +19,8 @@ import path from 'node:path';
 import { products, productUrl, faqs, i18n } from '../../assets/js/data.js';
 import { faqBlock, faqPageNode } from './seo.mjs';
 import { LANGS, PAGES, pageUrl } from './langs.mjs';
-import { ROOT } from './site.mjs';
+import { sitemapFor } from './sitemap.mjs';
+import { loadSite, ROOT } from './site.mjs';
 
 const SITE = 'https://www.tzero-jp.com';
 
@@ -327,4 +328,15 @@ test('every page in the sitemap says when it last changed', async () => {
   for (const date of dates) {
     assert.match(date, /^\d{4}-\d{2}-\d{2}$/, `lastmod is not a date: ${date}`);
   }
+});
+
+test('the sitemap on disk is the one the script would write', async () => {
+  /* If somebody edited the sitemap by hand, or the generator is out
+     of date, the file and the script disagree. The file is the one
+     that goes to the search engine, so it is the file that has to
+     be right. */
+  const site = await loadSite();
+  const { text } = await sitemapFor(site.url);
+  const onDisk = (await readFile(path.join(ROOT, 'sitemap.xml'), 'utf8')).replace(/\r\n/g, '\n');
+  assert.equal(onDisk, text, 'sitemap.xml has been edited by hand, or the generator is out of date');
 });
