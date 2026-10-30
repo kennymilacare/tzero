@@ -40,6 +40,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { deriveExcerpt, deriveTitle } from './lib/feed.mjs';
+import { findChrome } from './lib/chrome.mjs';
 import { cleanCaption, dateFromShortcode, mediaIdOf, parseArgs, postUrl, shortcodeOf, sortShortcodesNewestFirst, shortcodesFromHrefs } from './lib/ig.mjs';
 import { loadSite, usernameOf } from './lib/site.mjs';
 
@@ -56,24 +57,9 @@ const MANUAL_FILE = path.join(DATA_DIR, 'manual.json');
    cookies, so it is gitignored. */
 const PROFILE_DIR = path.join(ROOT, '.ig-profile');
 
-const CHROME_PATHS = [
-  process.env.CHROME_PATH,
-  'C:/Program Files/Google/Chrome/Application/chrome.exe',
-  'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe',
-  '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
-  '/usr/bin/google-chrome',
-  '/usr/bin/chromium',
-  '/usr/bin/chromium-browser',
-].filter(Boolean);
-
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 /* ---------- headless Chrome over CDP ---------- */
-
-function findChrome() {
-  for (const p of CHROME_PATHS) if (existsSync(p)) return p;
-  return null;
-}
 
 async function connect(wsUrl) {
   const ws = new WebSocket(wsUrl);

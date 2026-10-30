@@ -8,12 +8,13 @@ Built with plain **HTML / CSS / JavaScript** — no build step, no framework, no
 - **Traditional Chinese + English + 日本語** with a cycling 3-way in-header language switcher (persists across reloads)
 - **Homepage** — hero, featured product grid (4 items), brand story, FAQ accordion, contact form, newsletter footer
 - **Catalog** (`products.html`) — full 4-product grid with type filters and sort dropdown
-- **Product detail** (`product.html?id=…`) — generated from the same data module, links out to HKTVmall
+- **Product detail** — one real page per product (`product-ultra-thin.html`, `product-studded.html`, `product-extended.html`, `product-extra-lub.html`), each with its own canonical link and Product structured data; `product.html?id=…` stays as the legacy fallback for old links
 - **About** + **404** — supporting pages
 - **News** (`news.html`) — the Facebook + Instagram feed, auto-synced from the Page (see below)
 - **HKTVmall integration** — every product card has a "Buy on HKTVmall" button that opens the external listing
 - **Watsons retail badge** — the footer carries the Watsons logo and a "全線屈臣氏有售" line
 - **Mobile-first** responsive layout — collapsible hamburger menu, 2-column product grid on mobile
+- **SEO** — sitemap with automatic `lastmod`, structured data for the products, the FAQ, the news list and the business, one shared sharing image, and a FAQ that is in the markup rather than drawn by JavaScript. See [`docs/seo.md`](docs/seo.md)
 
 ## File Structure
 
@@ -21,12 +22,18 @@ Built with plain **HTML / CSS / JavaScript** — no build step, no framework, no
 .
 ├── index.html             # Home (hero + featured + FAQ + contact + footer)
 ├── products.html          # Full catalog with brand/type/sort
-├── product.html           # Product detail (driven by ?id=)
+├── product-ultra-thin.html# Product detail — 超薄
+├── product-studded.html   # Product detail — 顆粒
+├── product-extended.html  # Product detail — 持久
+├── product-extra-lub.html # Product detail — 潤滑
+├── product.html           # Legacy fallback for old product.html?id=… links (noindex)
 ├── about.html             # About + brand values + brand story
 ├── news.html              # Latest news (renders the Facebook feed)
 ├── contact.html           # Contact form + cards + map placeholder
 ├── terms.html             # Privacy policy + terms
 ├── 404.html               # Not-found page
+├── sitemap.xml            # Generated — the pages a crawler should read
+├── robots.txt             # Generated — points at the sitemap
 ├── assets/
 │   ├── css/
 │   │   ├── base.css       # Variables, reset, typography
@@ -46,11 +53,12 @@ Built with plain **HTML / CSS / JavaScript** — no build step, no framework, no
 │   │   ├── products.js    # Catalog render/filter/sort
 │   │   ├── product.js     # Detail-page render
 │   │   ├── product-svg.js # SVG product mockup generator
+│   │   ├── faq.js         # The FAQ accordion — shared by the page and the generators
 │   │   ├── carousel.js    # Hero carousel
 │   │   ├── splash.js      # Opening splash
 │   │   ├── bubbles.js     # Homepage background bubbles
 │   │   └── contact.js     # Form validation
-│   └── images/            # banners, brand, couples, hero, icons, products
+│   └── images/            # banners, brand, couples, hero, icons, products, og-image.png
 ├── scripts/
 │   ├── sync-facebook.mjs  # Pulls the Instagram feed, writes news.json
 │   ├── manual-post.mjs    # Turns assets/data/manual.json into the feed — no token needed
@@ -58,17 +66,29 @@ Built with plain **HTML / CSS / JavaScript** — no build step, no framework, no
 │   │                       # (--latest finds the newest posts by itself)
 │   ├── sync-social-links.mjs # Rewrites every social link to match site.json
 │   ├── set-site-url.mjs  # Moves the site to a new address — canonical, sitemap, robots
+│   ├── gen-product-pages.mjs # Writes the four product pages
+│   ├── gen-faq-html.mjs   # Writes the FAQ into index.html
+│   ├── gen-jsonld.mjs     # Writes the structured data into the pages
+│   ├── gen-og-image.mjs   # Writes the sharing image
+│   ├── sync-og-image.mjs  # Keeps the sharing image in step with the pages
+│   ├── sync-news-jsonld.mjs # Writes the news ItemList into data.js
+│   ├── update-sitemap.mjs # Writes sitemap.xml with the lastmod dates from git
+│   ├── compress-images.py # Shrinks the images (--dry-run first!)
 │   ├── lib/feed.mjs       # Pure helpers (unit-tested)
 │   ├── lib/site.mjs       # Reads the accounts from site.json
 │   ├── lib/siteurl.mjs    # Pure helpers for the site's own address
+│   ├── lib/seo.mjs        # The FAQ block and the FAQPage node, one source for both
+│   ├── lib/chrome.mjs     # Drives a headless Chrome over the DevTools Protocol
 │   ├── lib/feed.test.mjs  # Unit tests for the helpers
 │   ├── lib/site.test.mjs  # Fails if any social link drifts from site.json
 │   ├── lib/siteurl.test.mjs # Fails if any page drifts from the address in site.json
+│   ├── lib/seo.test.mjs   # Fails if the markup and the structured data drift apart
 │   ├── sync.test.mjs      # End-to-end test — runs the real script against a mock Graph API
 │   └── manual-post.test.mjs # End-to-end test for the manual route
 ├── docs/
 │   ├── instagram-sync.md  # Instagram / Graph API setup guide
-│   └── manual-posts.md    # Updating the feed by hand — no token, no CI
+│   ├── manual-posts.md    # Updating the feed by hand — no token, no CI
+│   └── seo.md             # What the SEO work is, and how to keep it
 └── .github/workflows/
     ├── sync-instagram.yml # Graph API feed sync (schedule off — no token yet)
     └── deploy-pages.yml   # Publishes the repo to GitHub Pages on every push
@@ -285,7 +305,13 @@ one, so a half-finished move cannot slip through.
 ### Tests
 
 ```bash
-node --test scripts/lib/feed.test.mjs scripts/lib/site.test.mjs scripts/lib/siteurl.test.mjs scripts/lib/ig.test.mjs scripts/sync.test.mjs scripts/manual-post.test.mjs
+npm test
+```
+
+which runs:
+
+```bash
+node --test scripts/lib/feed.test.mjs scripts/lib/site.test.mjs scripts/lib/siteurl.test.mjs scripts/lib/ig.test.mjs scripts/lib/seo.test.mjs scripts/sync.test.mjs scripts/manual-post.test.mjs
 ```
 
 `sync.test.mjs` starts a mock `graph.facebook.com` and runs the **real** sync
@@ -294,11 +320,28 @@ overrides, pinning and pruning all get exercised with no credentials and no
 internet access. `manual-post.test.mjs` does the same for the manual route.
 `site.test.mjs` fails if any social link in the HTML or the JSON-LD drifts
 from `assets/data/site.json`. `ig.test.mjs` covers the link and date
-arithmetic behind `ig-fetch.mjs`.
+arithmetic behind `ig-fetch.mjs`. `seo.test.mjs` fails if the markup and the
+structured data drift apart, if a page loses its canonical link or its
+sharing image, or if the sitemap lists a page that does not exist.
 
 > **Never put a Facebook token in client-side code.** This site is fully
 > static, so anything in a front-end file is public. Tokens live only in
 > GitHub Secrets — see `docs/instagram-sync.md` §6.
+
+### SEO
+
+The SEO work — one page per product, the shared sharing image, the FAQ in the
+markup, the structured data, the sitemap and the image compression — is
+written up in [`docs/seo.md`](docs/seo.md). The short version:
+
+```bash
+npm run seo:check   # regenerate everything, then run the tests
+```
+
+Every generated file says so in a comment at the top. If a file says
+`GENERATED FILE — do not edit by hand`, change the script or the data it
+reads from and run it again — editing the file by hand is undone the next
+time anyone runs the generator.
 
 ## Design System
 
@@ -317,13 +360,14 @@ All tokens live in [`base.css`](assets/css/base.css). Adjust there to retheme th
 1. Hero, product grid, FAQ, contact form all visible on `index.html`.
 2. EN/中 toggle swaps every `data-i18n` string, persists across reloads.
 3. `products.html` filters update the grid; sort dropdown reorders items.
-4. `product.html?id=tzero-ultra-thin` renders the correct product.
-5. "Buy on HKTVmall" buttons open in a new tab with `rel="noopener"`.
-6. Mobile viewport (≤768 px): nav collapses, grid becomes 2-col.
-7. Contact form: empty fields show error; valid submission shows success toast.
-8. Newsletter form: invalid email rejected; valid email shows success toast.
-9. Footer shows the opening hours with "(公眾假期除外)" on its own line, in all three languages.
-10. Footer shows the Watsons logo badge in the 購物 column.
+4. Each of `product-ultra-thin.html`, `product-studded.html`, `product-extended.html`, `product-extra-lub.html` renders its own product, with its own title and price.
+5. The FAQ questions are visible in `index.html` with JavaScript switched off (they are in the markup, not drawn by a script).
+6. "Buy on HKTVmall" buttons open in a new tab with `rel="noopener"`.
+7. Mobile viewport (≤768 px): nav collapses, grid becomes 2-col.
+8. Contact form: empty fields show error; valid submission shows success toast.
+9. Newsletter form: invalid email rejected; valid email shows success toast.
+10. Footer shows the opening hours with "(公眾假期除外)" on its own line, in all three languages.
+11. Footer shows the Watsons logo badge in the 購物 column.
 
 ## Out of Scope
 

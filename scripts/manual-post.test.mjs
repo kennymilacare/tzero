@@ -59,7 +59,7 @@ const ONE_POST = {
       date: '2026-10-28',
       text: '新裝上市 🎉\n全線產品換上全新包裝。\n#Tzero',
       url: 'https://www.facebook.com/Tzerohk/posts/1234567890',
-      image: 'assets/images/banners/carousel/11.png',
+      image: 'assets/images/banners/carousel/11.jpg',
     },
   ],
 };

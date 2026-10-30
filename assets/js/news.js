@@ -10,7 +10,7 @@
    never innerHTML, because Instagram post text is not authored here.
    =========================================================== */
 
-import { getLang, t } from './i18n.js?v=5';
+import { getLang, t } from './i18n.js?v=6';
 
 const DATA_URL = 'assets/data/news.json';
 const MAX_POSTS = 8;
@@ -246,10 +246,9 @@ function render() {
 }
 
 /* Build one NewsArticle node for a post. */
-function newsArticle(post, position) {
+function newsArticle(post) {
   const entry = {
     '@type': 'NewsArticle',
-    position,
     headline: pickNews(post, 'title'),
     url: post.permalink || state.pageUrl,
   };
@@ -260,6 +259,20 @@ function newsArticle(post, position) {
   if (post.image) {
     try { entry.image = new URL(post.image, window.location.href).href; } catch (e) { /* leave it out */ }
   }
+  return entry;
+}
+
+/* Build one ListItem for an ItemList. An ItemList holds ListItems,
+   not articles — the reader takes the name and the url off each
+   entry and builds the list from those. */
+function listItem(post, position) {
+  const entry = {
+    '@type': 'ListItem',
+    position,
+    name: pickNews(post, 'title'),
+    url: post.permalink || state.pageUrl,
+  };
+  if (post.datePublished) entry.datePublished = post.datePublished;
   return entry;
 }
 
@@ -286,9 +299,12 @@ function updateJsonLd() {
       // matches what a visitor sees.
       const el = document.querySelector('[data-news-list]');
       const posts = el ? postsFor(el) : state.posts;
-      list.itemListElement = posts.map((post, i) => newsArticle(post, i + 1));
+      list.itemListElement = posts.map((post, i) => listItem(post, i + 1));
+      list.numberOfItems = posts.length;
+      /* Newest first — the order the page shows them in. */
+      list.itemListOrder = 'https://schema.org/ItemListOrderDescending';
     } else {
-      const node = newsArticle(state.posts[0], 1);
+      const node = newsArticle(state.posts[0]);
       const at = graph.findIndex((n) => n['@type'] === 'NewsArticle');
       if (at >= 0) graph[at] = node;
       else graph.push(node);

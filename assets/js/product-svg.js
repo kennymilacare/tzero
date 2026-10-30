@@ -3,8 +3,8 @@
    (no copyrighted brand imagery)
    =========================================================== */
 
-import { brands } from './data.js?v=22';
-import { getLang as realGetLang, pickByLang, t } from './i18n.js?v=5';
+import { brands, productUrl } from './data.js?v=24';
+import { getLang as realGetLang, pickByLang, t } from './i18n.js?v=6';
 
 const W = 200;
 const H = 280;
@@ -133,7 +133,7 @@ export function productMediaHTML(product, large = false) {
 export function productCardHTML(product) {
   const lang = getLangSafe();
   return `
-    <a class="card-product" href="product.html?id=${encodeURIComponent(product.id)}">
+    <a class="card-product" href="${productUrl(product.id)}">
       <div class="card-product__media">
         <div class="card-product__badges">
           ${product.popular ? `<span class="badge badge--accent" data-i18n="product.card.popular">熱賣</span>` : ''}

@@ -21,7 +21,11 @@
   <meta property="og:title" content="全部產品 · T-ZERO 第九感" data-i18n-attr="content" data-i18n="seo.og.title.products">
   <meta property="og:description" content="T-ZERO 第九感全系列:加倍潤滑、持久、顆粒、超薄 4 款玻尿酸安全套。日本工藝,即日送貨。" data-i18n-attr="content" data-i18n="seo.og.desc.products">
   <meta property="og:url" content="https://www.tzero-jp.com/products.html">
-  <meta property="og:image" content="https://www.tzero-jp.com/assets/images/og-image.svg">
+  <meta property="og:image" content="https://www.tzero-jp.com/assets/images/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:alt" content="T-ZERO 第九感 — 日本玻尿酸安全套,即日送貨,保密包裝">
   <meta property="og:locale" content="zh_HK" data-i18n-attr="content" data-i18n="seo.og.locale">
   <meta property="og:locale:alternate" content="en_US" data-i18n-attr="content" data-i18n="seo.og.locale.alt1">
   <meta property="og:locale:alternate" content="ja_JP" data-i18n-attr="content" data-i18n="seo.og.locale.alt2">
@@ -29,6 +33,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="全部產品 · T-ZERO 第九感" data-i18n-attr="content" data-i18n="seo.og.title.products">
   <meta name="twitter:description" content="T-ZERO 第九感全系列:加倍潤滑、持久、顆粒、超薄 4 款玻尿酸安全套。日本工藝,即日送貨。" data-i18n-attr="content" data-i18n="seo.og.desc.products">
+  <meta name="twitter:image" content="https://www.tzero-jp.com/assets/images/og-image.png">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -50,7 +55,61 @@
   <link rel="icon" type="image/png" sizes="512x512" href="assets/images/icons/android-chrome-512.png">
 
   <script type="application/ld+json" data-i18n-json="seo.jsonld.products">
-  </script>
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "首頁",
+          "item": "https://www.tzero-jp.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "全部產品",
+          "item": "https://www.tzero-jp.com/products.html"
+        }
+      ]
+    },
+    {
+      "@type": "ItemList",
+      "name": "T-ZERO 第九感 系列",
+      "numberOfItems": 4,
+      "itemListOrder": "https://schema.org/ItemListOrderAscending",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "url": "https://www.tzero-jp.com/product-extra-lub.html",
+          "name": "T-ZERO 加倍潤滑"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "url": "https://www.tzero-jp.com/product-extended.html",
+          "name": "T-ZERO 持久"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "url": "https://www.tzero-jp.com/product-studded.html",
+          "name": "T-ZERO 顆粒"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "url": "https://www.tzero-jp.com/product-ultra-thin.html",
+          "name": "T-ZERO 超薄"
+        }
+      ]
+    }
+  ]
+}
+</script>
 </head>
 <body>
 
@@ -90,26 +149,26 @@
   <div class="top-banner top-banner--carousel" data-carousel>
     <a class="top-banner__link" href="products.html" aria-label="瀏覽 T-ZERO 全系列產品">
       <img class="top-banner__img is-active"
-           src="assets/images/banners/carousel/7.png?v=1"
+           src="assets/images/banners/carousel/7.jpg?v=1"
            alt="T-ZERO 第九感 — 玻尿酸安全套 (1/4)"
            width="2658" height="984"
            loading="eager" decoding="async"
            fetchpriority="high"
            data-carousel-slide>
       <img class="top-banner__img"
-           src="assets/images/banners/carousel/9.png?v=1"
+           src="assets/images/banners/carousel/9.jpg?v=1"
            alt="T-ZERO 第九感 — 玻尿酸安全套 (2/4)"
            width="2658" height="984"
            loading="lazy" decoding="async"
            data-carousel-slide>
       <img class="top-banner__img"
-           src="assets/images/banners/carousel/Tzero_website_banner.png?v=1"
+           src="assets/images/banners/carousel/Tzero_website_banner.jpg?v=1"
            alt="T-ZERO 第九感 — 玻尿酸滋潤 · 水份充足 (3/4)"
            width="2658" height="984"
            loading="lazy" decoding="async"
            data-carousel-slide>
       <img class="top-banner__img"
-           src="assets/images/banners/carousel/11.png?v=1"
+           src="assets/images/banners/carousel/11.jpg?v=1"
            alt="T-ZERO 第九感 — 玻尿酸安全套 (4/4)"
            width="2658" height="984"
            loading="lazy" decoding="async"
@@ -268,6 +327,7 @@
       <div class="footer__bottom">
         <span data-i18n="footer.copyright">© 2026 T-ZERO 第九感. 版權所有。</span>
       </div>
+    </div>
     </div>
   </footer>
 

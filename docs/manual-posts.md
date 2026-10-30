@@ -28,7 +28,7 @@ assets/data/news.json  ←  網站讀呢個
   "text": "新裝上市 🎉\n全線產品換上全新包裝，樽身更透明，凸點一目了然。\n#Tzero",
   "url": "https://www.facebook.com/Tzerohk/posts/1234567890",
   "source": "Facebook",
-  "image": "assets/images/banners/carousel/11.png"
+  "image": "assets/images/banners/carousel/11.jpg"
 }
 ```
 

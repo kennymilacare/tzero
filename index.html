@@ -11,6 +11,16 @@
   <meta name="author" content="T-ZERO 第九感">
   <meta name="robots" content="index,follow">
 
+  <!-- Search Console / Bing Webmaster verification.
+       Paste the token from
+         Google — search.google.com/search-console → Settings → Domain verification → HTML tag verification
+         Bing   — bing.com/webmasters → Settings → Website verification → Meta tag
+       into the content="" below and delete the <!-- and --> around that line.
+       The DNS TXT record works as well and needs no change to this file —
+       see docs/seo.md. -->
+  <!-- <meta name="google-site-verification" content="PASTE_TOKEN_HERE"> -->
+  <!-- <meta name="msvalidate.01" content="PASTE_TOKEN_HERE"> -->
+
   <!-- SEO: canonical & hreflang -->
   <link rel="canonical" href="https://www.tzero-jp.com/">
   <link rel="alternate" hreflang="zh-HK" href="https://www.tzero-jp.com/">
@@ -24,7 +34,11 @@
   <meta property="og:title" content="T-ZERO 第九感 · 玻尿酸安全套" data-i18n-attr="content" data-i18n="seo.og.title.home">
   <meta property="og:description" content="日本玻尿酸安全套品牌 — 加倍潤滑、持久、顆粒、超薄 4 款設計,即日送貨,保密包裝。" data-i18n-attr="content" data-i18n="seo.og.desc.home">
   <meta property="og:url" content="https://www.tzero-jp.com/">
-  <meta property="og:image" content="https://www.tzero-jp.com/assets/images/og-image.svg">
+  <meta property="og:image" content="https://www.tzero-jp.com/assets/images/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:alt" content="T-ZERO 第九感 — 日本玻尿酸安全套,即日送貨,保密包裝">
   <meta property="og:locale" content="zh_HK" data-i18n-attr="content" data-i18n="seo.og.locale">
   <meta property="og:locale:alternate" content="en_US" data-i18n-attr="content" data-i18n="seo.og.locale.alt1">
   <meta property="og:locale:alternate" content="ja_JP" data-i18n-attr="content" data-i18n="seo.og.locale.alt2">
@@ -33,7 +47,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="T-ZERO 第九感 · 玻尿酸安全套" data-i18n-attr="content" data-i18n="seo.og.title.home">
   <meta name="twitter:description" content="日本玻尿酸安全套品牌 — 加倍潤滑、持久、顆粒、超薄 4 款設計,即日送貨,保密包裝。" data-i18n-attr="content" data-i18n="seo.og.desc.home">
-  <meta name="twitter:image" content="https://www.tzero-jp.com/assets/images/og-image.svg">
+  <meta name="twitter:image" content="https://www.tzero-jp.com/assets/images/og-image.png">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -57,7 +71,146 @@
 
   <!-- Structured data -->
   <script type="application/ld+json" data-i18n-json="seo.jsonld.home" data-news-jsonld="latest">
-  </script>
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "LocalBusiness",
+      "@id": "https://www.tzero-jp.com/#org",
+      "name": "T-ZERO 第九感",
+      "alternateName": "T-ZERO NINTH SENSE · 玻尿酸安全套",
+      "url": "https://www.tzero-jp.com/",
+      "logo": "https://www.tzero-jp.com/assets/images/icons/android-chrome-512.png",
+      "image": "https://www.tzero-jp.com/assets/images/og-image.png",
+      "telephone": "+852-6897-1473",
+      "email": "info@tzero-jp.com",
+      "priceRange": "HK$98",
+      "currenciesAccepted": "HKD",
+      "paymentAccepted": "Visa, Mastercard, PayMe, AlipayHK, FPS, Bank Transfer",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "5/F, D.J. Building, No.173 Hoi Bun Road",
+        "addressLocality": "Kwun Tong",
+        "addressRegion": "Kowloon",
+        "addressCountry": "HK"
+      },
+      "hasMap": "https://www.google.com/maps/search/?api=1&query=D.J.+Building,+No.173+Hoi+Bun+Road,+Kwun+Tong",
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+          ],
+          "opens": "10:00",
+          "closes": "18:00"
+        }
+      ],
+      "sameAs": [
+        "https://www.instagram.com/tzerojp",
+        "https://www.facebook.com/Tzerohk"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://www.tzero-jp.com/#site",
+      "url": "https://www.tzero-jp.com/",
+      "name": "T-ZERO 第九感",
+      "inLanguage": [
+        "zh-HK",
+        "en",
+        "ja-JP"
+      ],
+      "publisher": {
+        "@id": "https://www.tzero-jp.com/#org"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "首頁",
+          "item": "https://www.tzero-jp.com/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "包裝會否標明產品名稱?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "我們採用全黑啞面紙盒包裝,並無任何品牌或類別字樣,確保送貨過程中完全保密。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "預計送貨時間是多久?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "香港本地訂單一般於 1–2 個工作天內送達;離島及偏遠地區或需額外 1–2 天。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "怎樣選擇適合自己的尺寸?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "亞洲男士一般闊度約 52 ± 2 mm,可參考產品頁的「闊度」欄目。如欲更貼合,我們另有大碼系列。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "乳膠與 PU 有什麼分別?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "乳膠 (Latex) 彈性較佳;PU (水性聚氨酯) 更薄、導熱更快,且不含乳膠蛋白,適合敏感體質。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "可以退換貨嗎?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "基於衛生理由,所有產品一經拆封恕不退換。如收貨時發現包裝破損,請於 7 天內聯絡客服。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "接受哪些付款方式?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "我們接受 Visa、Mastercard、PayMe、AlipayHK、轉數快 FPS 及銀行轉帳。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "產品應如何存放?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "請存放於陰涼乾燥處,避免陽光直射及高溫;最佳保存溫度為 10–30°C。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "有沒有批發或企業客戶方案?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "有的。如有 50 盒以上訂單或企業禮品需求,請電郵至 info@tzero-jp.com 與我們聯絡。"
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
 </head>
 <body>
 
@@ -99,26 +252,26 @@
   <div class="top-banner top-banner--carousel top-banner--zoom" data-carousel>
     <a class="top-banner__link" href="products.html" aria-label="瀏覽 T-ZERO 全系列產品">
       <img class="top-banner__img is-active"
-           src="assets/images/banners/carousel/Tzero_website_banner.png?v=1"
+           src="assets/images/banners/carousel/Tzero_website_banner.jpg?v=1"
            alt="T-ZERO 第九感 — 玻尿酸滋潤 · 水份充足 (1/4)"
            width="2658" height="984"
            loading="eager" decoding="async"
            fetchpriority="high"
            data-carousel-slide>
       <img class="top-banner__img"
-           src="assets/images/banners/carousel/7.png?v=1"
+           src="assets/images/banners/carousel/7.jpg?v=1"
            alt="T-ZERO 第九感 — 玻尿酸安全套 (2/4)"
            width="2658" height="984"
            loading="lazy" decoding="async"
            data-carousel-slide>
       <img class="top-banner__img"
-           src="assets/images/banners/carousel/11.png?v=1"
+           src="assets/images/banners/carousel/11.jpg?v=1"
            alt="T-ZERO 第九感 — 玻尿酸安全套 (3/4)"
            width="2658" height="984"
            loading="lazy" decoding="async"
            data-carousel-slide>
       <img class="top-banner__img"
-           src="assets/images/banners/carousel/9.png?v=1"
+           src="assets/images/banners/carousel/9.jpg?v=1"
            alt="T-ZERO 第九感 — 玻尿酸安全套 (4/4)"
            width="2658" height="984"
            loading="lazy" decoding="async"
@@ -166,7 +319,7 @@
       </div>
 
       <div class="hero__art reveal">
-        <img src="assets/images/couples/hero-product.png?v=2"
+        <img src="assets/images/couples/hero-product-studded.jpg?v=2"
              alt="T-ZERO 第九感 玻尿酸安全套:顆粒凸點 玻尿酸潤滑"
              width="600" height="600"
              loading="eager" fetchpriority="high"
@@ -382,7 +535,7 @@
       </div>
 
       <div class="match-grid reveal">
-        <a href="product.html?id=tzero-extra-lub" class="match-card match-card--blue" data-num="01">
+        <a href="product-extra-lub.html" class="match-card match-card--blue" data-num="01">
           <div class="match-card__head">
             <span class="match-card__num">01</span>
             <div class="match-card__icon" data-i18n-aria="home.match.card1.tag" aria-label="想要更滋潤">
@@ -408,7 +561,7 @@
           </span>
         </a>
 
-        <a href="product.html?id=tzero-extended" class="match-card match-card--gray" data-num="02">
+        <a href="product-extended.html" class="match-card match-card--gray" data-num="02">
           <div class="match-card__head">
             <span class="match-card__num">02</span>
             <div class="match-card__icon" data-i18n-aria="home.match.card2.tag" aria-label="想要更持久">
@@ -438,7 +591,7 @@
           </span>
         </a>
 
-        <a href="product.html?id=tzero-studded" class="match-card match-card--orange" data-num="03">
+        <a href="product-studded.html" class="match-card match-card--orange" data-num="03">
           <div class="match-card__head">
             <span class="match-card__num">03</span>
             <div class="match-card__icon" data-i18n-aria="home.match.card3.tag" aria-label="想要更刺激">
@@ -463,7 +616,7 @@
           </span>
         </a>
 
-        <a href="product.html?id=tzero-ultra-thin" class="match-card match-card--black" data-num="04">
+        <a href="product-ultra-thin.html" class="match-card match-card--black" data-num="04">
           <div class="match-card__head">
             <span class="match-card__num">04</span>
             <div class="match-card__icon" data-i18n-aria="home.match.card4.tag" aria-label="想要更貼近">
@@ -507,7 +660,7 @@
 
       <div class="news-card reveal" data-news-card>
         <a class="news-card__media" href="https://www.facebook.com/Tzerohk" target="_blank" rel="noopener" data-i18n-aria="home.news.aria">
-          <img src="assets/images/banners/carousel/11.png"
+          <img src="assets/images/banners/carousel/11.jpg"
                alt="T-ZERO 第九感 Facebook 貼文圖片"
                width="2658" height="984"
                loading="lazy" decoding="async">
@@ -546,8 +699,99 @@
       </div>
 
       <div class="faq reveal" data-faq>
-        <!-- populated by main.js init -->
-      </div>
+          <!-- GENERATED by scripts/gen-faq-html.mjs — do not edit by hand.
+               The questions are in the markup so a crawler can read them
+               without running any JavaScript. The page replaces this
+               block with the same questions in the visitor's language. -->
+          <div class="accordion__item">
+            <button class="accordion__btn" aria-expanded="false">
+              <span class="accordion__q">包裝會否標明產品名稱?</span>
+              <span class="accordion__icon" aria-hidden="true"><svg viewBox="0 0 16 17" xmlns="http://www.w3.org/2000/svg">
+                  <path class="vbar" d="M8 3V14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  <path class="hbar" d="M2.5 8.5H13.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+              </span>
+            </button>
+            <div class="accordion__panel"><div class="accordion__panel-inner">我們採用全黑啞面紙盒包裝,並無任何品牌或類別字樣,確保送貨過程中完全保密。</div></div>
+          </div>
+          <div class="accordion__item">
+            <button class="accordion__btn" aria-expanded="false">
+              <span class="accordion__q">預計送貨時間是多久?</span>
+              <span class="accordion__icon" aria-hidden="true"><svg viewBox="0 0 16 17" xmlns="http://www.w3.org/2000/svg">
+                  <path class="vbar" d="M8 3V14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  <path class="hbar" d="M2.5 8.5H13.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+              </span>
+            </button>
+            <div class="accordion__panel"><div class="accordion__panel-inner">香港本地訂單一般於 1–2 個工作天內送達;離島及偏遠地區或需額外 1–2 天。</div></div>
+          </div>
+          <div class="accordion__item">
+            <button class="accordion__btn" aria-expanded="false">
+              <span class="accordion__q">怎樣選擇適合自己的尺寸?</span>
+              <span class="accordion__icon" aria-hidden="true"><svg viewBox="0 0 16 17" xmlns="http://www.w3.org/2000/svg">
+                  <path class="vbar" d="M8 3V14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  <path class="hbar" d="M2.5 8.5H13.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+              </span>
+            </button>
+            <div class="accordion__panel"><div class="accordion__panel-inner">亞洲男士一般闊度約 52 ± 2 mm,可參考產品頁的「闊度」欄目。如欲更貼合,我們另有大碼系列。</div></div>
+          </div>
+          <div class="accordion__item">
+            <button class="accordion__btn" aria-expanded="false">
+              <span class="accordion__q">乳膠與 PU 有什麼分別?</span>
+              <span class="accordion__icon" aria-hidden="true"><svg viewBox="0 0 16 17" xmlns="http://www.w3.org/2000/svg">
+                  <path class="vbar" d="M8 3V14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  <path class="hbar" d="M2.5 8.5H13.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+              </span>
+            </button>
+            <div class="accordion__panel"><div class="accordion__panel-inner">乳膠 (Latex) 彈性較佳;PU (水性聚氨酯) 更薄、導熱更快,且不含乳膠蛋白,適合敏感體質。</div></div>
+          </div>
+          <div class="accordion__item">
+            <button class="accordion__btn" aria-expanded="false">
+              <span class="accordion__q">可以退換貨嗎?</span>
+              <span class="accordion__icon" aria-hidden="true"><svg viewBox="0 0 16 17" xmlns="http://www.w3.org/2000/svg">
+                  <path class="vbar" d="M8 3V14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  <path class="hbar" d="M2.5 8.5H13.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+              </span>
+            </button>
+            <div class="accordion__panel"><div class="accordion__panel-inner">基於衛生理由,所有產品一經拆封恕不退換。如收貨時發現包裝破損,請於 7 天內聯絡客服。</div></div>
+          </div>
+          <div class="accordion__item">
+            <button class="accordion__btn" aria-expanded="false">
+              <span class="accordion__q">接受哪些付款方式?</span>
+              <span class="accordion__icon" aria-hidden="true"><svg viewBox="0 0 16 17" xmlns="http://www.w3.org/2000/svg">
+                  <path class="vbar" d="M8 3V14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  <path class="hbar" d="M2.5 8.5H13.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+              </span>
+            </button>
+            <div class="accordion__panel"><div class="accordion__panel-inner">我們接受 Visa、Mastercard、PayMe、AlipayHK、轉數快 FPS 及銀行轉帳。</div></div>
+          </div>
+          <div class="accordion__item">
+            <button class="accordion__btn" aria-expanded="false">
+              <span class="accordion__q">產品應如何存放?</span>
+              <span class="accordion__icon" aria-hidden="true"><svg viewBox="0 0 16 17" xmlns="http://www.w3.org/2000/svg">
+                  <path class="vbar" d="M8 3V14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  <path class="hbar" d="M2.5 8.5H13.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+              </span>
+            </button>
+            <div class="accordion__panel"><div class="accordion__panel-inner">請存放於陰涼乾燥處,避免陽光直射及高溫;最佳保存溫度為 10–30°C。</div></div>
+          </div>
+          <div class="accordion__item">
+            <button class="accordion__btn" aria-expanded="false">
+              <span class="accordion__q">有沒有批發或企業客戶方案?</span>
+              <span class="accordion__icon" aria-hidden="true"><svg viewBox="0 0 16 17" xmlns="http://www.w3.org/2000/svg">
+                  <path class="vbar" d="M8 3V14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  <path class="hbar" d="M2.5 8.5H13.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+              </span>
+            </button>
+            <div class="accordion__panel"><div class="accordion__panel-inner">有的。如有 50 盒以上訂單或企業禮品需求,請電郵至 info@tzero-jp.com 與我們聯絡。</div></div>
+          </div>
+</div>
     </div>
   </section>
 
@@ -708,11 +952,12 @@
 
   <!-- ========== SCRIPTS ========== -->
   <script type="module">
-    import { products } from './assets/js/data.js?v=22';
-    import { productCardHTML } from './assets/js/product-svg.js?v=6';
-    import { faqs } from './assets/js/data.js?v=22';
-    import { initI18n, t, pickByLang } from './assets/js/i18n.js?v=5';
-    import { initHeaderScroll, initReveal, initNewsletter, showToast } from './assets/js/main.js?v=10';
+    import { products } from './assets/js/data.js?v=24';
+    import { productCardHTML } from './assets/js/product-svg.js?v=7';
+    import { faqs } from './assets/js/data.js?v=24';
+    import { initI18n, t, pickByLang } from './assets/js/i18n.js?v=6';
+    import { initFaq } from './assets/js/faq.js?v=1';
+    import { initHeaderScroll, initReveal, initNewsletter, showToast } from './assets/js/main.js?v=11';
     import { initForm } from './assets/js/contact.js?v=2';
 
     initI18n();
@@ -725,60 +970,10 @@
       grid.innerHTML = [...featured, ...filler].slice(0, 4).map(productCardHTML).join('');
     }
 
-    /* FAQ accordion */
-    const faqBox = document.querySelector('[data-faq]');
-    if (faqBox) {
-      faqBox.innerHTML = faqs.map((f) => {
-        const q = pickByLang(f, 'q');
-        const a = pickByLang(f, 'a');
-        return `
-          <div class="accordion__item">
-            <button class="accordion__btn" aria-expanded="false">
-              <span class="accordion__q">${q}</span>
-              <span class="accordion__icon" aria-hidden="true">
-                <svg viewBox="0 0 16 17" xmlns="http://www.w3.org/2000/svg">
-                  <path class="vbar" d="M8 3V14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                  <path class="hbar" d="M2.5 8.5H13.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-              </span>
-            </button>
-            <div class="accordion__panel"><div class="accordion__panel-inner">${a}</div></div>
-          </div>`;
-      }).join('');
-
-      faqBox.addEventListener('click', (e) => {
-        const btn = e.target.closest('.accordion__btn');
-        if (!btn) return;
-        const open = btn.getAttribute('aria-expanded') === 'true';
-        btn.setAttribute('aria-expanded', String(!open));
-        const panel = btn.nextElementSibling;
-        if (!open) panel.style.maxHeight = panel.scrollHeight + 'px';
-        else panel.style.maxHeight = '0';
-      });
-    }
-
-    /* re-render FAQ on language change */
-    document.addEventListener('lang:change', () => {
-      const faqBox2 = document.querySelector('[data-faq]');
-      if (!faqBox2) return;
-      faqBox2.innerHTML = faqs.map((f) => {
-        const q = pickByLang(f, 'q');
-        const a = pickByLang(f, 'a');
-        return `
-          <div class="accordion__item">
-            <button class="accordion__btn" aria-expanded="false">
-              <span class="accordion__q">${q}</span>
-              <span class="accordion__icon" aria-hidden="true">
-                <svg viewBox="0 0 16 17" xmlns="http://www.w3.org/2000/svg">
-                  <path class="vbar" d="M8 3V14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                  <path class="hbar" d="M2.5 8.5H13.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-              </span>
-            </button>
-            <div class="accordion__panel"><div class="accordion__panel-inner">${a}</div></div>
-          </div>`;
-      }).join('');
-    });
+    /* FAQ accordion — the questions are already in the markup so that a
+       crawler can read them; this redraws them in the visitor's
+       language and re-does that when the language changes. */
+    initFaq(faqs, pickByLang);
 
     initHeaderScroll();
     initReveal();
@@ -787,6 +982,6 @@
   </script>
   <script src="assets/js/carousel.js?v=5" defer></script>
   <script src="assets/js/bubbles.js?v=5" defer></script>
-  <script type="module" src="assets/js/news.js?v=7"></script>
+  <script type="module" src="assets/js/news.js?v=9"></script>
 </body>
 </html>

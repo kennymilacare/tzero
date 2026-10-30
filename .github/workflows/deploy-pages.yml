@@ -46,9 +46,25 @@ jobs:
         with:
           # Always publish the default branch, whichever event fired.
           ref: ${{ github.event.repository.default_branch }}
+          # The sitemap's lastmod is the day a page was last changed,
+          # which means reading the git history. A shallow checkout
+          # cannot answer that, so take the whole history.
+          fetch-depth: 0
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
+
+      - name: Refresh the generated pages
+        run: |
+          # The product pages, the FAQ block, the structured data and
+          # the sitemap are all written from files that are already in
+          # the repository. Running the generators here means what goes
+          # live is never out of date, even if a commit forgot to run
+          # them.
+          node scripts/gen-product-pages.mjs
+          node scripts/gen-faq-html.mjs
+          node scripts/gen-jsonld.mjs
+          node scripts/update-sitemap.mjs
 
       - name: Prepare the site
         run: |
@@ -57,7 +73,7 @@ jobs:
           # editor's own settings. Everything under /assets/ IS published:
           # the pages need the CSS and the JavaScript to render at all.
           rm -rf .git .github .claude .tmp-test .tmp-verify docs scripts
-          rm -f screenshots/*.png README.md .gitignore
+          rm -f screenshots/*.png README.md .gitignore package.json
 
       - name: Upload the site
         uses: actions/upload-pages-artifact@v3

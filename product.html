@@ -6,7 +6,11 @@
   <title>產品詳情 · T-ZERO 第九感</title>
   <meta name="description" content="查看 T-ZERO 第九感玻尿酸安全套產品詳情:規格、成分、使用方法、顧客評價。日本工藝製造,即日送貨,保密包裝。">
   <meta name="keywords" content="T-ZERO, 第九感, 安全套, 玻尿酸安全套, 產品詳情, condom, hyaluronic, 香港, 潤滑, 超薄, 持久, 顆粒">
-  <meta name="robots" content="index,follow">
+  <!-- The old catch-all product page. Every product has a page of its own
+       now (product-ultra-thin.html and friends), and this page points its
+       canonical at whichever one is being asked for — so it must not be
+       indexed in its own right. -->
+  <meta name="robots" content="noindex,follow">
 
   <link rel="canonical" href="https://www.tzero-jp.com/product.html">
   <link rel="alternate" hreflang="zh-HK" href="https://www.tzero-jp.com/product.html">
@@ -19,7 +23,11 @@
   <meta property="og:title" content="產品詳情 · T-ZERO 第九感" data-i18n-attr="content" data-i18n="seo.og.title.product">
   <meta property="og:description" content="查看 T-ZERO 第九感玻尿酸安全套產品詳情:規格、成分、使用方法、顧客評價。日本工藝,即日送貨。" data-i18n-attr="content" data-i18n="seo.og.desc.product">
   <meta property="og:url" content="https://www.tzero-jp.com/product.html">
-  <meta property="og:image" content="https://www.tzero-jp.com/assets/images/og-image.svg">
+  <meta property="og:image" content="https://www.tzero-jp.com/assets/images/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:alt" content="T-ZERO 第九感 — 日本玻尿酸安全套,即日送貨,保密包裝">
   <meta property="og:locale" content="zh_HK" data-i18n-attr="content" data-i18n="seo.og.locale">
   <meta property="og:locale:alternate" content="en_US" data-i18n-attr="content" data-i18n="seo.og.locale.alt1">
   <meta property="og:locale:alternate" content="ja_JP" data-i18n-attr="content" data-i18n="seo.og.locale.alt2">
@@ -27,7 +35,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="產品詳情 · T-ZERO 第九感" data-i18n-attr="content" data-i18n="seo.og.title.product">
   <meta name="twitter:description" content="查看 T-ZERO 第九感玻尿酸安全套產品詳情:規格、成分、使用方法、顧客評價。日本工藝,即日送貨。" data-i18n-attr="content" data-i18n="seo.og.desc.product">
-  <meta name="twitter:image" content="https://www.tzero-jp.com/assets/images/og-image.svg">
+  <meta name="twitter:image" content="https://www.tzero-jp.com/assets/images/og-image.png">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -85,26 +93,26 @@
   <div class="top-banner top-banner--carousel" data-carousel>
     <a class="top-banner__link" href="products.html" aria-label="瀏覽 T-ZERO 全系列產品">
       <img class="top-banner__img is-active"
-           src="assets/images/banners/carousel/11.png?v=1"
+           src="assets/images/banners/carousel/11.jpg?v=1"
            alt="T-ZERO 第九感 — 玻尿酸安全套 (1/4)"
            width="2658" height="984"
            loading="eager" decoding="async"
            fetchpriority="high"
            data-carousel-slide>
       <img class="top-banner__img"
-           src="assets/images/banners/carousel/Tzero_website_banner.png?v=1"
+           src="assets/images/banners/carousel/Tzero_website_banner.jpg?v=1"
            alt="T-ZERO 第九感 — 玻尿酸滋潤 · 水份充足 (2/4)"
            width="2658" height="984"
            loading="lazy" decoding="async"
            data-carousel-slide>
       <img class="top-banner__img"
-           src="assets/images/banners/carousel/9.png?v=1"
+           src="assets/images/banners/carousel/9.jpg?v=1"
            alt="T-ZERO 第九感 — 玻尿酸安全套 (3/4)"
            width="2658" height="984"
            loading="lazy" decoding="async"
            data-carousel-slide>
       <img class="top-banner__img"
-           src="assets/images/banners/carousel/7.png?v=1"
+           src="assets/images/banners/carousel/7.jpg?v=1"
            alt="T-ZERO 第九感 — 玻尿酸安全套 (4/4)"
            width="2658" height="984"
            loading="lazy" decoding="async"
@@ -277,10 +285,11 @@
         <span data-i18n="footer.copyright">© 2026 T-ZERO 第九感. 版權所有。</span>
       </div>
     </div>
+    </div>
   </footer>
 
   <script src="assets/js/carousel.js?v=5" defer></script>
-  <script type="module" src="assets/js/product.js?v=2"></script>
-  <script type="module" src="assets/js/main.js?v=10"></script>
+  <script type="module" src="assets/js/product.js?v=3"></script>
+  <script type="module" src="assets/js/main.js?v=11"></script>
 </body>
 </html>

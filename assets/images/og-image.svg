@@ -6,8 +6,9 @@
     </linearGradient>
   </defs>
   <rect width="1200" height="630" fill="url(#bg)"/>
+
   <!-- T-ZERO logo (re-scaled from 685 viewBox to ~360 wide, centered-left) -->
-  <g transform="translate(80,135) scale(0.6)">
+  <g transform="translate(70,105) scale(0.62)">
     <g fill="#E8B4B4">
       <rect x="120" y="130" width="445" height="80" rx="6"/>
       <rect x="297" y="210" width="91"  height="380" rx="6"/>
@@ -21,21 +22,29 @@
           letter-spacing="-8"
           fill="#B584C8">ZERO</text>
   </g>
-  <!-- Right side copy -->
-  <text x="540" y="280"
-        font-family="'Inter','Helvetica Neue',Arial,sans-serif"
+
+  <!-- Right side copy.
+       Every line is sized to fit inside 1200px — the text used to
+       run off the right edge, which cropped the headline. -->
+  <text x="560" y="245"
+        font-family="'Inter','Microsoft JhengHei','PingFang HK','Noto Sans CJK TC',sans-serif"
         font-weight="800"
-        font-size="76"
-        fill="#2B1F18">第九感 玻尿酸安全套</text>
-  <text x="540" y="350"
-        font-family="'Inter','Helvetica Neue',Arial,sans-serif"
+        font-size="88"
+        fill="#2B1F18">第九感</text>
+  <text x="560" y="330"
+        font-family="'Inter','Microsoft JhengHei','PingFang HK','Noto Sans CJK TC',sans-serif"
+        font-weight="700"
+        font-size="52"
+        fill="#2B1F18">玻尿酸安全套</text>
+  <text x="560" y="400"
+        font-family="'Inter','Microsoft JhengHei','PingFang HK','Noto Sans CJK TC',sans-serif"
         font-weight="500"
-        font-size="34"
-        fill="#6E5944">天然潤滑 ・ 長效水潤 ・ 長效滑</text>
-  <text x="540" y="500"
+        font-size="28"
+        fill="#6E5944">天然潤滑 ・ 長效水潤 ・ 保密包裝</text>
+  <text x="560" y="490"
         font-family="'Inter','Helvetica Neue',Arial,sans-serif"
         font-weight="700"
-        font-size="28"
-        letter-spacing="2"
+        font-size="26"
+        letter-spacing="3"
         fill="#86ABCA">T-ZERO ・ NINTH SENSE</text>
 </svg>

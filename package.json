@@ -1,0 +1,17 @@
+{
+  "name": "tzero-jp",
+  "version": "1.0.0",
+  "private": true,
+  "description": "T-ZERO 第九感 — a static site. No build step, no dependencies.",
+  "type": "module",
+  "scripts": {
+    "test": "node --test scripts/lib/feed.test.mjs scripts/lib/site.test.mjs scripts/lib/siteurl.test.mjs scripts/lib/ig.test.mjs scripts/lib/seo.test.mjs scripts/sync.test.mjs scripts/manual-post.test.mjs",
+    "gen:products": "node scripts/gen-product-pages.mjs",
+    "gen:faq": "node scripts/gen-faq-html.mjs",
+    "gen:jsonld": "node scripts/gen-jsonld.mjs",
+    "gen:og": "node scripts/gen-og-image.mjs",
+    "sitemap": "node scripts/update-sitemap.mjs",
+    "seo:sync": "node scripts/sync-news-jsonld.mjs",
+    "seo:check": "npm run gen:products && npm run gen:faq && npm run seo:sync && npm run gen:jsonld && npm run sitemap && npm test"
+  }
+}

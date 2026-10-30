@@ -3,7 +3,7 @@
    Supports zh, en, ja. Falls back to zh, then to en, then key.
    =========================================================== */
 
-import { i18n } from './data.js?v=22';
+import { i18n } from './data.js?v=24';
 
 const STORAGE_KEY = 'tzero.lang';
 const DEFAULT_LANG = 'zh';

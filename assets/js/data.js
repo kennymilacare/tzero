@@ -15,6 +15,16 @@ export const brands = [
   },
 ];
 
+/* ---------- Product pages ----------
+   Every product has its own real page — a file, not a query string.
+   A crawler sees four different products that way; with one
+   product.html?id=… it only ever sees the first one. */
+
+export function productUrl(id) {
+  const slug = String(id || '').replace(/^tzero-/, '');
+  return `product-${slug}.html`;
+}
+
 /* ---------- Products ---------- */
 
 export const products = [
@@ -419,7 +429,7 @@ export const faqs = [
   },
   {
     id: 'storage',
-    q_zh: '製品應如何存放?',
+    q_zh: '產品應如何存放?',
     q_en: 'How should I store the products?',
     q_ja: '製品の保管方法は?',
     a_zh:
@@ -444,6 +454,21 @@ export const faqs = [
     cat: 'order',
   },
 ];
+
+/* The FAQ the page shows and the FAQ in the structured data are the
+   same list — one source, so the two cannot drift apart. Google
+   checks that the questions in the markup match the ones in the
+   FAQPage block; a copy kept by hand always goes stale. */
+function faqPage(lang) {
+  return {
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({
+      '@type': 'Question',
+      name: f[`q_${lang}`],
+      acceptedAnswer: { '@type': 'Answer', text: f[`a_${lang}`] },
+    })),
+  };
+}
 
 /* ---------- i18n strings ---------- */
 
@@ -697,11 +722,27 @@ export const i18n = {
     'seo.jsonld.home': JSON.stringify({
       "@context": "https://schema.org",
       "@graph": [
-        { "@type": "Organization", "@id": "https://www.tzero-jp.com/#org",
+        { "@type": "LocalBusiness", "@id": "https://www.tzero-jp.com/#org",
           "name": "T-ZERO 第九感", "alternateName": "T-ZERO NINTH SENSE · 玻尿酸安全套",
           "url": "https://www.tzero-jp.com/",
           "logo": "https://www.tzero-jp.com/assets/images/icons/android-chrome-512.png",
+          "image": "https://www.tzero-jp.com/assets/images/og-image.png",
           "telephone": "+852-6897-1473", "email": "info@tzero-jp.com",
+          "priceRange": "HK$98", "currenciesAccepted": "HKD",
+          "paymentAccepted": "Visa, Mastercard, PayMe, AlipayHK, FPS, Bank Transfer",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "5/F, D.J. Building, No.173 Hoi Bun Road",
+            "addressLocality": "Kwun Tong",
+            "addressRegion": "Kowloon",
+            "addressCountry": "HK"
+          },
+          "hasMap": "https://www.google.com/maps/search/?api=1&query=D.J.+Building,+No.173+Hoi+Bun+Road,+Kwun+Tong",
+          "openingHoursSpecification": [
+            { "@type": "OpeningHoursSpecification",
+              "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+              "opens": "10:00", "closes": "18:00" }
+          ],
           "sameAs": ["https://www.instagram.com/tzerojp", "https://www.facebook.com/Tzerohk"] },
         { "@type": "WebSite", "@id": "https://www.tzero-jp.com/#site",
           "url": "https://www.tzero-jp.com/", "name": "T-ZERO 第九感",
@@ -710,24 +751,7 @@ export const i18n = {
         { "@type": "BreadcrumbList", "itemListElement": [
           { "@type": "ListItem", "position": 1, "name": "首頁", "item": "https://www.tzero-jp.com/" }
         ] },
-        { "@type": "FAQPage", "mainEntity": [
-          { "@type": "Question", "name": "包裝會否標明產品名稱?",
-            "acceptedAnswer": { "@type": "Answer", "text": "我們採用全黑啞面紙盒包裝,並無任何品牌或類別字樣,確保送貨過程中完全保密。" } },
-          { "@type": "Question", "name": "預計送貨時間是多久?",
-            "acceptedAnswer": { "@type": "Answer", "text": "香港本地訂單一般於 1–2 個工作天內送達;離島及偏遠地區或需額外 1–2 天。" } },
-          { "@type": "Question", "name": "怎樣選擇適合自己的尺寸?",
-            "acceptedAnswer": { "@type": "Answer", "text": "亞洲男士一般闊度約 52 ± 2 mm,可參考產品頁的「闊度」欄目。" } },
-          { "@type": "Question", "name": "乳膠與 PU 有什麼分別?",
-            "acceptedAnswer": { "@type": "Answer", "text": "乳膠 (Latex) 彈性較佳;PU (水性聚氨酯) 更薄、導熱更快,且不含乳膠蛋白,適合敏感體質。" } },
-          { "@type": "Question", "name": "可以退換貨嗎?",
-            "acceptedAnswer": { "@type": "Answer", "text": "基於衛生理由,所有產品一經拆封恕不退換。如收貨時發現包裝破損,請於 7 天內聯絡客服。" } },
-          { "@type": "Question", "name": "接受哪些付款方式?",
-            "acceptedAnswer": { "@type": "Answer", "text": "我們接受 Visa、Mastercard、PayMe、AlipayHK、轉數快 FPS 及銀行轉帳。" } },
-          { "@type": "Question", "name": "產品應如何存放?",
-            "acceptedAnswer": { "@type": "Answer", "text": "請存放於陰涼乾燥處,避免陽光直射及高溫;最佳保存溫度為 10–30°C。" } },
-          { "@type": "Question", "name": "有沒有批發或企業客戶方案?",
-            "acceptedAnswer": { "@type": "Answer", "text": "有的。如有 50 盒以上訂單或企業禮品需求,請電郵至 info@tzero-jp.com 與我們聯絡。" } }
-        ] }
+        faqPage('zh')
       ]
     }),
 
@@ -742,15 +766,15 @@ export const i18n = {
           "numberOfItems": 4,
           "itemListOrder": "https://schema.org/ItemListOrderAscending",
           "itemListElement": [
-            { "@type": "ListItem", "position": 1, "url": "https://www.tzero-jp.com/product.html?id=tzero-extra-lub",   "name": "T-ZERO 加倍潤滑" },
-            { "@type": "ListItem", "position": 2, "url": "https://www.tzero-jp.com/product.html?id=tzero-extended",    "name": "T-ZERO 持久" },
-            { "@type": "ListItem", "position": 3, "url": "https://www.tzero-jp.com/product.html?id=tzero-studded",      "name": "T-ZERO 顆粒" },
-            { "@type": "ListItem", "position": 4, "url": "https://www.tzero-jp.com/product.html?id=tzero-ultra-thin",  "name": "T-ZERO 超薄" }
+            { "@type": "ListItem", "position": 1, "url": "https://www.tzero-jp.com/product-extra-lub.html",   "name": "T-ZERO 加倍潤滑" },
+            { "@type": "ListItem", "position": 2, "url": "https://www.tzero-jp.com/product-extended.html",    "name": "T-ZERO 持久" },
+            { "@type": "ListItem", "position": 3, "url": "https://www.tzero-jp.com/product-studded.html",      "name": "T-ZERO 顆粒" },
+            { "@type": "ListItem", "position": 4, "url": "https://www.tzero-jp.com/product-ultra-thin.html",  "name": "T-ZERO 超薄" }
           ] }
       ]
     }),
 
-    'seo.jsonld.news': JSON.stringify({
+                                    'seo.jsonld.news': JSON.stringify({
       "@context": "https://schema.org",
       "@graph": [
         { "@type": "BreadcrumbList", "itemListElement": [
@@ -758,12 +782,15 @@ export const i18n = {
           { "@type": "ListItem", "position": 2, "name": "最新動態", "item": "https://www.tzero-jp.com/news.html" }
         ] },
         { "@type": "ItemList", "name": "T-ZERO 第九感 最新動態",
-          "itemListOrder": "https://schema.org/itemListOrderDescending",
+          "numberOfItems": 6,
+          "itemListOrder": "https://schema.org/ItemListOrderDescending",
           "itemListElement": [
-            { "@type": "ListItem", "position": 1, "datePublished": "2026-10-06", "url": "https://www.facebook.com/Tzerohk", "name": "最新 Facebook 貼文" },
-            { "@type": "ListItem", "position": 2, "datePublished": "2026-09-15", "url": "https://www.hktvmall.com", "name": "正式登陸 HKTVmall" },
-            { "@type": "ListItem", "position": 3, "datePublished": "2026-08-20", "url": "https://www.facebook.com/Tzerohk", "name": "玻尿酸配方全面升級" },
-            { "@type": "ListItem", "position": 4, "datePublished": "2026-07-10", "url": "https://www.facebook.com/Tzerohk", "name": "全新 T-ZERO 品牌視覺登場" }
+            { "@type": "ListItem", "position": 1, "datePublished": "2026-10-30", "url": "https://www.instagram.com/tzerojp/p/DfGkQzBAfF7/", "name": "揀咗『超潤滑』，點解仲係越用越乾？" },
+            { "@type": "ListItem", "position": 2, "datePublished": "2026-10-28", "url": "https://www.instagram.com/tzerojp/p/DfBe7FggRof/", "name": "今晚，換點不一樣" },
+            { "@type": "ListItem", "position": 3, "datePublished": "2026-10-28", "url": "https://www.instagram.com/tzerojp/p/DfBi7XygZzA/", "name": "最合拍神隊友，今晚拒絕快槍手" },
+            { "@type": "ListItem", "position": 4, "datePublished": "2026-10-27", "url": "https://www.instagram.com/tzerojp/p/De_a7-Yks0Z/", "name": "返工已經夠乾，拍拖想潤返啲" },
+            { "@type": "ListItem", "position": 5, "datePublished": "2026-10-27", "url": "https://www.instagram.com/tzerojp/p/De_bTyXEsOn/", "name": "NEW｜靠近你，感覺可以再細膩啲" },
+            { "@type": "ListItem", "position": 6, "datePublished": "2026-09-15", "url": "https://www.hktvmall.com", "name": "正式登陸 HKTVmall" }
           ] }
       ]
     }),
@@ -1053,11 +1080,27 @@ export const i18n = {
     'seo.jsonld.home': JSON.stringify({
       "@context": "https://schema.org",
       "@graph": [
-        { "@type": "Organization", "@id": "https://www.tzero-jp.com/#org",
+        { "@type": "LocalBusiness", "@id": "https://www.tzero-jp.com/#org",
           "name": "T-ZERO NINTH SENSE", "alternateName": "T-ZERO 第九感 · Hyaluronic Condom",
           "url": "https://www.tzero-jp.com/",
           "logo": "https://www.tzero-jp.com/assets/images/icons/android-chrome-512.png",
+          "image": "https://www.tzero-jp.com/assets/images/og-image.png",
           "telephone": "+852-6897-1473", "email": "info@tzero-jp.com",
+          "priceRange": "HK$98", "currenciesAccepted": "HKD",
+          "paymentAccepted": "Visa, Mastercard, PayMe, AlipayHK, FPS, Bank Transfer",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "5/F, D.J. Building, No.173 Hoi Bun Road",
+            "addressLocality": "Kwun Tong",
+            "addressRegion": "Kowloon",
+            "addressCountry": "HK"
+          },
+          "hasMap": "https://www.google.com/maps/search/?api=1&query=D.J.+Building,+No.173+Hoi+Bun+Road,+Kwun+Tong",
+          "openingHoursSpecification": [
+            { "@type": "OpeningHoursSpecification",
+              "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+              "opens": "10:00", "closes": "18:00" }
+          ],
           "sameAs": ["https://www.instagram.com/tzerojp", "https://www.facebook.com/Tzerohk"] },
         { "@type": "WebSite", "@id": "https://www.tzero-jp.com/#site",
           "url": "https://www.tzero-jp.com/", "name": "T-ZERO NINTH SENSE",
@@ -1066,24 +1109,7 @@ export const i18n = {
         { "@type": "BreadcrumbList", "itemListElement": [
           { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.tzero-jp.com/" }
         ] },
-        { "@type": "FAQPage", "mainEntity": [
-          { "@type": "Question", "name": "Does the packaging show the product name?",
-            "acceptedAnswer": { "@type": "Answer", "text": "We use a plain matte black box with no brand or category markings, ensuring complete discretion during delivery." } },
-          { "@type": "Question", "name": "How long does delivery take?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Hong Kong local orders typically arrive within 1–2 working days; outlying islands and remote areas may require an extra 1–2 days." } },
-          { "@type": "Question", "name": "How do I choose the right size?",
-            "acceptedAnswer": { "@type": "Answer", "text": "For most Asian men, the nominal width is around 52 ± 2 mm. Please refer to the Width field on each product page." } },
-          { "@type": "Question", "name": "What is the difference between latex and PU?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Latex offers better elasticity. PU (water-based polyurethane) is thinner, transfers heat faster, and contains no latex proteins — suitable for sensitive users." } },
-          { "@type": "Question", "name": "Can I return or exchange a product?",
-            "acceptedAnswer": { "@type": "Answer", "text": "For hygiene reasons, opened products cannot be returned. If your order arrives damaged, please contact customer service within 7 days." } },
-          { "@type": "Question", "name": "Which payment methods are accepted?",
-            "acceptedAnswer": { "@type": "Answer", "text": "We accept Visa, Mastercard, PayMe, AlipayHK, FPS and bank transfer." } },
-          { "@type": "Question", "name": "How should I store the product?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Store in a cool, dry place away from direct sunlight and heat. The ideal storage temperature is 10–30°C." } },
-          { "@type": "Question", "name": "Do you offer wholesale or corporate plans?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Yes. For orders of 50+ boxes or corporate gifting, please email info@tzero-jp.com." } }
-        ] }
+        faqPage('en')
       ]
     }),
 
@@ -1098,15 +1124,15 @@ export const i18n = {
           "numberOfItems": 4,
           "itemListOrder": "https://schema.org/ItemListOrderAscending",
           "itemListElement": [
-            { "@type": "ListItem", "position": 1, "url": "https://www.tzero-jp.com/product.html?id=tzero-extra-lub",   "name": "T-ZERO Extra Lubricant" },
-            { "@type": "ListItem", "position": 2, "url": "https://www.tzero-jp.com/product.html?id=tzero-extended",    "name": "T-ZERO Extended" },
-            { "@type": "ListItem", "position": 3, "url": "https://www.tzero-jp.com/product.html?id=tzero-studded",      "name": "T-ZERO Studded" },
-            { "@type": "ListItem", "position": 4, "url": "https://www.tzero-jp.com/product.html?id=tzero-ultra-thin",  "name": "T-ZERO Ultra Thin" }
+            { "@type": "ListItem", "position": 1, "url": "https://www.tzero-jp.com/product-extra-lub.html",   "name": "T-ZERO Extra Lubricant" },
+            { "@type": "ListItem", "position": 2, "url": "https://www.tzero-jp.com/product-extended.html",    "name": "T-ZERO Extended" },
+            { "@type": "ListItem", "position": 3, "url": "https://www.tzero-jp.com/product-studded.html",      "name": "T-ZERO Studded" },
+            { "@type": "ListItem", "position": 4, "url": "https://www.tzero-jp.com/product-ultra-thin.html",  "name": "T-ZERO Ultra Thin" }
           ] }
       ]
     }),
 
-    'seo.jsonld.news': JSON.stringify({
+                                    'seo.jsonld.news': JSON.stringify({
       "@context": "https://schema.org",
       "@graph": [
         { "@type": "BreadcrumbList", "itemListElement": [
@@ -1114,12 +1140,15 @@ export const i18n = {
           { "@type": "ListItem", "position": 2, "name": "Latest News", "item": "https://www.tzero-jp.com/news.html" }
         ] },
         { "@type": "ItemList", "name": "T-ZERO NINTH SENSE Updates",
-          "itemListOrder": "https://schema.org/itemListOrderDescending",
+          "numberOfItems": 6,
+          "itemListOrder": "https://schema.org/ItemListOrderDescending",
           "itemListElement": [
-            { "@type": "ListItem", "position": 1, "datePublished": "2026-10-06", "url": "https://www.facebook.com/Tzerohk", "name": "Latest Facebook Post" },
-            { "@type": "ListItem", "position": 2, "datePublished": "2026-09-15", "url": "https://www.hktvmall.com", "name": "Now Available on HKTVmall" },
-            { "@type": "ListItem", "position": 3, "datePublished": "2026-08-20", "url": "https://www.facebook.com/Tzerohk", "name": "Hyaluronic Formula Upgrade" },
-            { "@type": "ListItem", "position": 4, "datePublished": "2026-07-10", "url": "https://www.facebook.com/Tzerohk", "name": "New T-ZERO Brand Identity" }
+            { "@type": "ListItem", "position": 1, "datePublished": "2026-10-30", "url": "https://www.instagram.com/tzerojp/p/DfGkQzBAfF7/", "name": "Why does \"ultra smooth\" still dry out?" },
+            { "@type": "ListItem", "position": 2, "datePublished": "2026-10-28", "url": "https://www.instagram.com/tzerojp/p/DfBe7FggRof/", "name": "Tonight, make it a little different" },
+            { "@type": "ListItem", "position": 3, "datePublished": "2026-10-28", "url": "https://www.instagram.com/tzerojp/p/DfBi7XygZzA/", "name": "Play it long tonight — no rushing 😏" },
+            { "@type": "ListItem", "position": 4, "datePublished": "2026-10-27", "url": "https://www.instagram.com/tzerojp/p/De_a7-Yks0Z/", "name": "Tired after work? Make it a little more fun 💧" },
+            { "@type": "ListItem", "position": 5, "datePublished": "2026-10-27", "url": "https://www.instagram.com/tzerojp/p/De_bTyXEsOn/", "name": "Closer to you, a little more delicate ✨" },
+            { "@type": "ListItem", "position": 6, "datePublished": "2026-09-15", "url": "https://www.hktvmall.com", "name": "Now on HKTVmall" }
           ] }
       ]
     }),
@@ -1425,11 +1454,27 @@ export const i18n = {
     'seo.jsonld.home': JSON.stringify({
       "@context": "https://schema.org",
       "@graph": [
-        { "@type": "Organization", "@id": "https://www.tzero-jp.com/#org",
+        { "@type": "LocalBusiness", "@id": "https://www.tzero-jp.com/#org",
           "name": "T-ZERO 第九感", "alternateName": "T-ZERO NINTH SENSE · ヒアルロン酸コンドーム",
           "url": "https://www.tzero-jp.com/",
           "logo": "https://www.tzero-jp.com/assets/images/icons/android-chrome-512.png",
+          "image": "https://www.tzero-jp.com/assets/images/og-image.png",
           "telephone": "+852-6897-1473", "email": "info@tzero-jp.com",
+          "priceRange": "HK$98", "currenciesAccepted": "HKD",
+          "paymentAccepted": "Visa, Mastercard, PayMe, AlipayHK, FPS, Bank Transfer",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "5/F, D.J. Building, No.173 Hoi Bun Road",
+            "addressLocality": "Kwun Tong",
+            "addressRegion": "Kowloon",
+            "addressCountry": "HK"
+          },
+          "hasMap": "https://www.google.com/maps/search/?api=1&query=D.J.+Building,+No.173+Hoi+Bun+Road,+Kwun+Tong",
+          "openingHoursSpecification": [
+            { "@type": "OpeningHoursSpecification",
+              "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+              "opens": "10:00", "closes": "18:00" }
+          ],
           "sameAs": ["https://www.instagram.com/tzerojp", "https://www.facebook.com/Tzerohk"] },
         { "@type": "WebSite", "@id": "https://www.tzero-jp.com/#site",
           "url": "https://www.tzero-jp.com/", "name": "T-ZERO 第九感",
@@ -1438,24 +1483,7 @@ export const i18n = {
         { "@type": "BreadcrumbList", "itemListElement": [
           { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://www.tzero-jp.com/" }
         ] },
-        { "@type": "FAQPage", "mainEntity": [
-          { "@type": "Question", "name": "パッケージに商品名は記載されますか?",
-            "acceptedAnswer": { "@type": "Answer", "text": "マットブラックの無地ボックスを使用しており、ブランド名・カテゴリ表示は一切ありません。配送時のプライバシーも完全に守られます。" } },
-          { "@type": "Question", "name": "お届けまでの日数は?",
-            "acceptedAnswer": { "@type": "Answer", "text": "香港本土のご注文は通常 1〜2 営業日で到着。離島・遠隔地は追加で 1〜2 日かかる場合があります。" } },
-          { "@type": "Question", "name": "サイズの選び方は?",
-            "acceptedAnswer": { "@type": "Answer", "text": "アジア人男性向けの標準幅は約 52 ± 2 mm。各商品ページの「幅」欄をご参照ください。" } },
-          { "@type": "Question", "name": "ラテックスと PU の違いは?",
-            "acceptedAnswer": { "@type": "Answer", "text": "ラテックスは弾性に優れます。PU(水性ポリウレタン)はより薄く熱伝導が速く、ラテックス蛋白を含まないため敏感肌の方にも適しています。" } },
-          { "@type": "Question", "name": "返品・交換は可能ですか?",
-            "acceptedAnswer": { "@type": "Answer", "text": "衛生上、開封後の返品はお受けできません。配送時に破損があった場合は 7 日以内にカスタマーサービスまでご連絡ください。" } },
-          { "@type": "Question", "name": "対応している決済方法は?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Visa、Mastercard、PayMe、AlipayHK、FPS(転数快)、銀行振込をご利用いただけます。" } },
-          { "@type": "Question", "name": "保管方法は?",
-            "acceptedAnswer": { "@type": "Answer", "text": "直射日光・高温を避け、涼しく乾燥した場所に保管してください。最適保存温度は 10〜30°C です。" } },
-          { "@type": "Question", "name": "法人・卸売りプランはありますか?",
-            "acceptedAnswer": { "@type": "Answer", "text": "はい、ございます。50 箱以上のご注文、法人ギフトなどについては info@tzero-jp.com までご連絡ください。" } }
-        ] }
+        faqPage('ja')
       ]
     }),
 
@@ -1470,15 +1498,15 @@ export const i18n = {
           "numberOfItems": 4,
           "itemListOrder": "https://schema.org/ItemListOrderAscending",
           "itemListElement": [
-            { "@type": "ListItem", "position": 1, "url": "https://www.tzero-jp.com/product.html?id=tzero-extra-lub",   "name": "T-ZERO エクストラ潤滑" },
-            { "@type": "ListItem", "position": 2, "url": "https://www.tzero-jp.com/product.html?id=tzero-extended",    "name": "T-ZERO エクステンド" },
-            { "@type": "ListItem", "position": 3, "url": "https://www.tzero-jp.com/product.html?id=tzero-studded",      "name": "T-ZERO スタッド" },
-            { "@type": "ListItem", "position": 4, "url": "https://www.tzero-jp.com/product.html?id=tzero-ultra-thin",  "name": "T-ZERO ウルトラシン" }
+            { "@type": "ListItem", "position": 1, "url": "https://www.tzero-jp.com/product-extra-lub.html",   "name": "T-ZERO エクストラ潤滑" },
+            { "@type": "ListItem", "position": 2, "url": "https://www.tzero-jp.com/product-extended.html",    "name": "T-ZERO エクステンド" },
+            { "@type": "ListItem", "position": 3, "url": "https://www.tzero-jp.com/product-studded.html",      "name": "T-ZERO スタッド" },
+            { "@type": "ListItem", "position": 4, "url": "https://www.tzero-jp.com/product-ultra-thin.html",  "name": "T-ZERO ウルトラシン" }
           ] }
       ]
     }),
 
-    'seo.jsonld.news': JSON.stringify({
+                                    'seo.jsonld.news': JSON.stringify({
       "@context": "https://schema.org",
       "@graph": [
         { "@type": "BreadcrumbList", "itemListElement": [
@@ -1486,12 +1514,15 @@ export const i18n = {
           { "@type": "ListItem", "position": 2, "name": "最新ニュース", "item": "https://www.tzero-jp.com/news.html" }
         ] },
         { "@type": "ItemList", "name": "T-ZERO 第九感 最新情報",
-          "itemListOrder": "https://schema.org/itemListOrderDescending",
+          "numberOfItems": 6,
+          "itemListOrder": "https://schema.org/ItemListOrderDescending",
           "itemListElement": [
-            { "@type": "ListItem", "position": 1, "datePublished": "2026-10-06", "url": "https://www.facebook.com/Tzerohk", "name": "最新 Facebook 投稿" },
-            { "@type": "ListItem", "position": 2, "datePublished": "2026-09-15", "url": "https://www.hktvmall.com", "name": "HKTVmall にて販売開始" },
-            { "@type": "ListItem", "position": 3, "datePublished": "2026-08-20", "url": "https://www.facebook.com/Tzerohk", "name": "ヒアルロン酸配合を全面アップグレード" },
-            { "@type": "ListItem", "position": 4, "datePublished": "2026-07-10", "url": "https://www.facebook.com/Tzerohk", "name": "新しい T-ZERO ブランドビジュアル" }
+            { "@type": "ListItem", "position": 1, "datePublished": "2026-10-30", "url": "https://www.instagram.com/tzerojp/p/DfGkQzBAfF7/", "name": "揀咗『超潤滑』，點解仲係越用越乾？" },
+            { "@type": "ListItem", "position": 2, "datePublished": "2026-10-28", "url": "https://www.instagram.com/tzerojp/p/DfBe7FggRof/", "name": "今晚，換點不一樣" },
+            { "@type": "ListItem", "position": 3, "datePublished": "2026-10-28", "url": "https://www.instagram.com/tzerojp/p/DfBi7XygZzA/", "name": "最合拍神隊友，今晚拒絕快槍手" },
+            { "@type": "ListItem", "position": 4, "datePublished": "2026-10-27", "url": "https://www.instagram.com/tzerojp/p/De_a7-Yks0Z/", "name": "返工已經夠乾，拍拖想潤返啲" },
+            { "@type": "ListItem", "position": 5, "datePublished": "2026-10-27", "url": "https://www.instagram.com/tzerojp/p/De_bTyXEsOn/", "name": "NEW｜靠近你，感覺可以再細膩啲" },
+            { "@type": "ListItem", "position": 6, "datePublished": "2026-09-15", "url": "https://www.hktvmall.com", "name": "HKTVmall に登場" }
           ] }
       ]
     }),

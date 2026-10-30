@@ -305,7 +305,7 @@ Key 係 IG 貼文 id（喺 `news.json` 度搵到），**有 `ig-` 前綴**。
       "title_zh": "正式登陸 HKTVmall",
       "title_en": "Now on HKTVmall",
       "excerpt_zh": "…",
-      "image": "assets/images/banners/carousel/9.png",
+      "image": "assets/images/banners/carousel/9.jpg",
       "permalink": "https://www.hktvmall.com",
       "link": "https://www.hktvmall.com",
       "cta_zh": "前往 HKTVmall 選購",

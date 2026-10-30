@@ -3,8 +3,8 @@
    newsletter form, header shadow on scroll, search.
    =========================================================== */
 
-import { initI18n, t, getLang } from './i18n.js?v=5';
-import { products } from './data.js?v=22';
+import { initI18n, t, getLang } from './i18n.js?v=6';
+import { products, productUrl } from './data.js?v=24';
 
 /* ---------- Header shadow on scroll ---------- */
 function initHeaderScroll() {
@@ -348,7 +348,7 @@ function initSearch() {
           typeLabel: '產品',
           title: pickLocalized({ zh: p.name_zh, en: p.name_en, ja: p.name_ja }),
           subtitle: pickLocalized({ zh: p.subtitle_zh, en: p.subtitle_en, ja: p.subtitle_ja }),
-          url: `product.html?id=${p.id}`,
+          url: productUrl(p.id),
           image: p.image,
         });
       }

@@ -22,6 +22,7 @@ import { fileURLToPath } from 'node:url';
 
 import { applyOverride, curatedPosts, deriveExcerpt, deriveTitle, sortByDate } from './lib/feed.mjs';
 import { loadSite, usernameOf } from './lib/site.mjs';
+import { syncNewsJsonLd } from './sync-news-jsonld.mjs';
 
 const HERE       = path.dirname(fileURLToPath(import.meta.url));
 const ROOT       = path.resolve(HERE, '..');
@@ -213,6 +214,17 @@ async function main() {
   }
   local.posts = nextOverrides;
   await writeFile(LOCAL_FILE, JSON.stringify(local, null, 2) + '\n', 'utf8');
+
+  /* --- 4. bring the news structured data along ---
+     The ItemList in data.js is written from the feed, so it has to
+     be rewritten whenever the feed changes — otherwise the page
+     and its structured data describe different posts. */
+  try {
+    const { posts, changed } = await syncNewsJsonLd();
+    if (changed) console.log(`[manual-post] news structured data updated (${posts} post(s)).`);
+  } catch (e) {
+    console.warn(`[manual-post] could not update the news structured data: ${e.message}`);
+  }
 
   if (!manualPosts.length) {
     console.log('[manual-post] no manual posts — the built-in cards in the HTML stay.');
