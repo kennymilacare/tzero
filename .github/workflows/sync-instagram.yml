@@ -10,11 +10,19 @@ name: Sync Instagram news
 #
 # Setup: see docs/instagram-sync.md. The secrets below must be added under
 # Settings -> Secrets and variables -> Actions.
+#
+# The schedule is OFF on purpose. The Graph API route needs a Meta App and
+# a token, and none is set up — so a scheduled run would only fail twice a
+# day. The feed is updated the other way for now:
+#
+#     node scripts/ig-fetch.mjs --latest && node scripts/manual-post.mjs
+#
+# which uses the Instagram session saved in .ig-profile/. That session
+# holds cookies and can never be committed to a public repository, so it
+# cannot run here in Actions. Re-enable the cron below if the token is
+# ever set up.
 
 on:
-  schedule:
-    # 09:00 and 21:00 Hong Kong time (GitHub cron runs on UTC).
-    - cron: '0 1,13 * * *'
   workflow_dispatch:
 
 permissions:

@@ -4,10 +4,19 @@
 
    Run:  node scripts/ig-fetch.mjs <ig-url> [<ig-url> ...]
          node scripts/ig-fetch.mjs --file urls.txt
+         node scripts/ig-fetch.mjs --latest          the account's newest posts
+         node scripts/ig-fetch.mjs --latest=12      the twelve newest
+         node scripts/ig-fetch.mjs --login           sign in to Instagram
 
    For each post it reads the caption, the image and the date, then
    writes an entry into assets/data/manual.json. Run manual-post.mjs
    afterwards to regenerate the feed the site reads.
+
+   --latest finds the posts by itself: it opens the account's profile
+   page in the saved session and reads the post links off it, so no
+   links have to be pasted by hand. Posts already stored are skipped
+   unless --refresh is given. It needs a signed-in session — run
+   --login first if the session has expired.
 
    Re-running with the same URL updates that post instead of adding a
    second copy. Any wording you wrote by hand — the headline, the
@@ -31,7 +40,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { deriveExcerpt, deriveTitle } from './lib/feed.mjs';
-import { cleanCaption, dateFromShortcode, mediaIdOf, parseArgs, postUrl, shortcodeOf } from './lib/ig.mjs';
+import { cleanCaption, dateFromShortcode, mediaIdOf, parseArgs, postUrl, shortcodeOf, sortShortcodesNewestFirst, shortcodesFromHrefs } from './lib/ig.mjs';
 import { loadSite, usernameOf } from './lib/site.mjs';
 
 const HERE        = path.dirname(fileURLToPath(import.meta.url));
@@ -484,6 +493,92 @@ async function downloadImage(url, filename) {
 
 /* ---------- main ---------- */
 
+/* ---------- listing the account's own posts ---------- */
+
+/* Instagram's profile page shows the account's posts as a grid of
+   links. Reading them out of the rendered page means nobody has to
+   paste links by hand — but it needs the signed-in session, because
+   that is what lets the grid show the account's own posts at all.
+
+   Returns the shortcodes, newest first. Throws with a readable message
+   when the page did not show any, so the caller can say what went
+   wrong instead of quietly adding nothing. */
+async function listLatestShortcodes(port, username, count) {
+  const url = `https://www.instagram.com/${username}/`;
+  const target = await (await fetch(
+    `http://127.0.0.1:${port}/json/new?${encodeURIComponent(url)}`,
+    { method: 'PUT' })).json();
+  const cdp = await connect(target.webSocketDebuggerUrl);
+  try {
+    await cdp.send('Page.enable');
+    await cdp.send('Runtime.enable');
+    await cdp.send('Page.navigate', { url });
+    await sleep(6000);   // the grid is drawn by JavaScript
+
+    const read = async () => {
+      const r = await cdp.send('Runtime.evaluate', {
+        returnByValue: true,
+        expression: `(() => {
+          const hrefs = [...document.querySelectorAll('a[href]')].map((a) => a.getAttribute('href') || '');
+          const body = document.body ? document.body.innerText : '';
+          return {
+            hrefs,
+            title: document.title,
+            text: body.replace(/\\s+/g, ' ').slice(0, 300),
+          };
+        })()`,
+      });
+      const v = r.result.value;
+      /* Which of those links are this account's posts is decided by the
+         shared helper, so the rule can be unit-tested. */
+      return { ...v, codes: shortcodesFromHrefs(v.hrefs, username) };
+    };
+
+    let found = await read();
+
+    /* Nothing yet? A first visit sometimes lands on a "Log in to see
+       this account" wall. Dismiss it and read the grid again. */
+    if (!found.codes.length) {
+      await cdp.send('Runtime.evaluate', {
+        expression: `(() => {
+          document.querySelectorAll('button, [role=button], a').forEach((el) => {
+            const t = (el.innerText || '').trim();
+            if (/^(see photos|view photos|see posts|view posts|查看相片|查看貼文|照片|貼文)$/i.test(t)) {
+              try { el.click(); } catch (e) {}
+            }
+          });
+        })()`,
+      });
+      await sleep(4000);
+      found = await read();
+    }
+
+    /* The grid loads a page at a time — scroll for more if needed. */
+    for (let i = 0; i < 8 && found.codes.length < count; i++) {
+      await cdp.send('Runtime.evaluate', { expression: 'window.scrollBy(0, 1400)' });
+      await sleep(1800);
+      found = await read();
+    }
+
+    if (!found.codes.length) {
+      const looksLoggedOut = /login|log in|sign up|登入|登录/i.test(found.title + ' ' + found.text);
+      throw new Error(
+        `the profile page showed no posts` +
+        (looksLoggedOut
+          ? ' — the Instagram session has expired. Run: node scripts/ig-fetch.mjs --login'
+          : ` — the page said "${found.title}" / ${found.text}`)
+      );
+    }
+    /* The grid is not in date order — Instagram puts pinned posts at
+       the top, ahead of newer ones. Sort by the date the post's own
+       code carries, so "the newest N" really is the newest N. */
+    return sortShortcodesNewestFirst(found.codes).slice(0, count);
+  } finally {
+    cdp.close();
+    await fetch(`http://127.0.0.1:${port}/json/close/${target.id}`).catch(() => {});
+  }
+}
+
 async function main() {
   const chromePath = findChrome();
   if (!chromePath) {
@@ -491,7 +586,8 @@ async function main() {
     process.exit(1);
   }
 
-  const { urls, files, login: wantLogin } = parseArgs(process.argv.slice(2));
+  const { urls, files, login: wantLogin, latest: wantLatest, latestCount, refresh } =
+    parseArgs(process.argv.slice(2));
 
   /* Signing in is its own mode: it opens a browser window for you and
      waits. It needs no links. */
@@ -509,9 +605,9 @@ async function main() {
       if (m) all.push(m[0]);
     }
   }
-  if (!all.length) {
+  if (!all.length && !wantLatest) {
     console.error('\n[ig-fetch] give me at least one Instagram post URL.');
-    console.error('[ig-fetch] (or run with --login to sign in to Instagram)\n');
+    console.error('[ig-fetch] (or run with --latest to let the script find them, or --login to sign in to Instagram)\n');
     process.exit(1);
   }
 
@@ -539,6 +635,31 @@ async function main() {
 
   const posts = Array.isArray(manual.posts) ? manual.posts : [];
   const added = [];
+
+  /* --latest: find the account's newest posts by itself, so nobody has
+     to paste links. The posts already stored are skipped, unless
+     --refresh asks for them to be read again. */
+  if (wantLatest) {
+    console.log(`[ig-fetch] reading the newest posts from @${igUser}…`);
+    let codes;
+    try {
+      codes = await listLatestShortcodes(port, igUser, latestCount);
+    } catch (e) {
+      console.error(`\n[ig-fetch] could not list the posts: ${e.message}\n`);
+      chrome.kill();
+      process.exit(1);
+    }
+    console.log(`[ig-fetch] the profile shows ${codes.length} post(s).`);
+
+    const known = new Set(posts.map((p) => shortcodeOf(p.url || '')).filter(Boolean));
+    for (const code of codes) {
+      if (known.has(code) && !refresh) {
+        console.log(`[ig-fetch] ${code} is already stored — skipping (use --refresh to read it again).`);
+        continue;
+      }
+      all.push(postUrl(igUser, code));
+    }
+  }
 
   try {
     for (const raw of all) {
@@ -658,6 +779,13 @@ async function main() {
   }
 
   if (!added.length) {
+    /* Listing the profile when every post is already stored is not a
+       failure — there was just nothing new. Say so, and stop. */
+    if (wantLatest) {
+      console.log('\n[ig-fetch] nothing new — every post on the profile is already stored.');
+      console.log('[ig-fetch] (use --refresh to read the stored ones again)\n');
+      process.exit(0);
+    }
     console.error('\n[ig-fetch] nothing was added.\n');
     process.exit(1);
   }

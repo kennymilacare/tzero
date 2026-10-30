@@ -180,6 +180,75 @@ node scripts/ig-fetch.mjs <連結> && node scripts/manual-post.mjs
 
 ---
 
+## 連連結都唔想抄？用 `--latest`
+
+如果你已經登入過 Instagram（下面「有年齡限制」嗰節有講點登入），
+script 可以自己去你個帳號主页搵最新嘅貼文：
+
+```bash
+node scripts/ig-fetch.mjs --latest
+```
+
+佢會：
+
+1. 用你個 `.ig-profile/` session 開 `instagram.com/tzerojp/`
+2. 讀走主页啲貼文連結（淨係自己帳號嘅，唔會混入其他人嘅貼文）
+3. 逐條去讀 caption、圖片、日期
+4. **已經入咗 `manual.json` 嘅貼文會跳過**（除非加 `--refresh`）
+
+想讀多啲：
+
+```bash
+node scripts/ig-fetch.mjs --latest=12
+```
+
+想連舊貼文都重新讀一次（caption 改咗都想更新）：
+
+```bash
+node scripts/ig-fetch.mjs --latest --refresh
+```
+
+冇新貼文嘅話佢會話「nothing new」然後正常完結（唔會當錯誤）。
+
+一條龍：
+
+```bash
+node scripts/ig-fetch.mjs --latest && node scripts/manual-post.mjs
+```
+
+> **要 session 冇過期。** 如果 Instagram 話「session expired」，
+> 跑 `node scripts/ig-fetch.mjs --login` 重新登入一次就得。
+
+### 新貼文嘅標題同摘要要自己寫
+
+`ig-fetch` 抄返嘅係 Instagram 嘅 caption。caption 第一行通常係好長嘅
+一句（`【明明已經揀咗『超潤滑』，點解仲係越用越乾、甚至刺痛？🤔】`），
+自動切去 24 字會切爛中間 —— 變成 `…點解仲係越用越乾、甚至…`。
+
+所以新貼文入咗 `manual.json` 之後，**最好自己寫返 `title_zh` 同
+`excerpt_zh`**（仲有 `title_en` / `excerpt_en`）：
+
+```json
+{
+  "date": "2026-10-30",
+  "text": "【明明已經揀咗『超潤滑』…】",
+  "url": "https://www.instagram.com/tzerojp/p/DfGkQzBAfF7/",
+  "source": "Instagram",
+  "image": "assets/images/news/ig-2026-10-30-DfGkQzBAfF7.jpg",
+  "title_zh": "揀咗『超潤滑』，點解仲係越用越乾？",
+  "excerpt_zh": "問題唔係出喺潤滑嘅「量」，而係出喺潤滑嘅「成分」。…",
+  "title_en": "Why does \"ultra smooth\" still dry out?",
+  "excerpt_en": "The problem is rarely how much lubricant a condom carries…"
+}
+```
+
+寫完之後再跑 `node scripts/manual-post.mjs`，卡片就會用你嘅文案。
+
+> **日文唔使寫。** 之前決定咗日文版照顯示中文原文，所以唔使加
+> `title_ja` / `excerpt_ja`。
+
+---
+
 ## 啲貼文成日讀唔到？可能係「有年齡限制」
 
 Instagram 會將部分貼文標記做 sensitive（有年齡限制）—— 性健康品牌好常見中招。
@@ -225,6 +294,7 @@ node scripts/ig-fetch.mjs <連結>
 | 改字 | 直接改 `text`，跑 script |
 | 換張圖 | 改 `image` 個值，跑 script |
 | 由連結自動入 | `node scripts/ig-fetch.mjs <連結>` |
+| 自動搵最新貼文（唔使抄連結） | `node scripts/ig-fetch.mjs --latest` |
 | 貼文有年齡限制、讀唔到 | `node scripts/ig-fetch.mjs --login`（登入一次，之後唔使再登） |
 
 **Id 係自動生成嘅**（用貼文連結計），所以次序唔影響 —— 你可以隨便擺。
@@ -252,7 +322,7 @@ node scripts/ig-fetch.mjs <連結>
 |---|---|
 | `assets/data/manual.json` | **你改呢個** |
 | `scripts/manual-post.mjs` | 跑呢個 |
-| `scripts/ig-fetch.mjs` | 淨係有連結嗰陣用 —— 自動抓 caption／圖／日期 |
+| `scripts/ig-fetch.mjs` | 淨係有連結嗰陣用 —— 自動抓 caption／圖／日期。`--latest` 更加連連結都唔使俾 |
 | `assets/data/news.json` | 自動生成，網站讀呢個 |
 | `assets/data/news.local.json` | 自動生成（手動貼文部分）+ 手動維護（翻譯、置頂） |
 | `assets/data/site.json` | Facebook / Instagram 帳號（全站唯一真相來源） |

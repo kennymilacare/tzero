@@ -2,6 +2,18 @@
 
 把 T-ZERO 嘅 Instagram Business 帳號貼文自動同步到網站。
 
+> **而家行緊嘅係另一條路。** 呢一頁講嘅 Graph API 路線（要 Meta App + token）
+> **未啟用** —— `sync-instagram.yml` 個排程係閂咗嘅。
+> 每日更新而家靠本機 session：
+>
+> ```bash
+> node scripts/ig-fetch.mjs --latest && node scripts/manual-post.mjs
+> ```
+>
+> 詳情見 [`manual-posts.md`](manual-posts.md)。
+> 呢頁保留住做參考 —— 如果你想改用排程自動更新，就跟下面做設定，
+> 再把 `sync-instagram.yml` 個 `schedule:` 打開。
+
 > **淨係想手動更新？** 唔想開 GitHub、唔想搞 token 嘅話，用
 > [`manual-posts.md`](manual-posts.md) —— 貼落一個 JSON、跑一行 command 就得，
 > 完全唔需要 Meta 帳號同 token。兩條路可以共存：手動加嘅貼文會被寫入
@@ -21,6 +33,11 @@ assets/js/news.js      ←  前端讀取、渲染卡片（無 JS 時回退到 HT
 
 網站本身仍然係純靜態 —— 冇後端、冇 build step、冇 runtime 依賴。
 同步只係一個 GitHub Actions 排程 job，佢做嘅事係「commit 兩個檔案」。
+
+> **點解本機 session 路線行唔到 GitHub Actions？**
+> `.ig-profile/` 存住 Instagram 嘅登入 cookie。呢個 repo 係 **public**，
+> cookie 絕對唔可以 commit 入去，所以 Actions 開唔到嗰個 session。
+> Graph API 路線就冇呢個問題 —— token 放喺 GitHub Secrets（係加密嘅）。
 
 > **Facebook 專頁嘅貼文唔會同步。** `FB_INCLUDE_FB=0` 令 script 唔會再請求
 > Facebook 專頁嘅貼文（`/{page}/feed`）。專頁本身仲係會用到 —— 因為 Meta 係
@@ -182,7 +199,12 @@ Actions → **Sync Instagram news** → **Run workflow**。
 
 ## 日常運作
 
-- 排程：**每日 09:00 同 21:00（香港時間）**
+> **而家排程係閂咗嘅。** `sync-instagram.yml` 只有 `workflow_dispatch`，
+> 冇 `schedule:` —— 因為 token 未設定，行落去只會一日錯兩次。
+> 設定好上面嘅步驟之後，將 `schedule:` 加返返去（`cron: '0 1,13 * * *'`
+> = 香港時間 09:00 同 21:00）就得。
+
+- 排程：**每日 09:00 同 21:00（香港時間）**（啟用排程之後）
 - 每次同步会：拉最新 IG 贴文 → 下載圖片 → 寫 `news.json` → commit → 自動部署
 - `sync-instagram.yml` 同 `deploy-pages.yml` 会接力：前者 commit，後者 publish
   （同步 bot 嘅 commit 用 `GITHUB_TOKEN` 推，唔會觸發 `push` event，
@@ -387,5 +409,5 @@ Production 環境另一條路：喺 Business Portfolio 開 System User，
 | `assets/data/site.json` | **手動維護** —— Facebook / Instagram 帳號 |
 | `assets/data/news.local.json` | **手動維護** —— 翻譯、自訂貼文、隱藏、pinned |
 | `assets/js/news.js` | 前端渲染 |
-| `.github/workflows/sync-instagram.yml` | 排程同步 |
+| `.github/workflows/sync-instagram.yml` | 排程同步（**排程而家閂咗**，見上面） |
 | `.github/workflows/deploy-pages.yml` | 每次 push 完就發佈去 GitHub Pages |

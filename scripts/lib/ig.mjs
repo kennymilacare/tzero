@@ -98,19 +98,68 @@ export function cleanCaption(text, account) {
 }
 
 /**
+ * The post codes in a list of links, when they belong to this account.
+ *
+ * The profile page shows the account's posts as a grid of links, and
+ * the same page also links to tagged accounts and to other people's
+ * posts — so only links under this account's own path count.
+ *
+ * The order is kept: the grid is in reading order, newest first.
+ */
+export function shortcodesFromHrefs(hrefs, username) {
+  const user = String(username || '').replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const re = new RegExp(`/${user}/(?:p|reel|reels|tv)/([A-Za-z0-9_-]+)`);
+  const out = [];
+  for (const href of hrefs || []) {
+    const m = String(href || '').match(re);
+    if (m) out.push(m[1]);
+  }
+  return [...new Set(out)];
+}
+
+/**
+ * The shortcodes, newest first.
+ *
+ * The order on the profile grid is not the order of the posts —
+ * Instagram puts pinned posts at the top, ahead of newer ones. The
+ * media id carries the timestamp, so the posts are ordered by that
+ * instead, which is exact.
+ */
+export function sortShortcodesNewestFirst(codes) {
+  return [...new Set(codes || [])].sort((a, b) => {
+    const ia = mediaIdBigInt(a);
+    const ib = mediaIdBigInt(b);
+    if (ia === null && ib === null) return 0;
+    if (ia === null) return 1;   // not a post code — push it to the end
+    if (ib === null) return -1;
+    if (ia === ib) return 0;
+    return ia < ib ? 1 : -1;     // newest first
+  });
+}
+
+/**
  * Pull the post links out of command-line arguments and text files.
  *
  *   ig-fetch.mjs https://…  https://…
  *   ig-fetch.mjs --file urls.txt
  *   ig-fetch.mjs --login
+ *   ig-fetch.mjs --latest          the account's newest posts, read from its profile
+ *   ig-fetch.mjs --latest=12      the twelve newest
+ *   ig-fetch.mjs --latest --refresh  re-read the ones already stored too
  *
  * `--login` is a mode, not a link: it opens Instagram so you can sign
  * in, which the script needs for posts marked age-restricted.
+ *
+ * `--latest` is a mode too: it finds the posts by itself, so nobody has
+ * to paste links. It needs the signed-in session (see `--login`).
  */
 export function parseArgs(argv) {
   const urls = [];
   const files = [];
   let login = false;
+  let latest = false;
+  let latestCount = 8;
+  let refresh = false;
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
     if (a === '--file') {
@@ -118,7 +167,14 @@ export function parseArgs(argv) {
       continue;
     }
     if (a === '--login') { login = true; continue; }
+    if (a === '--refresh') { refresh = true; continue; }
+    if (a === '--latest' || a.startsWith('--latest=')) {
+      latest = true;
+      const n = Number(a.split('=')[1]);
+      if (Number.isFinite(n) && n > 0) latestCount = n;
+      continue;
+    }
     for (const m of String(a).matchAll(/https?:\/\/\S+/g)) urls.push(m[0]);
   }
-  return { urls, files, login };
+  return { urls, files, login, latest, latestCount, refresh };
 }

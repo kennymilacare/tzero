@@ -55,6 +55,7 @@ Built with plain **HTML / CSS / JavaScript** — no build step, no framework, no
 │   ├── sync-facebook.mjs  # Pulls the Instagram feed, writes news.json
 │   ├── manual-post.mjs    # Turns assets/data/manual.json into the feed — no token needed
 │   ├── ig-fetch.mjs       # Reads an IG post link → caption, image and date
+│   │                       # (--latest finds the newest posts by itself)
 │   ├── sync-social-links.mjs # Rewrites every social link to match site.json
 │   ├── set-site-url.mjs  # Moves the site to a new address — canonical, sitemap, robots
 │   ├── lib/feed.mjs       # Pure helpers (unit-tested)
@@ -69,7 +70,7 @@ Built with plain **HTML / CSS / JavaScript** — no build step, no framework, no
 │   ├── instagram-sync.md  # Instagram / Graph API setup guide
 │   └── manual-posts.md    # Updating the feed by hand — no token, no CI
 └── .github/workflows/
-    ├── sync-instagram.yml # Scheduled feed sync
+    ├── sync-instagram.yml # Graph API feed sync (schedule off — no token yet)
     └── deploy-pages.yml   # Publishes the repo to GitHub Pages on every push
 ```
 
@@ -173,6 +174,14 @@ of the post's own code, so it is exact rather than guessed. Re-running it
 on the same link refreshes that post's caption and image without
 touching any wording you wrote by hand.
 
+If you have already signed in, you do not have to paste links at all —
+`--latest` reads the account's own profile page and picks up the newest
+posts by itself, skipping the ones already stored:
+
+```bash
+node scripts/ig-fetch.mjs --latest && node scripts/manual-post.mjs
+```
+
 Instagram hides some posts behind an age restriction, and a condom brand
 gets flagged more often than not. `node scripts/ig-fetch.mjs --login`
 opens a visible Chrome window once so you can sign in; the session is
@@ -181,12 +190,11 @@ picks it up.
 
 Full guide: [`docs/manual-posts.md`](docs/manual-posts.md).
 
-### Automatic — GitHub Actions + Graph API
+### Automatic — GitHub Actions + Graph API (not enabled yet)
 
-A scheduled job pulls the latest posts from the T-ZERO Facebook Page and the
-Instagram Business account linked to it, downloads their images into the repo,
-and commits the result — the site itself stays fully static, with no backend
-and no build step.
+A scheduled job would pull the latest posts from the T-ZERO Instagram Business
+account, download their images into the repo, and commit the result — the site
+itself stays fully static, with no backend and no build step.
 
 ```
 Instagram ─→ Graph API → assets/data/news.json → assets/js/news.js → page
@@ -197,6 +205,19 @@ Instagram ─→ Graph API → assets/data/news.json → assets/js/news.js → p
 - `assets/data/news.local.json` — hand-written; EN/JA copy, curated posts, `hidden`, `pinned`
 - `assets/js/news.js` — renders the cards and updates the JSON-LD
 - `docs/instagram-sync.md` — how to create the Meta App and get a token
+
+**This route is not switched on.** It needs a Meta App and a token, and
+neither is set up — so the schedule in `sync-instagram.yml` is off and the
+workflow can only be run by hand. Until then the feed is updated the other
+way, with the saved Instagram session:
+
+```bash
+node scripts/ig-fetch.mjs --latest && node scripts/manual-post.mjs
+```
+
+That route cannot run in GitHub Actions: `.ig-profile/` holds session cookies
+and this repository is public, so it can never be committed. A token in GitHub
+Secrets has no such problem.
 
 Only Instagram is synced. The Facebook Page's own posts are not fetched
 (`FB_INCLUDE_FB=0`); the Page is still read, because that is how Meta links an
@@ -222,7 +243,7 @@ Two workflows run in sequence:
 
 | Workflow | When | What it does |
 |---|---|---|
-| `sync-instagram.yml` | 09:00 & 21:00 HK time, or manually | Pulls the feed and commits `news.json` + images |
+| `sync-instagram.yml` | Manually (the schedule is off — no token is set up) | Pulls the feed and commits `news.json` + images |
 | `deploy-pages.yml` | On every push to `main`, and after each sync run | Publishes the repo as-is to GitHub Pages |
 
 The deploy workflow also listens for `workflow_run`, because GitHub

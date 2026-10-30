@@ -7,7 +7,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 
-import { cleanCaption, dateFromShortcode, mediaIdOf, parseArgs, postUrl, shortcodeOf } from './ig.mjs';
+import { cleanCaption, dateFromShortcode, mediaIdOf, parseArgs, postUrl, shortcodeOf, sortShortcodesNewestFirst, shortcodesFromHrefs } from './ig.mjs';
 
 test('a share link still yields the post code', () => {
   assert.equal(shortcodeOf('https://www.instagram.com/p/De_a7-Yks0Z/?img_index=1'), 'De_a7-Yks0Z');
@@ -68,6 +68,26 @@ test('--login is a mode, not a link', () => {
   assert.equal(parseArgs(['https://x.test/p/A/']).login, false);
 });
 
+test('--latest is a mode, and carries how many posts to read', () => {
+  const plain = parseArgs(['--latest']);
+  assert.equal(plain.latest, true);
+  assert.equal(plain.latestCount, 8);
+  assert.deepEqual(plain.urls, []);
+
+  assert.equal(parseArgs(['--latest=12']).latestCount, 12);
+  assert.equal(parseArgs(['--latest=12']).latest, true);
+  assert.equal(parseArgs(['--latest=0']).latestCount, 8);   // nonsense -> the default
+  assert.equal(parseArgs(['--latest=abc']).latestCount, 8);
+  assert.equal(parseArgs(['https://x.test/p/A/']).latest, false);
+});
+
+test('--refresh only means something together with --latest', () => {
+  assert.equal(parseArgs(['--latest', '--refresh']).refresh, true);
+  assert.equal(parseArgs(['--latest', '--refresh']).latest, true);
+  assert.equal(parseArgs(['--latest']).refresh, false);
+  assert.equal(parseArgs(['https://x.test/p/A/']).refresh, false);
+});
+
 test('the account name is dropped off the top of the caption', () => {
   const raw = 'tzerojp\n\n【返工已經夠乾，拍拖想潤返啲 💧】\n\n覆唔完嘅訊息。';
   assert.equal(
@@ -94,4 +114,44 @@ test('a caption that opens with a handle mid-sentence is left alone', () => {
 test('an empty caption stays empty', () => {
   assert.equal(cleanCaption('', 'tzerojp'), '');
   assert.equal(cleanCaption(null, null), '');
+});
+
+test("the account's own posts are read off the profile links", () => {
+  const hrefs = [
+    '/tzerojp/',
+    '/tzerojp/p/De_a7-Yks0Z/',
+    '/tzerojp/reel/DfBi7XygZzA/',
+    '/tzerojp/p/De_a7-Yks0Z/',            // the same post twice
+    '/someoneelse/p/AAAAAAAAAAA/',        // somebody else's post
+    '/tzerojp/followers/',
+  ];
+  assert.deepEqual(shortcodesFromHrefs(hrefs, 'tzerojp'), ['De_a7-Yks0Z', 'DfBi7XygZzA']);
+});
+
+test('a link to the account without a post is not a post', () => {
+  assert.deepEqual(shortcodesFromHrefs(['/tzerojp/', '/tzerojp/followers/'], 'tzerojp'), []);
+  assert.deepEqual(shortcodesFromHrefs([], 'tzerojp'), []);
+  assert.deepEqual(shortcodesFromHrefs(null, 'tzerojp'), []);
+});
+
+test('another account that shares the name prefix is not this account', () => {
+  assert.deepEqual(shortcodesFromHrefs(['/tzerojp2/p/AAAAAAAAAAA/'], 'tzerojp'), []);
+});
+
+test('the posts are sorted by date, not by where the grid puts them', () => {
+  /* Instagram puts pinned posts at the top of the grid, ahead of newer
+     ones — so the grid order is not the date order. */
+  const grid = ['De_a7-Yks0Z', 'De_bTyXEsOn', 'DfBi7XygZzA', 'DfGkQzBAfF7'];
+  assert.deepEqual(sortShortcodesNewestFirst(grid), [
+    'DfGkQzBAfF7',   // 2026-10-30
+    'DfBi7XygZzA',   // 2026-10-28
+    'De_bTyXEsOn',   // 2026-10-27
+    'De_a7-Yks0Z',   // 2026-10-27
+  ]);
+});
+
+test('sorting keeps one copy of each post and puts junk last', () => {
+  assert.deepEqual(sortShortcodesNewestFirst(['DfGkQzBAfF7', 'DfGkQzBAfF7']), ['DfGkQzBAfF7']);
+  assert.deepEqual(sortShortcodesNewestFirst(['not a code!', 'DfGkQzBAfF7']), ['DfGkQzBAfF7', 'not a code!']);
+  assert.deepEqual(sortShortcodesNewestFirst([]), []);
 });
