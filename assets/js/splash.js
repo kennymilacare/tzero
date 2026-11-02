@@ -1,9 +1,10 @@
 /* ===========================================================
-   splash.js — 5-second bubble splash screen (once per session)
+   splash.js — bubble splash screen, on the front page, once a
+   session, for a second and a bit.
    Bypass: add ?splash=force to the URL to replay.
    =========================================================== */
 
-console.log('[splash] script loaded, version v3');
+console.log('[splash] script loaded, version v4');
 
 (function () {
   'use strict';
@@ -19,6 +20,24 @@ console.log('[splash] script loaded, version v3');
 
   const url = new URL(window.location.href);
   const force = url.searchParams.get('splash') === 'force';
+
+  /* The splash belongs to the front page and to nothing else.
+
+     It used to cover every page for five seconds, and that was two
+     problems at once. A reader who followed a link to a product or
+     to the news had to wait out an animation they had already seen.
+     And an animation that covers the whole screen holds back the
+     largest picture on the page — Google measures how long the
+     biggest thing takes to appear, and a splash sitting on top of
+     it counts against the site.
+
+     A front page is a directory index: the site's own address, or
+     the English and Japanese ones. */
+  const isHome = window.location.pathname.endsWith('/');
+  if (!force && !isHome) {
+    console.log('[splash] not the front page — skipping');
+    return;
+  }
 
   // Reset any old flag from earlier broken versions, so users in existing
   // sessions can still see the splash on this new build.
@@ -50,7 +69,7 @@ console.log('[splash] script loaded, version v3');
       align-items: center;
       justify-content: center;
       opacity: 1;
-      transition: opacity 0.6s ease;
+      transition: opacity 0.4s ease;
     }
     .splash--hiding { opacity: 0; pointer-events: none; }
 
@@ -197,7 +216,7 @@ console.log('[splash] script loaded, version v3');
       dismissed = true;
       console.log('[splash] dismissing');
       splash.classList.add('splash--hiding');
-      setTimeout(() => splash.remove(), 650);
+      setTimeout(() => splash.remove(), 450);
     }
 
     function showSplash() {
@@ -209,7 +228,9 @@ console.log('[splash] script loaded, version v3');
       target.prepend(splash);
       console.log('[splash] shown');
 
-      setTimeout(dismiss, 5000);
+      /* Long enough for the eye to catch the logo and the bubbles —
+         short enough that the page underneath is not held back. */
+      setTimeout(dismiss, 1200);
 
       const skip = splash.querySelector('.splash__skip');
       if (skip) {

@@ -159,6 +159,22 @@ export function productJsonLd(p, siteUrl, page, lang, productUrl) {
   /* The name in another language, so a search in either finds it. */
   const alternateName = lang === 'en' ? p.name_zh : p.name_en;
 
+  /* The brand and the business are the same two things on every
+     page of the site, so they are named by their address and not
+     written out afresh each time. The brand is defined right here;
+     the business is defined on the home page — where its address,
+     its telephone number and its opening hours live — and is
+     pointed at from here. A crawler follows the pointer and learns
+     that these four products are sold by that one company. */
+  const brandNode = {
+    '@type': 'Brand',
+    '@id': `${siteUrl}#brand`,
+    name: brand,
+    url: siteUrl,
+    logo: `${siteUrl}assets/images/icons/android-chrome-512.png`,
+  };
+  const orgRef = { '@id': `${siteUrl}#org` };
+
   const product = {
     '@type': 'Product',
     '@id': `${page}#product`,
@@ -168,7 +184,8 @@ export function productJsonLd(p, siteUrl, page, lang, productUrl) {
     image: [`${siteUrl}${p.image.replace(/^\//, '')}`],
     sku: p.id,
     url: page,
-    brand: { '@type': 'Brand', name: brand },
+    brand: { '@id': `${siteUrl}#brand` },
+    publisher: orgRef,
     offers: {
       '@type': 'Offer',
       url: p.hktv_url,
@@ -176,7 +193,7 @@ export function productJsonLd(p, siteUrl, page, lang, productUrl) {
       price: String(p.price_hkd),
       availability: 'https://schema.org/InStock',
       itemCondition: 'https://schema.org/NewCondition',
-      seller: { '@type': 'Organization', name: brand },
+      seller: orgRef,
     },
   };
 
@@ -214,6 +231,7 @@ export function productJsonLd(p, siteUrl, page, lang, productUrl) {
         ],
       },
       product,
+      brandNode,
     ],
   };
 }

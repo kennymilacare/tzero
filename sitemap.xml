@@ -1,303 +1,736 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://www.tzero-jp.com/</loc>
-    <lastmod>2026-10-30</lastmod>
+    <lastmod>2026-11-02</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-HK" href="https://www.tzero-jp.com/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.tzero-jp.com/en/"/>
     <xhtml:link rel="alternate" hreflang="ja-JP" href="https://www.tzero-jp.com/ja/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tzero-jp.com/"/>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/og-image.png</image:loc>
+      <image:title>T-ZERO 第九感</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/brand/t-zero-logo.png</image:loc>
+      <image:title>T-ZERO 第九感</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/banners/carousel/Tzero_website_banner.jpg</image:loc>
+      <image:title>T-ZERO 第九感</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/products/tzero-extra-lub.jpg</image:loc>
+      <image:title>T-ZERO 加倍潤滑裝 — 200% 玻尿酸潤滑安全套</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/products/tzero-extended.jpg</image:loc>
+      <image:title>T-ZERO 持久裝 — 玻尿酸潤滑安全套</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/products/tzero-studded.jpg</image:loc>
+      <image:title>T-ZERO 顆粒裝 — 凸點設計玻尿酸潤滑安全套</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/products/tzero-ultra-thin.jpg</image:loc>
+      <image:title>T-ZERO 超薄裝 — 0.01mm 極薄玻尿酸潤滑安全套</image:title>
+    </image:image>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://www.tzero-jp.com/en/</loc>
-    <lastmod>2026-10-30</lastmod>
+    <lastmod>2026-11-02</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-HK" href="https://www.tzero-jp.com/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.tzero-jp.com/en/"/>
     <xhtml:link rel="alternate" hreflang="ja-JP" href="https://www.tzero-jp.com/ja/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tzero-jp.com/"/>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/og-image.png</image:loc>
+      <image:title>T-ZERO NINTH SENSE</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/brand/t-zero-logo.png</image:loc>
+      <image:title>T-ZERO NINTH SENSE</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/banners/carousel/Tzero_website_banner.jpg</image:loc>
+      <image:title>T-ZERO NINTH SENSE</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/products/tzero-extra-lub.jpg</image:loc>
+      <image:title>T-ZERO Extra Lubricant — 200% hyaluronic condom</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/products/tzero-extended.jpg</image:loc>
+      <image:title>T-ZERO Extended — hyaluronic condom for lasting performance</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/products/tzero-studded.jpg</image:loc>
+      <image:title>T-ZERO Studded — textured hyaluronic condom</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/products/tzero-ultra-thin.jpg</image:loc>
+      <image:title>T-ZERO Ultra Thin — 0.01mm hyaluronic condom</image:title>
+    </image:image>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://www.tzero-jp.com/ja/</loc>
-    <lastmod>2026-10-30</lastmod>
+    <lastmod>2026-11-02</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-HK" href="https://www.tzero-jp.com/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.tzero-jp.com/en/"/>
     <xhtml:link rel="alternate" hreflang="ja-JP" href="https://www.tzero-jp.com/ja/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tzero-jp.com/"/>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/og-image.png</image:loc>
+      <image:title>T-ZERO 第九感</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/brand/t-zero-logo.png</image:loc>
+      <image:title>T-ZERO 第九感</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/banners/carousel/Tzero_website_banner.jpg</image:loc>
+      <image:title>T-ZERO 第九感</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/products/tzero-extra-lub.jpg</image:loc>
+      <image:title>T-ZERO エクストラ潤滑 — 200% ヒアルロン酸コンドーム</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/products/tzero-extended.jpg</image:loc>
+      <image:title>T-ZERO エクステンド — 持続力サポート ヒアルロン酸コンドーム</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/products/tzero-studded.jpg</image:loc>
+      <image:title>T-ZERO スタッデッド — ドット加工 ヒアルロン酸コンドーム</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/products/tzero-ultra-thin.jpg</image:loc>
+      <image:title>T-ZERO ウルトラシン — 0.01mm 極薄 ヒアルロン酸コンドーム</image:title>
+    </image:image>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://www.tzero-jp.com/products.html</loc>
-    <lastmod>2026-10-30</lastmod>
+    <lastmod>2026-11-02</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-HK" href="https://www.tzero-jp.com/products.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.tzero-jp.com/en/products.html"/>
     <xhtml:link rel="alternate" hreflang="ja-JP" href="https://www.tzero-jp.com/ja/products.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tzero-jp.com/products.html"/>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/og-image.png</image:loc>
+      <image:title>T-ZERO 第九感</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/products/tzero-extra-lub.jpg</image:loc>
+      <image:title>T-ZERO 加倍潤滑裝 — 200% 玻尿酸潤滑安全套</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/products/tzero-extended.jpg</image:loc>
+      <image:title>T-ZERO 持久裝 — 玻尿酸潤滑安全套</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/products/tzero-studded.jpg</image:loc>
+      <image:title>T-ZERO 顆粒裝 — 凸點設計玻尿酸潤滑安全套</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/products/tzero-ultra-thin.jpg</image:loc>
+      <image:title>T-ZERO 超薄裝 — 0.01mm 極薄玻尿酸潤滑安全套</image:title>
+    </image:image>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.tzero-jp.com/en/products.html</loc>
-    <lastmod>2026-10-30</lastmod>
+    <lastmod>2026-11-02</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-HK" href="https://www.tzero-jp.com/products.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.tzero-jp.com/en/products.html"/>
     <xhtml:link rel="alternate" hreflang="ja-JP" href="https://www.tzero-jp.com/ja/products.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tzero-jp.com/products.html"/>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/og-image.png</image:loc>
+      <image:title>T-ZERO NINTH SENSE</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/products/tzero-extra-lub.jpg</image:loc>
+      <image:title>T-ZERO Extra Lubricant — 200% hyaluronic condom</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/products/tzero-extended.jpg</image:loc>
+      <image:title>T-ZERO Extended — hyaluronic condom for lasting performance</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/products/tzero-studded.jpg</image:loc>
+      <image:title>T-ZERO Studded — textured hyaluronic condom</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/products/tzero-ultra-thin.jpg</image:loc>
+      <image:title>T-ZERO Ultra Thin — 0.01mm hyaluronic condom</image:title>
+    </image:image>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.tzero-jp.com/ja/products.html</loc>
-    <lastmod>2026-10-30</lastmod>
+    <lastmod>2026-11-02</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-HK" href="https://www.tzero-jp.com/products.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.tzero-jp.com/en/products.html"/>
     <xhtml:link rel="alternate" hreflang="ja-JP" href="https://www.tzero-jp.com/ja/products.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tzero-jp.com/products.html"/>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/og-image.png</image:loc>
+      <image:title>T-ZERO 第九感</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/products/tzero-extra-lub.jpg</image:loc>
+      <image:title>T-ZERO エクストラ潤滑 — 200% ヒアルロン酸コンドーム</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/products/tzero-extended.jpg</image:loc>
+      <image:title>T-ZERO エクステンド — 持続力サポート ヒアルロン酸コンドーム</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/products/tzero-studded.jpg</image:loc>
+      <image:title>T-ZERO スタッデッド — ドット加工 ヒアルロン酸コンドーム</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/products/tzero-ultra-thin.jpg</image:loc>
+      <image:title>T-ZERO ウルトラシン — 0.01mm 極薄 ヒアルロン酸コンドーム</image:title>
+    </image:image>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.tzero-jp.com/product-extra-lub.html</loc>
-    <lastmod>2026-10-30</lastmod>
+    <lastmod>2026-11-02</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-HK" href="https://www.tzero-jp.com/product-extra-lub.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.tzero-jp.com/en/product-extra-lub.html"/>
     <xhtml:link rel="alternate" hreflang="ja-JP" href="https://www.tzero-jp.com/ja/product-extra-lub.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tzero-jp.com/product-extra-lub.html"/>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/og-image.png</image:loc>
+      <image:title>T-ZERO 第九感</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/products/tzero-extra-lub.jpg</image:loc>
+      <image:title>T-ZERO 加倍潤滑裝 — 200% 玻尿酸潤滑安全套</image:title>
+    </image:image>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.tzero-jp.com/en/product-extra-lub.html</loc>
-    <lastmod>2026-10-30</lastmod>
+    <lastmod>2026-11-02</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-HK" href="https://www.tzero-jp.com/product-extra-lub.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.tzero-jp.com/en/product-extra-lub.html"/>
     <xhtml:link rel="alternate" hreflang="ja-JP" href="https://www.tzero-jp.com/ja/product-extra-lub.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tzero-jp.com/product-extra-lub.html"/>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/og-image.png</image:loc>
+      <image:title>T-ZERO NINTH SENSE</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/products/tzero-extra-lub.jpg</image:loc>
+      <image:title>T-ZERO Extra Lubricant — 200% hyaluronic condom</image:title>
+    </image:image>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.tzero-jp.com/ja/product-extra-lub.html</loc>
-    <lastmod>2026-10-30</lastmod>
+    <lastmod>2026-11-02</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-HK" href="https://www.tzero-jp.com/product-extra-lub.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.tzero-jp.com/en/product-extra-lub.html"/>
     <xhtml:link rel="alternate" hreflang="ja-JP" href="https://www.tzero-jp.com/ja/product-extra-lub.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tzero-jp.com/product-extra-lub.html"/>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/og-image.png</image:loc>
+      <image:title>T-ZERO 第九感</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/products/tzero-extra-lub.jpg</image:loc>
+      <image:title>T-ZERO エクストラ潤滑 — 200% ヒアルロン酸コンドーム</image:title>
+    </image:image>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.tzero-jp.com/product-extended.html</loc>
-    <lastmod>2026-10-30</lastmod>
+    <lastmod>2026-11-02</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-HK" href="https://www.tzero-jp.com/product-extended.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.tzero-jp.com/en/product-extended.html"/>
     <xhtml:link rel="alternate" hreflang="ja-JP" href="https://www.tzero-jp.com/ja/product-extended.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tzero-jp.com/product-extended.html"/>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/og-image.png</image:loc>
+      <image:title>T-ZERO 第九感</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/products/tzero-extended.jpg</image:loc>
+      <image:title>T-ZERO 持久裝 — 玻尿酸潤滑安全套</image:title>
+    </image:image>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.tzero-jp.com/en/product-extended.html</loc>
-    <lastmod>2026-10-30</lastmod>
+    <lastmod>2026-11-02</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-HK" href="https://www.tzero-jp.com/product-extended.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.tzero-jp.com/en/product-extended.html"/>
     <xhtml:link rel="alternate" hreflang="ja-JP" href="https://www.tzero-jp.com/ja/product-extended.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tzero-jp.com/product-extended.html"/>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/og-image.png</image:loc>
+      <image:title>T-ZERO NINTH SENSE</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/products/tzero-extended.jpg</image:loc>
+      <image:title>T-ZERO Extended — hyaluronic condom for lasting performance</image:title>
+    </image:image>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.tzero-jp.com/ja/product-extended.html</loc>
-    <lastmod>2026-10-30</lastmod>
+    <lastmod>2026-11-02</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-HK" href="https://www.tzero-jp.com/product-extended.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.tzero-jp.com/en/product-extended.html"/>
     <xhtml:link rel="alternate" hreflang="ja-JP" href="https://www.tzero-jp.com/ja/product-extended.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tzero-jp.com/product-extended.html"/>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/og-image.png</image:loc>
+      <image:title>T-ZERO 第九感</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/products/tzero-extended.jpg</image:loc>
+      <image:title>T-ZERO エクステンド — 持続力サポート ヒアルロン酸コンドーム</image:title>
+    </image:image>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.tzero-jp.com/product-studded.html</loc>
-    <lastmod>2026-10-30</lastmod>
+    <lastmod>2026-11-02</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-HK" href="https://www.tzero-jp.com/product-studded.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.tzero-jp.com/en/product-studded.html"/>
     <xhtml:link rel="alternate" hreflang="ja-JP" href="https://www.tzero-jp.com/ja/product-studded.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tzero-jp.com/product-studded.html"/>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/og-image.png</image:loc>
+      <image:title>T-ZERO 第九感</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/products/tzero-studded.jpg</image:loc>
+      <image:title>T-ZERO 顆粒裝 — 凸點設計玻尿酸潤滑安全套</image:title>
+    </image:image>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.tzero-jp.com/en/product-studded.html</loc>
-    <lastmod>2026-10-30</lastmod>
+    <lastmod>2026-11-02</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-HK" href="https://www.tzero-jp.com/product-studded.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.tzero-jp.com/en/product-studded.html"/>
     <xhtml:link rel="alternate" hreflang="ja-JP" href="https://www.tzero-jp.com/ja/product-studded.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tzero-jp.com/product-studded.html"/>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/og-image.png</image:loc>
+      <image:title>T-ZERO NINTH SENSE</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/products/tzero-studded.jpg</image:loc>
+      <image:title>T-ZERO Studded — textured hyaluronic condom</image:title>
+    </image:image>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.tzero-jp.com/ja/product-studded.html</loc>
-    <lastmod>2026-10-30</lastmod>
+    <lastmod>2026-11-02</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-HK" href="https://www.tzero-jp.com/product-studded.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.tzero-jp.com/en/product-studded.html"/>
     <xhtml:link rel="alternate" hreflang="ja-JP" href="https://www.tzero-jp.com/ja/product-studded.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tzero-jp.com/product-studded.html"/>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/og-image.png</image:loc>
+      <image:title>T-ZERO 第九感</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/products/tzero-studded.jpg</image:loc>
+      <image:title>T-ZERO スタッデッド — ドット加工 ヒアルロン酸コンドーム</image:title>
+    </image:image>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.tzero-jp.com/product-ultra-thin.html</loc>
-    <lastmod>2026-10-30</lastmod>
+    <lastmod>2026-11-02</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-HK" href="https://www.tzero-jp.com/product-ultra-thin.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.tzero-jp.com/en/product-ultra-thin.html"/>
     <xhtml:link rel="alternate" hreflang="ja-JP" href="https://www.tzero-jp.com/ja/product-ultra-thin.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tzero-jp.com/product-ultra-thin.html"/>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/og-image.png</image:loc>
+      <image:title>T-ZERO 第九感</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/products/tzero-ultra-thin.jpg</image:loc>
+      <image:title>T-ZERO 超薄裝 — 0.01mm 極薄玻尿酸潤滑安全套</image:title>
+    </image:image>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.tzero-jp.com/en/product-ultra-thin.html</loc>
-    <lastmod>2026-10-30</lastmod>
+    <lastmod>2026-11-02</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-HK" href="https://www.tzero-jp.com/product-ultra-thin.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.tzero-jp.com/en/product-ultra-thin.html"/>
     <xhtml:link rel="alternate" hreflang="ja-JP" href="https://www.tzero-jp.com/ja/product-ultra-thin.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tzero-jp.com/product-ultra-thin.html"/>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/og-image.png</image:loc>
+      <image:title>T-ZERO NINTH SENSE</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/products/tzero-ultra-thin.jpg</image:loc>
+      <image:title>T-ZERO Ultra Thin — 0.01mm hyaluronic condom</image:title>
+    </image:image>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.tzero-jp.com/ja/product-ultra-thin.html</loc>
-    <lastmod>2026-10-30</lastmod>
+    <lastmod>2026-11-02</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-HK" href="https://www.tzero-jp.com/product-ultra-thin.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.tzero-jp.com/en/product-ultra-thin.html"/>
     <xhtml:link rel="alternate" hreflang="ja-JP" href="https://www.tzero-jp.com/ja/product-ultra-thin.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tzero-jp.com/product-ultra-thin.html"/>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/og-image.png</image:loc>
+      <image:title>T-ZERO 第九感</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/products/tzero-ultra-thin.jpg</image:loc>
+      <image:title>T-ZERO ウルトラシン — 0.01mm 極薄 ヒアルロン酸コンドーム</image:title>
+    </image:image>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.tzero-jp.com/news.html</loc>
-    <lastmod>2026-10-30</lastmod>
+    <lastmod>2026-11-02</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-HK" href="https://www.tzero-jp.com/news.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.tzero-jp.com/en/news.html"/>
     <xhtml:link rel="alternate" hreflang="ja-JP" href="https://www.tzero-jp.com/ja/news.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tzero-jp.com/news.html"/>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/og-image.png</image:loc>
+      <image:title>T-ZERO 第九感</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/news/ig-2026-10-30-DfGkQzBAfF7.jpg</image:loc>
+      <image:title>揀咗『超潤滑』，點解仲係越用越乾？</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/news/ig-2026-10-28-DfBe7FggRof.jpg</image:loc>
+      <image:title>今晚，換點不一樣</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/news/ig-2026-10-28-DfBi7XygZzA.jpg</image:loc>
+      <image:title>最合拍神隊友，今晚拒絕快槍手</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/news/ig-2026-10-27-De_a7-Yks0Z.jpg</image:loc>
+      <image:title>返工已經夠乾，拍拖想潤返啲</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/news/ig-2026-10-27-De_bTyXEsOn.jpg</image:loc>
+      <image:title>NEW｜靠近你，感覺可以再細膩啲</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/banners/carousel/9.jpg</image:loc>
+      <image:title>正式登陸 HKTVmall</image:title>
+    </image:image>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.tzero-jp.com/en/news.html</loc>
-    <lastmod>2026-10-30</lastmod>
+    <lastmod>2026-11-02</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-HK" href="https://www.tzero-jp.com/news.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.tzero-jp.com/en/news.html"/>
     <xhtml:link rel="alternate" hreflang="ja-JP" href="https://www.tzero-jp.com/ja/news.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tzero-jp.com/news.html"/>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/og-image.png</image:loc>
+      <image:title>T-ZERO NINTH SENSE</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/news/ig-2026-10-30-DfGkQzBAfF7.jpg</image:loc>
+      <image:title>Why does &quot;ultra smooth&quot; still dry out?</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/news/ig-2026-10-28-DfBe7FggRof.jpg</image:loc>
+      <image:title>Tonight, make it a little different</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/news/ig-2026-10-28-DfBi7XygZzA.jpg</image:loc>
+      <image:title>Play it long tonight — no rushing 😏</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/news/ig-2026-10-27-De_a7-Yks0Z.jpg</image:loc>
+      <image:title>Tired after work? Make it a little more fun 💧</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/news/ig-2026-10-27-De_bTyXEsOn.jpg</image:loc>
+      <image:title>Closer to you, a little more delicate ✨</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/banners/carousel/9.jpg</image:loc>
+      <image:title>Now on HKTVmall</image:title>
+    </image:image>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.tzero-jp.com/ja/news.html</loc>
-    <lastmod>2026-10-30</lastmod>
+    <lastmod>2026-11-02</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-HK" href="https://www.tzero-jp.com/news.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.tzero-jp.com/en/news.html"/>
     <xhtml:link rel="alternate" hreflang="ja-JP" href="https://www.tzero-jp.com/ja/news.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tzero-jp.com/news.html"/>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/og-image.png</image:loc>
+      <image:title>T-ZERO 第九感</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/news/ig-2026-10-30-DfGkQzBAfF7.jpg</image:loc>
+      <image:title>揀咗『超潤滑』，點解仲係越用越乾？</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/news/ig-2026-10-28-DfBe7FggRof.jpg</image:loc>
+      <image:title>今晚，換點不一樣</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/news/ig-2026-10-28-DfBi7XygZzA.jpg</image:loc>
+      <image:title>最合拍神隊友，今晚拒絕快槍手</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/news/ig-2026-10-27-De_a7-Yks0Z.jpg</image:loc>
+      <image:title>返工已經夠乾，拍拖想潤返啲</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/news/ig-2026-10-27-De_bTyXEsOn.jpg</image:loc>
+      <image:title>NEW｜靠近你，感覺可以再細膩啲</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/banners/carousel/9.jpg</image:loc>
+      <image:title>HKTVmall に登場</image:title>
+    </image:image>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.tzero-jp.com/about.html</loc>
-    <lastmod>2026-10-30</lastmod>
+    <lastmod>2026-11-02</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-HK" href="https://www.tzero-jp.com/about.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.tzero-jp.com/en/about.html"/>
     <xhtml:link rel="alternate" hreflang="ja-JP" href="https://www.tzero-jp.com/ja/about.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tzero-jp.com/about.html"/>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/og-image.png</image:loc>
+      <image:title>T-ZERO 第九感</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/products/hyaluronic-acid.jpg</image:loc>
+      <image:title>玻尿酸成份示意圖——更持久保持水潤、質感輕盈、極致潤滑</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/products/lubricant-comparison.jpg</image:loc>
+      <image:title>潤滑成分比較資訊圖——玻尿酸 vs 矽油 vs 甘油基底</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/products/tzero-extra-lub.jpg</image:loc>
+      <image:title>T-ZERO 加倍潤滑裝 — 200% 玻尿酸潤滑安全套</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/products/tzero-extended.jpg</image:loc>
+      <image:title>T-ZERO 持久裝 — 玻尿酸潤滑安全套</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/products/tzero-studded.jpg</image:loc>
+      <image:title>T-ZERO 顆粒裝 — 凸點設計玻尿酸潤滑安全套</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/products/tzero-ultra-thin.jpg</image:loc>
+      <image:title>T-ZERO 超薄裝 — 0.01mm 極薄玻尿酸潤滑安全套</image:title>
+    </image:image>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.tzero-jp.com/en/about.html</loc>
-    <lastmod>2026-10-30</lastmod>
+    <lastmod>2026-11-02</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-HK" href="https://www.tzero-jp.com/about.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.tzero-jp.com/en/about.html"/>
     <xhtml:link rel="alternate" hreflang="ja-JP" href="https://www.tzero-jp.com/ja/about.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tzero-jp.com/about.html"/>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/og-image.png</image:loc>
+      <image:title>T-ZERO NINTH SENSE</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/products/hyaluronic-acid.jpg</image:loc>
+      <image:title>Hyaluronic acid diagram — longer-lasting moisture, light texture, ultimate smoothness</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/products/lubricant-comparison.jpg</image:loc>
+      <image:title>Lubricant comparison infographic — hyaluronic acid vs silicone vs glycerin base</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/products/tzero-extra-lub.jpg</image:loc>
+      <image:title>T-ZERO Extra Lubricant — 200% hyaluronic condom</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/products/tzero-extended.jpg</image:loc>
+      <image:title>T-ZERO Extended — hyaluronic condom for lasting performance</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/products/tzero-studded.jpg</image:loc>
+      <image:title>T-ZERO Studded — textured hyaluronic condom</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/products/tzero-ultra-thin.jpg</image:loc>
+      <image:title>T-ZERO Ultra Thin — 0.01mm hyaluronic condom</image:title>
+    </image:image>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.tzero-jp.com/ja/about.html</loc>
-    <lastmod>2026-10-30</lastmod>
+    <lastmod>2026-11-02</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-HK" href="https://www.tzero-jp.com/about.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.tzero-jp.com/en/about.html"/>
     <xhtml:link rel="alternate" hreflang="ja-JP" href="https://www.tzero-jp.com/ja/about.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tzero-jp.com/about.html"/>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/og-image.png</image:loc>
+      <image:title>T-ZERO 第九感</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/products/hyaluronic-acid.jpg</image:loc>
+      <image:title>玻尿酸の模式図——長時間のうるおい保持、軽やかな質感、極上の滑り</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/products/lubricant-comparison.jpg</image:loc>
+      <image:title>潤滑成分の比較インフォグラフィック——ヒアルロン vs シリコン vs グリセリン</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/products/tzero-extra-lub.jpg</image:loc>
+      <image:title>T-ZERO エクストラ潤滑 — 200% ヒアルロン酸コンドーム</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/products/tzero-extended.jpg</image:loc>
+      <image:title>T-ZERO エクステンド — 持続力サポート ヒアルロン酸コンドーム</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/products/tzero-studded.jpg</image:loc>
+      <image:title>T-ZERO スタッデッド — ドット加工 ヒアルロン酸コンドーム</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/products/tzero-ultra-thin.jpg</image:loc>
+      <image:title>T-ZERO ウルトラシン — 0.01mm 極薄 ヒアルロン酸コンドーム</image:title>
+    </image:image>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.tzero-jp.com/contact.html</loc>
-    <lastmod>2026-10-30</lastmod>
+    <lastmod>2026-11-02</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-HK" href="https://www.tzero-jp.com/contact.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.tzero-jp.com/en/contact.html"/>
     <xhtml:link rel="alternate" hreflang="ja-JP" href="https://www.tzero-jp.com/ja/contact.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tzero-jp.com/contact.html"/>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/og-image.png</image:loc>
+      <image:title>T-ZERO 第九感</image:title>
+    </image:image>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://www.tzero-jp.com/en/contact.html</loc>
-    <lastmod>2026-10-30</lastmod>
+    <lastmod>2026-11-02</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-HK" href="https://www.tzero-jp.com/contact.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.tzero-jp.com/en/contact.html"/>
     <xhtml:link rel="alternate" hreflang="ja-JP" href="https://www.tzero-jp.com/ja/contact.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tzero-jp.com/contact.html"/>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/og-image.png</image:loc>
+      <image:title>T-ZERO NINTH SENSE</image:title>
+    </image:image>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://www.tzero-jp.com/ja/contact.html</loc>
-    <lastmod>2026-10-30</lastmod>
+    <lastmod>2026-11-02</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-HK" href="https://www.tzero-jp.com/contact.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.tzero-jp.com/en/contact.html"/>
     <xhtml:link rel="alternate" hreflang="ja-JP" href="https://www.tzero-jp.com/ja/contact.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tzero-jp.com/contact.html"/>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/og-image.png</image:loc>
+      <image:title>T-ZERO 第九感</image:title>
+    </image:image>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://www.tzero-jp.com/terms.html</loc>
-    <lastmod>2026-10-30</lastmod>
+    <lastmod>2026-11-02</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-HK" href="https://www.tzero-jp.com/terms.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.tzero-jp.com/en/terms.html"/>
     <xhtml:link rel="alternate" hreflang="ja-JP" href="https://www.tzero-jp.com/ja/terms.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tzero-jp.com/terms.html"/>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/og-image.png</image:loc>
+      <image:title>T-ZERO 第九感</image:title>
+    </image:image>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://www.tzero-jp.com/en/terms.html</loc>
-    <lastmod>2026-10-30</lastmod>
+    <lastmod>2026-11-02</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-HK" href="https://www.tzero-jp.com/terms.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.tzero-jp.com/en/terms.html"/>
     <xhtml:link rel="alternate" hreflang="ja-JP" href="https://www.tzero-jp.com/ja/terms.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tzero-jp.com/terms.html"/>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/og-image.png</image:loc>
+      <image:title>T-ZERO NINTH SENSE</image:title>
+    </image:image>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://www.tzero-jp.com/ja/terms.html</loc>
-    <lastmod>2026-10-30</lastmod>
+    <lastmod>2026-11-02</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-HK" href="https://www.tzero-jp.com/terms.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.tzero-jp.com/en/terms.html"/>
     <xhtml:link rel="alternate" hreflang="ja-JP" href="https://www.tzero-jp.com/ja/terms.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tzero-jp.com/terms.html"/>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/og-image.png</image:loc>
+      <image:title>T-ZERO 第九感</image:title>
+    </image:image>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>

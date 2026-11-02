@@ -168,6 +168,35 @@ test('every product has a page of its own', async () => {
   }
 });
 
+test('the product pages point at the site\'s own brand and business', async () => {
+  /* A product page used to name its seller with nothing but a name:
+     an "Organization" that appeared on that page and nowhere else.
+     The brand and the business are the same two things everywhere on
+     the site, so they are named by their address instead — #brand,
+     and #org, which is the business the home page describes with its
+     address and its telephone number. A crawler that follows the
+     pointer learns that these four products are sold by that one
+     company. */
+  for (const product of products) {
+    const file = productUrl(product.id);
+    for (const lang of LANGS) {
+      const page = lang === 'zh' ? file : `${lang}/${file}`;
+      const data = jsonLdOf(await readPage(page));
+
+      const node = data['@graph'].find((n) => n['@type'] === 'Product');
+      assert.ok(node, `${page}: no Product in the structured data`);
+      assert.equal(node.brand?.['@id'], `${SITE}/#brand`, `${page}: the brand is not named`);
+      assert.equal(node.publisher?.['@id'], `${SITE}/#org`, `${page}: the publisher is not named`);
+      assert.equal(node.offers?.seller?.['@id'], `${SITE}/#org`, `${page}: the seller is not named`);
+
+      const brand = data['@graph'].find((n) => n['@type'] === 'Brand');
+      assert.ok(brand, `${page}: the brand is pointed at but never defined`);
+      assert.equal(brand['@id'], `${SITE}/#brand`);
+      assert.ok(brand.name, `${page}: the brand has no name`);
+    }
+  }
+});
+
 test('no page still links to the old product query string', async () => {
   for (const file of await sitePages()) {
     const html = withoutComments(await readPage(file));
@@ -339,4 +368,29 @@ test('the sitemap on disk is the one the script would write', async () => {
   const { text } = await sitemapFor(site.url);
   const onDisk = (await readFile(path.join(ROOT, 'sitemap.xml'), 'utf8')).replace(/\r\n/g, '\n');
   assert.equal(onDisk, text, 'sitemap.xml has been edited by hand, or the generator is out of date');
+});
+
+test('the sitemap names the pictures on each page', async () => {
+  /* A sitemap may name the pictures that belong to a page. That is
+     how a product shot reaches the image results instead of only
+     the page it happens to sit on. */
+  const xml = (await readFile(path.join(ROOT, 'sitemap.xml'), 'utf8')).replace(/\r\n/g, '\n');
+
+  for (const block of xml.match(/<url>[\s\S]*?<\/url>/g) || []) {
+    const loc = block.match(/<loc>([^<]+)<\/loc>/)?.[1];
+    const pictures = [...block.matchAll(/<image:loc>([^<]+)<\/image:loc>/g)].map((m) => m[1]);
+    assert.ok(pictures.length, `${loc}: the sitemap names no pictures for this page`);
+  }
+});
+
+test('the pictures the sitemap names are really there', async () => {
+  const xml = (await readFile(path.join(ROOT, 'sitemap.xml'), 'utf8')).replace(/\r\n/g, '\n');
+  const images = [...xml.matchAll(/<image:loc>([^<]+)<\/image:loc>/g)].map((m) => m[1]);
+  assert.ok(images.length, 'the sitemap names no pictures at all');
+
+  for (const image of images) {
+    const file = image.replace(`${SITE}/`, '');
+    const there = await access(path.join(ROOT, file)).then(() => true, () => false);
+    assert.ok(there, `the sitemap names ${image}, which does not exist`);
+  }
 });

@@ -45,7 +45,7 @@
   <link rel="stylesheet" href="../assets/css/components.css?v=5">
   <link rel="stylesheet" href="../assets/css/pages.css?v=24">
 
-  <script src="../assets/js/splash.js?v=4" defer></script>
+  <script src="../assets/js/splash.js?v=5" defer></script>
 
   <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/icons/favicon-32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/icons/favicon-16.png">
@@ -92,8 +92,10 @@
       "sku": "tzero-extended",
       "url": "https://www.tzero-jp.com/en/product-extended.html",
       "brand": {
-        "@type": "Brand",
-        "name": "T-ZERO NINTH SENSE"
+        "@id": "https://www.tzero-jp.com/#brand"
+      },
+      "publisher": {
+        "@id": "https://www.tzero-jp.com/#org"
       },
       "offers": {
         "@type": "Offer",
@@ -103,8 +105,7 @@
         "availability": "https://schema.org/InStock",
         "itemCondition": "https://schema.org/NewCondition",
         "seller": {
-          "@type": "Organization",
-          "name": "T-ZERO NINTH SENSE"
+          "@id": "https://www.tzero-jp.com/#org"
         }
       },
       "aggregateRating": {
@@ -161,6 +162,13 @@
           }
         }
       ]
+    },
+    {
+      "@type": "Brand",
+      "@id": "https://www.tzero-jp.com/#brand",
+      "name": "T-ZERO NINTH SENSE",
+      "url": "https://www.tzero-jp.com/",
+      "logo": "https://www.tzero-jp.com/assets/images/icons/android-chrome-512.png"
     }
   ]
 }
