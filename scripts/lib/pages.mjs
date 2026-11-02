@@ -17,6 +17,7 @@
    =========================================================== */
 
 import { LANGS, PAGES, pageFile } from './langs.mjs';
+import { GUIDES } from './guides.mjs';
 
 /* How often a crawler should come back, and how important the page
    is — the same for all three languages of a page. */
@@ -28,6 +29,7 @@ export const CHANGEFREQ = {
   about: 'monthly',
   contact: 'monthly',
   terms: 'yearly',
+  guide: 'monthly',
 };
 
 export const PRIORITY = {
@@ -38,6 +40,7 @@ export const PRIORITY = {
   about: '0.6',
   contact: '0.5',
   terms: '0.3',
+  guide: '0.6',
 };
 
 /** What a page shows, on top of the page itself. */
@@ -62,6 +65,10 @@ export function pageList() {
 
   for (const page of PAGES) {
     const extra = extrasFor(page.kind);
+    /* A guide carries the date it was last written on. It is the
+       date the words changed, which is what a crawler's lastmod
+       is supposed to mean — and it does not need git to find it. */
+    const guide = page.kind === 'guide' ? GUIDES.find((g) => g.path === page.path) : null;
 
     for (const lang of LANGS) {
       const file = pageFile(lang, page.path);
@@ -73,6 +80,7 @@ export function pageList() {
         files: [file, ...extra],
         changefreq: CHANGEFREQ[page.kind] || 'weekly',
         priority: PRIORITY[page.kind] || '0.5',
+        updated: guide ? guide.updated : null,
       });
     }
   }

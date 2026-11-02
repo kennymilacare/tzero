@@ -30,6 +30,7 @@ const GENERATORS = [
   'scripts/gen-faq-html.mjs',
   'scripts/gen-jsonld.mjs',
   'scripts/gen-lang-pages.mjs',
+  'scripts/gen-guide-pages.mjs',
   'scripts/update-sitemap.mjs',
 ];
 
@@ -49,6 +50,7 @@ async function generatedFiles() {
   }
 
   files.push('sitemap.xml');
+  files.push('assets/js/guides.js');
   return files.sort();
 }
 

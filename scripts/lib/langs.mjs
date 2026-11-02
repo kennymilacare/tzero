@@ -21,6 +21,7 @@
    =========================================================== */
 
 import { products, productUrl } from '../../assets/js/data.js';
+import { GUIDE_PATHS } from './guides.mjs';
 
 /* The three languages, in the order they cycle. */
 export const LANGS = ['zh', 'en', 'ja'];
@@ -58,6 +59,7 @@ export const PAGES = [
   { path: 'about.html', kind: 'about' },
   { path: 'contact.html', kind: 'contact' },
   { path: 'terms.html', kind: 'terms' },
+  ...GUIDE_PATHS.map((path) => ({ path, kind: 'guide' })),
 ];
 
 /** The address of one page in one language. */

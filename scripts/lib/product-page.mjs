@@ -24,6 +24,7 @@
 import { i18n } from '../../assets/js/data.js';
 import { productTitle, productDescription, productKeywords } from '../../assets/js/product-copy.js';
 import { escapeText, replaceLinks } from './html.mjs';
+import { GUIDES, GUIDE_UI } from './guides.mjs';
 import { linkBlock, pageUrl } from './langs.mjs';
 
 /* ---------- small helpers ---------- */
@@ -145,6 +146,26 @@ export function relatedHtml(p, all, lang, productUrl) {
                 </span>
               </div>
             </a>`).join('');
+}
+
+/**
+ * The buying guides, as links.
+ *
+ * A visitor who has read the specification table still has a
+ * question — usually "which size is mine", or "does the latex
+ * matter". The guides answer those, and a link from the product
+ * page to the guide is the shortest way there.
+ */
+export function guideLinksHtml(lang) {
+  const heading = GUIDE_UI.guides[lang] || GUIDE_UI.guides.zh;
+  const items = GUIDES.map((g) =>
+    `            <li><a href="${g.path}">${escapeText(g.short[lang] || g.short.zh)}</a></li>`,
+  ).join('\n');
+  return `
+            <h3>${escapeText(heading)}</h3>
+            <ul>
+${items}
+            </ul>`;
 }
 
 /* ---------- structured data ---------- */
@@ -358,6 +379,11 @@ export function buildProductPage(template, p, all, {
     '<div class="product-grid" data-related></div>',
     `<div class="product-grid" data-related>${relatedHtml(p, all, lang, productUrl)}
         </div>`, 'the related products');
+
+  html = fill(html,
+    '<div class="guide-links" data-guide-links></div>',
+    `<div class="guide-links" data-guide-links>${guideLinksHtml(lang)}
+        </div>`, 'the buying guide links');
 
   /* A note at the top of the file, so nobody hand-edits a generated page. */
   html = fill(html, '<!DOCTYPE html>',

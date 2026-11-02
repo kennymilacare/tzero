@@ -63,11 +63,13 @@ jobs:
           # even if a commit forgot to run them.
           #
           # The order matters: the language pages are made from the
-          # product pages and the structured data, so they come last.
+          # product pages and the structured data, and the buying
+          # guides are made from their own files, so they come last.
           node scripts/gen-product-pages.mjs
           node scripts/gen-faq-html.mjs
           node scripts/gen-jsonld.mjs
           node scripts/gen-lang-pages.mjs
+          node scripts/gen-guide-pages.mjs
           node scripts/update-sitemap.mjs
 
           # The IndexNow key file. The search engine fetches it from

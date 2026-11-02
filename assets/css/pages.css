@@ -936,3 +936,324 @@
   .match-card::before { font-size: 160px; top: -20px; right: -10px; }
   .match-card::after { width: 180px; height: 180px; top: -60px; right: -60px; }
 }
+
+/* ===========================================================
+   Buying guides — guide-size.html and its friends
+   =========================================================== */
+
+.guide__crumbs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--fs-xs);
+  color: var(--ink-muted);
+  margin-bottom: var(--space-5);
+}
+
+.guide__crumbs a { color: var(--ink-muted); }
+.guide__crumbs a:hover { color: var(--ink); text-decoration: underline; }
+.guide__crumbs-sep { color: var(--border-strong); }
+
+.guide__head { margin-bottom: var(--space-6); }
+
+.guide__head h1 {
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  line-height: var(--lh-tight);
+  margin: var(--space-3) 0 var(--space-4);
+}
+
+.guide__lead {
+  font-size: var(--fs-md);
+  line-height: 1.75;
+  color: var(--ink-soft);
+  max-width: 760px;
+}
+
+.guide__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-5);
+  margin-top: var(--space-5);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--border);
+}
+
+.guide__figure { margin: 0; flex: 0 0 auto; }
+
+.guide__figure img {
+  display: block;
+  width: 128px;
+  height: 128px;
+  object-fit: cover;
+  border-radius: var(--r-md);
+  border: 1px solid var(--border);
+}
+
+.guide__updated {
+  font-size: var(--fs-xs);
+  color: var(--ink-muted);
+  margin: 0;
+}
+
+.guide__updated span {
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-right: var(--space-2);
+}
+
+.guide__updated time { color: var(--ink); font-weight: 600; }
+
+.guide__toc {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: var(--space-4) var(--space-5);
+  margin-bottom: var(--space-7);
+}
+
+.guide__toc-label {
+  display: block;
+  font-size: var(--fs-xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-bottom: var(--space-3);
+}
+
+.guide__toc ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-5);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.guide__toc a {
+  color: var(--ink);
+  font-weight: 500;
+  font-size: var(--fs-sm);
+}
+
+.guide__toc a:hover { color: var(--primary-dark); text-decoration: underline; }
+
+/* The writing itself — one column, top to bottom. A guide is read,
+   not scanned: the answer is usually a paragraph, and a paragraph
+   cut in half and put beside a heading is harder to read. */
+.guide__prose { max-width: 760px; margin-inline: auto; }
+
+.guide__section { margin-bottom: var(--space-7); }
+
+.guide__section h2 {
+  font-size: var(--fs-lg);
+  margin-bottom: var(--space-3);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--border);
+}
+
+.guide__section:first-child h2 {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: 0;
+}
+
+.guide__prose p,
+.guide__prose li {
+  color: var(--ink-soft);
+  line-height: 1.8;
+  font-size: var(--fs-sm);
+  margin-bottom: var(--space-3);
+}
+
+.guide__prose ul,
+.guide__prose ol {
+  padding-left: 1.25rem;
+  margin-bottom: var(--space-4);
+}
+
+.guide__prose ul { list-style: disc; }
+.guide__prose ol { list-style: decimal; }
+.guide__prose li { margin-bottom: var(--space-2); }
+.guide__prose strong { color: var(--ink); }
+.guide__prose a { color: var(--primary-dark); font-weight: 500; }
+
+.guide__note {
+  background: var(--accent-soft);
+  border: 1px solid var(--accent);
+  border-left-width: 4px;
+  border-radius: var(--r-sm);
+  padding: var(--space-4) var(--space-5);
+  margin: var(--space-5) 0;
+}
+
+.guide__note h3 {
+  font-size: var(--fs-base);
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: var(--space-2);
+}
+
+.guide__note p {
+  color: var(--ink-soft);
+  line-height: 1.75;
+  font-size: var(--fs-sm);
+  margin-bottom: 0;
+}
+
+/* Tables */
+.guide__table-wrap {
+  overflow-x: auto;
+  margin: var(--space-5) 0;
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+}
+
+.guide__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--fs-sm);
+  min-width: 520px;
+}
+
+.guide__table th,
+.guide__table td {
+  padding: var(--space-3) var(--space-4);
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--border);
+  color: var(--ink-soft);
+  line-height: 1.6;
+}
+
+.guide__table th {
+  background: var(--surface-2);
+  color: var(--ink);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.guide__table tbody tr:last-child td { border-bottom: 0; }
+.guide__table tbody tr:nth-child(even) { background: rgba(238, 245, 251, 0.55); }
+
+/* The questions */
+.guide__faq { max-width: 760px; margin-inline: auto; margin-top: var(--space-7); }
+
+.guide__faq h2,
+.guide__related h2,
+.guide__all h2 {
+  font-size: var(--fs-lg);
+  margin-bottom: var(--space-4);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--border);
+}
+
+.guide__faq-item {
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  margin-bottom: var(--space-3);
+  background: var(--surface);
+}
+
+.guide__faq-item summary {
+  cursor: pointer;
+  padding: var(--space-4) var(--space-5);
+  font-weight: 600;
+  color: var(--ink);
+  font-size: var(--fs-base);
+  list-style: none;
+}
+
+.guide__faq-item summary::-webkit-details-marker { display: none; }
+
+.guide__faq-item summary::after {
+  content: "+";
+  float: right;
+  color: var(--primary-dark);
+  font-weight: 700;
+}
+
+.guide__faq-item[open] summary::after { content: "\2212"; }
+
+.guide__faq-answer { padding: 0 var(--space-5) var(--space-4); }
+
+.guide__faq-answer p {
+  color: var(--ink-soft);
+  line-height: 1.75;
+  font-size: var(--fs-sm);
+  margin: 0;
+}
+
+/* The links out */
+.guide__related,
+.guide__all { max-width: 760px; margin-inline: auto; margin-top: var(--space-7); }
+
+.guide__related ul,
+.guide__all ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.guide__related li,
+.guide__all li { margin: 0; }
+
+.guide__related a,
+.guide__all a {
+  display: inline-block;
+  padding: var(--space-2) var(--space-4);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--ink);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+}
+
+.guide__related a:hover,
+.guide__all a:hover {
+  border-color: var(--primary);
+  color: var(--primary-dark);
+}
+
+/* The guide links on the product pages */
+.guide-links {
+  margin-top: var(--space-6);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--border);
+  text-align: center;
+}
+
+.guide-links h3 {
+  font-size: var(--fs-xs);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-bottom: var(--space-3);
+}
+
+.guide-links ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-3);
+}
+
+.guide-links a {
+  display: inline-block;
+  padding: var(--space-2) var(--space-4);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--ink);
+  font-size: var(--fs-sm);
+}
+
+.guide-links a:hover { border-color: var(--primary); color: var(--primary-dark); }

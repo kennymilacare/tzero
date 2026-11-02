@@ -20,6 +20,7 @@ import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 
 import { i18n, productUrl, products } from '../../assets/js/data.js';
+import { GUIDES } from './guides.mjs';
 import { ROOT } from './site.mjs';
 
 /* The picture every page carries, and the logo. */
@@ -95,6 +96,13 @@ export async function imagesFor(path, lang) {
     for (const p of products) {
       images.push({ path: p.image, title: productAlt(p, lang) });
     }
+    return images;
+  }
+
+  /* A guide page: the picture the guide is about. */
+  const guide = GUIDES.find((g) => g.path === path);
+  if (guide) {
+    images.push({ path: guide.image, title: `${brand} ${guide.short[lang] || guide.short.zh}` });
     return images;
   }
 

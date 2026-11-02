@@ -112,6 +112,9 @@ async function main() {
 
   for (const page of PAGES) {
     const kind = page.kind;
+    /* The guides have a generator of their own — they are written
+       from the guide files, not translated from a Chinese page. */
+    if (kind === 'guide') continue;
     const isProduct = kind === 'product';
     const product = isProduct ? products.find((p) => productUrl(p.id) === page.path) : null;
 

@@ -27,6 +27,11 @@ Built with plain **HTML / CSS / JavaScript** — no build step, no framework, no
 ├── product-extended.html  # Product detail — 持久
 ├── product-extra-lub.html # Product detail — 潤滑
 ├── product.html           # Legacy fallback for old product.html?id=… links (noindex)
+├── guide-size.html        # Generated — the buying guides (see below)
+├── guide-material.html    # Generated — latex, polyurethane or polyisoprene
+├── guide-texture.html     # Generated — plain, ribbed, studded, wrinkled
+├── guide-first-time.html  # Generated — buying one for the first time
+├── guide-hyaluronic.html  # Generated — what hyaluronic acid actually does
 ├── about.html             # About + brand values + brand story
 ├── news.html              # Latest news (renders the Facebook feed)
 ├── contact.html           # Contact form + cards + map placeholder
@@ -52,6 +57,7 @@ Built with plain **HTML / CSS / JavaScript** — no build step, no framework, no
 │   │   └── indexnow.json  # The IndexNow key — public, like a verification token
 │   ├── js/
 │   │   ├── data.js        # Products, FAQs, brands, translations
+│   │   ├── guides.js      # Generated — the buying guides, for the search box
 │   │   ├── i18n.js        # Language switcher
 │   │   ├── paths.js       # Builds asset URLs that work from /en/ and /ja/ too
 │   │   ├── main.js        # Header, mobile nav, reveal, newsletter
@@ -76,6 +82,7 @@ Built with plain **HTML / CSS / JavaScript** — no build step, no framework, no
 │   ├── gen-faq-html.mjs   # Writes the FAQ into index.html
 │   ├── gen-jsonld.mjs     # Writes the structured data into the pages
 │   ├── gen-lang-pages.mjs # Writes the English and Japanese version of every page
+│   ├── gen-guide-pages.mjs # Writes the five buying guides, in three languages
 │   ├── gen-og-image.mjs   # Writes the sharing image
 │   ├── sync-og-image.mjs  # Keeps the sharing image in step with the pages
 │   ├── sync-news-jsonld.mjs # Writes the news ItemList into data.js
@@ -91,6 +98,9 @@ Built with plain **HTML / CSS / JavaScript** — no build step, no framework, no
 │   ├── lib/html.mjs       # Reads and rewrites HTML without a parser
 │   ├── lib/langs.mjs      # The three languages, their URLs and the list of pages
 │   ├── lib/langpage.mjs   # Builds one language page out of the Chinese one
+│   ├── lib/guides.mjs     # The five buying guides, in one place
+│   ├── lib/guides/        # The words of each guide — build time only
+│   ├── lib/guide-page.mjs # Builds one guide page, in one language
 │   ├── lib/terms.mjs      # The legal page, in three languages
 │   ├── lib/pages.mjs      # Every page, and the files it shows
 │   ├── lib/sitemap.mjs    # What the sitemap should say
@@ -103,6 +113,7 @@ Built with plain **HTML / CSS / JavaScript** — no build step, no framework, no
 │   ├── lib/seo.test.mjs   # Fails if the markup and the structured data drift apart
 │   ├── lib/ig.test.mjs    # Unit tests for the Instagram helpers
 │   ├── lib/lang.test.mjs  # Fails if a language page is not really in that language
+│   ├── lib/guide.test.mjs # Fails if a buying guide is broken, or in the wrong language
 │   ├── lib/submit.test.mjs # Fails if a search engine could not find or trust the site
 │   ├── sync.test.mjs      # End-to-end test — runs the real script against a mock Graph API
 │   └── manual-post.test.mjs # End-to-end test for the manual route
@@ -194,6 +205,35 @@ rendered by `scripts/lib/terms.mjs`.
 `scripts/lib/lang.test.mjs` fails if a language page is not really in that
 language, if a translation marker was left in a generated page, or if the
 `hreflang` links do not point at three different addresses.
+
+## Buying Guides
+
+Five pages that answer the questions people ask *before* they buy anything.
+Each one exists in three languages, at its own address:
+
+| Guide | URL |
+|---|---|
+| 尺碼表 · Size chart · サイズ表 | `/guide-size.html` |
+| 材質比較 · Materials · 素材の比較 | `/guide-material.html` |
+| 紋路種類 · Textures · テクスチャーの種類 | `/guide-texture.html` |
+| 第一次買點揀 · First time buying · 初めての選び方 | `/guide-first-time.html` |
+| 玻尿酸究竟係咩 · Hyaluronic acid · 玻尿酸とは | `/guide-hyaluronic.html` |
+
+The words live in `scripts/lib/guides/*.mjs` — one file per guide, in three
+languages. `scripts/gen-guide-pages.mjs` turns them into pages, into the
+structured data (a breadcrumb, the page, and the questions it answers), and
+into `assets/js/guides.js`, which is what puts them in the search box. The
+guides are in the sitemap, and every product page links to all five.
+
+The guides are **generated**. Edit `scripts/lib/guides/*.mjs`, then:
+
+```bash
+npm run gen:guides
+```
+
+`scripts/lib/guide.test.mjs` fails if a guide is missing, if a link points at
+a page that does not exist, if the questions on the page are not the questions
+in the structured data, or if a Japanese sentence has a Korean word in it.
 
 ## Social Feed (Facebook + Instagram)
 
@@ -366,7 +406,7 @@ npm test
 which runs:
 
 ```bash
-node --test scripts/lib/feed.test.mjs scripts/lib/site.test.mjs scripts/lib/siteurl.test.mjs scripts/lib/ig.test.mjs scripts/lib/seo.test.mjs scripts/lib/lang.test.mjs scripts/lib/submit.test.mjs scripts/sync.test.mjs scripts/manual-post.test.mjs
+node --test scripts/lib/feed.test.mjs scripts/lib/site.test.mjs scripts/lib/siteurl.test.mjs scripts/lib/ig.test.mjs scripts/lib/seo.test.mjs scripts/lib/lang.test.mjs scripts/lib/guide.test.mjs scripts/lib/submit.test.mjs scripts/sync.test.mjs scripts/manual-post.test.mjs
 ```
 
 `sync.test.mjs` starts a mock `graph.facebook.com` and runs the **real** sync

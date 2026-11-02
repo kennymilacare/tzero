@@ -5,6 +5,7 @@
 
 import { initI18n, t, getLang } from './i18n.js?v=8';
 import { products, productUrl } from './data.js?v=27';
+import { guides } from './guides.js?v=1';
 import { assetUrl } from './paths.js?v=2';
 
 /* ---------- Header shadow on scroll ---------- */
@@ -366,6 +367,23 @@ function initSearch() {
           subtitle: pickLocalized(p.desc),
           url: p.url,
           icon: '🔗',
+        });
+      }
+    });
+
+    /* buying guides — searched in every language, so a guide is
+       found from whichever page the visitor is on. */
+    guides.forEach((g) => {
+      const hay = [g.title.zh, g.title.en, g.title.ja, g.desc.zh, g.desc.en, g.desc.ja]
+        .join(' ').toLowerCase();
+      if (hay.includes(q)) {
+        items.push({
+          type: 'guide',
+          typeLabel: t('search.typePage'),
+          title: pickLocalized(g.title),
+          subtitle: pickLocalized(g.desc),
+          url: g.url,
+          image: assetUrl(g.image),
         });
       }
     });

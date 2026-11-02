@@ -89,7 +89,7 @@ ${entries.join('\n')}
 export async function sitemapFor(base) {
   const list = pageList();
   for (const entry of list) {
-    entry.lastmod = await lastmodOf(entry.files);
+    entry.lastmod = entry.updated || await lastmodOf(entry.files);
     entry.images = await imagesFor(entry.path, entry.lang);
   }
   return { text: render(list, base), list };

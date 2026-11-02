@@ -96,7 +96,8 @@ test('the request names the host, the key and the addresses', async () => {
   assert.equal(body.host, 'www.tzero-jp.com');
   assert.equal(body.key, key);
   assert.equal(body.keyLocation, `https://www.tzero-jp.com/${key}.txt`);
-  assert.equal(body.urlList.length, 30, 'the site has 30 addresses — 10 pages in 3 languages');
+  assert.equal(body.urlList.length, pageList().length,
+    'the request does not carry every address the site has');
 });
 
 test('every address we send belongs to the site', async () => {

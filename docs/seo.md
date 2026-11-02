@@ -22,7 +22,7 @@
 | 最新動態嘅 ItemList | `scripts/sync-news-jsonld.mjs` |
 | sitemap + 自動 lastmod | `scripts/update-sitemap.mjs` |
 | 圖片壓縮（38 MB → 9 MB） | `scripts/compress-images.py` |
-| 防漂移測試 | `scripts/lib/seo.test.mjs`、`scripts/lib/lang.test.mjs`、`scripts/lib/submit.test.mjs` |
+| 防漂移測試 | `scripts/lib/seo.test.mjs`、`scripts/lib/lang.test.mjs`、`scripts/lib/guide.test.mjs`、`scripts/lib/submit.test.mjs` |
 
 ---
 
@@ -33,6 +33,7 @@ npm run gen:products   # 4 個產品頁
 npm run gen:faq        # index.html 入面嘅常見問題
 npm run gen:jsonld     # 各頁嘅結構化資料
 npm run gen:lang       # 英文版同日文版嘅每一頁（en/ 同 ja/）
+npm run gen:guides     # 5 篇選購指南，三種語言（15 個頁）
 npm run seo:sync       # 最新動態嘅 ItemList
 npm run sitemap        # sitemap.xml + lastmod
 npm run seo:idempotent # 跑多次生成器，睇下會唔會變
@@ -40,7 +41,7 @@ npm run indexnow       # 話俾 Bing 同 Yandex 知啲頁改咗
 npm run seo:check      # 上面全部 + 跑晒所有測試
 ```
 
-`npm run seo:check` 係最值得跑嗰條 —— 一句就做晒所有生成，再跑 109 個測試，
+`npm run seo:check` 係最值得跑嗰條 —— 一句就做晒所有生成，再跑 128 個測試，
 最後仲會確認生成器跑兩次出嚟嘅嘢一模一樣。
 改完任何 SEO 相關嘅嘢，跑一次佢。
 
@@ -48,7 +49,7 @@ npm run seo:check      # 上面全部 + 跑晒所有測試
 因為語言頁係攞嗰啲生成好嘅最終 markup 去做翻譯。
 
 > Deploy workflow 每次都會自動跑一次 `gen:products`、`gen:faq`、`gen:jsonld`、
-> `gen:lang` 同 `sitemap`，所以就算邊次 commit 唔小心漏咗生成，
+> `gen:lang`、`gen:guides` 同 `sitemap`，所以就算邊次 commit 唔小心漏咗生成，
 > 線上版本都唔會過期。
 
 ---
@@ -309,6 +310,42 @@ Google 唔理 hash，所以呢個改動對 SEO 冇影響。
 
 `scripts/lib/submit.test.mjs`（15 個測試）守住「搜尋引擎搵到個站」嗰部分：
 key 檔真係喺站嘅 root、token 三份主頁一樣、sitemap 喺磁碟上同生成器會寫出嚟嘅一樣。
+
+---
+
+## 六之二、五篇選購指南
+
+有啲問題係「買之前」先會問嘅：闊度點睇、膠係咩料、紋路有咩分別、
+第一次買要買幾多、玻尿酸究竟做緊咩。五篇指南就係答呢五個問題。
+
+```
+guide-size.html         尺碼表 · Size chart · サイズ表
+guide-material.html     材質比較 · Materials · 素材の比較
+guide-texture.html      紋路種類 · Textures · テクスチャーの種類
+guide-first-time.html   第一次買點揀 · First time buying · 初めての選び方
+guide-hyaluronic.html   玻尿酸究竟係咩 · Hyaluronic acid · 玻尿酸とは
+```
+
+每篇三種語言，各有各嘅 URL（`/en/guide-size.html`、`/ja/guide-size.html`），
+全部入 sitemap，每篇都帶 FAQPage 結構化資料。
+
+**字喺 `scripts/lib/guides/*.mjs`** —— 一篇一個檔案，三種語言嘅字都喺度。
+`scripts/gen-guide-pages.mjs` 會：
+
+1. 寫出 15 個頁（正文、麵包屑、目錄、表格、常見問題、相關閱讀）
+2. 寫出結構化資料（BreadcrumbList + WebPage + FAQPage）
+3. 寫出 `assets/js/guides.js` —— 搜尋框入面搵得到五篇指南
+
+產品頁底部亦都會列出五篇指南，指南之間互相連結，所以內部連結係雙向嘅。
+
+改完指南嘅字要跑：
+
+```bash
+npm run gen:guides
+```
+
+`scripts/lib/guide.test.mjs`（16 個測試）會捉住：頁面冇咗、連結指向唔存在嘅頁、
+頁面問嘅問題同結構化資料唔一樣、日文入面有韓文或者英文指南入面有中文。
 
 ---
 
