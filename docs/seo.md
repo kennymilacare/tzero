@@ -69,7 +69,9 @@ product-extra-lub.html     ← 潤滑
 ```
 
 每頁自己帶 title、description、canonical、`og:url`、hreflang，
-同埋 Product 結構化資料（sku、價錢、貨架狀態、評分、評價、麵包屑）。
+同埋 Product 結構化資料（sku、價錢、貨架狀態、麵包屑）。
+頁面上亦都有一行看得見嘅麵包屑（首頁 / 全部產品 / 產品名），
+唔止係喺結構化資料入面。
 
 `product.html` 本身仲喺度 —— 舊連結（`product.html?id=`）唔會死，
 但佢而家係 `noindex,follow`，亦唔喺 sitemap 入面，避免同四個新頁重複。
@@ -329,12 +331,34 @@ guide-hyaluronic.html   玻尿酸究竟係咩 · Hyaluronic acid · 玻尿酸と
 每篇三種語言，各有各嘅 URL（`/en/guide-size.html`、`/ja/guide-size.html`），
 全部入 sitemap，每篇都帶 FAQPage 結構化資料。
 
+### 指南嘅索引頁
+
+```
+guides.html               全部選購指南 · All buying guides · すべての購入ガイド
+```
+
+以前五篇指南**只喺產品頁**有連結 —— 其他每一頁（首頁、產品列表、
+新聞、關於、聯絡）都搵唔到佢哋，爬蟲冇理由去撞見呢五頁。
+而家 `guides.html` 列出全部五篇，並且喺**每一頁嘅選單同頁腳**都有連結，
+所以成個指南群係連住嘅。
+
+`guides.html` 帶 BreadcrumbList + CollectionPage + ItemList —— 搜尋引擎
+睇得出佢係「一頁指南」而唔係又一篇指南，同埋知得入面有五篇。
+
 **字喺 `scripts/lib/guides/*.mjs`** —— 一篇一個檔案，三種語言嘅字都喺度。
 `scripts/gen-guide-pages.mjs` 會：
 
 1. 寫出 15 個頁（正文、麵包屑、目錄、表格、常見問題、相關閱讀）
 2. 寫出結構化資料（BreadcrumbList + WebPage + FAQPage）
-3. 寫出 `assets/js/guides.js` —— 搜尋框入面搵得到五篇指南
+3. 寫出 `guides.html`（指南列表頁）同埋佢嘅結構化資料
+4. 寫出 `assets/js/guides.js` —— 搜尋框入面搵得到五篇指南
+
+指南頁**唔會**有 banner 輪播 —— 四張圖成個 megabyte，喺一篇要讀嘅
+文章上面只會拖慢第一個畫面。
+
+頁面上面「最後更新」嘅日期**唔係手寫嘅**，係 git 話你知嗰日
+（`git log -1 --format=%cs`），所以改完指南唔會有人記得去改日期，
+頁面嘅日期同 sitemap 嘅 `lastmod` 亦都唔會爭。
 
 產品頁底部亦都會列出五篇指南，指南之間互相連結，所以內部連結係雙向嘅。
 
@@ -344,8 +368,9 @@ guide-hyaluronic.html   玻尿酸究竟係咩 · Hyaluronic acid · 玻尿酸と
 npm run gen:guides
 ```
 
-`scripts/lib/guide.test.mjs`（16 個測試）會捉住：頁面冇咗、連結指向唔存在嘅頁、
-頁面問嘅問題同結構化資料唔一樣、日文入面有韓文或者英文指南入面有中文。
+`scripts/lib/guide.test.mjs`（22 個測試）會捉住：頁面冇咗、連結指向唔存在嘅頁、
+頁面問嘅問題同結構化資料唔一樣、日文入面有韓文或者英文指南入面有中文、
+每一頁有冇連結去指南、指南頁面嘅日期同 git 話嘅日期一唔一致。
 
 ---
 
@@ -387,11 +412,13 @@ python scripts/compress-images.py --apply     # 真係做
 |---|---|
 | `index.html` | LocalBusiness、WebSite、BreadcrumbList、FAQPage |
 | `products.html` | BreadcrumbList、ItemList（4 件貨） |
-| `product-*.html` | BreadcrumbList、Product（sku、價錢、貨架、評分、評價） |
+| `product-*.html` | BreadcrumbList、Product（sku、價錢、貨架） |
 | `news.html` | BreadcrumbList、ItemList（最新貼文） |
 | `about.html` | BreadcrumbList、WebPage |
 | `contact.html` | BreadcrumbList、ContactPage（指返間舖） |
 | `terms.html` | BreadcrumbList、WebPage |
+| `guides.html` | BreadcrumbList、CollectionPage、ItemList（五篇指南） |
+| `guide-*.html` | BreadcrumbList、WebPage、FAQPage |
 
 `about` / `contact` / `terms` 嗰三頁嘅標題同描述係**直接由頁面自己讀出嚟**，
 所以結構化資料唔可能同頁面講緊唔同嘅嘢。
@@ -413,7 +440,7 @@ python scripts/compress-images.py --apply     # 真係做
 
 ## 九、社交平台分享
 
-`assets/images/og-image.png`（1200×630，PNG）全站共用。
+`assets/images/og-image.png`（1200×630，PNG）係大部分頁面共用嘅品牌圖。
 
 **唔好用 SVG 做 og:image** —— Facebook、X、LinkedIn、WhatsApp 全部讀唔到 SVG。
 `seo.test.mjs` 會守住呢一點。
@@ -424,21 +451,46 @@ python scripts/compress-images.py --apply     # 真係做
 node scripts/gen-og-image.mjs
 ```
 
+### 指南有自己嘅分享圖
+
+五篇指南同一個「指南列表」頁，每頁每種語言都有自己嘅分享圖
+（`assets/images/og/<page>-<lang>.png`，1200×630）—— 圖上面係嗰篇指南
+自己嘅標題，用嗰種語言。所以分享一篇尺碼指南出 WhatsApp，見到嘅係
+「安全套尺碼表」而唔係品牌 logo。
+
+```bash
+node scripts/gen-guide-og-images.mjs   # 18 張圖（6 頁 × 3 語言）
+```
+
+張圖係 headless Chrome 畫出嚟嘅（行一次就夠，圖會 commit 落 repo，
+所以發佈唔使有瀏覽器）。改咗指南嘅標題要再跑一次。
+
+`seo.test.mjs` 會守住：只有指南頁同指南列表頁可以用自己嘅圖，
+其他每一頁都仍然用品牌圖。
+
 ---
 
 ## 十、仲未做嘅嘢
 
 - **Google Business Profile** —— 上面有地址但冇 `geo` 座標（唔想亂填）。
   開咗 Business Profile 之後，可以拎返真實座標加落 `LocalBusiness`
-- **真實用戶評價** —— 而家 Product 結構化資料入面嘅評價係示範內容。
-  Google 會要求評價真係來自真實用戶先會顯示星星
-- **產品列表 / 新聞列表寫死入 HTML** —— 而家呢兩份列表仍然係由 JavaScript 畫。
-  結構化資料（ItemList）已經齊，所以唔急；做咗先對爬蟲更友好
-- **搜尋 overlay 嘅文案翻譯** —— `輸入關鍵字搜尋產品或頁面`、`產品`、`頁面`
-  呢幾個字硬編碼喺 `assets/js/main.js`，冇經 `data-i18n`，所以英文版同日文版
-  嘅搜尋框仍然係中文
-- **Core Web Vitals** —— 圖片壓完之後 LCP 應該大幅改善，
+- **真實用戶評價** —— 之前 Product 結構化資料入面嗰幾條「評價」其實係
+  示範內容，而且頁面上寫住「真實評價」。Google 嘅結構化資料政策要求
+  評價真係來自真實用戶先可以標記，寫住「真實評價」但冇真實評價更加唔可以。
+  所以 markup 同字眼都拎走咗（`aggregateRating` 同 `review` 兩個 node 都冇咗，
+  頁面亦都冇「真實評價」四隻字）。有咗真實評價之後，
+  喺 `assets/js/data.js` 加返 `reviews` 再喺 `scripts/lib/product-page.mjs`
+  加返兩個 node 就得 —— 而家 `seo.test.mjs` 會守住佢哋唔會無端端出現
+- **新聞列表寫死入 HTML** —— 產品列表已經寫死咗（`products.html` 個
+  grid 喺 HTML 入面，唔再淨係靠 JavaScript 畫），但新聞列表仲係由
+  JavaScript 畫。結構化資料（ItemList）已經齊，所以唔急
+- **Core Web Vitals** —— banner 四張圖由 2658 闊壓到 1600（手機另外有
+  800 闊嗰版，用 `srcset` 揀），四張加埋由 1170 KB 跌到 446 KB；
+  手機上只會載 800 闊嗰版，得 147 KB。冇顯示嗰三張 slide 亦都降到低
+  優先次序（`fetchpriority="low"`），等畫面最大嗰張（LCP）先到手。
   上線後可以用 PageSpeed Insights 實測
+  （新圖用新檔名 `*-1600.jpg` / `*-800.jpg`，原本嗰四張原圖冇郁，
+  留返喺度做源檔；`scripts/compress-carousel.py` 就係由佢哋再造新圖）
 - **Search Console / Bing Webmaster 嘅帳戶** —— 呢兩樣要用人手開，要用自己嘅
   Google / Microsoft 帳戶登入，script 做唔到。開咗之後攞 token，再跑
   `node scripts/set-verification.mjs --google <token>` 就得 —— 一步搞掂。

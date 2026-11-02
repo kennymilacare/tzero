@@ -18,7 +18,7 @@
       <image:title>T-ZERO 第九感</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://www.tzero-jp.com/assets/images/banners/carousel/Tzero_website_banner.jpg</image:loc>
+      <image:loc>https://www.tzero-jp.com/assets/images/banners/carousel/Tzero_website_banner-1600.jpg</image:loc>
       <image:title>T-ZERO 第九感</image:title>
     </image:image>
     <image:image>
@@ -56,7 +56,7 @@
       <image:title>T-ZERO NINTH SENSE</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://www.tzero-jp.com/assets/images/banners/carousel/Tzero_website_banner.jpg</image:loc>
+      <image:loc>https://www.tzero-jp.com/assets/images/banners/carousel/Tzero_website_banner-1600.jpg</image:loc>
       <image:title>T-ZERO NINTH SENSE</image:title>
     </image:image>
     <image:image>
@@ -94,7 +94,7 @@
       <image:title>T-ZERO 第九感</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://www.tzero-jp.com/assets/images/banners/carousel/Tzero_website_banner.jpg</image:loc>
+      <image:loc>https://www.tzero-jp.com/assets/images/banners/carousel/Tzero_website_banner-1600.jpg</image:loc>
       <image:title>T-ZERO 第九感</image:title>
     </image:image>
     <image:image>
@@ -454,7 +454,7 @@
       <image:title>NEW｜靠近你，感覺可以再細膩啲</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://www.tzero-jp.com/assets/images/banners/carousel/9.jpg</image:loc>
+      <image:loc>https://www.tzero-jp.com/assets/images/banners/carousel/9-800.jpg</image:loc>
       <image:title>正式登陸 HKTVmall</image:title>
     </image:image>
     <changefreq>weekly</changefreq>
@@ -492,7 +492,7 @@
       <image:title>Closer to you, a little more delicate ✨</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://www.tzero-jp.com/assets/images/banners/carousel/9.jpg</image:loc>
+      <image:loc>https://www.tzero-jp.com/assets/images/banners/carousel/9-800.jpg</image:loc>
       <image:title>Now on HKTVmall</image:title>
     </image:image>
     <changefreq>weekly</changefreq>
@@ -530,7 +530,7 @@
       <image:title>NEW｜靠近你，感覺可以再細膩啲</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://www.tzero-jp.com/assets/images/banners/carousel/9.jpg</image:loc>
+      <image:loc>https://www.tzero-jp.com/assets/images/banners/carousel/9-800.jpg</image:loc>
       <image:title>HKTVmall に登場</image:title>
     </image:image>
     <changefreq>weekly</changefreq>
@@ -735,6 +735,48 @@
     <priority>0.3</priority>
   </url>
   <url>
+    <loc>https://www.tzero-jp.com/guides.html</loc>
+    <lastmod>2026-11-02</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://www.tzero-jp.com/guides.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.tzero-jp.com/en/guides.html"/>
+    <xhtml:link rel="alternate" hreflang="ja-JP" href="https://www.tzero-jp.com/ja/guides.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tzero-jp.com/guides.html"/>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/og/guides-zh.png</image:loc>
+      <image:title>T-ZERO 第九感</image:title>
+    </image:image>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.tzero-jp.com/en/guides.html</loc>
+    <lastmod>2026-11-02</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://www.tzero-jp.com/guides.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.tzero-jp.com/en/guides.html"/>
+    <xhtml:link rel="alternate" hreflang="ja-JP" href="https://www.tzero-jp.com/ja/guides.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tzero-jp.com/guides.html"/>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/og/guides-en.png</image:loc>
+      <image:title>T-ZERO NINTH SENSE</image:title>
+    </image:image>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.tzero-jp.com/ja/guides.html</loc>
+    <lastmod>2026-11-02</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://www.tzero-jp.com/guides.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.tzero-jp.com/en/guides.html"/>
+    <xhtml:link rel="alternate" hreflang="ja-JP" href="https://www.tzero-jp.com/ja/guides.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tzero-jp.com/guides.html"/>
+    <image:image>
+      <image:loc>https://www.tzero-jp.com/assets/images/og/guides-ja.png</image:loc>
+      <image:title>T-ZERO 第九感</image:title>
+    </image:image>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://www.tzero-jp.com/guide-size.html</loc>
     <lastmod>2026-11-02</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-HK" href="https://www.tzero-jp.com/guide-size.html"/>
@@ -742,8 +784,8 @@
     <xhtml:link rel="alternate" hreflang="ja-JP" href="https://www.tzero-jp.com/ja/guide-size.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tzero-jp.com/guide-size.html"/>
     <image:image>
-      <image:loc>https://www.tzero-jp.com/assets/images/og-image.png</image:loc>
-      <image:title>T-ZERO 第九感</image:title>
+      <image:loc>https://www.tzero-jp.com/assets/images/og/guide-size-zh.png</image:loc>
+      <image:title>T-ZERO 第九感 尺碼表</image:title>
     </image:image>
     <image:image>
       <image:loc>https://www.tzero-jp.com/assets/images/products/tzero-ultra-thin.jpg</image:loc>
@@ -760,8 +802,8 @@
     <xhtml:link rel="alternate" hreflang="ja-JP" href="https://www.tzero-jp.com/ja/guide-size.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tzero-jp.com/guide-size.html"/>
     <image:image>
-      <image:loc>https://www.tzero-jp.com/assets/images/og-image.png</image:loc>
-      <image:title>T-ZERO NINTH SENSE</image:title>
+      <image:loc>https://www.tzero-jp.com/assets/images/og/guide-size-en.png</image:loc>
+      <image:title>T-ZERO NINTH SENSE Size chart</image:title>
     </image:image>
     <image:image>
       <image:loc>https://www.tzero-jp.com/assets/images/products/tzero-ultra-thin.jpg</image:loc>
@@ -778,8 +820,8 @@
     <xhtml:link rel="alternate" hreflang="ja-JP" href="https://www.tzero-jp.com/ja/guide-size.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tzero-jp.com/guide-size.html"/>
     <image:image>
-      <image:loc>https://www.tzero-jp.com/assets/images/og-image.png</image:loc>
-      <image:title>T-ZERO 第九感</image:title>
+      <image:loc>https://www.tzero-jp.com/assets/images/og/guide-size-ja.png</image:loc>
+      <image:title>T-ZERO 第九感 サイズ表</image:title>
     </image:image>
     <image:image>
       <image:loc>https://www.tzero-jp.com/assets/images/products/tzero-ultra-thin.jpg</image:loc>
@@ -796,8 +838,8 @@
     <xhtml:link rel="alternate" hreflang="ja-JP" href="https://www.tzero-jp.com/ja/guide-material.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tzero-jp.com/guide-material.html"/>
     <image:image>
-      <image:loc>https://www.tzero-jp.com/assets/images/og-image.png</image:loc>
-      <image:title>T-ZERO 第九感</image:title>
+      <image:loc>https://www.tzero-jp.com/assets/images/og/guide-material-zh.png</image:loc>
+      <image:title>T-ZERO 第九感 材質比較</image:title>
     </image:image>
     <image:image>
       <image:loc>https://www.tzero-jp.com/assets/images/products/lubricant-comparison.jpg</image:loc>
@@ -814,8 +856,8 @@
     <xhtml:link rel="alternate" hreflang="ja-JP" href="https://www.tzero-jp.com/ja/guide-material.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tzero-jp.com/guide-material.html"/>
     <image:image>
-      <image:loc>https://www.tzero-jp.com/assets/images/og-image.png</image:loc>
-      <image:title>T-ZERO NINTH SENSE</image:title>
+      <image:loc>https://www.tzero-jp.com/assets/images/og/guide-material-en.png</image:loc>
+      <image:title>T-ZERO NINTH SENSE Materials</image:title>
     </image:image>
     <image:image>
       <image:loc>https://www.tzero-jp.com/assets/images/products/lubricant-comparison.jpg</image:loc>
@@ -832,8 +874,8 @@
     <xhtml:link rel="alternate" hreflang="ja-JP" href="https://www.tzero-jp.com/ja/guide-material.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tzero-jp.com/guide-material.html"/>
     <image:image>
-      <image:loc>https://www.tzero-jp.com/assets/images/og-image.png</image:loc>
-      <image:title>T-ZERO 第九感</image:title>
+      <image:loc>https://www.tzero-jp.com/assets/images/og/guide-material-ja.png</image:loc>
+      <image:title>T-ZERO 第九感 素材の比較</image:title>
     </image:image>
     <image:image>
       <image:loc>https://www.tzero-jp.com/assets/images/products/lubricant-comparison.jpg</image:loc>
@@ -850,8 +892,8 @@
     <xhtml:link rel="alternate" hreflang="ja-JP" href="https://www.tzero-jp.com/ja/guide-texture.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tzero-jp.com/guide-texture.html"/>
     <image:image>
-      <image:loc>https://www.tzero-jp.com/assets/images/og-image.png</image:loc>
-      <image:title>T-ZERO 第九感</image:title>
+      <image:loc>https://www.tzero-jp.com/assets/images/og/guide-texture-zh.png</image:loc>
+      <image:title>T-ZERO 第九感 紋路種類</image:title>
     </image:image>
     <image:image>
       <image:loc>https://www.tzero-jp.com/assets/images/products/tzero-studded.jpg</image:loc>
@@ -868,8 +910,8 @@
     <xhtml:link rel="alternate" hreflang="ja-JP" href="https://www.tzero-jp.com/ja/guide-texture.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tzero-jp.com/guide-texture.html"/>
     <image:image>
-      <image:loc>https://www.tzero-jp.com/assets/images/og-image.png</image:loc>
-      <image:title>T-ZERO NINTH SENSE</image:title>
+      <image:loc>https://www.tzero-jp.com/assets/images/og/guide-texture-en.png</image:loc>
+      <image:title>T-ZERO NINTH SENSE Textures</image:title>
     </image:image>
     <image:image>
       <image:loc>https://www.tzero-jp.com/assets/images/products/tzero-studded.jpg</image:loc>
@@ -886,8 +928,8 @@
     <xhtml:link rel="alternate" hreflang="ja-JP" href="https://www.tzero-jp.com/ja/guide-texture.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tzero-jp.com/guide-texture.html"/>
     <image:image>
-      <image:loc>https://www.tzero-jp.com/assets/images/og-image.png</image:loc>
-      <image:title>T-ZERO 第九感</image:title>
+      <image:loc>https://www.tzero-jp.com/assets/images/og/guide-texture-ja.png</image:loc>
+      <image:title>T-ZERO 第九感 テクスチャーの種類</image:title>
     </image:image>
     <image:image>
       <image:loc>https://www.tzero-jp.com/assets/images/products/tzero-studded.jpg</image:loc>
@@ -904,8 +946,8 @@
     <xhtml:link rel="alternate" hreflang="ja-JP" href="https://www.tzero-jp.com/ja/guide-first-time.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tzero-jp.com/guide-first-time.html"/>
     <image:image>
-      <image:loc>https://www.tzero-jp.com/assets/images/og-image.png</image:loc>
-      <image:title>T-ZERO 第九感</image:title>
+      <image:loc>https://www.tzero-jp.com/assets/images/og/guide-first-time-zh.png</image:loc>
+      <image:title>T-ZERO 第九感 第一次買點揀</image:title>
     </image:image>
     <image:image>
       <image:loc>https://www.tzero-jp.com/assets/images/products/tzero-ultra-thin.jpg</image:loc>
@@ -922,8 +964,8 @@
     <xhtml:link rel="alternate" hreflang="ja-JP" href="https://www.tzero-jp.com/ja/guide-first-time.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tzero-jp.com/guide-first-time.html"/>
     <image:image>
-      <image:loc>https://www.tzero-jp.com/assets/images/og-image.png</image:loc>
-      <image:title>T-ZERO NINTH SENSE</image:title>
+      <image:loc>https://www.tzero-jp.com/assets/images/og/guide-first-time-en.png</image:loc>
+      <image:title>T-ZERO NINTH SENSE First time buying</image:title>
     </image:image>
     <image:image>
       <image:loc>https://www.tzero-jp.com/assets/images/products/tzero-ultra-thin.jpg</image:loc>
@@ -940,8 +982,8 @@
     <xhtml:link rel="alternate" hreflang="ja-JP" href="https://www.tzero-jp.com/ja/guide-first-time.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tzero-jp.com/guide-first-time.html"/>
     <image:image>
-      <image:loc>https://www.tzero-jp.com/assets/images/og-image.png</image:loc>
-      <image:title>T-ZERO 第九感</image:title>
+      <image:loc>https://www.tzero-jp.com/assets/images/og/guide-first-time-ja.png</image:loc>
+      <image:title>T-ZERO 第九感 初めての選び方</image:title>
     </image:image>
     <image:image>
       <image:loc>https://www.tzero-jp.com/assets/images/products/tzero-ultra-thin.jpg</image:loc>
@@ -958,8 +1000,8 @@
     <xhtml:link rel="alternate" hreflang="ja-JP" href="https://www.tzero-jp.com/ja/guide-hyaluronic.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tzero-jp.com/guide-hyaluronic.html"/>
     <image:image>
-      <image:loc>https://www.tzero-jp.com/assets/images/og-image.png</image:loc>
-      <image:title>T-ZERO 第九感</image:title>
+      <image:loc>https://www.tzero-jp.com/assets/images/og/guide-hyaluronic-zh.png</image:loc>
+      <image:title>T-ZERO 第九感 玻尿酸究竟係咩</image:title>
     </image:image>
     <image:image>
       <image:loc>https://www.tzero-jp.com/assets/images/products/hyaluronic-acid.jpg</image:loc>
@@ -976,8 +1018,8 @@
     <xhtml:link rel="alternate" hreflang="ja-JP" href="https://www.tzero-jp.com/ja/guide-hyaluronic.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tzero-jp.com/guide-hyaluronic.html"/>
     <image:image>
-      <image:loc>https://www.tzero-jp.com/assets/images/og-image.png</image:loc>
-      <image:title>T-ZERO NINTH SENSE</image:title>
+      <image:loc>https://www.tzero-jp.com/assets/images/og/guide-hyaluronic-en.png</image:loc>
+      <image:title>T-ZERO NINTH SENSE Hyaluronic acid</image:title>
     </image:image>
     <image:image>
       <image:loc>https://www.tzero-jp.com/assets/images/products/hyaluronic-acid.jpg</image:loc>
@@ -994,8 +1036,8 @@
     <xhtml:link rel="alternate" hreflang="ja-JP" href="https://www.tzero-jp.com/ja/guide-hyaluronic.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tzero-jp.com/guide-hyaluronic.html"/>
     <image:image>
-      <image:loc>https://www.tzero-jp.com/assets/images/og-image.png</image:loc>
-      <image:title>T-ZERO 第九感</image:title>
+      <image:loc>https://www.tzero-jp.com/assets/images/og/guide-hyaluronic-ja.png</image:loc>
+      <image:title>T-ZERO 第九感 玻尿酸とは</image:title>
     </image:image>
     <image:image>
       <image:loc>https://www.tzero-jp.com/assets/images/products/hyaluronic-acid.jpg</image:loc>

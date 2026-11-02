@@ -2,9 +2,9 @@
    products.js — catalog page: render, filter, sort, count
    =========================================================== */
 
-import { products, brands } from './data.js?v=27';
-import { productCardHTML } from './product-svg.js?v=9';
-import { t, initI18n } from './i18n.js?v=8';
+import { products, brands } from './data.js?v=28';
+import { productCardHTML } from './product-svg.js?v=10';
+import { t, initI18n } from './i18n.js?v=9';
 
 /* ---------- State ---------- */
 
@@ -115,7 +115,7 @@ function render() {
 
   if (count) {
     count.innerHTML = `
-      <span data-i18n="products.count">顯示</span>
+      <span data-i18n="products.count">${t('products.count')}</span>
       <strong>${filtered.length}</strong>
       <span>/</span>
       <strong>${products.length}</strong>

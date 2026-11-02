@@ -21,9 +21,10 @@ import { access, readFile } from 'node:fs/promises';
 import path from 'node:path';
 
 import { products, productUrl } from '../../assets/js/data.js';
-import { GUIDES } from './guides.mjs';
+import { GUIDES, GUIDE_HUB, GUIDE_UI } from './guides.mjs';
 import { escapeText } from './html.mjs';
 import { HTML_LANG, LANGS, pageFile, pageUrl } from './langs.mjs';
+import { changedOn } from './sitemap.mjs';
 import { ROOT } from './site.mjs';
 
 const SITE = 'https://www.tzero-jp.com';
@@ -47,6 +48,19 @@ async function readPage(name) {
 
 async function there(file) {
   return access(path.join(ROOT, file)).then(() => true, () => false);
+}
+
+/** Every page the site publishes. */
+async function sitePages() {
+  const { readdir } = await import('node:fs/promises');
+  const out = [];
+  for (const dir of ['', 'en', 'ja']) {
+    const inner = await readdir(path.join(ROOT, dir)).catch(() => []);
+    for (const name of inner) {
+      if (name.endsWith('.html')) out.push(dir ? `${dir}/${name}` : name);
+    }
+  }
+  return out;
 }
 
 /** Every sentence of a guide, in one language. */
@@ -327,6 +341,106 @@ test('the sitemap lists every guide in every language', async () => {
     for (const lang of LANGS) {
       const loc = `<loc>${pageUrl(SITE, lang, guide.path)}</loc>`;
       assert.ok(xml.includes(loc), `the sitemap does not list ${loc}`);
+    }
+  }
+});
+
+/* ---------- the page that lists them all ---------- */
+
+test('the list of the guides has a page in every language', async () => {
+  for (const lang of LANGS) {
+    assert.ok(await there(pageFile(lang, GUIDE_HUB.path)),
+      `${pageFile(lang, GUIDE_HUB.path)} is missing`);
+  }
+});
+
+test('the list of the guides says what it is', async () => {
+  for (const lang of LANGS) {
+    const html = await readPage(pageFile(lang, GUIDE_HUB.path));
+
+    const nodes = [...html.matchAll(/<script type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g)]
+      .flatMap((m) => {
+        const graph = JSON.parse(m[1]);
+        return graph['@graph'] || [graph];
+      });
+
+    const types = nodes.map((n) => n['@type']);
+    assert.ok(types.includes('BreadcrumbList'), `${lang}/${GUIDE_HUB.path}: no breadcrumb`);
+    assert.ok(types.includes('CollectionPage'), `${lang}/${GUIDE_HUB.path}: no CollectionPage`);
+    assert.ok(types.includes('ItemList'), `${lang}/${GUIDE_HUB.path}: no ItemList`);
+
+    const list = nodes.find((n) => n['@type'] === 'ItemList');
+    assert.equal(list.itemListElement.length, GUIDES.length,
+      `${lang}/${GUIDE_HUB.path}: the list holds ${list.itemListElement.length} of ${GUIDES.length} guides`);
+
+    /* And the words on the page are the words in the guide files. */
+    assert.ok(html.includes(escapeText(GUIDE_UI.hubH1[lang])),
+      `${lang}/${GUIDE_HUB.path}: the heading is not the one from the guide files`);
+    for (const guide of GUIDES) {
+      assert.ok(html.includes(`href="${guide.path}"`),
+        `${lang}/${GUIDE_HUB.path}: there is no link to ${guide.path}`);
+    }
+  }
+});
+
+test('the sitemap lists the page that lists the guides', async () => {
+  const xml = await readPage('sitemap.xml');
+  for (const lang of LANGS) {
+    const loc = `<loc>${pageUrl(SITE, lang, GUIDE_HUB.path)}</loc>`;
+    assert.ok(xml.includes(loc), `the sitemap does not list ${loc}`);
+  }
+});
+
+/* ---------- the guides are found ---------- */
+
+test('every page of the site offers the guides', async () => {
+  /* The guides used to be reachable only from the four product
+     pages. Every other page linked to none of them, and a crawler
+     had no reason to find them. Now they are in the menu and in the
+     footer of every page. */
+  for (const file of await sitePages()) {
+    const html = await readPage(file);
+
+    assert.ok(html.includes(`href="${GUIDE_HUB.path}"`),
+      `${file}: there is no link to ${GUIDE_HUB.path}`);
+
+    for (const guide of GUIDES) {
+      assert.ok(html.includes(`href="${guide.path}"`),
+        `${file}: there is no link to ${guide.path}`);
+    }
+  }
+});
+
+test('the footer of every page lists the guides under their own names', async () => {
+  for (const file of await sitePages()) {
+    const html = await readPage(file);
+    const block = html.match(/<ul data-footer-guides>([\s\S]*?)<\/ul>/);
+    assert.ok(block, `${file}: the footer has no list of guides`);
+
+    for (const guide of GUIDES) {
+      assert.ok(block[1].includes(`>${escapeText(guide.short.zh)}<`)
+        || block[1].includes(`>${escapeText(guide.short.en)}<`)
+        || block[1].includes(`>${escapeText(guide.short.ja)}<`),
+        `${file}: the footer does not name ${guide.slug}`);
+    }
+  }
+});
+
+/* ---------- the date on the page ---------- */
+
+test('the date a guide shows is the day its words were last changed', async () => {
+  /* The date used to be written down by hand, in the guide file, and
+     it went out of date the moment a guide was rewritten. It comes
+     from git now: the day the words were last committed. */
+  for (const guide of GUIDES) {
+    const source = `scripts/lib/guides/${guide.slug}.mjs`;
+    const date = await changedOn(source);
+    if (!date) continue;   /* git cannot say — nothing to check */
+
+    for (const lang of LANGS) {
+      const html = await readPage(pageFile(lang, guide.path));
+      assert.ok(html.includes(`<time datetime="${date}">${date}</time>`),
+        `${lang}/${guide.path}: the page does not show ${date}, the day the words were changed`);
     }
   }
 });

@@ -29,6 +29,7 @@ export const CHANGEFREQ = {
   about: 'monthly',
   contact: 'monthly',
   terms: 'yearly',
+  guides: 'monthly',
   guide: 'monthly',
 };
 
@@ -40,6 +41,7 @@ export const PRIORITY = {
   about: '0.6',
   contact: '0.5',
   terms: '0.3',
+  guides: '0.6',
   guide: '0.6',
 };
 
@@ -50,6 +52,9 @@ export function extrasFor(kind) {
 
   if (kind === 'home' || kind === 'news') return feed;
   if (kind === 'products' || kind === 'product') return catalogue;
+  /* The list of guides shows what each guide is called, so it
+     changes when a guide's words change. */
+  if (kind === 'guides') return GUIDES.map((g) => `scripts/lib/guides/${g.slug}.mjs`);
   return [];
 }
 
@@ -65,10 +70,12 @@ export function pageList() {
 
   for (const page of PAGES) {
     const extra = extrasFor(page.kind);
-    /* A guide carries the date it was last written on. It is the
-       date the words changed, which is what a crawler's lastmod
-       is supposed to mean — and it does not need git to find it. */
+    /* A guide's date is the day its words were last committed, which
+       git knows and nobody has to remember to write down. The file
+       the words live in is part of the page, so that a change to
+       it moves the page's date with it. */
     const guide = page.kind === 'guide' ? GUIDES.find((g) => g.path === page.path) : null;
+    const source = guide ? [`scripts/lib/guides/${guide.slug}.mjs`] : [];
 
     for (const lang of LANGS) {
       const file = pageFile(lang, page.path);
@@ -77,10 +84,11 @@ export function pageList() {
         path: page.path,
         kind: page.kind,
         file,
-        files: [file, ...extra],
+        files: [file, ...extra, ...source],
         changefreq: CHANGEFREQ[page.kind] || 'weekly',
         priority: PRIORITY[page.kind] || '0.5',
-        updated: guide ? guide.updated : null,
+        /* null means "ask git" — see scripts/lib/sitemap.mjs. */
+        updated: null,
       });
     }
   }

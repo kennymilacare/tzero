@@ -41,9 +41,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="../assets/css/base.css?v=5">
-  <link rel="stylesheet" href="../assets/css/layout.css?v=36">
+  <link rel="stylesheet" href="../assets/css/layout.css?v=37">
   <link rel="stylesheet" href="../assets/css/components.css?v=5">
-  <link rel="stylesheet" href="../assets/css/pages.css?v=25">
+  <link rel="stylesheet" href="../assets/css/pages.css?v=26">
 
   <script src="../assets/js/splash.js?v=5" defer></script>
 
@@ -107,61 +107,7 @@
         "seller": {
           "@id": "https://www.tzero-jp.com/#org"
         }
-      },
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.7",
-        "reviewCount": "3",
-        "bestRating": "5",
-        "worstRating": "1"
-      },
-      "review": [
-        {
-          "@type": "Review",
-          "author": {
-            "@type": "Person",
-            "name": "ジェイソン P."
-          },
-          "datePublished": "2026-07-09",
-          "reviewBody": "私にとって「無薬剤」の四文字が決め手です。ベンゾカインに敏感で、多くの持続製品でかぶれが出て、結局一番高い医療用ブランドしか選べず、長期的には出費も痛い。T-ZERO は物理的設計+ヒアルロン酸で刺激ゼロ、効果も安定、医療用よりかなり安い。持続効果ははっきり感じられるのに不自然さがなく、自然な感じ。つや消しブラックの箱は洗面所の棚に置いても目立たず、義母が来ても気に留められない。総合で星4つ。「無薬剤+手頃な価格」は満点、アルミ包装の開けにくさは他SKU同様1点減点。",
-          "reviewRating": {
-            "@type": "Rating",
-            "ratingValue": "4",
-            "bestRating": "5",
-            "worstRating": "1"
-          }
-        },
-        {
-          "@type": "Review",
-          "author": {
-            "@type": "Person",
-            "name": "ライアン H."
-          },
-          "datePublished": "2026-09-18",
-          "reviewBody": "延時スプレーはもう要らない。",
-          "reviewRating": {
-            "@type": "Rating",
-            "ratingValue": "5",
-            "bestRating": "5",
-            "worstRating": "1"
-          }
-        },
-        {
-          "@type": "Review",
-          "author": {
-            "@type": "Person",
-            "name": "マーカス T."
-          },
-          "datePublished": "2026-08-30",
-          "reviewBody": "最後まで持たないことが、私と彼女の長年の悩みでした。T-ZERO のエクステンドは確かに効くのに、しびれ感はゼロ。ヒアルロン酸潤滑で、両方ともぐっと快適に。",
-          "reviewRating": {
-            "@type": "Rating",
-            "ratingValue": "5",
-            "bestRating": "5",
-            "worstRating": "1"
-          }
-        }
-      ]
+      }
     },
     {
       "@type": "Brand",
@@ -189,21 +135,25 @@
       <a href="index.html" class="brand" aria-label="T-ZERO 第九感">
         <img src="../assets/images/brand/t-zero-logo.png" alt="T-ZERO 第九感" class="brand__logo" width="32" height="32">
       </a>
-      <nav class="nav" aria-label="メインメニュー">
+      <nav class="nav" id="site-nav" aria-label="メインメニュー">
         <a href="index.html" class="nav__link">ホーム</a>
         <a href="products.html" class="nav__link is-active">製品</a>
+        <a href="guides.html" class="nav__link">購入ガイド</a>
         <a href="news.html" class="nav__link">ニュース</a>
         <a href="about.html" class="nav__link">ブランドについて</a>
         <a href="contact.html" class="nav__link">お問い合わせ</a>
+      </nav>
+      <div class="header-actions">
         <button class="nav__search" type="button" data-search-open aria-label="検索">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <circle cx="11" cy="11" r="8"/>
             <line x1="21" y1="21" x2="16.65" y2="16.65"/>
           </svg>
         </button>
-      </nav>
-      <div class="header-actions">
         <a class="lang-toggle" href="../product-extended.html" hreflang="zh-HK" lang="zh-HK" data-lang-toggle aria-label="日本語から繁體中文へ切替" title="日本語から繁體中文へ切替">中</a>
+        <button class="menu-toggle" type="button" data-menu-toggle aria-expanded="false" aria-controls="site-nav" aria-label="メニューを開く">
+          <span class="menu-toggle__bars" aria-hidden="true"></span>
+        </button>
       </div>
     </div>
   </header>
@@ -212,29 +162,36 @@
   <div class="top-banner top-banner--carousel" data-carousel>
     <a class="top-banner__link" href="products.html" aria-label="T-ZERO 全シリーズを見る">
       <img class="top-banner__img is-active"
-           src="../assets/images/banners/carousel/11.jpg?v=1"
+           src="../assets/images/banners/carousel/11-1600.jpg?v=2"
+           srcset="../assets/images/banners/carousel/11-800.jpg?v=2 800w, ../assets/images/banners/carousel/11-1600.jpg?v=2 1600w" sizes="100vw"
            alt="T-ZERO 第九感 — エクステンドのバナー"
-           width="2658" height="984"
+           width="1600" height="592"
            loading="eager" decoding="async"
            fetchpriority="high"
            data-carousel-slide>
       <img class="top-banner__img"
-           src="../assets/images/banners/carousel/Tzero_website_banner.jpg?v=1"
+           src="../assets/images/banners/carousel/Tzero_website_banner-1600.jpg?v=2"
+           srcset="../assets/images/banners/carousel/Tzero_website_banner-800.jpg?v=2 800w, ../assets/images/banners/carousel/Tzero_website_banner-1600.jpg?v=2 1600w" sizes="100vw"
            alt="T-ZERO 第九感 — エクストラ潤滑のバナー"
-           width="2658" height="984"
+           width="1600" height="592"
            loading="lazy" decoding="async"
+           fetchpriority="low"
            data-carousel-slide>
       <img class="top-banner__img"
-           src="../assets/images/banners/carousel/9.jpg?v=1"
+           src="../assets/images/banners/carousel/9-1600.jpg?v=2"
+           srcset="../assets/images/banners/carousel/9-800.jpg?v=2 800w, ../assets/images/banners/carousel/9-1600.jpg?v=2 1600w" sizes="100vw"
            alt="T-ZERO 第九感 — スタッデッドのバナー"
-           width="2658" height="984"
+           width="1600" height="592"
            loading="lazy" decoding="async"
+           fetchpriority="low"
            data-carousel-slide>
       <img class="top-banner__img"
-           src="../assets/images/banners/carousel/7.jpg?v=1"
+           src="../assets/images/banners/carousel/7-1600.jpg?v=2"
+           srcset="../assets/images/banners/carousel/7-800.jpg?v=2 800w, ../assets/images/banners/carousel/7-1600.jpg?v=2 1600w" sizes="100vw"
            alt="T-ZERO 第九感 — ウルトラシンのバナー"
-           width="2658" height="984"
+           width="1600" height="592"
            loading="lazy" decoding="async"
+           fetchpriority="low"
            data-carousel-slide>
     </a>
     <button class="top-banner__arrow top-banner__arrow--prev" type="button" data-carousel-prev aria-label="前のスライド">
@@ -259,7 +216,13 @@
   <!-- PRODUCT -->
   <section class="section">
     <div class="container">
-      <a href="products.html" class="back-link">← 製品一覧へ戻る</a>
+      <nav class="crumbs" aria-label="パンくずリスト">
+        <a href="index.html">ホーム</a>
+        <span class="crumbs__sep" aria-hidden="true">/</span>
+        <a href="products.html">全製品</a>
+        <span class="crumbs__sep" aria-hidden="true">/</span>
+        <span class="crumbs__current" aria-current="page" data-crumb>T-ZERO エクステンド</span>
+      </nav>
 
       <div class="product-detail">
         <div class="product-detail__image" data-image><img class="product-image" src="../assets/images/products/tzero-extended.jpg" alt="T-ZERO エクステンド — 持続力サポート ヒアルロン酸コンドーム" width="600" height="600" fetchpriority="high" decoding="async"></div>
@@ -311,54 +274,6 @@
           </div>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- REVIEWS -->
-  <section class="section section--reviews" id="reviews">
-    <div class="container">
-      <div class="reviews-head reveal">
-        <span class="eyebrow">本物のレビュー</span>
-        <h2>お客様の声</h2>
-      </div>
-      <div class="reviews-grid" data-reviews>
-            <article class="review-card">
-              <div class="review-card__stars" role="img" aria-label="4 / 5"><svg class="review-card__star is-on" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.95 6.27 6.85.78-5.13 4.74 1.45 6.78L12 17.7l-6.12 3.37 1.45-6.78L2.2 9.55l6.85-.78L12 2.5z" fill="currentColor" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg><svg class="review-card__star is-on" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.95 6.27 6.85.78-5.13 4.74 1.45 6.78L12 17.7l-6.12 3.37 1.45-6.78L2.2 9.55l6.85-.78L12 2.5z" fill="currentColor" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg><svg class="review-card__star is-on" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.95 6.27 6.85.78-5.13 4.74 1.45 6.78L12 17.7l-6.12 3.37 1.45-6.78L2.2 9.55l6.85-.78L12 2.5z" fill="currentColor" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg><svg class="review-card__star is-on" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.95 6.27 6.85.78-5.13 4.74 1.45 6.78L12 17.7l-6.12 3.37 1.45-6.78L2.2 9.55l6.85-.78L12 2.5z" fill="currentColor" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg><svg class="review-card__star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.95 6.27 6.85.78-5.13 4.74 1.45 6.78L12 17.7l-6.12 3.37 1.45-6.78L2.2 9.55l6.85-.78L12 2.5z" fill="currentColor" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg></div>
-              <p class="review-card__body">私にとって「無薬剤」の四文字が決め手です。ベンゾカインに敏感で、多くの持続製品でかぶれが出て、結局一番高い医療用ブランドしか選べず、長期的には出費も痛い。T-ZERO は物理的設計+ヒアルロン酸で刺激ゼロ、効果も安定、医療用よりかなり安い。持続効果ははっきり感じられるのに不自然さがなく、自然な感じ。つや消しブラックの箱は洗面所の棚に置いても目立たず、義母が来ても気に留められない。総合で星4つ。「無薬剤+手頃な価格」は満点、アルミ包装の開けにくさは他SKU同様1点減点。</p>
-              <div class="review-card__foot">
-                <div class="review-card__avatar" aria-hidden="true">ジ</div>
-                <div class="review-card__meta">
-                  <div class="review-card__name">ジェイソン P.</div>
-                  <div class="review-card__sub">香港・タイワイ · 2026-07-09</div>
-                </div>
-                <span class="review-card__verified"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="5 12 10 17 19 7"/></svg><span>購入済み認証</span></span>
-              </div>
-            </article>
-            <article class="review-card">
-              <div class="review-card__stars" role="img" aria-label="5 / 5"><svg class="review-card__star is-on" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.95 6.27 6.85.78-5.13 4.74 1.45 6.78L12 17.7l-6.12 3.37 1.45-6.78L2.2 9.55l6.85-.78L12 2.5z" fill="currentColor" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg><svg class="review-card__star is-on" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.95 6.27 6.85.78-5.13 4.74 1.45 6.78L12 17.7l-6.12 3.37 1.45-6.78L2.2 9.55l6.85-.78L12 2.5z" fill="currentColor" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg><svg class="review-card__star is-on" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.95 6.27 6.85.78-5.13 4.74 1.45 6.78L12 17.7l-6.12 3.37 1.45-6.78L2.2 9.55l6.85-.78L12 2.5z" fill="currentColor" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg><svg class="review-card__star is-on" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.95 6.27 6.85.78-5.13 4.74 1.45 6.78L12 17.7l-6.12 3.37 1.45-6.78L2.2 9.55l6.85-.78L12 2.5z" fill="currentColor" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg><svg class="review-card__star is-on" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.95 6.27 6.85.78-5.13 4.74 1.45 6.78L12 17.7l-6.12 3.37 1.45-6.78L2.2 9.55l6.85-.78L12 2.5z" fill="currentColor" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg></div>
-              <p class="review-card__body">延時スプレーはもう要らない。</p>
-              <div class="review-card__foot">
-                <div class="review-card__avatar" aria-hidden="true">ラ</div>
-                <div class="review-card__meta">
-                  <div class="review-card__name">ライアン H.</div>
-                  <div class="review-card__sub">香港・テュエンムン · 2026-09-18</div>
-                </div>
-                <span class="review-card__verified"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="5 12 10 17 19 7"/></svg><span>購入済み認証</span></span>
-              </div>
-            </article>
-            <article class="review-card">
-              <div class="review-card__stars" role="img" aria-label="5 / 5"><svg class="review-card__star is-on" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.95 6.27 6.85.78-5.13 4.74 1.45 6.78L12 17.7l-6.12 3.37 1.45-6.78L2.2 9.55l6.85-.78L12 2.5z" fill="currentColor" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg><svg class="review-card__star is-on" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.95 6.27 6.85.78-5.13 4.74 1.45 6.78L12 17.7l-6.12 3.37 1.45-6.78L2.2 9.55l6.85-.78L12 2.5z" fill="currentColor" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg><svg class="review-card__star is-on" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.95 6.27 6.85.78-5.13 4.74 1.45 6.78L12 17.7l-6.12 3.37 1.45-6.78L2.2 9.55l6.85-.78L12 2.5z" fill="currentColor" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg><svg class="review-card__star is-on" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.95 6.27 6.85.78-5.13 4.74 1.45 6.78L12 17.7l-6.12 3.37 1.45-6.78L2.2 9.55l6.85-.78L12 2.5z" fill="currentColor" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg><svg class="review-card__star is-on" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.95 6.27 6.85.78-5.13 4.74 1.45 6.78L12 17.7l-6.12 3.37 1.45-6.78L2.2 9.55l6.85-.78L12 2.5z" fill="currentColor" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg></div>
-              <p class="review-card__body">最後まで持たないことが、私と彼女の長年の悩みでした。T-ZERO のエクステンドは確かに効くのに、しびれ感はゼロ。ヒアルロン酸潤滑で、両方ともぐっと快適に。</p>
-              <div class="review-card__foot">
-                <div class="review-card__avatar" aria-hidden="true">マ</div>
-                <div class="review-card__meta">
-                  <div class="review-card__name">マーカス T.</div>
-                  <div class="review-card__sub">香港・ノースポイント · 2026-08-30</div>
-                </div>
-                <span class="review-card__verified"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="5 12 10 17 19 7"/></svg><span>購入済み認証</span></span>
-              </div>
-            </article>
-        </div>
     </div>
   </section>
 
@@ -473,6 +388,15 @@
           </ul>
         </div>
         <div class="footer__col">
+          <h4>購入ガイド</h4>
+          <ul data-footer-guides>            <li><a href="guides.html">すべての購入ガイド</a></li>
+            <li><a href="guide-size.html">サイズ表</a></li>
+            <li><a href="guide-material.html">素材の比較</a></li>
+            <li><a href="guide-texture.html">テクスチャーの種類</a></li>
+            <li><a href="guide-first-time.html">初めての選び方</a></li>
+            <li><a href="guide-hyaluronic.html">玻尿酸とは</a></li></ul>
+        </div>
+        <div class="footer__col">
           <h4>お問い合わせ</h4>
           <ul>
             <li>
@@ -529,7 +453,7 @@
   </footer>
 
   <script src="../assets/js/carousel.js?v=5" defer></script>
-  <script type="module" src="../assets/js/product.js?v=5"></script>
-  <script type="module" src="../assets/js/main.js?v=14"></script>
+  <script type="module" src="../assets/js/product.js?v=6"></script>
+  <script type="module" src="../assets/js/main.js?v=15"></script>
 </body>
 </html>

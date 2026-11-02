@@ -14,7 +14,7 @@ export default {
   image: 'assets/images/products/lubricant-comparison.jpg',
   imageWidth: 1254,
   imageHeight: 1254,
-  updated: '2026-11-02',
+  published: '2026-11-02',
 
   short: {
     zh: '材質比較',

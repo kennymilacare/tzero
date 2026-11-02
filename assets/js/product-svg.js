@@ -3,8 +3,8 @@
    (no copyrighted brand imagery)
    =========================================================== */
 
-import { brands, productUrl } from './data.js?v=27';
-import { getLang as realGetLang, pickByLang, t } from './i18n.js?v=8';
+import { brands, productUrl } from './data.js?v=28';
+import { getLang as realGetLang, pickByLang, t } from './i18n.js?v=9';
 import { assetUrl } from './paths.js?v=2';
 
 const W = 200;

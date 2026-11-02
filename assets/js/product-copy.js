@@ -15,7 +15,7 @@
    the same in the browser and in Node.
    =========================================================== */
 
-import { i18n } from './data.js?v=27';
+import { i18n } from './data.js?v=28';
 
 /** The words for a key, in a language, with the same fallbacks the browser uses. */
 function word(lang, key) {

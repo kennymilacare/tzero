@@ -15,7 +15,7 @@ export default {
   image: 'assets/images/products/hyaluronic-acid.jpg',
   imageWidth: 1254,
   imageHeight: 1254,
-  updated: '2026-11-02',
+  published: '2026-11-02',
 
   short: {
     zh: '玻尿酸究竟係咩',

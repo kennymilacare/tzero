@@ -18,7 +18,7 @@ export default {
   image: 'assets/images/products/tzero-ultra-thin.jpg',
   imageWidth: 2048,
   imageHeight: 2048,
-  updated: '2026-11-02',
+  published: '2026-11-02',
 
   short: {
     zh: '尺碼表',

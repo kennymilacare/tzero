@@ -1257,3 +1257,41 @@
 }
 
 .guide-links a:hover { border-color: var(--primary); color: var(--primary-dark); }
+
+/* ===========================================================
+   The list of guides — guides.html
+   =========================================================== */
+
+/* One column, top to bottom, like the guides themselves. A list
+   of things to read is a list — five boxes side by side would be
+   five things to squint at. */
+.guide-hub {
+  max-width: 760px;
+  margin-inline: auto;
+  margin-bottom: var(--space-7);
+}
+
+.guide-hub__item {
+  padding: var(--space-5) 0;
+  border-top: 1px solid var(--border);
+}
+
+.guide-hub__item:last-child { border-bottom: 1px solid var(--border); }
+
+.guide-hub__item h2 {
+  font-size: var(--fs-lg);
+  line-height: var(--lh-tight);
+  margin-bottom: var(--space-2);
+}
+
+.guide-hub__item h2 a { color: var(--ink); }
+.guide-hub__item h2 a:hover { color: var(--primary-dark); text-decoration: underline; }
+
+.guide-hub__item p {
+  color: var(--ink-soft);
+  font-size: var(--fs-sm);
+  line-height: 1.8;
+  margin: 0;
+}
+
+.guide-hub__cta { margin-top: var(--space-6); }

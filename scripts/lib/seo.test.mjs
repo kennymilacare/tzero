@@ -18,6 +18,7 @@ import path from 'node:path';
 
 import { products, productUrl, faqs, i18n } from '../../assets/js/data.js';
 import { faqBlock, faqPageNode } from './seo.mjs';
+import { GUIDES, GUIDE_HUB, guideOgImagePath } from './guides.mjs';
 import { LANGS, PAGES, pageUrl } from './langs.mjs';
 import { sitemapFor } from './sitemap.mjs';
 import { loadSite, ROOT } from './site.mjs';
@@ -159,8 +160,16 @@ test('every product has a page of its own', async () => {
     assert.equal(node.offers.price, String(product.price_hkd));
     assert.equal(node.offers.priceCurrency, 'HKD');
     assert.equal(node.offers.availability, 'https://schema.org/InStock');
-    assert.ok(node.aggregateRating && node.aggregateRating.ratingValue);
-    assert.ok(node.review && node.review.length);
+
+    /* The reviews are gone, and they are not to come back as a
+       placeholder. The only reviews this site had were written as
+       examples, and marking those up as customer reviews — with
+       names, dates and a "verified purchase" badge — is exactly what
+       Google's structured data policy forbids. When there are real
+       reviews they can be marked up; until then there is nothing
+       here to mark up. */
+    assert.equal(node.aggregateRating, undefined, `${file}: the rating is back`);
+    assert.equal(node.review, undefined, `${file}: the reviews are back`);
 
     const crumbs = data['@graph'].find((n) => n['@type'] === 'BreadcrumbList');
     assert.ok(crumbs, `${file}: no breadcrumb`);
@@ -213,15 +222,72 @@ test('every page tells a crawler what it is', async () => {
     assert.match(html, /<title>[^<]+<\/title>/, `${file}: no title`);
     assert.match(html, /<meta name="description" content="[^"]+">/, `${file}: no description`);
     assert.match(html, /<link rel="canonical" href="https:\/\/www\.tzero-jp\.com\/[^"]*">/, `${file}: no canonical link`);
+
+    /* The sharing picture. It has to be a raster picture on this
+       site — a social platform cannot read an SVG, and a picture on
+       somebody else's server is a picture that can go missing. */
+    const ogImage = html.match(/<meta property="og:image" content="([^"]+)">/)?.[1];
+    assert.ok(ogImage, `${file}: no sharing picture`);
+    assert.ok(
+      ogImage.startsWith(`${SITE}/assets/images/`),
+      `${file}: the sharing picture is not a picture of this site`,
+    );
+    assert.ok(!ogImage.endsWith('.svg'), `${file}: the sharing picture is an SVG — social platforms cannot read those`);
+    assert.match(html, /<meta property="og:image:width" content="1200">/, `${file}: the sharing picture has no width`);
+    assert.match(html, /<meta property="og:image:height" content="630">/, `${file}: the sharing picture has no height`);
+    assert.match(html, /<meta name="twitter:card" content="summary_large_image">/, `${file}: no Twitter card`);
+
+    /* And the picture Twitter shows is the same one. */
+    const twitterImage = html.match(/<meta name="twitter:image" content="([^"]+)">/)?.[1];
+    assert.equal(twitterImage, ogImage, `${file}: Twitter shows a different picture`);
+  }
+});
+
+test('the guides are shared under a picture of their own', async () => {
+  /* Every page of the site pointed at one picture — the brand mark —
+     so a guide shared on WhatsApp looked like the home page shared
+     on WhatsApp. Now each guide has a picture of its own, in the
+     language of the page, with the guide's own heading on it. */
+  for (const page of [...GUIDES.map((g) => g.path), GUIDE_HUB.path]) {
+    for (const lang of LANGS) {
+      const file = lang === 'zh' ? page : `${lang}/${page}`;
+      const html = await readPage(file);
+      const expected = `${SITE}/${guideOgImagePath(page, lang)}`;
+
+      const ogImage = html.match(/<meta property="og:image" content="([^"]+)">/)?.[1];
+      assert.equal(ogImage, expected, `${file}: the sharing picture is not the guide's own`);
+
+      const there = await access(path.join(ROOT, guideOgImagePath(page, lang))).then(() => true, () => false);
+      assert.ok(there, `${file}: the sharing picture is missing — run: node scripts/gen-guide-og-images.mjs`);
+    }
+  }
+});
+
+test('the other pages keep the brand picture', async () => {
+  const guides = new Set([...GUIDES.map((g) => g.path), GUIDE_HUB.path]);
+
+  for (const file of await sitePages()) {
+    const name = file.includes('/') ? file.split('/')[1] : file;
+    if (guides.has(name)) continue;
+
+    const html = await readPage(file);
     assert.match(
       html,
       /<meta property="og:image" content="https:\/\/www\.tzero-jp\.com\/assets\/images\/og-image\.png">/,
-      `${file}: the sharing image is not the raster one`,
+      `${file}: the sharing picture is not the brand one`,
     );
-    assert.match(html, /<meta property="og:image:width" content="1200">/, `${file}: the sharing image has no width`);
-    assert.match(html, /<meta property="og:image:height" content="630">/, `${file}: the sharing image has no height`);
-    assert.doesNotMatch(html, /og:image"[^>]*\.svg/, `${file}: the sharing image is an SVG — social platforms cannot read those`);
-    assert.match(html, /<meta name="twitter:card" content="summary_large_image">/, `${file}: no Twitter card`);
+  }
+});
+
+test('no page promises reviews it does not have', async () => {
+  /* The old copy called the examples "真實評價" — real reviews. It
+     was not true then and it is not true now, so the words are gone
+     as well as the markup. */
+  for (const file of await sitePages()) {
+    const html = withoutComments(await readPage(file));
+    assert.doesNotMatch(html, /真實評價/, `${file}: still says 真實評價`);
+    assert.doesNotMatch(html, /顧客真實評價/, `${file}: still says 顧客真實評價`);
+    assert.doesNotMatch(html, /aggregateRating/, `${file}: still marks up a rating`);
   }
 });
 

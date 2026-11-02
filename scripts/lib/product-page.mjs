@@ -23,7 +23,7 @@
 
 import { i18n } from '../../assets/js/data.js';
 import { productTitle, productDescription, productKeywords } from '../../assets/js/product-copy.js';
-import { escapeText, replaceLinks } from './html.mjs';
+import { escapeAttr, escapeText, fillByAttr, replaceLinks } from './html.mjs';
 import { GUIDES, GUIDE_UI } from './guides.mjs';
 import { linkBlock, pageUrl } from './langs.mjs';
 
@@ -99,28 +99,77 @@ export function specsHtml(p, lang) {
           </dl>`;
 }
 
-const STAR = `<svg class="review-card__star is-on" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.95 6.27 6.85.78-5.13 4.74 1.45 6.78L12 17.7l-6.12 3.37 1.45-6.78L2.2 9.55l6.85-.78L12 2.5z" fill="currentColor" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>`;
-const STAR_OFF = STAR.replace(' is-on', '');
-
-/** One review, in the same shape product.js builds. */
-export function reviewHtml(r, lang) {
-  const full = Math.max(0, Math.min(5, Math.round(r.rating)));
-  const stars = Array.from({ length: 5 }, (_, i) => (i < full ? STAR : STAR_OFF)).join('');
-  const name = field(r, 'name', lang);
-  const initial = name.trim().charAt(0).toUpperCase() || '?';
-  return `
-            <article class="review-card">
-              <div class="review-card__stars" role="img" aria-label="${r.rating} / 5">${stars}</div>
-              <p class="review-card__body">${escapeText(field(r, 'body', lang))}</p>
-              <div class="review-card__foot">
-                <div class="review-card__avatar" aria-hidden="true">${escapeText(initial)}</div>
-                <div class="review-card__meta">
-                  <div class="review-card__name">${escapeText(name)}</div>
-                  <div class="review-card__sub">${escapeText(field(r, 'location', lang))} · ${escapeText(field(r, 'date', lang))}</div>
+/**
+ * The catalogue, as it is written into the file.
+ *
+ * The products page used to be empty until JavaScript ran: the grid
+ * was drawn by a script, so a crawler — which does not run scripts —
+ * saw a page with a heading and nothing else, and the four product
+ * names, the four prices and the four links to the product pages
+ * were all missing from it.
+ *
+ * This is the same grid, written out in the file, in the language of
+ * the page. The script still redraws it when the page loads (so the
+ * filters work), but the words are there before anything runs.
+ */
+export function catalogueHtml(all, lang, productUrl) {
+  return all.map((p) => `
+            <a class="card-product" href="${productUrl(p.id)}">
+              <div class="card-product__media">
+                <div class="card-product__badges">
+                  ${p.popular ? `<span class="badge badge--accent">${escapeText(t(lang, 'product.card.popular'))}</span>` : ''}
                 </div>
-                ${r.verified ? `<span class="review-card__verified"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="5 12 10 17 19 7"/></svg><span>${escapeText(t(lang, 'product.reviews.verified'))}</span></span>` : ''}
+                <img class="product-image" src="${p.image}" alt="${escapeText(field(p, 'image_alt', lang) || field(p, 'name', lang))}" loading="lazy" decoding="async">
               </div>
-            </article>`;
+              <div class="card-product__brand">${escapeText(p.brand.toUpperCase())}</div>
+              <h3 class="card-product__name">${escapeText(field(p, 'name', lang))}</h3>
+              <p class="card-product__sub">${escapeText(field(p, 'subtitle', lang))}</p>
+              <div class="card-product__specs">
+                <span class="card-product__spec">
+                  ${escapeText(t(lang, 'product.card.material'))}:
+                  <strong>${escapeText(p.material)}</strong>
+                </span>
+                ${p.thickness_mm ? `<span class="card-product__spec">
+                  ${escapeText(t(lang, 'product.card.thickness'))}:
+                  <strong>${p.thickness_mm} mm</strong>
+                </span>` : ''}
+              </div>
+              <div class="card-product__bottom">
+                <span class="card-product__price">
+                  <span class="currency">${escapeText(t(lang, 'product.card.from'))}</span>${p.price_hkd}
+                </span>
+                <span class="btn btn--primary btn--sm"
+                      data-hktv="${escapeAttr(p.hktv_url)}"
+                      onclick="event.preventDefault();event.stopPropagation();window.open('${escapeAttr(p.hktv_url)}','_blank','noopener')">
+                  ${escapeText(t(lang, 'product.card.buy'))}
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                       stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M7 17L17 7M7 7h10v10"/>
+                  </svg>
+                </span>
+              </div>
+            </a>`).join('\n');
+}
+
+/** How many products there are, in the words the page uses. */
+export function countHtml(all, lang) {
+  return `
+            <span data-i18n="products.count">${escapeText(t(lang, 'products.count'))}</span>
+            <strong>${all.length}</strong>
+            <span>/</span>
+            <strong>${all.length}</strong>`;
+}
+
+/**
+ * The catalogue, written into the products page.
+ *
+ * The grid and the count are found by the attributes they carry, so
+ * the same call works on the Chinese page and on its two copies.
+ */
+export function withCatalogue(html, all, lang, productUrl) {
+  let out = fillByAttr(html, 'data-grid', catalogueHtml(all, lang, productUrl));
+  out = fillByAttr(out, 'data-count', countHtml(all, lang));
+  return out;
 }
 
 /** The other products, as links a crawler can follow. */
@@ -171,11 +220,6 @@ ${items}
 /* ---------- structured data ---------- */
 
 export function productJsonLd(p, siteUrl, page, lang, productUrl) {
-  const reviews = Array.isArray(p.reviews) ? p.reviews : [];
-  const average = reviews.length
-    ? reviews.reduce((sum, r) => sum + Number(r.rating || 0), 0) / reviews.length
-    : null;
-
   const brand = t(lang, 'seo.brand.name');
   /* The name in another language, so a search in either finds it. */
   const alternateName = lang === 'en' ? p.name_zh : p.name_en;
@@ -218,27 +262,13 @@ export function productJsonLd(p, siteUrl, page, lang, productUrl) {
     },
   };
 
-  if (average !== null) {
-    product.aggregateRating = {
-      '@type': 'AggregateRating',
-      ratingValue: average.toFixed(1),
-      reviewCount: String(reviews.length),
-      bestRating: '5',
-      worstRating: '1',
-    };
-    product.review = reviews.map((r) => ({
-      '@type': 'Review',
-      author: { '@type': 'Person', name: field(r, 'name', lang) },
-      datePublished: field(r, 'date', lang),
-      reviewBody: field(r, 'body', lang),
-      reviewRating: {
-        '@type': 'Rating',
-        ratingValue: String(r.rating),
-        bestRating: '5',
-        worstRating: '1',
-      },
-    }));
-  }
+  /* No aggregateRating and no review nodes here, on purpose.
+     The only reviews this site had were written as examples, and
+     marking them up as customer reviews — with names, dates and a
+     "verified purchase" badge — is exactly what Google's structured
+     data policy forbids. When genuine customer reviews exist, they can
+     be marked up: put them in `reviews` in assets/js/data.js and add
+     the two nodes back here. See docs/seo.md. */
 
   return {
     '@context': 'https://schema.org',
@@ -278,7 +308,6 @@ export function buildProductPage(template, p, all, {
   const title = productTitle(p, lang);
   const description = productDescription(p, lang);
   const keywords = productKeywords(p, lang);
-  const reviews = Array.isArray(p.reviews) ? p.reviews : [];
 
   let html = template;
 
@@ -336,6 +365,13 @@ export function buildProductPage(template, p, all, {
   /* --- the body --- */
   html = fill(html, '<body>', `<body data-product-id="${escapeText(p.id)}">`, 'the <body> tag');
 
+  /* The breadcrumb — the way back, written out where a visitor can
+     see it and not only in the structured data. */
+  html = fill(html,
+    '<span class="crumbs__current" aria-current="page" data-crumb>產品詳情</span>',
+    `<span class="crumbs__current" aria-current="page" data-crumb>${escapeText(field(p, 'name', lang))}</span>`,
+    'the breadcrumb');
+
   html = fill(html,
     '<div class="product-detail__image" data-image></div>',
     `<div class="product-detail__image" data-image><img class="product-image" src="${p.image}" alt="${escapeText(field(p, 'image_alt', lang) || field(p, 'name', lang))}" width="600" height="600" fetchpriority="high" decoding="async"></div>`,
@@ -369,11 +405,6 @@ export function buildProductPage(template, p, all, {
   html = fill(html,
     '<p data-desc></p>',
     `<p data-desc>${escapeText(field(p, 'description', lang))}</p>`, 'the product description');
-
-  html = fill(html,
-    '<div class="reviews-grid" data-reviews></div>',
-    `<div class="reviews-grid" data-reviews>${reviews.map((r) => reviewHtml(r, lang)).join('')}
-        </div>`, 'the reviews');
 
   html = fill(html,
     '<div class="product-grid" data-related></div>',

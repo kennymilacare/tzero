@@ -18,7 +18,7 @@
 
 import { products, productUrl } from '../../assets/js/data.js';
 import { escapeAttr, escapeText } from './html.mjs';
-import { GUIDES, GUIDE_UI, guideByPath } from './guides.mjs';
+import { GUIDES, GUIDE_HUB, GUIDE_UI, guideByPath, guideOgImageUrl } from './guides.mjs';
 import { HTML_LANG, pageUrl } from './langs.mjs';
 import { t } from './langpage.mjs';
 
@@ -133,14 +133,20 @@ function blockHtml(block, lang) {
  * The links are relative, so the same body works at the root and
  * one folder down — a link to a product page stays inside the
  * language the reader is in.
+ *
+ * `modified` is the day the words were last changed. It comes from
+ * git, so it cannot go out of date — there is no date to forget to
+ * update when the guide is rewritten.
  */
-export function guideBody(guide, lang) {
+export function guideBody(guide, lang, modified) {
   const brand = t(lang, 'seo.brand.name');
   const short = pick(guide.short, lang);
 
   const crumbs = [
     '      <nav class="guide__crumbs" aria-label="' + escapeAttr(GUIDE_UI.guides[lang]) + '">',
     `        <a href="index.html">${escapeText(GUIDE_UI.home[lang])}</a>`,
+    '        <span class="guide__crumbs-sep" aria-hidden="true">/</span>',
+    `        <a href="${escapeAttr(GUIDE_HUB.path)}">${escapeText(GUIDE_UI.guides[lang])}</a>`,
     '        <span class="guide__crumbs-sep" aria-hidden="true">/</span>',
     `        <span aria-current="page">${escapeText(short)}</span>`,
     '      </nav>',
@@ -196,7 +202,7 @@ ${crumbs}
             <figure class="guide__figure">
               <img src="${escapeAttr(guide.image)}" alt="${escapeAttr(`${brand} ${short}`)}" width="${guide.imageWidth || 600}" height="${guide.imageHeight || 600}" loading="lazy" decoding="async">
             </figure>
-            <p class="guide__updated"><span>${escapeText(GUIDE_UI.updated[lang])}</span> <time datetime="${escapeAttr(guide.updated)}">${escapeText(guide.updated)}</time></p>
+            <p class="guide__updated"><span>${escapeText(GUIDE_UI.updated[lang])}</span> <time datetime="${escapeAttr(modified)}">${escapeText(modified)}</time></p>
           </div>
         </header>
 
@@ -236,6 +242,55 @@ ${others}
   </main>`;
 }
 
+/* ---------- the page that lists them all ---------- */
+
+/**
+ * The body of the page that lists every guide.
+ *
+ * One card per guide: its title, its one-line summary, and a link.
+ * The writing is one column, top to bottom, like the guides
+ * themselves — a list of things to read is a list, not a grid of
+ * boxes to squint at.
+ */
+export function hubBody(lang) {
+  const items = GUIDES.map((g) => [
+    '          <article class="guide-hub__item">',
+    `            <h2><a href="${escapeAttr(g.path)}">${escapeText(pick(g.short, lang))}</a></h2>`,
+    `            <p>${inline(pick(g.blurb, lang))}</p>`,
+    '          </article>',
+  ].join('\n')).join('\n');
+
+  const crumbs = [
+    '        <nav class="guide__crumbs" aria-label="' + escapeAttr(GUIDE_UI.guides[lang]) + '">',
+    `          <a href="index.html">${escapeText(GUIDE_UI.home[lang])}</a>`,
+    '          <span class="guide__crumbs-sep" aria-hidden="true">/</span>',
+    `          <span aria-current="page">${escapeText(GUIDE_UI.guides[lang])}</span>`,
+    '        </nav>',
+  ].join('\n');
+
+  return `  <main>
+    <section class="section guide">
+      <div class="container">
+${crumbs}
+
+        <header class="guide__head">
+          <span class="eyebrow">${escapeText(GUIDE_UI.hubEyebrow[lang])}</span>
+          <h1>${escapeText(GUIDE_UI.hubH1[lang])}</h1>
+          <p class="guide__lead">${inline(GUIDE_UI.hubLead[lang])}</p>
+        </header>
+
+        <div class="guide-hub">
+${items}
+        </div>
+
+        <p class="guide-hub__cta">
+          <a class="btn btn--primary" href="products.html">${escapeText(GUIDE_UI.hubCta[lang])}</a>
+        </p>
+      </div>
+    </section>
+  </main>`;
+}
+
 /* ---------- the structured data ---------- */
 
 /**
@@ -245,7 +300,7 @@ ${others}
  * itself, and the questions it answers — all three are true of
  * the page and none of them is written out twice.
  */
-export function guideJsonLd(guide, lang, siteUrl) {
+export function guideJsonLd(guide, lang, siteUrl, modified) {
   const page = pageUrl(siteUrl, lang, guide.path);
 
   return {
@@ -255,7 +310,8 @@ export function guideJsonLd(guide, lang, siteUrl) {
         '@type': 'BreadcrumbList',
         itemListElement: [
           { '@type': 'ListItem', position: 1, name: GUIDE_UI.home[lang], item: pageUrl(siteUrl, lang, '') },
-          { '@type': 'ListItem', position: 2, name: pick(guide.short, lang), item: page },
+          { '@type': 'ListItem', position: 2, name: GUIDE_UI.guides[lang], item: pageUrl(siteUrl, lang, GUIDE_HUB.path) },
+          { '@type': 'ListItem', position: 3, name: pick(guide.short, lang), item: page },
         ],
       },
       {
@@ -267,9 +323,11 @@ export function guideJsonLd(guide, lang, siteUrl) {
         isPartOf: { '@id': `${siteUrl}#site` },
         publisher: { '@id': `${siteUrl}#org` },
         inLanguage: HTML_LANG[lang],
-        datePublished: guide.updated,
-        dateModified: guide.updated,
-        image: `${siteUrl}${guide.image}`,
+        datePublished: guide.published,
+        dateModified: modified,
+        /* The picture the guide is about, and the picture it is
+           shared under — the same two the sitemap names. */
+        image: [`${siteUrl}${guide.image}`, guideOgImageUrl(siteUrl, guide.path, lang)],
       },
       {
         '@type': 'FAQPage',
@@ -277,6 +335,52 @@ export function guideJsonLd(guide, lang, siteUrl) {
           '@type': 'Question',
           name: plain(pick(item.q, lang)),
           acceptedAnswer: { '@type': 'Answer', text: plain(pick(item.a, lang)) },
+        })),
+      },
+    ],
+  };
+}
+
+/**
+ * What the list of guides says about itself.
+ *
+ * A collection page, and a list of the five things in it — so that
+ * a search engine knows the page is a list of guides and not
+ * another guide, and knows what the list holds.
+ */
+export function hubJsonLd(lang, siteUrl, modified) {
+  const page = pageUrl(siteUrl, lang, GUIDE_HUB.path);
+
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: GUIDE_UI.home[lang], item: pageUrl(siteUrl, lang, '') },
+          { '@type': 'ListItem', position: 2, name: GUIDE_UI.guides[lang], item: page },
+        ],
+      },
+      {
+        '@type': 'CollectionPage',
+        '@id': `${page}#webpage`,
+        url: page,
+        name: GUIDE_UI.hubTitle[lang],
+        description: GUIDE_UI.hubDescription[lang],
+        isPartOf: { '@id': `${siteUrl}#site` },
+        publisher: { '@id': `${siteUrl}#org` },
+        inLanguage: HTML_LANG[lang],
+        datePublished: GUIDE_HUB.published,
+        dateModified: modified,
+        image: guideOgImageUrl(siteUrl, GUIDE_HUB.path, lang),
+      },
+      {
+        '@type': 'ItemList',
+        itemListElement: GUIDES.map((g, i) => ({
+          '@type': 'ListItem',
+          position: i + 1,
+          name: pick(g.short, lang),
+          url: pageUrl(siteUrl, lang, g.path),
         })),
       },
     ],

@@ -89,7 +89,10 @@ const LANGUAGE_PROOF = [
   { file: 'ja/terms.html', has: 'プライバシーポリシー', hasNot: '私隱權政策' },
   { file: 'ja/terms.html', has: '返品・交換について', hasNot: '退換貨政策' },
   { file: 'en/index.html', has: 'Hyaluronic acid', hasNot: '玻尿酸' },
-  { file: 'ja/index.html', has: 'ヒアルロン酸', hasNot: '玻尿酸' },
+  /* 玻尿酸 is Japanese as well as Chinese — the guide's own title is
+     「玻尿酸とは」. So the Cantonese in the Chinese title is what
+     must not leak: 究竟係咩 is Cantonese and nothing else. */
+  { file: 'ja/index.html', has: 'ヒアルロン酸', hasNot: '究竟係咩' },
   { file: 'en/contact.html', has: 'Kwun Tong', hasNot: '九龍觀塘173號申新大廈5樓' },
   { file: 'en/news.html', has: 'News', hasNot: '最新動態' },
   { file: 'en/about.html', has: 'About', hasNot: '關於我們' },

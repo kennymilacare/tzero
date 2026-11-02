@@ -3,9 +3,9 @@
    newsletter form, header shadow on scroll, search.
    =========================================================== */
 
-import { initI18n, t, getLang } from './i18n.js?v=8';
-import { products, productUrl } from './data.js?v=27';
-import { guides } from './guides.js?v=1';
+import { initI18n, t, getLang } from './i18n.js?v=9';
+import { products, productUrl } from './data.js?v=28';
+import { guides } from './guides.js?v=2';
 import { assetUrl } from './paths.js?v=2';
 
 /* ---------- Header shadow on scroll ---------- */
@@ -80,6 +80,53 @@ function showToast(msg, type = 'success') {
 /* expose globally for other scripts */
 window.showToast = showToast;
 
+/* ---------- The menu on a small screen ----------
+   The menu has six links, which is more than a phone can show
+   across. Under 900 pixels it becomes a drawer: the button opens
+   it, the links stack, and the drawer closes when a link is
+   followed, when the Escape key is pressed, or when the screen
+   grows wide enough for the menu to lie flat again. */
+function initMobileMenu() {
+  const toggle = document.querySelector('[data-menu-toggle]');
+  const nav = document.querySelector('.nav');
+  if (!toggle || !nav) return;
+
+  const setOpen = (open) => {
+    nav.classList.toggle('is-open', open);
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  };
+
+  toggle.addEventListener('click', () => {
+    setOpen(!nav.classList.contains('is-open'));
+  });
+
+  /* A link in the drawer is a link to another page — the drawer
+     has done its job by the time it is followed. */
+  nav.addEventListener('click', (e) => {
+    if (e.target.closest('a')) setOpen(false);
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && nav.classList.contains('is-open')) {
+      setOpen(false);
+      toggle.focus();
+    }
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!nav.classList.contains('is-open')) return;
+    if (nav.contains(e.target) || toggle.contains(e.target)) return;
+    setOpen(false);
+  });
+
+  /* The drawer is for a small screen. When the screen grows, the
+     menu lies flat again — and the drawer must not stay open on
+     top of it. */
+  window.matchMedia('(min-width: 901px)').addEventListener('change', (e) => {
+    if (e.matches) setOpen(false);
+  });
+}
+
 /* ---------- Init ---------- */
 document.addEventListener('DOMContentLoaded', () => {
   initI18n();
@@ -87,6 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initReveal();
   initNewsletter();
   initSearch();
+  initMobileMenu();
   initFlipCards();
   initLightbox();
 });

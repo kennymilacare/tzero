@@ -320,3 +320,28 @@ export function innerText(html, openStart) {
   if (!span) return '';
   return html.slice(span.contentStart, span.contentEnd);
 }
+
+/**
+ * Put something inside the element that carries an attribute.
+ *
+ * The element is found by the attribute it carries, not by what is
+ * written around it — so the same call works on every page of the
+ * site, whatever else is on it. And because the whole of what was
+ * inside is replaced, running it twice gives the same page twice:
+ * a generator can fill a box in a file it read from that same file.
+ */
+export function fillByAttr(html, attr, content, { required = false } = {}) {
+  const tags = scan(html);
+  const spans = elements(html, tags);
+
+  for (const tag of tags) {
+    if (tag.closing) continue;
+    if (!(attr in attrsOf(tag))) continue;
+    const span = spans.get(tag.start);
+    if (!span) continue;
+    return html.slice(0, span.contentStart) + content + html.slice(span.contentEnd);
+  }
+
+  if (required) throw new Error(`the page has no element with ${attr}`);
+  return html;
+}

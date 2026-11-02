@@ -40,9 +40,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="../assets/css/base.css?v=5">
-  <link rel="stylesheet" href="../assets/css/layout.css?v=36">
+  <link rel="stylesheet" href="../assets/css/layout.css?v=37">
   <link rel="stylesheet" href="../assets/css/components.css?v=5">
-  <link rel="stylesheet" href="../assets/css/pages.css?v=25">
+  <link rel="stylesheet" href="../assets/css/pages.css?v=26">
 
   <script src="../assets/js/splash.js?v=5" defer></script>
 
@@ -125,21 +125,25 @@
       <a href="index.html" class="brand" aria-label="T-ZERO NINTH SENSE">
         <img src="../assets/images/brand/t-zero-logo.png" alt="T-ZERO NINTH SENSE" class="brand__logo" width="32" height="32">
       </a>
-      <nav class="nav" aria-label="Main menu">
+      <nav class="nav" id="site-nav" aria-label="Main menu">
         <a href="index.html" class="nav__link">Home</a>
         <a href="products.html" class="nav__link is-active">Products</a>
+        <a href="guides.html" class="nav__link">Buying guides</a>
         <a href="news.html" class="nav__link">News</a>
         <a href="about.html" class="nav__link">About</a>
         <a href="contact.html" class="nav__link">Contact</a>
+      </nav>
+      <div class="header-actions">
         <button class="nav__search" type="button" data-search-open aria-label="Search">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <circle cx="11" cy="11" r="8"/>
             <line x1="21" y1="21" x2="16.65" y2="16.65"/>
           </svg>
         </button>
-      </nav>
-      <div class="header-actions">
         <a class="lang-toggle" href="../ja/products.html" hreflang="ja-JP" lang="ja-JP" data-lang-toggle aria-label="Switch to 日本語" title="Switch to 日本語">JA</a>
+        <button class="menu-toggle" type="button" data-menu-toggle aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">
+          <span class="menu-toggle__bars" aria-hidden="true"></span>
+        </button>
       </div>
     </div>
   </header>
@@ -148,29 +152,36 @@
   <div class="top-banner top-banner--carousel" data-carousel>
     <a class="top-banner__link" href="products.html" aria-label="Browse all T-ZERO products">
       <img class="top-banner__img is-active"
-           src="../assets/images/banners/carousel/7.jpg?v=1"
+           src="../assets/images/banners/carousel/7-1600.jpg?v=2"
+           srcset="../assets/images/banners/carousel/7-800.jpg?v=2 800w, ../assets/images/banners/carousel/7-1600.jpg?v=2 1600w" sizes="100vw"
            alt="T-ZERO NINTH SENSE — ultra thin banner"
-           width="2658" height="984"
+           width="1600" height="592"
            loading="eager" decoding="async"
            fetchpriority="high"
            data-carousel-slide>
       <img class="top-banner__img"
-           src="../assets/images/banners/carousel/9.jpg?v=1"
+           src="../assets/images/banners/carousel/9-1600.jpg?v=2"
+           srcset="../assets/images/banners/carousel/9-800.jpg?v=2 800w, ../assets/images/banners/carousel/9-1600.jpg?v=2 1600w" sizes="100vw"
            alt="T-ZERO NINTH SENSE — studded banner"
-           width="2658" height="984"
+           width="1600" height="592"
            loading="lazy" decoding="async"
+           fetchpriority="low"
            data-carousel-slide>
       <img class="top-banner__img"
-           src="../assets/images/banners/carousel/Tzero_website_banner.jpg?v=1"
+           src="../assets/images/banners/carousel/Tzero_website_banner-1600.jpg?v=2"
+           srcset="../assets/images/banners/carousel/Tzero_website_banner-800.jpg?v=2 800w, ../assets/images/banners/carousel/Tzero_website_banner-1600.jpg?v=2 1600w" sizes="100vw"
            alt="T-ZERO NINTH SENSE — extra lubricant banner"
-           width="2658" height="984"
+           width="1600" height="592"
            loading="lazy" decoding="async"
+           fetchpriority="low"
            data-carousel-slide>
       <img class="top-banner__img"
-           src="../assets/images/banners/carousel/11.jpg?v=1"
+           src="../assets/images/banners/carousel/11-1600.jpg?v=2"
+           srcset="../assets/images/banners/carousel/11-800.jpg?v=2 800w, ../assets/images/banners/carousel/11-1600.jpg?v=2 1600w" sizes="100vw"
            alt="T-ZERO NINTH SENSE — extended banner"
-           width="2658" height="984"
+           width="1600" height="592"
            loading="lazy" decoding="async"
+           fetchpriority="low"
            data-carousel-slide>
     </a>
     <button class="top-banner__arrow top-banner__arrow--prev" type="button" data-carousel-prev aria-label="Previous slide">
@@ -216,7 +227,11 @@
 
       <div class="catalog__main">
         <div class="catalog__bar">
-          <div class="catalog__count" data-count></div>
+          <div class="catalog__count" data-count>
+            <span>Showing</span>
+            <strong>4</strong>
+            <span>/</span>
+            <strong>4</strong></div>
           <label class="catalog__sort">
             <span>Sort</span>
             <select data-sort>
@@ -228,7 +243,147 @@
           </label>
         </div>
 
-        <div class="product-grid" data-grid></div>
+        <div class="product-grid" data-grid>
+            <a class="card-product" href="product-extra-lub.html">
+              <div class="card-product__media">
+                <div class="card-product__badges">
+                  <span class="badge badge--accent">Popular</span>
+                </div>
+                <img class="product-image" src="../assets/images/products/tzero-extra-lub.jpg" alt="T-ZERO Extra Lubricant — 200% hyaluronic condom" loading="lazy" decoding="async">
+              </div>
+              <div class="card-product__brand">TZERO</div>
+              <h3 class="card-product__name">T-ZERO Extra Lubricant</h3>
+              <p class="card-product__sub">200% Lube ・ Hyaluronic Essence</p>
+              <div class="card-product__specs">
+                <span class="card-product__spec">
+                  Material:
+                  <strong>Latex</strong>
+                </span>
+                <span class="card-product__spec">
+                  Thickness:
+                  <strong>0.03 mm</strong>
+                </span>
+              </div>
+              <div class="card-product__bottom">
+                <span class="card-product__price">
+                  <span class="currency">HK$</span>98
+                </span>
+                <span class="btn btn--primary btn--sm"
+                      data-hktv="https://www.hktvmall.com/search?q=tzero+lubricant"
+                      onclick="event.preventDefault();event.stopPropagation();window.open('https://www.hktvmall.com/search?q=tzero+lubricant','_blank','noopener')">
+                  Buy on HKTVmall
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                       stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M7 17L17 7M7 7h10v10"/>
+                  </svg>
+                </span>
+              </div>
+            </a>
+
+            <a class="card-product" href="product-extended.html">
+              <div class="card-product__media">
+                <div class="card-product__badges">
+                  <span class="badge badge--accent">Popular</span>
+                </div>
+                <img class="product-image" src="../assets/images/products/tzero-extended.jpg" alt="T-ZERO Extended — hyaluronic condom for lasting performance" loading="lazy" decoding="async">
+              </div>
+              <div class="card-product__brand">TZERO</div>
+              <h3 class="card-product__name">T-ZERO Extended</h3>
+              <p class="card-product__sub">Lasting Performance ・ Hyaluronic Lube</p>
+              <div class="card-product__specs">
+                <span class="card-product__spec">
+                  Material:
+                  <strong>Latex</strong>
+                </span>
+                <span class="card-product__spec">
+                  Thickness:
+                  <strong>0.03 mm</strong>
+                </span>
+              </div>
+              <div class="card-product__bottom">
+                <span class="card-product__price">
+                  <span class="currency">HK$</span>98
+                </span>
+                <span class="btn btn--primary btn--sm"
+                      data-hktv="https://www.hktvmall.com/search?q=tzero+extended"
+                      onclick="event.preventDefault();event.stopPropagation();window.open('https://www.hktvmall.com/search?q=tzero+extended','_blank','noopener')">
+                  Buy on HKTVmall
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                       stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M7 17L17 7M7 7h10v10"/>
+                  </svg>
+                </span>
+              </div>
+            </a>
+
+            <a class="card-product" href="product-studded.html">
+              <div class="card-product__media">
+                <div class="card-product__badges">
+                  <span class="badge badge--accent">Popular</span>
+                </div>
+                <img class="product-image" src="../assets/images/products/tzero-studded.jpg" alt="T-ZERO Studded — textured hyaluronic condom" loading="lazy" decoding="async">
+              </div>
+              <div class="card-product__brand">TZERO</div>
+              <h3 class="card-product__name">T-ZERO Studded</h3>
+              <p class="card-product__sub">Studded Texture ・ Hyaluronic Lube</p>
+              <div class="card-product__specs">
+                <span class="card-product__spec">
+                  Material:
+                  <strong>Latex</strong>
+                </span>
+                <span class="card-product__spec">
+                  Thickness:
+                  <strong>0.04 mm</strong>
+                </span>
+              </div>
+              <div class="card-product__bottom">
+                <span class="card-product__price">
+                  <span class="currency">HK$</span>98
+                </span>
+                <span class="btn btn--primary btn--sm"
+                      data-hktv="https://www.hktvmall.com/search?q=tzero+studded"
+                      onclick="event.preventDefault();event.stopPropagation();window.open('https://www.hktvmall.com/search?q=tzero+studded','_blank','noopener')">
+                  Buy on HKTVmall
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                       stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M7 17L17 7M7 7h10v10"/>
+                  </svg>
+                </span>
+              </div>
+            </a>
+
+            <a class="card-product" href="product-ultra-thin.html">
+              <div class="card-product__media">
+                <div class="card-product__badges">
+                  <span class="badge badge--accent">Popular</span>
+                </div>
+                <img class="product-image" src="../assets/images/products/tzero-ultra-thin.jpg" alt="T-ZERO Ultra Thin — 0.01mm hyaluronic condom" loading="lazy" decoding="async">
+              </div>
+              <div class="card-product__brand">TZERO</div>
+              <h3 class="card-product__name">T-ZERO Ultra Thin</h3>
+              <p class="card-product__sub">Ultra-thin ・ Hyaluronic Lube</p>
+              <div class="card-product__specs">
+                <span class="card-product__spec">
+                  Material:
+                  <strong>Latex</strong>
+                </span>
+                
+              </div>
+              <div class="card-product__bottom">
+                <span class="card-product__price">
+                  <span class="currency">HK$</span>98
+                </span>
+                <span class="btn btn--primary btn--sm"
+                      data-hktv="https://www.hktvmall.com/search?q=tzero+ultra+thin"
+                      onclick="event.preventDefault();event.stopPropagation();window.open('https://www.hktvmall.com/search?q=tzero+ultra+thin','_blank','noopener')">
+                  Buy on HKTVmall
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                       stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M7 17L17 7M7 7h10v10"/>
+                  </svg>
+                </span>
+              </div>
+            </a></div>
         <div class="catalog__empty" data-empty style="display: none;">No products match your filters.</div>
       </div>
     </div>
@@ -270,6 +425,15 @@
             <li><a href="news.html">News</a></li>
             <li><a href="contact.html">Contact us</a></li>
           </ul>
+        </div>
+        <div class="footer__col">
+          <h4>Buying guides</h4>
+          <ul data-footer-guides>            <li><a href="guides.html">All buying guides</a></li>
+            <li><a href="guide-size.html">Size chart</a></li>
+            <li><a href="guide-material.html">Materials</a></li>
+            <li><a href="guide-texture.html">Textures</a></li>
+            <li><a href="guide-first-time.html">First time buying</a></li>
+            <li><a href="guide-hyaluronic.html">Hyaluronic acid</a></li></ul>
         </div>
         <div class="footer__col">
           <h4>Contact</h4>
@@ -328,6 +492,6 @@
   </footer>
 
   <script src="../assets/js/carousel.js?v=5" defer></script>
-  <script type="module" src="../assets/js/products.js?v=4"></script>
+  <script type="module" src="../assets/js/products.js?v=5"></script>
 </body>
 </html>

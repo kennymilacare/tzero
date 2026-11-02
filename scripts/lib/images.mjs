@@ -20,13 +20,13 @@ import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 
 import { i18n, productUrl, products } from '../../assets/js/data.js';
-import { GUIDES } from './guides.mjs';
+import { GUIDES, GUIDE_HUB, guideOgImagePath } from './guides.mjs';
 import { ROOT } from './site.mjs';
 
 /* The picture every page carries, and the logo. */
 const OG_IMAGE = 'assets/images/og-image.png';
 const LOGO = 'assets/images/brand/t-zero-logo.png';
-const BANNER = 'assets/images/banners/carousel/Tzero_website_banner.jpg';
+const BANNER = 'assets/images/banners/carousel/Tzero_website_banner-1600.jpg';
 
 /* The two pictures the About page flips between. */
 const ABOUT_IMAGES = [
@@ -59,7 +59,20 @@ async function newsPosts() {
  */
 export async function imagesFor(path, lang) {
   const brand = brandName(lang);
-  const images = [{ path: OG_IMAGE, title: brand }];
+
+  /* The sharing picture of this page. The guides have one of their
+     own — their own heading, in their own language — and every other
+     page keeps the brand picture. */
+  const guide = GUIDES.find((g) => g.path === path);
+  const isHub = path === GUIDE_HUB.path;
+  const sharing = guide || isHub
+    ? {
+        path: guideOgImagePath(path, lang),
+        title: `${brand} ${guide ? (guide.short[lang] || guide.short.zh) : ''}`.trim(),
+      }
+    : { path: OG_IMAGE, title: brand };
+
+  const images = [sharing];
 
   /* The home page: the banner, the logo, and the four products in
      the featured grid. */
@@ -99,10 +112,16 @@ export async function imagesFor(path, lang) {
     return images;
   }
 
-  /* A guide page: the picture the guide is about. */
-  const guide = GUIDES.find((g) => g.path === path);
+  /* A guide page: the picture the guide is about, and the picture
+     the guide is shared under — the one with its own heading on it,
+     which is what a search engine and a chat app both show. */
   if (guide) {
     images.push({ path: guide.image, title: `${brand} ${guide.short[lang] || guide.short.zh}` });
+    return images;
+  }
+
+  /* The list of the guides: the sharing picture of that page. */
+  if (isHub) {
     return images;
   }
 

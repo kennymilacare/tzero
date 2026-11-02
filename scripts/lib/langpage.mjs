@@ -17,7 +17,8 @@
    =========================================================== */
 
 import { i18n } from '../../assets/js/data.js';
-import { attrsOf, elements, escapeText, replaceLinks, resolveI18n, scan } from './html.mjs';
+import { attrsOf, elements, escapeAttr, escapeText, fillByAttr, replaceLinks, resolveI18n, scan } from './html.mjs';
+import { footerGuidesHtml } from './guides.mjs';
 import { HTML_LANG, LANG_DIR, NEXT_LANG, NEXT_LABEL, PAGES, TOGGLE_ARIA, linkBlock, langUrlsJson, pageUrl, relativePath } from './langs.mjs';
 
 /* ---------- the parts that say what language this is ---------- */
@@ -63,6 +64,12 @@ export function assetPaths(html, lang) {
   if (!LANG_DIR[lang]) return html;
   return html
     .replace(/(src|href)="assets\//g, '$1="../assets/')
+    /* The set of pictures a browser can choose from — the banner
+       offers a small copy for the phones and a large one for the
+       desktops. It is one more place the folder depth shows, and
+       every copy in the list is a path of its own. */
+    .replace(/(srcset)="([^"]*)"/g,
+      (m, attr, value) => `${attr}="${value.replace(/assets\//g, '../assets/')}"`)
     .replace(/'\.\/assets\//g, "'../assets/");
 }
 
@@ -178,6 +185,9 @@ export function translatePage(html, {
   faq = null,
   strip = false,
   dropKeywords = false,
+  footerGuides = true,
+  ogImage = null,
+  ogImageAlt = null,
 }) {
   let out = html;
 
@@ -203,8 +213,19 @@ export function translatePage(html, {
     `<meta property="og:site_name" content="${escapeText(brand)}">`);
   out = out.replace(/<meta name="author" content="[^"]*">/,
     `<meta name="author" content="${escapeText(brand)}">`);
+
+  /* The sharing picture. A guide has a picture of its own — its own
+     heading, in its own language — so that a guide shared on
+     WhatsApp looks like a guide and not like the logo. Every other
+     page keeps the brand picture the template carries. */
+  if (ogImage) {
+    out = out.replace(/<meta property="og:image" content="[^"]*">/,
+      `<meta property="og:image" content="${escapeAttr(ogImage)}">`);
+    out = out.replace(/<meta name="twitter:image" content="[^"]*">/,
+      `<meta name="twitter:image" content="${escapeAttr(ogImage)}">`);
+  }
   out = out.replace(/<meta property="og:image:alt" content="[^"]*">/,
-    `<meta property="og:image:alt" content="${escapeText(`${brand} — ${t(lang, 'seo.brand.desc')}`)}">`);
+    `<meta property="og:image:alt" content="${escapeText(ogImageAlt || `${brand} — ${t(lang, 'seo.brand.desc')}`)}">`);
 
   out = replaceLinks(out, linkBlock(siteUrl, lang, path));
   out = out.replace(/<meta property="og:url" content="[^"]*">/,
@@ -219,6 +240,11 @@ export function translatePage(html, {
 
   /* The questions. */
   if (faq != null) out = replaceFaq(out, faq);
+
+  /* The guides, in the footer of every page. The titles come from
+     the guide files, so the words in the footer are the same words
+     as the headings on the pages they point at. */
+  if (footerGuides) out = fillByAttr(out, 'data-footer-guides', footerGuidesHtml(lang));
 
   /* Where the page is, and how to get to the other language. */
   out = finishHead(out, { siteUrl, lang, path });

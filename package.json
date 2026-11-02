@@ -12,6 +12,7 @@
     "gen:lang": "node scripts/gen-lang-pages.mjs",
     "gen:guides": "node scripts/gen-guide-pages.mjs",
     "gen:og": "node scripts/gen-og-image.mjs",
+    "gen:og:guides": "node scripts/gen-guide-og-images.mjs",
     "sitemap": "node scripts/update-sitemap.mjs",
     "seo:sync": "node scripts/sync-news-jsonld.mjs",
     "seo:idempotent": "node scripts/check-idempotent.mjs",

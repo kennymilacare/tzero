@@ -32,6 +32,7 @@ Built with plain **HTML / CSS / JavaScript** — no build step, no framework, no
 ├── guide-texture.html     # Generated — plain, ribbed, studded, wrinkled
 ├── guide-first-time.html  # Generated — buying one for the first time
 ├── guide-hyaluronic.html  # Generated — what hyaluronic acid actually does
+├── guides.html            # Generated — the list of all five guides, in the menu of every page
 ├── about.html             # About + brand values + brand story
 ├── news.html              # Latest news (renders the Facebook feed)
 ├── contact.html           # Contact form + cards + map placeholder
@@ -70,7 +71,7 @@ Built with plain **HTML / CSS / JavaScript** — no build step, no framework, no
 │   │   ├── splash.js      # Opening splash
 │   │   ├── bubbles.js     # Homepage background bubbles
 │   │   └── contact.js     # Form validation
-│   └── images/            # banners, brand, couples, hero, icons, products, og-image.png
+│   └── images/            # banners, brand, couples, hero, icons, products, og-image.png, og/ (the guides' own sharing pictures)
 ├── scripts/
 │   ├── sync-facebook.mjs  # Pulls the Instagram feed, writes news.json
 │   ├── manual-post.mjs    # Turns assets/data/manual.json into the feed — no token needed
@@ -82,8 +83,9 @@ Built with plain **HTML / CSS / JavaScript** — no build step, no framework, no
 │   ├── gen-faq-html.mjs   # Writes the FAQ into index.html
 │   ├── gen-jsonld.mjs     # Writes the structured data into the pages
 │   ├── gen-lang-pages.mjs # Writes the English and Japanese version of every page
-│   ├── gen-guide-pages.mjs # Writes the five buying guides, in three languages
+│   ├── gen-guide-pages.mjs # Writes the five buying guides and their list page, in three languages
 │   ├── gen-og-image.mjs   # Writes the sharing image
+│   ├── gen-guide-og-images.mjs # Writes each guide's own sharing picture (needs Chrome)
 │   ├── sync-og-image.mjs  # Keeps the sharing image in step with the pages
 │   ├── sync-news-jsonld.mjs # Writes the news ItemList into data.js
 │   ├── update-sitemap.mjs # Writes sitemap.xml with the lastmod dates from git
@@ -91,6 +93,9 @@ Built with plain **HTML / CSS / JavaScript** — no build step, no framework, no
 │   ├── indexnow.mjs       # Tells Bing and Yandex which pages changed
 │   ├── set-verification.mjs # Puts the Search Console / Bing token in the home pages
 │   ├── compress-images.py # Shrinks the images (--dry-run first!)
+│   ├── compress-carousel.py # Makes the banner smaller, and makes a copy for the phones
+│   ├── update-carousel-markup.mjs # Points the pages at the two sizes of the banner
+│   ├── bump-versions.mjs  # Says to the browsers that a file has changed
 │   ├── lib/feed.mjs       # Pure helpers (unit-tested)
 │   ├── lib/site.mjs       # Reads the accounts from site.json
 │   ├── lib/siteurl.mjs    # Pure helpers for the site's own address
@@ -225,6 +230,23 @@ structured data (a breadcrumb, the page, and the questions it answers), and
 into `assets/js/guides.js`, which is what puts them in the search box. The
 guides are in the sitemap, and every product page links to all five.
 
+`guides.html` lists all five, and it is in the **menu and the footer of every
+page of the site** — so a crawler reaches the guides from anywhere, not only
+from the four product pages.
+
+The date each guide shows ("last updated") is not written down by hand: it is
+the day git says its words were last committed. There is no date to forget.
+
+Each guide also has **its own sharing picture** — `assets/images/og/<page>-<lang>.png`
+— with the guide's own heading on it, so a guide shared on WhatsApp looks like
+a guide and not like the logo. Those pictures are drawn by a headless Chrome:
+
+```bash
+npm run gen:og:guides
+```
+
+They are kept in the repository, so publishing the site does not need a browser.
+
 The guides are **generated**. Edit `scripts/lib/guides/*.mjs`, then:
 
 ```bash
@@ -233,7 +255,26 @@ npm run gen:guides
 
 `scripts/lib/guide.test.mjs` fails if a guide is missing, if a link points at
 a page that does not exist, if the questions on the page are not the questions
-in the structured data, or if a Japanese sentence has a Korean word in it.
+in the structured data, if a Japanese sentence has a Korean word in it, if a
+page does not offer the guides, or if the date on the page is not the day the
+words were changed.
+
+## The Banner Pictures
+
+The four pictures in the banner at the top of every page were 2658 pixels
+wide and cost about 1.2 MB between them. There are now **two copies of
+each** — `*-1600.jpg` for the desktops and `*-800.jpg` for the phones —
+and the pages ask for the right one with a `srcset`:
+
+```bash
+python scripts/compress-carousel.py            # makes the two copies
+node scripts/update-carousel-markup.mjs        # points the pages at them
+```
+
+The original pictures are left where they are: the script reads them and
+writes new files, so nothing is overwritten and the sources are kept. The
+three slides that are not showing are fetched last (`fetchpriority="low"`),
+so the picture the page is judged on arrives first.
 
 ## Social Feed (Facebook + Instagram)
 

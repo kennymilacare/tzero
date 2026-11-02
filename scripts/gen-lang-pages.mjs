@@ -40,7 +40,7 @@ import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import path from 'node:path';
 
 import { faqs, i18n, products, productUrl } from '../assets/js/data.js';
-import { buildProductPage } from './lib/product-page.mjs';
+import { buildProductPage, withCatalogue } from './lib/product-page.mjs';
 import { localiseGraph, plainGraph, t, translatePage } from './lib/langpage.mjs';
 import { faqBlock } from './lib/seo.mjs';
 import { LANGS, PAGES } from './lib/langs.mjs';
@@ -113,8 +113,10 @@ async function main() {
   for (const page of PAGES) {
     const kind = page.kind;
     /* The guides have a generator of their own — they are written
-       from the guide files, not translated from a Chinese page. */
-    if (kind === 'guide') continue;
+       from the guide files, not translated from a Chinese page.
+       The list of them (guides.html) is written there too, so that
+       the menu, the footer and the guide pages all agree about it. */
+    if (kind === 'guide' || kind === 'guides') continue;
     const isProduct = kind === 'product';
     const product = isProduct ? products.find((p) => productUrl(p.id) === page.path) : null;
 
@@ -147,6 +149,16 @@ async function main() {
           productUrl,
           note: 'node scripts/gen-lang-pages.mjs',
         }).html;
+      }
+
+      /* The catalogue, written into the file. It used to be drawn
+         by a script when the page loaded, so a crawler — which does
+         not run scripts — saw a page with a heading and nothing on
+         it: no product names, no prices, no links. The words are
+         there now, before anything runs; the script still redraws
+         the grid when the page loads, so the filters work. */
+      if (kind === 'products') {
+        html = withCatalogue(html, products, lang, productUrl);
       }
 
       html = translatePage(html, {

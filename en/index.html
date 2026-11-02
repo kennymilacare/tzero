@@ -50,9 +50,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@1,400;1,500&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="../assets/css/base.css?v=5">
-  <link rel="stylesheet" href="../assets/css/layout.css?v=36">
+  <link rel="stylesheet" href="../assets/css/layout.css?v=37">
   <link rel="stylesheet" href="../assets/css/components.css?v=5">
-  <link rel="stylesheet" href="../assets/css/pages.css?v=25">
+  <link rel="stylesheet" href="../assets/css/pages.css?v=26">
 
   <script src="../assets/js/splash.js?v=5" defer></script>
 
@@ -221,22 +221,26 @@
         <img src="../assets/images/brand/t-zero-logo.png" alt="T-ZERO NINTH SENSE" class="brand__logo" width="32" height="32">
       </a>
 
-      <nav class="nav" aria-label="Main menu">
+      <nav class="nav" id="site-nav" aria-label="Main menu">
         <a href="index.html" class="nav__link is-active">Home</a>
         <a href="products.html" class="nav__link">Products</a>
+        <a href="guides.html" class="nav__link">Buying guides</a>
         <a href="news.html" class="nav__link">News</a>
         <a href="about.html" class="nav__link">About</a>
         <a href="contact.html" class="nav__link">Contact</a>
+      </nav>
+
+      <div class="header-actions">
         <button class="nav__search" type="button" data-search-open aria-label="Search">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <circle cx="11" cy="11" r="8"/>
             <line x1="21" y1="21" x2="16.65" y2="16.65"/>
           </svg>
         </button>
-      </nav>
-
-      <div class="header-actions">
         <a class="lang-toggle" href="../ja/index.html" hreflang="ja-JP" lang="ja-JP" data-lang-toggle aria-label="Switch to 日本語" title="Switch to 日本語">JA</a>
+        <button class="menu-toggle" type="button" data-menu-toggle aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">
+          <span class="menu-toggle__bars" aria-hidden="true"></span>
+        </button>
       </div>
     </div>
   </header>
@@ -245,29 +249,36 @@
   <div class="top-banner top-banner--carousel top-banner--zoom" data-carousel>
     <a class="top-banner__link" href="products.html" aria-label="Browse all T-ZERO products">
       <img class="top-banner__img is-active"
-           src="../assets/images/banners/carousel/Tzero_website_banner.jpg?v=1"
+           src="../assets/images/banners/carousel/Tzero_website_banner-1600.jpg?v=2"
+           srcset="../assets/images/banners/carousel/Tzero_website_banner-800.jpg?v=2 800w, ../assets/images/banners/carousel/Tzero_website_banner-1600.jpg?v=2 1600w" sizes="100vw"
            alt="T-ZERO NINTH SENSE — extra lubricant banner"
-           width="2658" height="984"
+           width="1600" height="592"
            loading="eager" decoding="async"
            fetchpriority="high"
            data-carousel-slide>
       <img class="top-banner__img"
-           src="../assets/images/banners/carousel/7.jpg?v=1"
+           src="../assets/images/banners/carousel/7-1600.jpg?v=2"
+           srcset="../assets/images/banners/carousel/7-800.jpg?v=2 800w, ../assets/images/banners/carousel/7-1600.jpg?v=2 1600w" sizes="100vw"
            alt="T-ZERO NINTH SENSE — ultra thin banner"
-           width="2658" height="984"
+           width="1600" height="592"
            loading="lazy" decoding="async"
+           fetchpriority="low"
            data-carousel-slide>
       <img class="top-banner__img"
-           src="../assets/images/banners/carousel/11.jpg?v=1"
+           src="../assets/images/banners/carousel/11-1600.jpg?v=2"
+           srcset="../assets/images/banners/carousel/11-800.jpg?v=2 800w, ../assets/images/banners/carousel/11-1600.jpg?v=2 1600w" sizes="100vw"
            alt="T-ZERO NINTH SENSE — extended banner"
-           width="2658" height="984"
+           width="1600" height="592"
            loading="lazy" decoding="async"
+           fetchpriority="low"
            data-carousel-slide>
       <img class="top-banner__img"
-           src="../assets/images/banners/carousel/9.jpg?v=1"
+           src="../assets/images/banners/carousel/9-1600.jpg?v=2"
+           srcset="../assets/images/banners/carousel/9-800.jpg?v=2 800w, ../assets/images/banners/carousel/9-1600.jpg?v=2 1600w" sizes="100vw"
            alt="T-ZERO NINTH SENSE — studded banner"
-           width="2658" height="984"
+           width="1600" height="592"
            loading="lazy" decoding="async"
+           fetchpriority="low"
            data-carousel-slide>
     </a>
     <button class="top-banner__arrow top-banner__arrow--prev" type="button" data-carousel-prev aria-label="Previous slide">
@@ -642,9 +653,9 @@
 
       <div class="news-card reveal" data-news-card>
         <a aria-label="View post on Facebook" class="news-card__media" href="https://www.facebook.com/Tzerohk" target="_blank" rel="noopener">
-          <img src="../assets/images/banners/carousel/11.jpg"
+          <img src="../assets/images/banners/carousel/11-800.jpg?v=2" srcset="../assets/images/banners/carousel/11-800.jpg?v=2 800w, ../assets/images/banners/carousel/11-1600.jpg?v=2 1600w" sizes="(max-width: 768px) 100vw, 400px"
                alt="T-ZERO NINTH SENSE Facebook post image"
-               width="2658" height="984"
+               width="800" height="296"
                loading="lazy" decoding="async">
           <span class="news-card__source">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -866,6 +877,16 @@
         </div>
 
         <div class="footer__col">
+          <h4>Buying guides</h4>
+          <ul data-footer-guides>            <li><a href="guides.html">All buying guides</a></li>
+            <li><a href="guide-size.html">Size chart</a></li>
+            <li><a href="guide-material.html">Materials</a></li>
+            <li><a href="guide-texture.html">Textures</a></li>
+            <li><a href="guide-first-time.html">First time buying</a></li>
+            <li><a href="guide-hyaluronic.html">Hyaluronic acid</a></li></ul>
+        </div>
+
+        <div class="footer__col">
           <h4>Contact</h4>
           <ul>
             <li>
@@ -931,13 +952,13 @@
 
   <!-- ========== SCRIPTS ========== -->
   <script type="module">
-    import { products } from '../assets/js/data.js?v=27';
-    import { productCardHTML } from '../assets/js/product-svg.js?v=9';
-    import { faqs } from '../assets/js/data.js?v=27';
-    import { initI18n, t, pickByLang } from '../assets/js/i18n.js?v=8';
+    import { products } from '../assets/js/data.js?v=28';
+    import { productCardHTML } from '../assets/js/product-svg.js?v=10';
+    import { faqs } from '../assets/js/data.js?v=28';
+    import { initI18n, t, pickByLang } from '../assets/js/i18n.js?v=9';
     import { initFaq } from '../assets/js/faq.js?v=1';
-    import { initHeaderScroll, initReveal, initNewsletter, showToast } from '../assets/js/main.js?v=14';
-    import { initForm } from '../assets/js/contact.js?v=4';
+    import { initHeaderScroll, initReveal, initNewsletter, showToast } from '../assets/js/main.js?v=15';
+    import { initForm } from '../assets/js/contact.js?v=5';
 
     initI18n();
 
@@ -961,6 +982,6 @@
   </script>
   <script src="../assets/js/carousel.js?v=5" defer></script>
   <script src="../assets/js/bubbles.js?v=5" defer></script>
-  <script type="module" src="../assets/js/news.js?v=11"></script>
+  <script type="module" src="../assets/js/news.js?v=12"></script>
 </body>
 </html>

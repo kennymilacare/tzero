@@ -11,10 +11,10 @@
    page, so a crawler ends up on the right one.
    =========================================================== */
 
-import { products, productUrl } from './data.js?v=27';
-import { productCardHTML, productMediaHTML } from './product-svg.js?v=9';
-import { initI18n, getLang, t, pickByLang } from './i18n.js?v=8';
-import { productTitle, productDescription } from './product-copy.js?v=3';
+import { products, productUrl } from './data.js?v=28';
+import { productCardHTML, productMediaHTML } from './product-svg.js?v=10';
+import { initI18n, getLang, t, pickByLang } from './i18n.js?v=9';
+import { productTitle, productDescription } from './product-copy.js?v=4';
 
 function readId() {
   const fromBody = document.body && document.body.dataset.productId;
@@ -144,52 +144,6 @@ function renderRelated(product) {
   wrap.innerHTML = [...related, ...filler].map(productCardHTML).join('');
 }
 
-function starsHTML(rating) {
-  const full = Math.max(0, Math.min(5, Math.round(rating)));
-  let html = '';
-  for (let i = 0; i < 5; i++) {
-    const fill = i < full ? 'is-on' : '';
-    html += `<svg class="review-card__star ${fill}" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.95 6.27 6.85.78-5.13 4.74 1.45 6.78L12 17.7l-6.12 3.37 1.45-6.78L2.2 9.55l6.85-.78L12 2.5z" fill="currentColor" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>`;
-  }
-  return html;
-}
-
-function initialOf(name) {
-  return (name || '').trim().charAt(0).toUpperCase() || '?';
-}
-
-function reviewCardHTML(review) {
-  const name = pickByLang(review, 'name');
-  const location = pickByLang(review, 'location');
-  const date = pickByLang(review, 'date');
-  const body = pickByLang(review, 'body');
-  return `
-    <article class="review-card">
-      <div class="review-card__stars" role="img" aria-label="${review.rating} / 5">${starsHTML(review.rating)}</div>
-      <p class="review-card__body">${body}</p>
-      <div class="review-card__foot">
-        <div class="review-card__avatar" aria-hidden="true">${initialOf(name)}</div>
-        <div class="review-card__meta">
-          <div class="review-card__name">${name}</div>
-          <div class="review-card__sub">${location} · ${date}</div>
-        </div>
-        ${review.verified ? `<span class="review-card__verified"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="5 12 10 17 19 7"/></svg><span>${t('product.reviews.verified')}</span></span>` : ''}
-      </div>
-    </article>
-  `;
-}
-
-function renderReviews(product) {
-  const wrap = document.querySelector('[data-reviews]');
-  if (!wrap) return;
-  const reviews = Array.isArray(product.reviews) ? product.reviews : [];
-  if (reviews.length === 0) {
-    wrap.innerHTML = `<p class="reviews-empty">${t('product.reviews.empty')}</p>`;
-    return;
-  }
-  wrap.innerHTML = reviews.map(reviewCardHTML).join('');
-}
-
 function render() {
   const id = readId();
   const product = products.find((p) => p.id === id) || products[0];
@@ -199,6 +153,14 @@ function render() {
 
   const titleEl = document.querySelector('[data-title]');
   if (titleEl) titleEl.textContent = pickByLang(product, 'name');
+
+  /* The last step of the breadcrumb: the way back to the
+     catalogue, and the name of the product standing there. The
+     generated pages already carry the name; this keeps it right
+     when the visitor changes the language, and fills it in on the
+     old page that takes its product from the address. */
+  const crumbEl = document.querySelector('[data-crumb]');
+  if (crumbEl) crumbEl.textContent = pickByLang(product, 'name');
 
   const subEl = document.querySelector('[data-subtitle]');
   if (subEl) subEl.textContent = pickByLang(product, 'subtitle');
@@ -240,7 +202,6 @@ function render() {
   updateHead(product);
 
   renderRelated(product);
-  renderReviews(product);
 }
 
 function init() {

@@ -41,9 +41,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="../assets/css/base.css?v=5">
-  <link rel="stylesheet" href="../assets/css/layout.css?v=36">
+  <link rel="stylesheet" href="../assets/css/layout.css?v=37">
   <link rel="stylesheet" href="../assets/css/components.css?v=5">
-  <link rel="stylesheet" href="../assets/css/pages.css?v=25">
+  <link rel="stylesheet" href="../assets/css/pages.css?v=26">
 
   <script src="../assets/js/splash.js?v=5" defer></script>
 
@@ -107,61 +107,7 @@
         "seller": {
           "@id": "https://www.tzero-jp.com/#org"
         }
-      },
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.7",
-        "reviewCount": "3",
-        "bestRating": "5",
-        "worstRating": "1"
-      },
-      "review": [
-        {
-          "@type": "Review",
-          "author": {
-            "@type": "Person",
-            "name": "Yuki M."
-          },
-          "datePublished": "2026-08-19",
-          "reviewBody": "Tried 0.01mm brands from Japan, Korea, and Europe — T-ZERO is one of the few with no plastic smell at all.",
-          "reviewRating": {
-            "@type": "Rating",
-            "ratingValue": "5",
-            "bestRating": "5",
-            "worstRating": "1"
-          }
-        },
-        {
-          "@type": "Review",
-          "author": {
-            "@type": "Person",
-            "name": "Daniel K."
-          },
-          "datePublished": "2026-09-11",
-          "reviewBody": "Same as wearing nothing.",
-          "reviewRating": {
-            "@type": "Rating",
-            "ratingValue": "5",
-            "bestRating": "5",
-            "worstRating": "1"
-          }
-        },
-        {
-          "@type": "Review",
-          "author": {
-            "@type": "Person",
-            "name": "Brian N."
-          },
-          "datePublished": "2026-07-02",
-          "reviewBody": "My girlfriend's into the \"you can't feel a thing\" experience and T-ZERO delivers exactly that. 0.01mm plus instant body-heat transfer genuinely feels like a second skin — the gap to \"wearing nothing\" is basically non-existent. I've tried 0.01mm brands from Japan, Korea, and Europe, and the hyaluronic lube stops the ultra-thin from drying out and tearing. The manufacturing is clearly a step up in maturity, and neither of us got any reaction. The only thing to watch is being gentle when you open the box — 0.01mm is so thin you can snag one with your fingernail without realising; I tore one, lucky the other nine survived. Nothing to fault overall, I'll keep reordering and I've already recommended it to everyone looking for the \"invisible\" experience.",
-          "reviewRating": {
-            "@type": "Rating",
-            "ratingValue": "4",
-            "bestRating": "5",
-            "worstRating": "1"
-          }
-        }
-      ]
+      }
     },
     {
       "@type": "Brand",
@@ -189,21 +135,25 @@
       <a href="index.html" class="brand" aria-label="T-ZERO NINTH SENSE">
         <img src="../assets/images/brand/t-zero-logo.png" alt="T-ZERO NINTH SENSE" class="brand__logo" width="32" height="32">
       </a>
-      <nav class="nav" aria-label="Main menu">
+      <nav class="nav" id="site-nav" aria-label="Main menu">
         <a href="index.html" class="nav__link">Home</a>
         <a href="products.html" class="nav__link is-active">Products</a>
+        <a href="guides.html" class="nav__link">Buying guides</a>
         <a href="news.html" class="nav__link">News</a>
         <a href="about.html" class="nav__link">About</a>
         <a href="contact.html" class="nav__link">Contact</a>
+      </nav>
+      <div class="header-actions">
         <button class="nav__search" type="button" data-search-open aria-label="Search">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <circle cx="11" cy="11" r="8"/>
             <line x1="21" y1="21" x2="16.65" y2="16.65"/>
           </svg>
         </button>
-      </nav>
-      <div class="header-actions">
         <a class="lang-toggle" href="../ja/product-ultra-thin.html" hreflang="ja-JP" lang="ja-JP" data-lang-toggle aria-label="Switch to 日本語" title="Switch to 日本語">JA</a>
+        <button class="menu-toggle" type="button" data-menu-toggle aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">
+          <span class="menu-toggle__bars" aria-hidden="true"></span>
+        </button>
       </div>
     </div>
   </header>
@@ -212,29 +162,36 @@
   <div class="top-banner top-banner--carousel" data-carousel>
     <a class="top-banner__link" href="products.html" aria-label="Browse all T-ZERO products">
       <img class="top-banner__img is-active"
-           src="../assets/images/banners/carousel/11.jpg?v=1"
+           src="../assets/images/banners/carousel/11-1600.jpg?v=2"
+           srcset="../assets/images/banners/carousel/11-800.jpg?v=2 800w, ../assets/images/banners/carousel/11-1600.jpg?v=2 1600w" sizes="100vw"
            alt="T-ZERO NINTH SENSE — extended banner"
-           width="2658" height="984"
+           width="1600" height="592"
            loading="eager" decoding="async"
            fetchpriority="high"
            data-carousel-slide>
       <img class="top-banner__img"
-           src="../assets/images/banners/carousel/Tzero_website_banner.jpg?v=1"
+           src="../assets/images/banners/carousel/Tzero_website_banner-1600.jpg?v=2"
+           srcset="../assets/images/banners/carousel/Tzero_website_banner-800.jpg?v=2 800w, ../assets/images/banners/carousel/Tzero_website_banner-1600.jpg?v=2 1600w" sizes="100vw"
            alt="T-ZERO NINTH SENSE — extra lubricant banner"
-           width="2658" height="984"
+           width="1600" height="592"
            loading="lazy" decoding="async"
+           fetchpriority="low"
            data-carousel-slide>
       <img class="top-banner__img"
-           src="../assets/images/banners/carousel/9.jpg?v=1"
+           src="../assets/images/banners/carousel/9-1600.jpg?v=2"
+           srcset="../assets/images/banners/carousel/9-800.jpg?v=2 800w, ../assets/images/banners/carousel/9-1600.jpg?v=2 1600w" sizes="100vw"
            alt="T-ZERO NINTH SENSE — studded banner"
-           width="2658" height="984"
+           width="1600" height="592"
            loading="lazy" decoding="async"
+           fetchpriority="low"
            data-carousel-slide>
       <img class="top-banner__img"
-           src="../assets/images/banners/carousel/7.jpg?v=1"
+           src="../assets/images/banners/carousel/7-1600.jpg?v=2"
+           srcset="../assets/images/banners/carousel/7-800.jpg?v=2 800w, ../assets/images/banners/carousel/7-1600.jpg?v=2 1600w" sizes="100vw"
            alt="T-ZERO NINTH SENSE — ultra thin banner"
-           width="2658" height="984"
+           width="1600" height="592"
            loading="lazy" decoding="async"
+           fetchpriority="low"
            data-carousel-slide>
     </a>
     <button class="top-banner__arrow top-banner__arrow--prev" type="button" data-carousel-prev aria-label="Previous slide">
@@ -259,7 +216,13 @@
   <!-- PRODUCT -->
   <section class="section">
     <div class="container">
-      <a href="products.html" class="back-link">← Back to all products</a>
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href="index.html">Home</a>
+        <span class="crumbs__sep" aria-hidden="true">/</span>
+        <a href="products.html">All Products</a>
+        <span class="crumbs__sep" aria-hidden="true">/</span>
+        <span class="crumbs__current" aria-current="page" data-crumb>T-ZERO Ultra Thin</span>
+      </nav>
 
       <div class="product-detail">
         <div class="product-detail__image" data-image><img class="product-image" src="../assets/images/products/tzero-ultra-thin.jpg" alt="T-ZERO Ultra Thin — 0.01mm hyaluronic condom" width="600" height="600" fetchpriority="high" decoding="async"></div>
@@ -307,54 +270,6 @@
           </div>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- REVIEWS -->
-  <section class="section section--reviews" id="reviews">
-    <div class="container">
-      <div class="reviews-head reveal">
-        <span class="eyebrow">Real reviews</span>
-        <h2>Real Customer Reviews</h2>
-      </div>
-      <div class="reviews-grid" data-reviews>
-            <article class="review-card">
-              <div class="review-card__stars" role="img" aria-label="5 / 5"><svg class="review-card__star is-on" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.95 6.27 6.85.78-5.13 4.74 1.45 6.78L12 17.7l-6.12 3.37 1.45-6.78L2.2 9.55l6.85-.78L12 2.5z" fill="currentColor" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg><svg class="review-card__star is-on" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.95 6.27 6.85.78-5.13 4.74 1.45 6.78L12 17.7l-6.12 3.37 1.45-6.78L2.2 9.55l6.85-.78L12 2.5z" fill="currentColor" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg><svg class="review-card__star is-on" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.95 6.27 6.85.78-5.13 4.74 1.45 6.78L12 17.7l-6.12 3.37 1.45-6.78L2.2 9.55l6.85-.78L12 2.5z" fill="currentColor" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg><svg class="review-card__star is-on" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.95 6.27 6.85.78-5.13 4.74 1.45 6.78L12 17.7l-6.12 3.37 1.45-6.78L2.2 9.55l6.85-.78L12 2.5z" fill="currentColor" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg><svg class="review-card__star is-on" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.95 6.27 6.85.78-5.13 4.74 1.45 6.78L12 17.7l-6.12 3.37 1.45-6.78L2.2 9.55l6.85-.78L12 2.5z" fill="currentColor" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg></div>
-              <p class="review-card__body">Tried 0.01mm brands from Japan, Korea, and Europe — T-ZERO is one of the few with no plastic smell at all.</p>
-              <div class="review-card__foot">
-                <div class="review-card__avatar" aria-hidden="true">Y</div>
-                <div class="review-card__meta">
-                  <div class="review-card__name">Yuki M.</div>
-                  <div class="review-card__sub">Hong Kong · Tsim Sha Tsui · 2026-08-19</div>
-                </div>
-                <span class="review-card__verified"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="5 12 10 17 19 7"/></svg><span>Verified purchase</span></span>
-              </div>
-            </article>
-            <article class="review-card">
-              <div class="review-card__stars" role="img" aria-label="5 / 5"><svg class="review-card__star is-on" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.95 6.27 6.85.78-5.13 4.74 1.45 6.78L12 17.7l-6.12 3.37 1.45-6.78L2.2 9.55l6.85-.78L12 2.5z" fill="currentColor" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg><svg class="review-card__star is-on" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.95 6.27 6.85.78-5.13 4.74 1.45 6.78L12 17.7l-6.12 3.37 1.45-6.78L2.2 9.55l6.85-.78L12 2.5z" fill="currentColor" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg><svg class="review-card__star is-on" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.95 6.27 6.85.78-5.13 4.74 1.45 6.78L12 17.7l-6.12 3.37 1.45-6.78L2.2 9.55l6.85-.78L12 2.5z" fill="currentColor" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg><svg class="review-card__star is-on" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.95 6.27 6.85.78-5.13 4.74 1.45 6.78L12 17.7l-6.12 3.37 1.45-6.78L2.2 9.55l6.85-.78L12 2.5z" fill="currentColor" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg><svg class="review-card__star is-on" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.95 6.27 6.85.78-5.13 4.74 1.45 6.78L12 17.7l-6.12 3.37 1.45-6.78L2.2 9.55l6.85-.78L12 2.5z" fill="currentColor" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg></div>
-              <p class="review-card__body">Same as wearing nothing.</p>
-              <div class="review-card__foot">
-                <div class="review-card__avatar" aria-hidden="true">D</div>
-                <div class="review-card__meta">
-                  <div class="review-card__name">Daniel K.</div>
-                  <div class="review-card__sub">Hong Kong · Central · 2026-09-11</div>
-                </div>
-                <span class="review-card__verified"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="5 12 10 17 19 7"/></svg><span>Verified purchase</span></span>
-              </div>
-            </article>
-            <article class="review-card">
-              <div class="review-card__stars" role="img" aria-label="4 / 5"><svg class="review-card__star is-on" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.95 6.27 6.85.78-5.13 4.74 1.45 6.78L12 17.7l-6.12 3.37 1.45-6.78L2.2 9.55l6.85-.78L12 2.5z" fill="currentColor" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg><svg class="review-card__star is-on" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.95 6.27 6.85.78-5.13 4.74 1.45 6.78L12 17.7l-6.12 3.37 1.45-6.78L2.2 9.55l6.85-.78L12 2.5z" fill="currentColor" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg><svg class="review-card__star is-on" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.95 6.27 6.85.78-5.13 4.74 1.45 6.78L12 17.7l-6.12 3.37 1.45-6.78L2.2 9.55l6.85-.78L12 2.5z" fill="currentColor" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg><svg class="review-card__star is-on" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.95 6.27 6.85.78-5.13 4.74 1.45 6.78L12 17.7l-6.12 3.37 1.45-6.78L2.2 9.55l6.85-.78L12 2.5z" fill="currentColor" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg><svg class="review-card__star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.95 6.27 6.85.78-5.13 4.74 1.45 6.78L12 17.7l-6.12 3.37 1.45-6.78L2.2 9.55l6.85-.78L12 2.5z" fill="currentColor" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg></div>
-              <p class="review-card__body">My girlfriend's into the "you can't feel a thing" experience and T-ZERO delivers exactly that. 0.01mm plus instant body-heat transfer genuinely feels like a second skin — the gap to "wearing nothing" is basically non-existent. I've tried 0.01mm brands from Japan, Korea, and Europe, and the hyaluronic lube stops the ultra-thin from drying out and tearing. The manufacturing is clearly a step up in maturity, and neither of us got any reaction. The only thing to watch is being gentle when you open the box — 0.01mm is so thin you can snag one with your fingernail without realising; I tore one, lucky the other nine survived. Nothing to fault overall, I'll keep reordering and I've already recommended it to everyone looking for the "invisible" experience.</p>
-              <div class="review-card__foot">
-                <div class="review-card__avatar" aria-hidden="true">B</div>
-                <div class="review-card__meta">
-                  <div class="review-card__name">Brian N.</div>
-                  <div class="review-card__sub">Hong Kong · Tsuen Wan · 2026-07-02</div>
-                </div>
-                <span class="review-card__verified"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="5 12 10 17 19 7"/></svg><span>Verified purchase</span></span>
-              </div>
-            </article>
-        </div>
     </div>
   </section>
 
@@ -469,6 +384,15 @@
           </ul>
         </div>
         <div class="footer__col">
+          <h4>Buying guides</h4>
+          <ul data-footer-guides>            <li><a href="guides.html">All buying guides</a></li>
+            <li><a href="guide-size.html">Size chart</a></li>
+            <li><a href="guide-material.html">Materials</a></li>
+            <li><a href="guide-texture.html">Textures</a></li>
+            <li><a href="guide-first-time.html">First time buying</a></li>
+            <li><a href="guide-hyaluronic.html">Hyaluronic acid</a></li></ul>
+        </div>
+        <div class="footer__col">
           <h4>Contact</h4>
           <ul>
             <li>
@@ -525,7 +449,7 @@
   </footer>
 
   <script src="../assets/js/carousel.js?v=5" defer></script>
-  <script type="module" src="../assets/js/product.js?v=5"></script>
-  <script type="module" src="../assets/js/main.js?v=14"></script>
+  <script type="module" src="../assets/js/product.js?v=6"></script>
+  <script type="module" src="../assets/js/main.js?v=15"></script>
 </body>
 </html>

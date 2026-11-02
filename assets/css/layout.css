@@ -80,6 +80,10 @@
   font-weight: 500;
   color: var(--ink-soft);
   border-radius: var(--r-sm);
+  /* A link is one word. Without this, a narrow screen breaks it
+     one character to a line and the menu becomes a column of
+     single letters. */
+  white-space: nowrap;
   transition: color var(--d-fast) var(--ease),
               background var(--d-fast) var(--ease);
 }
@@ -152,6 +156,66 @@
 
 .menu-toggle__bars::before { top: -7px; }
 .menu-toggle__bars::after  { top:  7px; }
+
+/* ---------- The menu on a small screen ----------
+   Six links do not fit across a phone. The menu used to simply
+   run out of room — the words broke one character to a line and
+   the last links fell off the screen. Now the menu is a drawer:
+   the button opens it, the links stack one to a row, and the
+   search button stays in the header where it can be reached
+   without opening anything. */
+
+@media (max-width: 900px) {
+  .menu-toggle { display: inline-flex; }
+
+  .header-actions { margin-left: auto; }
+
+  .nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    margin-left: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: var(--space-2) 0 var(--space-4);
+    background: var(--bg);
+    border-top: 1px solid var(--border);
+    box-shadow: 0 18px 32px rgba(14, 58, 102, 0.10);
+    display: none;
+    max-height: calc(100vh - var(--header-h));
+    overflow-y: auto;
+  }
+
+  .nav.is-open { display: flex; }
+
+  .nav__link {
+    padding: var(--space-3) var(--gutter);
+    border-radius: 0;
+  }
+}
+
+/* ---------- The way back ----------
+   The breadcrumb on the product pages: the way home, the way to
+   the catalogue, and where you are. It says the same words as the
+   structured data on the page, so a crawler and a visitor are told
+   the same thing. */
+
+.crumbs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--fs-xs);
+  color: var(--ink-muted);
+  margin-bottom: var(--space-5);
+}
+
+.crumbs a { color: var(--ink-muted); }
+.crumbs a:hover { color: var(--ink); text-decoration: underline; }
+.crumbs__sep { color: var(--border-strong); }
+.crumbs__current { color: var(--ink-soft); }
 
 /* ---------- Top banner ---------- */
 .top-banner {
@@ -1406,9 +1470,20 @@ html[lang="en"] .about-stats li {
 
 @media (min-width: 768px) {
   .footer__top {
-    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    grid-template-columns: repeat(2, 1fr);
     gap: var(--space-6);
   }
+  /* The shop's own column spans the two, and the four lists of
+     links sit under it, two to a row. */
+  .footer__brand { grid-column: 1 / -1; }
+}
+
+@media (min-width: 1024px) {
+  .footer__top {
+    grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr;
+    gap: var(--space-6);
+  }
+  .footer__brand { grid-column: auto; }
 }
 
 .footer__brand h3 {
