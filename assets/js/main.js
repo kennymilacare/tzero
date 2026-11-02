@@ -3,8 +3,8 @@
    newsletter form, header shadow on scroll, search.
    =========================================================== */
 
-import { initI18n, t, getLang } from './i18n.js?v=7';
-import { products, productUrl } from './data.js?v=25';
+import { initI18n, t, getLang } from './i18n.js?v=8';
+import { products, productUrl } from './data.js?v=27';
 import { assetUrl } from './paths.js?v=2';
 
 /* ---------- Header shadow on scroll ---------- */

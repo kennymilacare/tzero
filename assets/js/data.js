@@ -623,7 +623,7 @@ export const i18n = {
     'product.card.popular': '熱賣',
 
     'products.title': '全部產品',
-    'products.subtitle': '4 款精心設計,玻尿酸潤滑,香港即日送貨。',
+    'products.subtitle': '4 款精心設計,玻尿酸潤滑,香港24小時落單。',
     'products.filter.brand': '品牌',
     'products.filter.type': '類別',
     'products.filter.thickness': '厚度',
@@ -646,7 +646,7 @@ export const i18n = {
     'product.back': '← 返回產品列表',
     'product.detail.brand': '品牌',
     'product.detail.series': '系列',
-    'product.detail.summary': '{description}{subtitle}。每盒 {pieces} 片,HK${price},即日送貨,全黑啞面保密包裝。',
+    'product.detail.summary': '{description}{subtitle}。每盒 {pieces} 片,HK${price},24小時落單,全黑啞面保密包裝。',
     'product.reviews.eyebrow': '真實評價',
     'product.reviews.title': '顧客真實評價',
     'product.reviews.verified': '已認證購買',
@@ -654,7 +654,10 @@ export const i18n = {
 
     'about.title': '關於 T-zero',
     'about.intro':
-      'T-ZERO 第九感專注於玻尿酸潤滑技術,為香港帶來更自然、更舒適的親密體驗。每一款產品都由日本工藝製造,經嚴格品質檢測。',
+      '<p>T-ZERO 第九感是專注於玻尿酸潤滑技術的安全套品牌，致力帶來更自然、更舒適的親密體驗。品牌全線產品皆傳承日本精密工藝製造，並通過極為嚴格的安全性與品質檢測，確保每一次使用都安心無憂。</p>' +
+      '<p>傳統潤滑劑容易帶來黏膩或乾燥感，而 T-ZERO 創新導入玻尿酸成分，其強大的鎖水保濕力能完美模擬人體自然分泌的超薄水潤感。</p>' +
+      '<p>產品不僅觸感潤滑、持久不乾澀，且易於清洗，大幅提升了伴侶間的親密契合度與舒適感。</p>' +
+      '<p>無論是追求極致順暢的感官享受，還是注重水嫩呵護的敏感肌膚，T-ZERO 守護你的每刻親密時光，成為提升生活情趣與品質的首選。</p>',
     'about.brand.eyebrow': 'Brand philosophy · 品牌理念',
     'about.brand.title': '玻尿酸潤滑的<span class="about-photo__accent">專家。</span>',
     'about.brand.quote': '好的保護，應該像水一樣自然。',
@@ -695,7 +698,7 @@ export const i18n = {
     'about.story.series.studded.body': '立體激點觸感，加強感官刺激，探索更多元的親密互動。',
     'about.story.retail.store.title': '即買即用',
     'about.story.retail.store.body': '隨時可以到各大屈臣氏實體門市親身選購，買完即走。',
-    'about.story.retail.online.title': '即日送貨',
+    'about.story.retail.online.title': '24小時落單',
     'about.story.retail.online.body': '上 HKTVmall 或 Watsons 網店下單，直送家門或智能櫃。',
     'about.story.retail.privacy.title': '保密包裝',
     'about.story.retail.privacy.body': '網購全程無任何品牌字樣，隨時隨地體驗極致快感。',
@@ -782,7 +785,7 @@ export const i18n = {
       ]
     }),
 
-                                    'seo.jsonld.news': JSON.stringify({
+                                        'seo.jsonld.news': JSON.stringify({
       "@context": "https://schema.org",
       "@graph": [
         { "@type": "BreadcrumbList", "itemListElement": [
@@ -804,14 +807,14 @@ export const i18n = {
     }),
 
     'seo.brand.title': 'T-ZERO 第九感 · 玻尿酸安全套',
-    'seo.brand.desc': '日本玻尿酸安全套品牌,即日送貨,保密包裝。',
+    'seo.brand.desc': '日本玻尿酸安全套品牌,24小時落單,保密包裝。',
     'seo.brand.name': 'T-ZERO 第九感',
-    'seo.og.title.home': 'T-ZERO 第九感 · 玻尿酸安全套 · 日本品牌 · 即日送貨',
-    'seo.og.desc.home': '日本玻尿酸安全套品牌 — 加倍潤滑、持久、顆粒、超薄 4 款設計,即日送貨,保密包裝。',
+    'seo.og.title.home': 'T-ZERO 第九感 · 玻尿酸安全套 · 日本品牌 · 24小時落單',
+    'seo.og.desc.home': '日本玻尿酸安全套品牌 — 加倍潤滑、持久、顆粒、超薄 4 款設計,24小時落單,保密包裝。',
     'seo.og.title.products': '全部產品 · T-ZERO 第九感',
-    'seo.og.desc.products': 'T-ZERO 第九感全系列:加倍潤滑、持久、顆粒、超薄 4 款玻尿酸安全套。日本工藝,即日送貨。',
+    'seo.og.desc.products': 'T-ZERO 第九感全系列:加倍潤滑、持久、顆粒、超薄 4 款玻尿酸安全套。日本工藝,24小時落單。',
     'seo.og.title.product': '產品詳情 · T-ZERO 第九感',
-    'seo.og.desc.product': '查看 T-ZERO 第九感玻尿酸安全套產品詳情:規格、成分、使用方法、顧客評價。日本工藝,即日送貨。',
+    'seo.og.desc.product': '查看 T-ZERO 第九感玻尿酸安全套產品詳情:規格、成分、使用方法、顧客評價。日本工藝,24小時落單。',
     'seo.og.title.about': '關於 T-zero · T-ZERO 第九感',
     'seo.og.desc.about': 'T-ZERO 第九感,日本玻尿酸安全套品牌。專注潤滑技術與日本工藝,4 款設計。',
     'seo.og.title.news': '最新動態 · T-ZERO 第九感',
@@ -1025,7 +1028,7 @@ export const i18n = {
     'product.card.popular': 'Popular',
 
     'products.title': 'All products',
-    'products.subtitle': 'Four designs, hyaluronic lubrication, same-day delivery in HK.',
+    'products.subtitle': 'Four designs, hyaluronic lubrication, 24-hour ordering in HK.',
     'products.filter.brand': 'Brand',
     'products.filter.type': 'Type',
     'products.filter.thickness': 'Thickness',
@@ -1048,7 +1051,7 @@ export const i18n = {
     'product.back': '← Back to all products',
     'product.detail.brand': 'Brand',
     'product.detail.series': 'Series',
-    'product.detail.summary': '{description} {subtitle}. {pieces} per box, HK${price}. Same-day delivery in discreet, plain black packaging.',
+    'product.detail.summary': '{description} {subtitle}. {pieces} per box, HK${price}. 24-hour ordering, discreet plain black packaging.',
     'product.reviews.eyebrow': 'Real reviews',
     'product.reviews.title': 'Real Customer Reviews',
     'product.reviews.verified': 'Verified purchase',
@@ -1056,7 +1059,10 @@ export const i18n = {
 
     'about.title': 'About T-zero',
     'about.intro':
-      'T-ZERO NINTH SENSE is built around hyaluronic lubrication — bringing Hong Kong a more natural, more comfortable intimate experience. Every product is crafted in Japan and quality-tested to the highest standard.',
+      '<p>T-ZERO NINTH SENSE is a condom brand built around hyaluronic acid lubrication, dedicated to a more natural, more comfortable intimate experience. Every product in the range is made with Japanese precision craftsmanship and passes the strictest safety and quality testing, so you can enjoy every moment with complete peace of mind.</p>' +
+      '<p>Conventional lubricants tend to leave a sticky or dry feeling behind. T-ZERO takes a different route, introducing hyaluronic acid, whose powerful moisture-locking ability reproduces the ultra-thin, naturally hydrated feel the body produces on its own.</p>' +
+      '<p>The result feels smooth and stays silky instead of drying out, and it is easy to wash afterwards — bringing partners a much closer, more comfortable fit and feel.</p>' +
+      '<p>Whether you are after the ultimate in smooth sensation or simply want to care for delicate skin, T-ZERO looks after every intimate moment — making it the first choice for a more pleasurable, higher-quality life.</p>',
     'about.brand.eyebrow': 'Brand Philosophy',
     'about.brand.title': 'Hyaluronic lubrication <span class="about-photo__accent">experts.</span>',
     'about.brand.quote': 'Good protection should feel as natural as water.',
@@ -1097,7 +1103,7 @@ export const i18n = {
     'about.story.series.studded.body': 'Raised stimulation points that intensify sensation and open up more ways to connect.',
     'about.story.retail.store.title': 'Buy & Go',
     'about.story.retail.store.body': 'Visit any Watsons store to try before you buy, and walk out with it today.',
-    'about.story.retail.online.title': 'Same-Day Delivery',
+    'about.story.retail.online.title': '24-Hour Ordering',
     'about.story.retail.online.body': 'Order on HKTVmall or Watsons online, delivered to your door or a parcel locker.',
     'about.story.retail.privacy.title': 'Discreet Packaging',
     'about.story.retail.privacy.body': 'No branding on the outside, so privacy is protected every step of the way.',
@@ -1184,7 +1190,7 @@ export const i18n = {
       ]
     }),
 
-                                    'seo.jsonld.news': JSON.stringify({
+                                        'seo.jsonld.news': JSON.stringify({
       "@context": "https://schema.org",
       "@graph": [
         { "@type": "BreadcrumbList", "itemListElement": [
@@ -1206,12 +1212,12 @@ export const i18n = {
     }),
 
     'seo.brand.title': 'T-ZERO NINTH SENSE · Hyaluronic Condom',
-    'seo.brand.desc': 'Japanese hyaluronic condom brand — same-day delivery, discreet packaging.',
+    'seo.brand.desc': 'Japanese hyaluronic condom brand — 24-hour ordering, discreet packaging.',
     'seo.brand.name': 'T-ZERO NINTH SENSE',
-    'seo.og.title.home': 'T-ZERO NINTH SENSE · Hyaluronic Condom · Japanese Brand · Same-Day Delivery',
-    'seo.og.desc.home': 'Japanese hyaluronic condom brand — extra lube, extended, studded, ultra-thin. Same-day delivery, discreet packaging.',
+    'seo.og.title.home': 'T-ZERO NINTH SENSE · Hyaluronic Condom · Japanese Brand · 24-Hour Ordering',
+    'seo.og.desc.home': 'Japanese hyaluronic condom brand — extra lube, extended, studded, ultra-thin. 24-Hour Ordering, discreet packaging.',
     'seo.og.title.products': 'All Products · T-ZERO NINTH SENSE',
-    'seo.og.desc.products': 'Full T-ZERO NINTH SENSE line: extra lube, extended, studded, ultra-thin 4 hyaluronic condom designs. Japanese craftsmanship, same-day delivery.',
+    'seo.og.desc.products': 'Full T-ZERO NINTH SENSE line: extra lube, extended, studded, ultra-thin 4 hyaluronic condom designs. Japanese craftsmanship, 24-hour ordering.',
     'seo.og.title.product': 'Product Details · T-ZERO NINTH SENSE',
     'seo.og.desc.product': 'View T-ZERO NINTH SENSE hyaluronic condom product details: specs, ingredients, how to use, customer reviews.',
     'seo.og.title.about': 'About T-zero · T-ZERO NINTH SENSE',
@@ -1429,7 +1435,7 @@ export const i18n = {
     'product.card.popular': '人気',
 
     'products.title': 'すべての製品',
-    'products.subtitle': '4つのこだわり設計、ヒアルロン酸潤滑、香港即日発送。',
+    'products.subtitle': '4つのこだわり設計、ヒアルロン酸潤滑、香港24時間受付。',
     'products.filter.brand': 'ブランド',
     'products.filter.type': 'カテゴリー',
     'products.filter.thickness': '薄さ',
@@ -1452,7 +1458,7 @@ export const i18n = {
     'product.back': '← 製品一覧へ戻る',
     'product.detail.brand': 'ブランド',
     'product.detail.series': 'シリーズ',
-    'product.detail.summary': '{description} {subtitle}。1箱{pieces}本、HK${price}。当日お届け・目立たない黒い簡易包装でプライバシーを守ります。',
+    'product.detail.summary': '{description} {subtitle}。1箱{pieces}本、HK${price}。24時間いつでも受付・目立たない黒い簡易包装でプライバシーを守ります。',
     'product.reviews.eyebrow': '本物のレビュー',
     'product.reviews.title': 'お客様の声',
     'product.reviews.verified': '購入済み認証',
@@ -1460,7 +1466,10 @@ export const i18n = {
 
     'about.title': 'T-zeroについて',
     'about.intro':
-      'T-ZERO 第九感はヒアルロン酸潤滑技術を核に、香港により自然で快適な親密体験をお届けします。すべての製品は日本製で、厳しい品質検査を経ております。',
+      '<p>T-ZERO 第九感は、玻尿酸の潤滑技術に特化した避孕具ブランドであり、より自然で快適な親密体験をもたらします。シリーズすべての製品は精密な日本のクラフトマンシップで製造され、極めて厳格な安全基準と品質検査をクリアしているため、いつでも安心してお使いいただけます。</p>' +
+      '<p>従来の潤滑剤は、べつきつきや乾いた感じを残しやすいものです。T-ZERO は玻尿酸を新たに導入し、その強い保水力によって、人体が自然に分泌する超薄な水潤感を忠実に再現します。</p>' +
+      '<p>製品は滑らかな触り心地で、摩擦しても乾きにくく、洗浄も容易です。これにより、パートナーとの一体化や快適性が大きく向上します。</p>' +
+      '<p>最も滑らかな感覚を追い求める方に、敏感肌のケアを大事にする方に——T-ZERO はすべての親密ひと時を守り、より良い暮らしと喜びのための第一選択となります。</p>',
     'about.brand.eyebrow': 'ブランド哲学',
     'about.brand.title': 'ヒアルロン潤滑の<span class="about-photo__accent">スペシャリスト。</span>',
     'about.brand.quote': '良い守りは、水のように自然であるべきです。',
@@ -1501,7 +1510,7 @@ export const i18n = {
     'about.story.series.studded.body': '立体的な突起の触感で感覚を刺激し、より多様な親密なふれあいを探求。',
     'about.story.retail.store.title': '店頭で直升',
     'about.story.retail.store.body': 'Watsons の実店舗で直接見て、その日のうちに購入できます。',
-    'about.story.retail.online.title': '当日配送',
+    'about.story.retail.online.title': '24時間受付',
     'about.story.retail.online.body': 'HKTVmall か Watsons のオンラインで注文し、ご自宅や置き配ボックスまでお届けします。',
     'about.story.retail.privacy.title': '完全秘匿包装',
     'about.story.retail.privacy.body': '外側にブランド表示は一切なし。プライバシーをしっかり守ります。',
@@ -1604,7 +1613,7 @@ export const i18n = {
       ]
     }),
 
-                                    'seo.jsonld.news': JSON.stringify({
+                                        'seo.jsonld.news': JSON.stringify({
       "@context": "https://schema.org",
       "@graph": [
         { "@type": "BreadcrumbList", "itemListElement": [
@@ -1626,12 +1635,12 @@ export const i18n = {
     }),
 
     'seo.brand.title': 'T-ZERO 第九感 · ヒアルロン酸コンドーム',
-    'seo.brand.desc': '日本のヒアルロン酸コンドームブランド,即日配達,秘密包装。',
+    'seo.brand.desc': '日本のヒアルロン酸コンドームブランド,24時間受付,秘密包装。',
     'seo.brand.name': 'T-ZERO 第九感',
-    'seo.og.title.home': 'T-ZERO 第九感 · ヒアルロン酸コンドーム · 日本ブランド · 即日配達',
-    'seo.og.desc.home': '日本のヒアルロン酸コンドームブランド — エクストラ潤滑、エクステンド、スタッド、ウルトラシン 4種類。即日配達、秘密包装。',
+    'seo.og.title.home': 'T-ZERO 第九感 · ヒアルロン酸コンドーム · 日本ブランド · 24時間受付',
+    'seo.og.desc.home': '日本のヒアルロン酸コンドームブランド — エクストラ潤滑、エクステンド、スタッド、ウルトラシン 4種類。24時間受付、秘密包装。',
     'seo.og.title.products': '全製品 · T-ZERO 第九感',
-    'seo.og.desc.products': 'T-ZERO 第九感全シリーズ:エクストラ潤滑、エクステンド、スタッド、ウルトラシン 4種類。日本クラフトマンシップ、即日配達。',
+    'seo.og.desc.products': 'T-ZERO 第九感全シリーズ:エクストラ潤滑、エクステンド、スタッド、ウルトラシン 4種類。日本クラフトマンシップ、24時間受付。',
     'seo.og.title.product': '製品詳細 · T-ZERO 第九感',
     'seo.og.desc.product': 'T-ZERO 第九感 ヒアルロン酸コンドームの製品詳細:仕様、成分、使用方法、ユーザーレビュー。',
     'seo.og.title.about': 'T-zeroについて · T-ZERO 第九感',

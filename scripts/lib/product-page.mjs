@@ -62,6 +62,28 @@ export function fill(text, needle, replacement, label) {
   return text.split(needle).join(replacement);
 }
 
+/**
+ * Replace a tag, found by what it is rather than by the words inside it.
+ *
+ * The wording in product.html changes from time to time — "即日送貨"
+ * became "24小時落單", for one — and a generator that has to be told
+ * about every wording change is a generator that breaks the next time
+ * somebody edits a page by hand. So the head tags are looked for by
+ * their name, and replaced whole.
+ */
+export function fillTag(html, pattern, replacement, label) {
+  const re = new RegExp(pattern, 'i');
+  const m = re.exec(html);
+  if (!m) {
+    throw new Error(
+      `[product-page] the template no longer contains the ${label}.\n` +
+      `  looking for: ${pattern}\n` +
+      '  product.html has changed — update this script to match.'
+    );
+  }
+  return html.slice(0, m.index) + replacement + html.slice(m.index + m[0].length);
+}
+
 /* ---------- the pieces of the page ---------- */
 
 /** The specification list, in the same shape product.js builds. */
@@ -222,16 +244,16 @@ export function buildProductPage(template, p, all, {
   let html = template;
 
   /* --- the head --- */
-  html = fill(html,
-    '<title>產品詳情 · T-ZERO 第九感</title>',
+  html = fillTag(html,
+    '<title>[^<]*</title>',
     `<title>${escapeText(title)}</title>`, 'the title');
 
-  html = fill(html,
-    '<meta name="description" content="查看 T-ZERO 第九感玻尿酸安全套產品詳情:規格、成分、使用方法、顧客評價。日本工藝製造,即日送貨,保密包裝。">',
+  html = fillTag(html,
+    '<meta\\s+name="description"[^>]*>',
     `<meta name="description" content="${escapeText(description)}">`, 'the meta description');
 
-  html = fill(html,
-    '<meta name="keywords" content="T-ZERO, 第九感, 安全套, 玻尿酸安全套, 產品詳情, condom, hyaluronic, 香港, 潤滑, 超薄, 持久, 顆粒">',
+  html = fillTag(html,
+    '<meta\\s+name="keywords"[^>]*>',
     `<meta name="keywords" content="${escapeText(keywords)}">`, 'the keywords');
 
   /* The page used to say "do not index me" — it is a real page
@@ -247,24 +269,24 @@ export function buildProductPage(template, p, all, {
 
   html = replaceLinks(html, linkBlock(siteUrl, lang, path));
 
-  html = fill(html,
-    '<meta property="og:title" content="產品詳情 · T-ZERO 第九感" data-i18n-attr="content" data-i18n="seo.og.title.product">',
+  html = fillTag(html,
+    '<meta\\s+property="og:title"[^>]*>',
     `<meta property="og:title" content="${escapeText(title)}">`, 'the og:title');
 
-  html = fill(html,
-    '<meta property="og:description" content="查看 T-ZERO 第九感玻尿酸安全套產品詳情:規格、成分、使用方法、顧客評價。日本工藝,即日送貨。" data-i18n-attr="content" data-i18n="seo.og.desc.product">',
+  html = fillTag(html,
+    '<meta\\s+property="og:description"[^>]*>',
     `<meta property="og:description" content="${escapeText(description)}">`, 'the og:description');
 
   html = fill(html,
     `<meta property="og:url" content="${siteUrl}product.html">`,
     `<meta property="og:url" content="${page}">`, 'the og:url');
 
-  html = fill(html,
-    '<meta name="twitter:title" content="產品詳情 · T-ZERO 第九感" data-i18n-attr="content" data-i18n="seo.og.title.product">',
+  html = fillTag(html,
+    '<meta\\s+name="twitter:title"[^>]*>',
     `<meta name="twitter:title" content="${escapeText(title)}">`, 'the twitter:title');
 
-  html = fill(html,
-    '<meta name="twitter:description" content="查看 T-ZERO 第九感玻尿酸安全套產品詳情:規格、成分、使用方法、顧客評價。日本工藝,即日送貨。" data-i18n-attr="content" data-i18n="seo.og.desc.product">',
+  html = fillTag(html,
+    '<meta\\s+name="twitter:description"[^>]*>',
     `<meta name="twitter:description" content="${escapeText(description)}">`, 'the twitter:description');
 
   /* The structured data goes in just before </head>. */

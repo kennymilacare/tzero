@@ -10,7 +10,7 @@
    never innerHTML, because Instagram post text is not authored here.
    =========================================================== */
 
-import { getLang, t } from './i18n.js?v=7';
+import { getLang, t } from './i18n.js?v=8';
 import { assetUrl } from './paths.js?v=2';
 
 /* The feed lives in the site, not in the page's own folder — the

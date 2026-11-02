@@ -15,7 +15,7 @@
    the same in the browser and in Node.
    =========================================================== */
 
-import { i18n } from './data.js?v=25';
+import { i18n } from './data.js?v=27';
 
 /** The words for a key, in a language, with the same fallbacks the browser uses. */
 function word(lang, key) {
@@ -60,9 +60,9 @@ export function productDescription(product, lang = 'zh') {
 /* The words people search for. Search engines ignore this tag, but
    it costs nothing to have it say the right thing. */
 const KEYWORDS = {
-  zh: { brand: '第九感', common: ['玻尿酸安全套', '安全套', 'condom', 'hyaluronic', '香港', '即日送貨', '保密包裝'] },
-  en: { brand: 'NINTH SENSE', common: ['hyaluronic condom', 'condom', 'hyaluronic', 'Hong Kong', 'same-day delivery', 'discreet packaging'] },
-  ja: { brand: '第九感', common: ['ハイアロンコンドーム', 'コンドーム', 'hyaluronic', '香港', '当日お届け', '簡易包装'] },
+  zh: { brand: '第九感', common: ['玻尿酸安全套', '安全套', 'condom', 'hyaluronic', '香港', '24小時落單', '保密包裝'] },
+  en: { brand: 'NINTH SENSE', common: ['hyaluronic condom', 'condom', 'hyaluronic', 'Hong Kong', '24-hour ordering', 'discreet packaging'] },
+  ja: { brand: '第九感', common: ['ハイアロンコンドーム', 'コンドーム', 'hyaluronic', '香港', '24時間受付', '簡易包装'] },
 };
 
 /** The keywords of a product page. */

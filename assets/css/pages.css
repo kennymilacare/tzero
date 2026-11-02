@@ -139,6 +139,23 @@
   max-width: 720px;
 }
 
+/* The lead is sometimes more than one paragraph — the paragraphs
+   inside it need air between them, because the stylesheet resets
+   every paragraph's margin to zero. */
+.page-hero__lead p + p {
+  margin-top: var(--space-4);
+}
+
+/* A lead made of several paragraphs. Left at the width of one line,
+   half the page stands empty — so it takes the whole width of the
+   page, and the paragraphs still read from top to bottom. */
+.page-hero__lead--wide {
+  max-width: none;
+}
+.page-hero__lead--wide p {
+  max-width: none;
+}
+
 /* Map (Google Maps embed) */
 .map-frame {
   display: block;

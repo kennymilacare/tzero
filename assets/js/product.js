@@ -11,10 +11,10 @@
    page, so a crawler ends up on the right one.
    =========================================================== */
 
-import { products, productUrl } from './data.js?v=25';
-import { productCardHTML, productMediaHTML } from './product-svg.js?v=8';
-import { initI18n, getLang, t, pickByLang } from './i18n.js?v=7';
-import { productTitle, productDescription } from './product-copy.js?v=2';
+import { products, productUrl } from './data.js?v=27';
+import { productCardHTML, productMediaHTML } from './product-svg.js?v=9';
+import { initI18n, getLang, t, pickByLang } from './i18n.js?v=8';
+import { productTitle, productDescription } from './product-copy.js?v=3';
 
 function readId() {
   const fromBody = document.body && document.body.dataset.productId;
