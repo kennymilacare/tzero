@@ -26,6 +26,7 @@ import { escapeText } from './html.mjs';
 import { HTML_LANG, LANGS, pageFile, pageUrl } from './langs.mjs';
 import { changedOn } from './sitemap.mjs';
 import { ROOT } from './site.mjs';
+import { SPOKEN } from './spoken.mjs';
 
 const SITE = 'https://www.tzero-jp.com';
 
@@ -170,22 +171,9 @@ test('the English guide has no Chinese in it, and the Japanese one is Japanese',
    back into speech, and a page that reads as though it were
    dictated is a page no shop would want on its shelf.
 
-   Each entry below is a word of Cantonese speech, and what to write
-   instead. A failure then says what to reach for, not only that
-   something is wrong. */
-const SPOKEN = [
-  ['嘅', '的'], ['唔', '不'], ['喺', '在'], ['咗', '了'], ['啱', '合適'],
-  ['睇', '看'], ['揀', '選'], ['冇', '沒有'], ['嘢', '東西'], ['嚟', '來'],
-  ['攞', '拿'], ['佢', '它'], ['哋', '他們'], ['乜', '什'], ['咩', '麼'],
-  ['呢個', '這個'], ['嗰個', '那個'], ['呢啲', '這些'], ['嗰啲', '那些'],
-  ['呢度', '這裡'], ['咁', '這麼'], ['吓', '一下'], ['靚', '漂亮'],
-  ['搵', '找'], ['點解', '為什麼'], ['點樣', '如何'], ['唔使', '不需要'],
-  ['唔好', '不要'], ['咁樣', '這樣'], ['嘥', '浪費'], ['唔錯', '不錯'],
-  ['啦', '（語氣詞）'], ['咯', '（語氣詞）'], ['吖', '（語氣詞）'],
-  ['喎', '（語氣詞）'], ['囉', '（語氣詞）'], ['㗎', '（語氣詞）'],
-  ['嘞', '（語氣詞）'],
-];
-
+   The words of speech and what to write instead live in
+   scripts/lib/spoken.mjs, because the same rule holds for the
+   news cards. */
 test('the Chinese of a guide is written Chinese, not Cantonese speech', () => {
   const shared = Object.values(GUIDE_UI)
     .map((v) => (typeof v === 'string' ? v : v.zh))

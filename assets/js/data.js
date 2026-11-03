@@ -583,7 +583,7 @@ export const i18n = {
       ]
     }),
 
-                                                                        'seo.jsonld.news': JSON.stringify({
+                                                                                'seo.jsonld.news': JSON.stringify({
       "@context": "https://schema.org",
       "@graph": [
         { "@type": "BreadcrumbList", "itemListElement": [
@@ -594,11 +594,11 @@ export const i18n = {
           "numberOfItems": 6,
           "itemListOrder": "https://schema.org/ItemListOrderDescending",
           "itemListElement": [
-            { "@type": "ListItem", "position": 1, "datePublished": "2026-10-30", "url": "https://www.instagram.com/tzerojp/p/DfGkQzBAfF7/", "name": "揀咗『超潤滑』，點解仲係越用越乾？" },
+            { "@type": "ListItem", "position": 1, "datePublished": "2026-10-30", "url": "https://www.instagram.com/tzerojp/p/DfGkQzBAfF7/", "name": "選擇了『超潤滑』，為什麼仍然越用越乾？" },
             { "@type": "ListItem", "position": 2, "datePublished": "2026-10-28", "url": "https://www.instagram.com/tzerojp/p/DfBe7FggRof/", "name": "今晚，換點不一樣" },
             { "@type": "ListItem", "position": 3, "datePublished": "2026-10-28", "url": "https://www.instagram.com/tzerojp/p/DfBi7XygZzA/", "name": "最合拍神隊友，今晚拒絕快槍手" },
-            { "@type": "ListItem", "position": 4, "datePublished": "2026-10-27", "url": "https://www.instagram.com/tzerojp/p/De_a7-Yks0Z/", "name": "返工已經夠乾，拍拖想潤返啲" },
-            { "@type": "ListItem", "position": 5, "datePublished": "2026-10-27", "url": "https://www.instagram.com/tzerojp/p/De_bTyXEsOn/", "name": "NEW｜靠近你，感覺可以再細膩啲" },
+            { "@type": "ListItem", "position": 4, "datePublished": "2026-10-27", "url": "https://www.instagram.com/tzerojp/p/De_a7-Yks0Z/", "name": "上班已經夠累，想潤滑一點" },
+            { "@type": "ListItem", "position": 5, "datePublished": "2026-10-27", "url": "https://www.instagram.com/tzerojp/p/De_bTyXEsOn/", "name": "NEW｜靠近你，感覺可以再細膩一點" },
             { "@type": "ListItem", "position": 6, "datePublished": "2026-09-15", "url": "https://www.hktvmall.com", "name": "正式登陸 HKTVmall" }
           ] }
       ]
@@ -988,7 +988,7 @@ export const i18n = {
       ]
     }),
 
-                                                                        'seo.jsonld.news': JSON.stringify({
+                                                                                'seo.jsonld.news': JSON.stringify({
       "@context": "https://schema.org",
       "@graph": [
         { "@type": "BreadcrumbList", "itemListElement": [
@@ -1411,7 +1411,7 @@ export const i18n = {
       ]
     }),
 
-                                                                        'seo.jsonld.news': JSON.stringify({
+                                                                                'seo.jsonld.news': JSON.stringify({
       "@context": "https://schema.org",
       "@graph": [
         { "@type": "BreadcrumbList", "itemListElement": [
@@ -1422,11 +1422,11 @@ export const i18n = {
           "numberOfItems": 6,
           "itemListOrder": "https://schema.org/ItemListOrderDescending",
           "itemListElement": [
-            { "@type": "ListItem", "position": 1, "datePublished": "2026-10-30", "url": "https://www.instagram.com/tzerojp/p/DfGkQzBAfF7/", "name": "揀咗『超潤滑』，點解仲係越用越乾？" },
+            { "@type": "ListItem", "position": 1, "datePublished": "2026-10-30", "url": "https://www.instagram.com/tzerojp/p/DfGkQzBAfF7/", "name": "選擇了『超潤滑』，為什麼仍然越用越乾？" },
             { "@type": "ListItem", "position": 2, "datePublished": "2026-10-28", "url": "https://www.instagram.com/tzerojp/p/DfBe7FggRof/", "name": "今晚，換點不一樣" },
             { "@type": "ListItem", "position": 3, "datePublished": "2026-10-28", "url": "https://www.instagram.com/tzerojp/p/DfBi7XygZzA/", "name": "最合拍神隊友，今晚拒絕快槍手" },
-            { "@type": "ListItem", "position": 4, "datePublished": "2026-10-27", "url": "https://www.instagram.com/tzerojp/p/De_a7-Yks0Z/", "name": "返工已經夠乾，拍拖想潤返啲" },
-            { "@type": "ListItem", "position": 5, "datePublished": "2026-10-27", "url": "https://www.instagram.com/tzerojp/p/De_bTyXEsOn/", "name": "NEW｜靠近你，感覺可以再細膩啲" },
+            { "@type": "ListItem", "position": 4, "datePublished": "2026-10-27", "url": "https://www.instagram.com/tzerojp/p/De_a7-Yks0Z/", "name": "上班已經夠累，想潤滑一點" },
+            { "@type": "ListItem", "position": 5, "datePublished": "2026-10-27", "url": "https://www.instagram.com/tzerojp/p/De_bTyXEsOn/", "name": "NEW｜靠近你，感覺可以再細膩一點" },
             { "@type": "ListItem", "position": 6, "datePublished": "2026-09-15", "url": "https://www.hktvmall.com", "name": "HKTVmall に登場" }
           ] }
       ]

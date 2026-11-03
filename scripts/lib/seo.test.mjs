@@ -22,6 +22,7 @@ import { GUIDES, GUIDE_HUB, guideOgImagePath } from './guides.mjs';
 import { LANGS, PAGES, pageUrl } from './langs.mjs';
 import { sitemapFor } from './sitemap.mjs';
 import { loadSite, ROOT } from './site.mjs';
+import { SPOKEN } from './spoken.mjs';
 
 const SITE = 'https://www.tzero-jp.com';
 
@@ -132,6 +133,33 @@ test('the news list describes the posts the site shows', async () => {
   for (const post of feed.posts.slice(0, 8)) {
     if (!post.permalink) continue;
     assert.ok(urls.includes(post.permalink), `the news list is missing ${post.permalink}`);
+  }
+});
+
+/* The news card shows a title and a summary the site wrote itself,
+   so they are written Chinese like the rest of the site. The
+   caption underneath them — the "message" — is the post as it was
+   published, and it stays in the voice it was posted in. */
+test('the Chinese of a news card is written Chinese, not Cantonese speech', async () => {
+  const feed = JSON.parse(await readFile(path.join(ROOT, 'assets', 'data', 'news.json'), 'utf8'));
+  const local = JSON.parse(await readFile(path.join(ROOT, 'assets', 'data', 'news.local.json'), 'utf8'));
+
+  const written = [];
+  for (const post of feed.posts) {
+    written.push([`news.json ${post.id} title`, post.title]);
+    written.push([`news.json ${post.id} excerpt`, post.excerpt]);
+  }
+  for (const [id, override] of Object.entries(local.posts || {})) {
+    if (!override) continue;
+    written.push([`news.local.json ${id} title_zh`, override.title_zh]);
+    written.push([`news.local.json ${id} excerpt_zh`, override.excerpt_zh]);
+  }
+
+  for (const [where, text] of written) {
+    for (const [spoken, instead] of SPOKEN) {
+      assert.ok(!String(text ?? '').includes(spoken),
+        `${where}: "${spoken}" is Cantonese speech — write "${instead}" instead. In: ${text}`);
+    }
   }
 });
 
