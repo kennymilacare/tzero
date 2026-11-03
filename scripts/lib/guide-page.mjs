@@ -13,11 +13,18 @@
    paragraph, and a paragraph cut in half and put beside a
    heading is harder to read than the same paragraph on its own.
 
+   Each guide carries a mark of its own — a ruler for the size
+   chart, a droplet for the hyaluronic one. The mark goes inside
+   the words, at the head of the heading, so it says what the
+   guide is about without standing beside it and breaking the
+   column.
+
    Pure — it takes the words in and gives the page back.
    =========================================================== */
 
 import { products, productUrl } from '../../assets/js/data.js';
 import { escapeAttr, escapeText } from './html.mjs';
+import { iconSvg } from './guide-icons.mjs';
 import { GUIDES, GUIDE_HUB, GUIDE_UI, guideByPath, guideOgImageUrl } from './guides.mjs';
 import { HTML_LANG, pageUrl } from './langs.mjs';
 import { t } from './langpage.mjs';
@@ -186,7 +193,7 @@ export function guideBody(guide, lang, modified) {
 
   const others = GUIDES
     .filter((g) => g.path !== guide.path)
-    .map((g) => `            <li><a href="${escapeAttr(g.path)}">${escapeText(pick(g.short, lang))}</a></li>`)
+    .map((g) => `            <li><a href="${escapeAttr(g.path)}">${iconSvg(g.slug, { className: 'guide__icon guide__icon--pill' })}${escapeText(pick(g.short, lang))}</a></li>`)
     .join('\n');
 
   return `  <main>
@@ -196,7 +203,7 @@ ${crumbs}
 
         <header class="guide__head">
           <span class="eyebrow">${escapeText(pick(guide.eyebrow, lang))}</span>
-          <h1>${escapeText(pick(guide.h1, lang))}</h1>
+          <h1>${iconSvg(guide.slug, { className: 'guide__icon guide__icon--title' })}${escapeText(pick(guide.h1, lang))}</h1>
           <p class="guide__lead">${inline(pick(guide.lead, lang))}</p>
           <div class="guide__meta">
             <figure class="guide__figure">
@@ -255,7 +262,7 @@ ${others}
 export function hubBody(lang) {
   const items = GUIDES.map((g) => [
     '          <article class="guide-hub__item">',
-    `            <h2><a href="${escapeAttr(g.path)}">${escapeText(pick(g.short, lang))}</a></h2>`,
+    `            <h2><a href="${escapeAttr(g.path)}">${iconSvg(g.slug, { className: 'guide__icon guide__icon--item' })}${escapeText(pick(g.short, lang))}</a></h2>`,
     `            <p>${inline(pick(g.blurb, lang))}</p>`,
     '          </article>',
   ].join('\n')).join('\n');
@@ -275,7 +282,7 @@ ${crumbs}
 
         <header class="guide__head">
           <span class="eyebrow">${escapeText(GUIDE_UI.hubEyebrow[lang])}</span>
-          <h1>${escapeText(GUIDE_UI.hubH1[lang])}</h1>
+          <h1>${iconSvg('list', { className: 'guide__icon guide__icon--title' })}${escapeText(GUIDE_UI.hubH1[lang])}</h1>
           <p class="guide__lead">${inline(GUIDE_UI.hubLead[lang])}</p>
         </header>
 

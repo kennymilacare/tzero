@@ -583,7 +583,7 @@ export const i18n = {
       ]
     }),
 
-                                                            'seo.jsonld.news': JSON.stringify({
+                                                                        'seo.jsonld.news': JSON.stringify({
       "@context": "https://schema.org",
       "@graph": [
         { "@type": "BreadcrumbList", "itemListElement": [
@@ -988,7 +988,7 @@ export const i18n = {
       ]
     }),
 
-                                                            'seo.jsonld.news': JSON.stringify({
+                                                                        'seo.jsonld.news': JSON.stringify({
       "@context": "https://schema.org",
       "@graph": [
         { "@type": "BreadcrumbList", "itemListElement": [
@@ -1411,7 +1411,7 @@ export const i18n = {
       ]
     }),
 
-                                                            'seo.jsonld.news': JSON.stringify({
+                                                                        'seo.jsonld.news': JSON.stringify({
       "@context": "https://schema.org",
       "@graph": [
         { "@type": "BreadcrumbList", "itemListElement": [

@@ -221,8 +221,8 @@ Each one exists in three languages, at its own address:
 | 尺碼表 · Size chart · サイズ表 | `/guide-size.html` |
 | 材質比較 · Materials · 素材の比較 | `/guide-material.html` |
 | 紋路種類 · Textures · テクスチャーの種類 | `/guide-texture.html` |
-| 第一次買點揀 · First time buying · 初めての選び方 | `/guide-first-time.html` |
-| 玻尿酸究竟係咩 · Hyaluronic acid · 玻尿酸とは | `/guide-hyaluronic.html` |
+| 第一次購買 · First time buying · 初めての選び方 | `/guide-first-time.html` |
+| 玻尿酸是什麼 · Hyaluronic acid · 玻尿酸とは | `/guide-hyaluronic.html` |
 
 The words live in `scripts/lib/guides/*.mjs` — one file per guide, in three
 languages. `scripts/gen-guide-pages.mjs` turns them into pages, into the
@@ -233,6 +233,20 @@ guides are in the sitemap, and every product page links to all five.
 `guides.html` lists all five, and it is in the **menu and the footer of every
 page of the site** — so a crawler reaches the guides from anywhere, not only
 from the four product pages.
+
+Each guide carries **a mark of its own** — a ruler for the size chart, layers
+for the materials, a shopping bag for the first time, a droplet for the
+hyaluronic one. The marks are in `scripts/lib/guide-icons.mjs`, drawn in
+strokes in the same house style as the rest of the site's icons. They sit
+*inside* the heading, at the head of the words, so they say what the guide is
+about without standing beside the writing and breaking the one column the
+page is set in.
+
+The Chinese is **written Chinese** — the way a shop would put it on a shelf,
+not the way it is spoken. No 嘅, 唔, 喺, 咗; 什麼, not 咩;
+的, not 嘅. A person searching for an answer types written Chinese, and a
+page written in spoken Cantonese does not read as the same thing. The test in
+`scripts/lib/guide.test.mjs` fails if a spoken word creeps back in.
 
 The date each guide shows ("last updated") is not written down by hand: it is
 the day git says its words were last committed. There is no date to forget.
@@ -255,7 +269,8 @@ npm run gen:guides
 
 `scripts/lib/guide.test.mjs` fails if a guide is missing, if a link points at
 a page that does not exist, if the questions on the page are not the questions
-in the structured data, if a Japanese sentence has a Korean word in it, if a
+in the structured data, if a Japanese sentence has a Korean word in it, if the
+Chinese is written in spoken Cantonese rather than written Chinese, if a
 page does not offer the guides, or if the date on the page is not the day the
 words were changed.
 

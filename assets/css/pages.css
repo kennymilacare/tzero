@@ -963,6 +963,24 @@
   margin: var(--space-3) 0 var(--space-4);
 }
 
+/* The mark each guide carries — a ruler, a drop, a shopping bag.
+   It sits inside the words, at the head of the heading, so it says
+   what the guide is about without standing beside the writing and
+   breaking the column. It is drawn in strokes, in the colour of the
+   brand, and it grows and shrinks with the text it sits in. */
+.guide__icon {
+  display: inline-block;
+  width: 0.85em;
+  height: 0.85em;
+  margin-right: 0.3em;
+  vertical-align: -0.06em;
+  color: var(--primary);
+}
+
+.guide__icon--title { width: 0.8em; height: 0.8em; }
+.guide__icon--item { width: 0.95em; height: 0.95em; vertical-align: -0.1em; }
+.guide__icon--pill { width: 1em; height: 1em; vertical-align: -0.12em; margin-right: 0.35em; }
+
 .guide__lead {
   font-size: var(--fs-md);
   line-height: 1.75;

@@ -21,7 +21,7 @@ export const guides = [
       ja: "サイズ表",
     },
     desc: {
-      zh: "闊度對照表,同自己量度嘅方法。",
+      zh: "闊度對照表,以及量度自己的方法。",
       en: "The width table, and how to measure yourself.",
       ja: "幅の表と、測り方の説明。",
     },
@@ -36,7 +36,7 @@ export const guides = [
       ja: "素材の比較",
     },
     desc: {
-      zh: "乳膠、PU、PI 有咩分別,同潤滑液點配合。",
+      zh: "乳膠、PU、PI 有什麼分別,以及如何配合潤滑液。",
       en: "Latex, PU and PI, and which lubricant to use.",
       ja: "ラテックス、PU、PIの違いと、潤滑剤の選び方。",
     },
@@ -51,7 +51,7 @@ export const guides = [
       ja: "テクスチャーの種類",
     },
     desc: {
-      zh: "平紋、環紋、凸點、皺紋有咩唔同。",
+      zh: "平紋、環紋、凸點、皺紋有什麼不同。",
       en: "Plain, ribbed, studded, wrinkled — what each one is.",
       ja: "プレーン、リブ、スタッド、皺の意味。",
     },
@@ -61,12 +61,12 @@ export const guides = [
     url: "guide-first-time.html",
     image: "assets/images/products/tzero-ultra-thin.jpg",
     title: {
-      zh: "第一次買點揀",
+      zh: "第一次購買",
       en: "First time buying",
       ja: "初めての選び方",
     },
     desc: {
-      zh: "第一次買安全套,應該揀邊款、買幾多隻。",
+      zh: "第一次購買安全套,應該選擇哪一款、買多少隻。",
       en: "Which one to pick the first time, and how many to buy.",
       ja: "はじめて買うときの選び方と、入数の目安。",
     },
@@ -76,12 +76,12 @@ export const guides = [
     url: "guide-hyaluronic.html",
     image: "assets/images/products/hyaluronic-acid.jpg",
     title: {
-      zh: "玻尿酸究竟係咩",
+      zh: "玻尿酸是什麼",
       en: "Hyaluronic acid",
       ja: "玻尿酸とは",
     },
     desc: {
-      zh: "玻尿酸係咩、喺安全套入面做緊咩。",
+      zh: "玻尿酸是什麼,以及它在安全套中的作用。",
       en: "What it is, and what it does inside a condom.",
       ja: "何で、何をしているのか。",
     },

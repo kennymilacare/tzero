@@ -324,8 +324,8 @@ key 檔真係喺站嘅 root、token 三份主頁一樣、sitemap 喺磁碟上同
 guide-size.html         尺碼表 · Size chart · サイズ表
 guide-material.html     材質比較 · Materials · 素材の比較
 guide-texture.html      紋路種類 · Textures · テクスチャーの種類
-guide-first-time.html   第一次買點揀 · First time buying · 初めての選び方
-guide-hyaluronic.html   玻尿酸究竟係咩 · Hyaluronic acid · 玻尿酸とは
+guide-first-time.html   第一次購買 · First time buying · 初めての選び方
+guide-hyaluronic.html   玻尿酸是什麼 · Hyaluronic acid · 玻尿酸とは
 ```
 
 每篇三種語言，各有各嘅 URL（`/en/guide-size.html`、`/ja/guide-size.html`），
@@ -362,15 +362,33 @@ guides.html               全部選購指南 · All buying guides · すべて�
 
 產品頁底部亦都會列出五篇指南，指南之間互相連結，所以內部連結係雙向嘅。
 
+### 指南嘅小圖示
+
+每篇指南有一個**屬於自己嘅記號** —— 尺碼表係尺，材質比較係層，第一購買係袋，
+玻尿酸係水滴。記號喺 `scripts/lib/guide-icons.mjs`，用同全站圖示一樣嘅
+線條畫法（`viewBox="0 0 24 24"`、`stroke="currentColor"`）。
+
+記號**放喺標題嘅字入面**（`<h1>` 嘅頭），唔係企喺旁邊 —— 因為指南正文
+係一欄、由上而下讀嘅，企喺旁邊會把欄打斷。
+
+### 中文用書面語，唔用口語
+
+指南嘅中文係**書面語** —— 唔係「嘅 / 唔 / 喺 / 咗 / 咩」，而係
+「的 / 不 / 在 / 了 / 什麼」。原因有兩個：搜尋嘅人打嘅係書面語，
+同埋口語嘅中文讀落似譯文，唔似香港人寫嘅說明。
+
+`scripts/lib/guide.test.mjs` 有一個測試會捉住呢類字，一旦有人改稿
+寫咗口語入去，測試就會紅。
+
 改完指南嘅字要跑：
 
 ```bash
 npm run gen:guides
 ```
 
-`scripts/lib/guide.test.mjs`（22 個測試）會捉住：頁面冇咗、連結指向唔存在嘅頁、
+`scripts/lib/guide.test.mjs`（23 個測試）會捉住：頁面冇咗、連結指向唔存在嘅頁、
 頁面問嘅問題同結構化資料唔一樣、日文入面有韓文或者英文指南入面有中文、
-每一頁有冇連結去指南、指南頁面嘅日期同 git 話嘅日期一唔一致。
+中文入面有口語、每一頁有冇連結去指南、指南頁面嘅日期同 git 話嘅日期一唔一致。
 
 ---
 
