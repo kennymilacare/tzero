@@ -48,7 +48,7 @@ export default {
   description: {
     zh: '第一次購買安全套應該怎樣選?新手只需要弄清楚尺碼、材質與包裝三項。本文說明應選擇哪一款、購買多少隻、購買前要查看什麼,以及第一次如何佩戴。',
     en: 'First time buying condoms? Here is the short version: which type to pick, how many to buy, what to check on the shelf, and how to put one on the first time.',
-    ja: 'はじめて選ぶときの基準、入数の目安、店頭で確認する項目、はじめての着け方。',
+    ja: 'はじめて選ぶときの基準は3つ。最初に選ぶ種類、入数の目安、店頭で確認する項目、そしてはじめての着け方まで、順番に整理します。',
   },
   lead: {
     zh: '第一次購買,大部分人會研究得太久,然後愈看愈亂。其實真正要決定的只有三件事:尺碼是否合適、能否接受材質、想要什麼感覺。弄清楚這三項,第一次便不會買錯。',

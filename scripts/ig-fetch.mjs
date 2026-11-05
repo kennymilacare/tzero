@@ -477,6 +477,36 @@ async function downloadImage(url, filename) {
   return path.relative(ROOT, file).split(path.sep).join('/');
 }
 
+/**
+ * Make the copies the pages ask for.
+ *
+ * The pages show a photograph in three widths and in WebP, so a new
+ * post needs its copies made before the page can offer them. The
+ * copies themselves are made by scripts/compress-photos.py — the
+ * same script that made the ones for the photographs that are
+ * already there.
+ */
+async function makeCopies(relative) {
+  const base = relative.replace(/\.(jpg|jpeg)$/i, '');
+  const targets = [];
+  for (const width of [320, 640, 1200]) {
+    targets.push(`${base}-${width}.webp`);
+    targets.push(`${base}-${width}.jpg`);
+  }
+
+  await new Promise((resolve, reject) => {
+    const child = spawn(
+      'python',
+      [path.join(ROOT, 'scripts', 'compress-photos.py'), '--apply', ...targets],
+      { cwd: ROOT, stdio: 'ignore' },
+    );
+    child.on('error', reject);
+    child.on('close', (code) => (code === 0
+      ? resolve()
+      : reject(new Error(`compress-photos.py exited with ${code}`))));
+  });
+}
+
 /* ---------- main ---------- */
 
 /* ---------- listing the account's own posts ---------- */
@@ -727,12 +757,27 @@ async function main() {
       let image = '';
       if (post.images && post.images.length) {
         const name = `ig-${date}-${shortcode}`;
+        let downloaded = false;
         try {
           image = await downloadImage(post.images[0], name);
+          downloaded = true;
           console.log(`[ig-fetch] saved ${image}`);
         } catch (e) {
           console.warn(`[ig-fetch] could not download the image (${e.message}); the card will link to it instead.`);
           image = post.images[0];
+        }
+
+        /* The pages show a photograph in three widths and in WebP, so
+           the new post needs its copies made too. If that fails the
+           post is still published: the pages fall back to the
+           original photograph, and the copies can be made later. */
+        if (downloaded && /\.(jpg|jpeg)$/i.test(image)) {
+          try {
+            await makeCopies(image);
+            console.log(`[ig-fetch] made the copies of ${image}`);
+          } catch (e) {
+            console.warn(`[ig-fetch] could not make the copies of ${image} (${e.message}).`);
+          }
         }
       }
 

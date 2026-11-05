@@ -47,8 +47,23 @@ export function productTitle(product, lang = 'zh') {
   return `${name} — ${subtitle} | ${word(lang, 'seo.brand.name')}`;
 }
 
-/** The description of a product page. */
+/**
+ * The description of a product page.
+ *
+ * A product page carries two pieces of writing about the product:
+ * the long description that the page itself shows, and a shorter
+ * summary for the meta description and the structured data. The
+ * summary is the one that is written to say what the page is — a
+ * search engine shows a page's description in the results, and
+ * reads the same words again in the structured data.
+ *
+ * A product with no summary written falls back to the long
+ * description and the sentence that goes with it.
+ */
 export function productDescription(product, lang = 'zh') {
+  const summary = field(product, 'summary', lang);
+  if (summary) return summary;
+
   return fill(word(lang, 'product.detail.summary'), {
     description: field(product, 'description', lang),
     subtitle: field(product, 'subtitle', lang),

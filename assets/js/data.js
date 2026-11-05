@@ -45,14 +45,22 @@ export const products = [
     type: 'functional',
     color: '#5FB3E6',
     hktv_url: 'https://www.hktvmall.com/search?q=tzero+lubricant',
+    summary_zh:
+      '200% 高濃度玻尿酸精華配製潤滑層,水潤不油膩,減少摩擦造成的乾澀;醫療級天然橡膠製造,每片經電子檢漏測試,10 片一盒,全黑啞面保密包裝。',
+    summary_en:
+      '200% hyaluronic lubrication with a water-light feel — medical-grade latex, leak-tested, 10 per box, discreet packaging.',
+    summary_ja:
+      '200%高濃度ヒアルロン酸の潤滑層。传统のべたつきのない軽い質感で、乾きにくい。医療グレードの天然ラテックス、全枚検査済み。1箱10本、簡易包装。',
     description_zh:
-      '200% 高濃度玻尿酸潤滑,告別傳統矽油黏膩感,水潤呵護,溫和親膚且易於清洗,讓過程流暢無阻。',
+      '加倍潤滑裝以 200% 高濃度玻尿酸精華配製潤滑層,質感接近清水而非傳統矽油的油膩與黏稠。水分在過程中不易蒸發,減少摩擦造成的乾澀與不適,配方溫和親膚,敏感肌膚同樣適用。每一片出廠前均經電子檢漏測試,確保氣密完整;採用醫療級天然橡膠製造,並由日本團隊按日本品質標準把關。包裝為全黑啞面紙盒,不印任何品牌或產品名稱,送貨過程保持完全保密。每盒 10 片,適合希望減少不適、追求水潤觸感的使用者。',
     description_en:
-      '200% high-concentration hyaluronic lubrication. Replaces sticky silicone with a water-light feel — gentle on skin, easy to rinse, and endlessly smooth.',
+      'Extra Lubricant is built around a 200% hyaluronic acid essence, so the lubrication feels close to water rather than the heavy, sticky film a conventional silicone lube leaves behind. The moisture does not evaporate quickly during use, which means less friction, less dryness and less irritation, and the formula is mild enough for sensitive skin. Every condom goes through an electronic leak test before it leaves the factory, and the whole range is made of medical-grade natural latex under Japanese quality standards. It arrives in a plain matte-black box with no branding and no product name, so the delivery says nothing about what is inside. Ten per box.',
     description_ja:
-      '200%高濃度ヒアルロン酸潤滑。従来のシリコンオイルのべたつきを抑え、水のように軽くなめらか。肌に優しく、洗浄も簡単。',
+      'エクストラ潤滑は、200%高濃度ヒアルロン酸エキスで潤滑層を設計。传统のシリコンオイルのようなべたつきではなく、水に近い軽やかな質感です。使用中の蒸発が少なく、摩擦による乾燥や刺激を抑えます。敏感肌にも向いています。すべての製品を出荷前に電子漏れ検査にかけ、気密を確認しています。原料は医療グレードの天然ラテックスで、日本の品質基準に従って製造しています。パッケージはつや消しの無地ブラックボックスで、ブランド名や製品名の記載はなく、お届け時のプライバシーを守ります。1箱10本入りです。',
     popular: true,
     image: 'assets/images/products/tzero-extra-lub.jpg',
+    imageWidth: 1536,
+    imageHeight: 1536,
     image_alt_zh: 'T-ZERO 加倍潤滑裝 — 200% 玻尿酸潤滑安全套',
     image_alt_en: 'T-ZERO Extra Lubricant — 200% hyaluronic condom',
     image_alt_ja: 'T-ZERO エクストラ潤滑 — 200% ヒアルロン酸コンドーム',
@@ -74,14 +82,22 @@ export const products = [
     type: 'functional',
     color: '#9A9A9A',
     hktv_url: 'https://www.hktvmall.com/search?q=tzero+extended',
+    summary_zh:
+      '0.03 mm 適中厚度兼顧耐用與貼合,玻尿酸潤滑配方溫和不刺激,醫療級天然橡膠製造,每片經電子檢漏測試,10 片一盒,全黑啞面保密包裝。',
+    summary_en:
+      '0.03 mm for endurance without losing the natural feel — gentle hyaluronic lubrication, medical-grade latex, leak-tested, 10 per box.',
+    summary_ja:
+      '0.03mmの適正厚さで、持続性と密着感を両立。温和な潤滑で肌にもやさしく、长时间使っても快適です。医療グレードの天然ラテックス、1箱10本、簡易包装。',
     description_zh:
-      '專為持久而設,玻尿酸潤滑配方溫和不刺激,保持肌膚自然觸感,讓親密時刻從容自在。',
+      '持久裝針對需要較長時間的親密時刻而設計,採用 0.03 mm 適中厚度,在傳遞體溫與維持貼合度之間取得平衡,不會因過薄而失去存在感,亦不會因過厚而影響觸感。潤滑層同樣以玻尿酸精華配製,配方溫和,不刺激皮膚,較長時間使用仍保持自然膚感。每一片經電子檢漏測試,並以醫療級天然橡膠製造,由日本團隊按日本品質標準把關。全黑啞面保密包裝,不顯示品牌或產品名稱,收貨過程不披露任何資料。每盒 10 片,適合重視耐用表現與穩定舒適度的使用者。',
     description_en:
-      'Designed for endurance. Hyaluronic lubrication keeps skin calm and natural, so you can take your time without compromise.',
+      'Extended is designed for the moments that need a little more time. At 0.03 mm it holds a balance between passing body heat through and staying close to the skin, so it never feels as though it has disappeared and never feels as though it is in the way. The lubrication is made with the same hyaluronic essence as the rest of the range: mild, non-irritating, and it keeps the natural feel of skin over a longer stretch. Every condom is put through an electronic leak test, and each one is made of medical-grade natural latex under Japanese quality standards. It arrives in a plain matte-black box with no branding and no product name, so nothing about the delivery gives you away. Ten per box.',
     description_ja:
-      '持続性を追求した設計。ヒアルロン酸潤滑が肌をやさしく整え、自然な感覚で落ち着いたひとときを。',
+      'エクステンドは、少し長めのひとときのために設計された製品です。0.03mmの適正厚さで、体温の伝わり方と密着感の両方を保ちます。薄すぎて存在感がないことも、厚すぎて手ごたえになることもありません。潤滑層もシリーズと同じ配分で、穏やかで肌に負担のない使い心地です。すべての製品を出荷前に電子漏れ検査にかけ、気密を確認しています。原料は医療グレードの天然ラテックスで、日本の品質基準に従って製造しています。パッケージはつや消しの無地ブラックボックスで、ブランド名や製品名の記載はなく、お届け時のプライバシーを守ります。1箱10本入りです。',
     popular: true,
     image: 'assets/images/products/tzero-extended.jpg',
+    imageWidth: 2048,
+    imageHeight: 2048,
     image_alt_zh: 'T-ZERO 持久裝 — 玻尿酸潤滑安全套',
     image_alt_en: 'T-ZERO Extended — hyaluronic condom for lasting performance',
     image_alt_ja: 'T-ZERO エクステンド — 持続力サポート ヒアルロン酸コンドーム',
@@ -103,14 +119,22 @@ export const products = [
     type: 'textured',
     color: '#86ABCA',
     hktv_url: 'https://www.hktvmall.com/search?q=tzero+studded',
+    summary_zh:
+      '立體凸點配合玻尿酸潤滑,在增加觸感刺激的同時保持肌膚被呵護的感覺;0.04 mm 厚度令凸點分佈平均,醫療級天然橡膠製造,每片經電子檢漏測試,10 片一盒,全黑啞面保密包裝。',
+    summary_en:
+      'Raised studs add sensation while hyaluronic lubrication cares for the skin. 0.04 mm for an even texture, medical-grade latex, leak-tested, 10 per box.',
+    summary_ja:
+      '立体のドットが触覚に刺激を加えます。0.04mmでドットの並びが均等になり、刺激が一点に偏りません。医療グレードの天然ラテックス、1箱10本、簡易包装。',
     description_zh:
-      '凸點設計增添刺激,玻尿酸潤滑同時呵護肌膚,日本工藝帶來更立體的觸感體驗。',
+      '顆粒裝在安全套表面加入立體凸點,配合玻尿酸潤滑層,在增加觸感刺激的同時保持肌膚被呵護的感覺。0.04 mm 厚度屬中等偏厚,凸點的立體結構需要一定厚度才能穩定成形,並維持一致的觸感,薄身款式難以做到同樣效果。凸點分佈經過設計,受力平均,不會集中於同一區域。使用醫療級天然橡膠製造,每一片出廠前經電子檢漏測試,氣密完整才會出貨。包裝採用全黑啞面紙盒,不印品牌或產品名稱,確保送貨過程完全保密。每盒 10 片,適合喜歡額外觸感刺激的使用者。',
     description_en:
-      'Raised studs add sensation while hyaluronic lubrication cares for the skin. Japanese craftsmanship for a more dimensional feel.',
+      'Studded puts raised dots on the surface of the condom, and pairs them with the same hyaluronic lubrication as the rest of the range. You get more to feel, and the skin is still looked after. At 0.04 mm the wall is thick enough for the studs to hold their shape and keep an even texture all the way round — something a thinner construction cannot do. The dots are placed by design rather than by chance, so the pressure is spread out rather than gathered in one place. Made of medical-grade natural latex, and every condom is put through an electronic leak test before it ships. It arrives in a plain matte-black box with no branding and no product name, so the delivery gives nothing away. Ten per box.',
     description_ja:
-      'ドット加工が刺激をプラスし、ヒアルロン酸潤滑が肌を守る。日本工藝による立体的な触感。',
+      'スタッデッドは、コンドームの表面に立体のドットを追加し、シリーズと同じヒアルロン酸潤滑を組み合わせました。触覚に刺激が加わりながら、肌に気遣いも残ります。0.04mmの厚さがドットの形と並び方を保ち、刺激が一点に偏らず全体に広がります。すべての製品を出荷前に電子漏れ検査にかけ、気密を確認しています。原料は医療グレードの天然ラテックスで、日本の品質基準に従って製造しています。パッケージはつや消しの無地ブラックボックスで、ブランド名や製品名の記載はなく、お届け時のプライバシーを守ります。1箱10本入りです。',
     popular: true,
     image: 'assets/images/products/tzero-studded.jpg',
+    imageWidth: 2048,
+    imageHeight: 2048,
     image_alt_zh: 'T-ZERO 顆粒裝 — 凸點設計玻尿酸潤滑安全套',
     image_alt_en: 'T-ZERO Studded — textured hyaluronic condom',
     image_alt_ja: 'T-ZERO スタッデッド — ドット加工 ヒアルロン酸コンドーム',
@@ -125,21 +149,29 @@ export const products = [
     subtitle_zh: '極薄 ・ 玻尿酸潤滑',
     subtitle_en: 'Ultra-thin ・ Hyaluronic Lube',
     subtitle_ja: '極薄 ・ ヒアルロン酸潤滑',
-    thickness_mm: null,
+    thickness_mm: 0.01,
     material: 'Latex',
     pieces: 10,
     price_hkd: 98,
     type: 'ultra-thin',
     color: '#171C1D',
     hktv_url: 'https://www.hktvmall.com/search?q=tzero+ultra+thin',
+    summary_zh:
+      '0.01 mm 極薄工藝,微米級貼合度,迅速傳導體溫,使用時幾乎感覺不到存在;醫療級天然橡膠製造,每片經電子檢漏測試,10 片一盒,全黑啞面保密包裝。',
+    summary_en:
+      '0.01 mm construction that transmits body heat and almost disappears — medical-grade latex, leak-tested, 10 per box, discreet packaging.',
+    summary_ja:
+      '0.01mmの極薄構造。体温をすみやかに伝え、装着感はほとんど残りません。医療グレードの天然ラテックス、全枚検査済み。1箱10本、簡易包装。',
     description_zh:
-      '0.01mm 極薄工藝,微米級貼合度,瞬間傳導體溫,玻尿酸潤滑讓超薄體驗更水潤自然。',
+      '超薄裝採用 0.01 mm 極薄工藝,厚度僅為一般安全套的數分之一,配合微米級貼合度,能迅速傳導體溫,使用時幾乎感覺不到存在,適合偏好接近無感體驗的使用者。極薄的另一面是對製造工藝的更高要求:每一片都必須通過電子檢漏測試,任何微小孔洞都不會流出,以確保氣密完整。潤滑層以玻尿酸精華配製,水潤不油膩,較長時間使用亦不易乾澀。採用醫療級天然橡膠,由日本團隊按日本品質標準把關。包裝為全黑啞面紙盒,不印任何品牌或產品名稱,送貨過程保持完全保密。每盒 10 片。',
     description_en:
-      '0.01mm micro-thin construction transmits body heat instantly. Hyaluronic lubrication keeps the ultra-thin experience feeling water-light and natural.',
+      'Ultra Thin is built at 0.01 mm — a fraction of the thickness of an ordinary condom — and moulded to fit at a precision of micrometres. Body heat passes through almost at once, so the condom is very nearly not there, which is what makes it the right choice if you prefer the lightest feel available. Thinness is also a harder thing to make well: every condom is put through an electronic leak test, so even the smallest pinhole is caught before it leaves the factory. The lubrication is made with hyaluronic essence, so it stays water-light and does not dry out as quickly. Made of medical-grade natural latex under Japanese quality standards, and packed in a plain matte-black box with no branding and no product name. Ten per box.',
     description_ja:
-      '0.01mm極薄構造が体温を瞬時に伝える。ヒアルロン酸潤滑が極薄体験をよりみずみずしく自然に。',
+      'ウルトラシンは0.01mmの極薄構造です。微細な密着で体温をすみやかに伝えます。装着感はほとんど残りません。薄さは製造の難しさでもあります。すべての製品を出荷前に電子漏れ検査にかけ、気密を確認しています。潤滑層はヒアルロン酸エキス配合で、べたつきが少なく乾きにくい性状です。原料は医療グレードの天然ラテックスで、日本の品質基準に従って製造しています。パッケージはつや消しの無地ブラックボックスで、ブランド名や製品名の記載はなく、お届け時のプライバシーを守ります。1箱10本入りです。',
     popular: true,
     image: 'assets/images/products/tzero-ultra-thin.jpg',
+    imageWidth: 2048,
+    imageHeight: 2048,
     image_alt_zh: 'T-ZERO 超薄裝 — 0.01mm 極薄玻尿酸潤滑安全套',
     image_alt_en: 'T-ZERO Ultra Thin — 0.01mm hyaluronic condom',
     image_alt_ja: 'T-ZERO ウルトラシン — 0.01mm 極薄 ヒアルロン酸コンドーム',
@@ -426,6 +458,12 @@ export const i18n = {
 
     'products.title': '全部產品',
     'products.subtitle': '4 款精心設計,玻尿酸潤滑,香港24小時落單。',
+    'products.intro':
+      '<p>T-ZERO 第九感全系列共有 4 款玻尿酸安全套,分別針對潤滑度、持久度、觸感與薄度設計。每一款都採用醫療級天然橡膠製造,每一片經電子檢漏測試,並由日本團隊按日本品質標準把關。</p><p>以下先說明四款產品的分別,再說明按材質、闊度與使用情境選擇的方法,讓你不用逐一試錯,也能一次選對。</p>',
+    'products.guide.title': '如何選擇適合自己的款式',
+    'products.guide.body':
+      '<p>四款產品的分別主要在於潤滑度、厚度與表面紋理。加倍潤滑裝使用 200% 高濃度玻尿酸精華,追求水潤而不油膩的觸感;持久裝以 0.03 mm 適中厚度兼顧耐用與貼合;顆粒裝以 0.04 mm 厚度配合立體凸點,增加觸感刺激;超薄裝則以 0.01 mm 極薄工藝,追求接近無感的體驗。</p><p>如對乳膠過敏,可向我們查詢聚氨酯(PU)或聚異戊烯(PI)材質的安排。所有款式每盒均為 10 片,採用全黑啞面保密包裝,不印任何品牌或產品名稱;香港本地 24 小時落單,最快一個工作天內安排發貨。</p>',
+    'products.guide.link': '閱讀尺碼與材質指南',
     'products.filter.brand': '品牌',
     'products.filter.type': '類別',
     'products.filter.thickness': '厚度',
@@ -608,19 +646,19 @@ export const i18n = {
     'seo.brand.desc': '日本玻尿酸安全套品牌,24小時落單,保密包裝。',
     'seo.brand.name': 'T-ZERO 第九感',
     'seo.og.title.home': 'T-ZERO 第九感 · 玻尿酸安全套 · 日本品牌 · 24小時落單',
-    'seo.og.desc.home': '日本玻尿酸安全套品牌 — 加倍潤滑、持久、顆粒、超薄 4 款設計,24小時落單,保密包裝。',
+    'seo.og.desc.home': '日本玻尿酸安全套品牌 — 加倍潤滑、持久、顆粒、超薄 4 款設計,全線玻尿酸潤滑配方,醫療級天然橡膠製造並逐片電子檢漏,24小時落單,全黑啞面保密包裝。',
     'seo.og.title.products': '全部產品 · T-ZERO 第九感',
-    'seo.og.desc.products': 'T-ZERO 第九感全系列:加倍潤滑、持久、顆粒、超薄 4 款玻尿酸安全套。日本工藝,24小時落單。',
+    'seo.og.desc.products': 'T-ZERO 第九感全系列:加倍潤滑、持久、顆粒、超薄 4 款玻尿酸安全套。比較厚度、材質、紋路與潤滑度,按闊度與用途選購適合自己的款式;每盒 10 片,24小時落單,全黑啞面保密包裝。',
     'seo.og.title.product': '產品詳情 · T-ZERO 第九感',
     'seo.og.desc.product': '查看 T-ZERO 第九感玻尿酸安全套產品詳情:規格、成分、使用方法。日本工藝,24小時落單。',
     'seo.og.title.about': '關於 T-zero · T-ZERO 第九感',
-    'seo.og.desc.about': 'T-ZERO 第九感,日本玻尿酸安全套品牌。專注潤滑技術與日本工藝,4 款設計。',
+    'seo.og.desc.about': 'T-ZERO 第九感,日本玻尿酸安全套品牌。專注潤滑技術與日本工藝,採用醫療級天然橡膠,每一片經電子檢漏測試;4 款設計為每一刻帶來更自在的親密體驗,2026 年登陸屈臣氏與 HKTVmall。',
     'seo.og.title.news': '最新動態 · T-ZERO 第九感',
-    'seo.og.desc.news': 'T-ZERO 第九感的最新消息、產品更新、品牌活動與限定優惠。',
+    'seo.og.desc.news': 'T-ZERO 第九感的最新消息、產品更新、品牌活動與限定優惠。第一手掌握日本玻尿酸安全套品牌動向,以及新品上架、店舖與網購優惠的資訊。',
     'seo.og.title.contact': '聯絡我們 · T-ZERO 第九感',
     'seo.og.desc.contact': '聯絡 T-ZERO 第九感。電話、電郵、WhatsApp 或於下方留言。',
     'seo.og.title.terms': '細則與條款 · T-ZERO 第九感',
-    'seo.og.desc.terms': 'T-ZERO 第九感 細則與條款 — 私隱政策、使用條款、運送及售後說明。',
+    'seo.og.desc.terms': 'T-ZERO 第九感細則與條款 — 私隱政策、使用條款、運送及售後說明。落單前請先閱覽本頁:包括訂單處理、付款方式、發貨時間、退換貨安排與私隱處理方式。18 歲以上方可購買。',
 
     'news.title': 'T-ZERO 最新動態',
     'news.intro': 'T-ZERO 第九感 Instagram 最新動態 —— 產品更新、品牌活動、限定優惠。',
@@ -831,6 +869,12 @@ export const i18n = {
 
     'products.title': 'All products',
     'products.subtitle': 'Four designs, hyaluronic lubrication, 24-hour ordering in HK.',
+    'products.intro':
+      '<p>T-ZERO NINTH SENSE is a line of four hyaluronic condoms, each designed around a different need: more lubrication, more time, more texture, or less of everything. All four are made of medical-grade natural latex, every condom is put through an electronic leak test, and the whole range is built to Japanese quality standards.</p><p>Below is how the four differ from one another, and how to choose between them by material, width and the occasion you have in mind — so you can pick the right one first time.</p>',
+    'products.guide.title': 'How to choose the one that suits you',
+    'products.guide.body':
+      '<p>The four differ mainly in lubrication, thickness and surface texture. Extra Lubricant uses a 200% hyaluronic acid essence for a water-light feel rather than an oily one. Extended uses a moderate 0.03 mm to hold up over a longer stretch without losing the close fit. Studded pairs 0.04 mm with raised studs for extra sensation. Ultra Thin goes to 0.01 mm for a feel that is very nearly nothing.</p><p>If you react to latex, ask us about the polyurethane (PU) and polyisoprene (PI) options. Every design comes ten to a box in a plain matte-black box with no branding and no product name. Orders placed in Hong Kong are dispatched within 24 hours, usually the next working day.</p>',
+    'products.guide.link': 'Read the size and material guides',
     'products.filter.brand': 'Brand',
     'products.filter.type': 'Type',
     'products.filter.thickness': 'Thickness',
@@ -1013,19 +1057,19 @@ export const i18n = {
     'seo.brand.desc': 'Japanese hyaluronic condom brand — 24-hour ordering, discreet packaging.',
     'seo.brand.name': 'T-ZERO NINTH SENSE',
     'seo.og.title.home': 'T-ZERO NINTH SENSE · Hyaluronic Condom · Japanese Brand · 24-Hour Ordering',
-    'seo.og.desc.home': 'Japanese hyaluronic condom brand — extra lube, extended, studded, ultra-thin. 24-Hour Ordering, discreet packaging.',
+    'seo.og.desc.home': 'Japanese hyaluronic condom brand — extra lube, extended, studded and ultra-thin in four designs. Medical-grade natural latex, electronic leak testing on every piece, 24-hour ordering and discreet plain black packaging.',
     'seo.og.title.products': 'All Products · T-ZERO NINTH SENSE',
-    'seo.og.desc.products': 'Full T-ZERO NINTH SENSE line: extra lube, extended, studded, ultra-thin 4 hyaluronic condom designs. Japanese craftsmanship, 24-hour ordering.',
+    'seo.og.desc.products': 'The full T-ZERO NINTH SENSE line: extra lube, extended, studded and ultra-thin. Compare thickness, material, texture and lubrication, then choose by width and by occasion. Ten per box, 24-hour ordering, discreet plain black packaging.',
     'seo.og.title.product': 'Product Details · T-ZERO NINTH SENSE',
     'seo.og.desc.product': 'View T-ZERO NINTH SENSE hyaluronic condom product details: specs, ingredients, how to use.',
     'seo.og.title.about': 'About T-zero · T-ZERO NINTH SENSE',
-    'seo.og.desc.about': 'T-ZERO NINTH SENSE — Japanese hyaluronic condom brand focused on lubrication technology and Japanese craftsmanship.',
+    'seo.og.desc.about': 'T-ZERO NINTH SENSE is a Japanese hyaluronic condom brand built around lubrication technology and Japanese craftsmanship. Medical-grade natural latex, electronic leak testing on every condom, four designs, and a discreet plain black box with no branding on it.',
     'seo.og.title.news': 'Latest News · T-ZERO NINTH SENSE',
-    'seo.og.desc.news': 'T-ZERO NINTH SENSE latest news, product updates, brand activities and limited offers.',
+    'seo.og.desc.news': 'T-ZERO NINTH SENSE news, product updates, brand activities and limited offers. New product launches, where to buy, and the latest offers from a Japanese hyaluronic condom brand.',
     'seo.og.title.contact': 'Contact Us · T-ZERO NINTH SENSE',
     'seo.og.desc.contact': 'Contact T-ZERO NINTH SENSE. Phone, email, WhatsApp, or send a message below.',
     'seo.og.title.terms': 'Terms & Conditions · T-ZERO NINTH SENSE',
-    'seo.og.desc.terms': 'T-ZERO NINTH SENSE terms & conditions — privacy policy, terms of use, shipping and returns.',
+    'seo.og.desc.terms': 'T-ZERO NINTH SENSE terms and conditions — privacy policy, terms of use, shipping and returns. Read this before ordering: order handling, payment methods, delivery times, returns and how your information is handled.',
 
     'news.title': 'News from NINTH SENSE.',
     'news.intro': 'Latest from T-ZERO on Instagram — product updates, brand events and limited offers.',
@@ -1111,10 +1155,10 @@ export const i18n = {
     'home.why.eyebrow': 'なぜ T-ZERO か',
     'home.why.title': '二つの核心、ひとつの純粋。',
     'home.why.feature1.title': '薄さ無双(究極の体感)',
-    'home.why.feature1.body': '画期的超薄工藝、マイクロメートル級フィット、体温を瞬時に伝導。すべての触れ合いが真実で自然に、まるでゼロ距離のインタラクションのように、感覚深層の第九感を目覚めさせます。',
+    'home.why.feature1.body': '常識を超えた超薄工芸、マイクロメートル級のフィットで体温を瞬時に伝導。すべての触れ合いが本物のように自然で、まるでゼロ距離のインタラクション。感覚の深部に眠る第九感を目覚めさせます。',
     'home.why.feature2.title': '高濃度ヒアルロン酸潤滑(水潤ケア)',
-    'home.why.feature2.body': 'スキンケア級ヒアルロン酸(透明質酸)エッセンスを注入、長続きする清爽な水感潤滑を提供。従来のシリコーン油の粘着感を告别、肌溫和且洗淨容易、過程を流暢に。',
-    'home.why.tagline': '全方位の安全保護を与えるだけでなく、あなたに隔たりを超えさせ、最も純粋な肌同士の対話を復元します。',
+    'home.why.feature2.body': 'スキンケア級のヒアルロン酸（透明質酸）成分を配合し、長続きする清爽な水感潤滑を提供。従来のシリコーン油の粘着感を告别し、肌は温和で洗浄しやすく、過程もなめらかです。',
+    'home.why.tagline': '全面的な保護を与えるだけでなく、隔りを超えて、最も純粋な肌同士の対話を取り戻します。',
 
     'home.lubricant.eyebrow': '潤滑成分分析',
     'home.lubricant.title': 'ヒアルロン酸 vs 他の潤滑剤:何が違う?',
@@ -1138,7 +1182,7 @@ export const i18n = {
 
     'home.featured.eyebrow': '全シリーズ',
     'home.featured.title': '4つのデザイン、ひとつの自然な感覚。',
-    'home.featured.subtitle': 'ヒアルロン酸潤滑 ・ 日本工藝 ・ 異なるニーズに応える4設計',
+    'home.featured.subtitle': 'ヒアルロン酸潤滑 ・ 日本工芸 ・ ニーズに応じた4つの設計',
     'home.featured.all': '4つの設計を見る →',
 
     'home.story.eyebrow': '第九感について',
@@ -1167,7 +1211,7 @@ export const i18n = {
     'home.match.card3.title': 'スタッデッド',
     'home.match.card3.body': 'マンネリ気味の親密さに、小さな火を灯したい?',
     'home.match.card3.b1': '立体ドット加工',
-    'home.match.card3.b2': '日本工藝で仕上げ',
+    'home.match.card3.b2': '日本工芸で仕上げ',
     'home.match.card3.b3': 'ヒアルロン酸配合で肌に優しい',
     'home.match.card4.tag': 'もっと近づきたい?',
     'home.match.card4.title': 'ウルトラシン',
@@ -1238,6 +1282,12 @@ export const i18n = {
 
     'products.title': 'すべての製品',
     'products.subtitle': '4つのこだわり設計、ヒアルロン酸潤滑、香港24時間受付。',
+    'products.intro':
+      '<p>T-ZERO 第九感は、全4モデルがそれぞれ違う目的に合わせて設計されています。すべて医療グレードの天然ラテックスで製造し、出荷前に電子漏れ検査で気密を確認しています。原料と製造は日本の品質基準に準じています。</p><p>以下では、4モデルの違いと、素材・幅・場面による選び方を説明します。</p>',
+    'products.guide.title': '自分に合ったモデルの選び方',
+    'products.guide.body':
+      '<p>4モデルの違いは、主に潤滑感・厚さ・表面の凹凸にあります。エクストラ潤滑は200%高濃度ヒアルロン酸配合の润滑液で、べたつきのない軽い食感。エクステンドは0.03mmの標準的な厚さで、持続性と密着感を両立。スタッデッドは0.04mmに立体のドットを加えて、触覚に刺激を加えます。ウルトラシンは0.01mmの極薄構造で、装着感を抑えます。</p><p>ラテックスに反応がある場合は、ポリウレタン（PU）やポリイソプレン（PI）の素材についてお問い合わせください。どのモデルも1箱10本入りで、つや消しの無地ブラックボックスに入り、ブランド名や製品名は記しません。香港でのご注文は24時間以内に発送します。</p>',
+    'products.guide.link': 'サイズと素材のガイドを読む',
     'products.filter.brand': 'ブランド',
     'products.filter.type': 'カテゴリー',
     'products.filter.thickness': '薄さ',
@@ -1291,7 +1341,7 @@ export const i18n = {
     'about.slogan.en': 'Touch the Real, Flow with Zero.',
     'about.slogan.zh': '流れるような滑らか、本物の触感。',
     'about.story.brand.title': 'T-ZERO 第九感について',
-    'about.story.brand.body': '日本の職人チームが <em>2018 年</em>に設立した高級ブランド「T-ZERO 第九感」。常に業界の前線を走り、従来の Kondーム の持つ距離感を打破してきました。<em>安全と親密さは二択ではない</em>——それが私たちの信念です。日本の先端技術により、「水感無阻，真實觸感」をすべてのカップルのプライベートな時間にもたらします。',
+    'about.story.brand.body': '日本の職人チームが <em>2018 年</em>に設立した高級ブランド「T-ZERO 第九感」。常に業界の前線を走り、従来のコンドームが持つ距離感を打破してきました。<em>安全と親密さは二択ではない</em>——それが私たちの信念です。日本の先端技術により、「なめらかな水感と、本物のような触感」をすべてのカップルのプライベートな時間にもたらします。',
     'about.story.ha.title': '全製品にヒアルロン酸を配合',
     'about.story.ha.body': '従来の乾きから卒業。全製品に<em>ヒアルロン酸</em>を配合し、長時間の潤滑と肌への優しさを両立。「Flow with Zero」の境地を体現し、<em>そのまま滑らかさを保ちながら</em>、パートナーの敏感肌にも優しく寄り添います。',
     'about.story.series.title': '4つのシリーズ、それぞれのニーズに正確に',
@@ -1304,7 +1354,7 @@ export const i18n = {
     'about.story.series.lub.body': '保湿を最大限に強化、比類ない「水感無阻」の滑らかさ。',
     'about.story.series.durable.title': '特久シリーズ',
     'about.story.series.durable.body': '甘い時間を少し延長。もっと多くの楽しさを分かち合う。',
-    'about.story.series.studded.title': '顆粒シリーズ',
+    'about.story.series.studded.title': '突起シリーズ',
     'about.story.series.studded.body': '立体的な突起の触感で感覚を刺激し、より多様な親密なふれあいを探求。',
     'about.story.retail.store.title': '店頭で直升',
     'about.story.retail.store.body': 'Watsons の実店舗で直接見て、その日のうちに購入できます。',
@@ -1436,19 +1486,19 @@ export const i18n = {
     'seo.brand.desc': '日本のヒアルロン酸コンドームブランド,24時間受付,秘密包装。',
     'seo.brand.name': 'T-ZERO 第九感',
     'seo.og.title.home': 'T-ZERO 第九感 · ヒアルロン酸コンドーム · 日本ブランド · 24時間受付',
-    'seo.og.desc.home': '日本のヒアルロン酸コンドームブランド — エクストラ潤滑、エクステンド、スタッド、ウルトラシン 4種類。24時間受付、秘密包装。',
+    'seo.og.desc.home': '日本のヒアルロン酸コンドームブランド — エクストラ潤滑、エクステンド、スタッド、ウルトラシンの4モデル。医療グレードの天然ラテックスで全枚検査、24時間受付、目立たない黒い簡易包装。',
     'seo.og.title.products': '全製品 · T-ZERO 第九感',
-    'seo.og.desc.products': 'T-ZERO 第九感全シリーズ:エクストラ潤滑、エクステンド、スタッド、ウルトラシン 4種類。日本クラフトマンシップ、24時間受付。',
+    'seo.og.desc.products': 'T-ZERO 第九感全シリーズ:エクストラ潤滑、エクステンド、スタッド、ウルトラシン。厚さ、素材、テクスチャ、潤滑感を比べて、幅と場面から選べる一本を選べます。1箱10本、24時間受付、簡易包装。',
     'seo.og.title.product': '製品詳細 · T-ZERO 第九感',
     'seo.og.desc.product': 'T-ZERO 第九感 ヒアルロン酸コンドームの製品詳細:仕様、成分、使用方法。',
     'seo.og.title.about': 'T-zeroについて · T-ZERO 第九感',
-    'seo.og.desc.about': 'T-ZERO 第九感 — 潤滑技術と日本クラフトマンシップに焦点を当てた日本のヒアルロン酸コンドームブランド。',
+    'seo.og.desc.about': 'T-ZERO 第九感 — 潤滑技術と日本のクラフトマンシップ。重点を置くのは、素材と検査、そして秘密を守ったパッケージです。4モデルを取り揃えています。',
     'seo.og.title.news': '最新ニュース · T-ZERO 第九感',
-    'seo.og.desc.news': 'T-ZERO 第九感の最新情報、製品更新、ブランド活動、限定オファー。',
+    'seo.og.desc.news': 'T-ZERO 第九感の最新情報、製品更新、ブランド活動、限定オファー。新商品のお知らせ、店頭とオンラインでの購入方法、限定販売の案内をまとめます。',
     'seo.og.title.contact': 'お問い合わせ · T-ZERO 第九感',
     'seo.og.desc.contact': 'T-ZERO 第九感へのお問い合わせ。電話、メール、WhatsApp、または下記にメッセージ。',
     'seo.og.title.terms': '利用規約 · T-ZERO 第九感',
-    'seo.og.desc.terms': 'T-ZERO 第九感 利用規約 — プライバシーポリシー、利用規約、配送および返品について。',
+    'seo.og.desc.terms': 'T-ZERO 第九感利用規約 — プライバシーポリシー、利用規約、配送および返品について。ご注文前にご確認ください。注文の取り扱い、支払い方法、お届けまでの日数、返品方法、個人情報の取り扱いをまとめています。18歳以上の方のみご注文いただけます。',
 
     /* 讀出嚟嘅文字 —— 螢幕閱讀器同圖片搜尋都會用。 */
     'a11y.announcement': 'お知らせ',

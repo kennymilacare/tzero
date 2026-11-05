@@ -10,7 +10,7 @@
 
    Now each guide has a picture of its own, in the language of the
    page it belongs to: the eyebrow ("選購指南 · 紋路"), the
-   heading, and the address. Eighteen of them — five guides and
+   heading, and the address. Twenty-one of them — six guides and
    the list of them, in three languages.
 
    The pictures are drawn by a headless Chrome from a small HTML
@@ -158,7 +158,13 @@ async function main() {
   const { i18n } = await import('../assets/js/data.js');
   let written = 0;
 
-  /* The five guides, and the page that lists them. */
+  /* The pictures to draw, when they are named on the command line.
+     Nothing is limited when the flag is not given. */
+  const named = process.argv.slice(2).filter((a) => !a.startsWith('--'));
+  const only = named.length ? new Set(named.map((p) => p.replace(/\\/g, '/'))) : null;
+  if (only) console.log(`[gen-guide-og-images] drawing ${only.size} named picture(s) only.`);
+
+  /* The guides, and the page that lists them. */
   const pages = [
     ...GUIDES.map((g) => ({
       path: g.path,
@@ -178,11 +184,19 @@ async function main() {
       const eyebrow = (page.eyebrow[lang] || page.eyebrow.zh);
       const title = (page.title[lang] || page.title.zh);
 
+      /* The pictures that are asked for by name. The flag exists so
+         that a run can be limited to the pictures that actually
+         changed — drawing all twenty-one again when only three
+         are new would rewrite eighteen files that are already
+         right. The names are the paths they are written to,
+         relative to the root of the site. */
+      const relative = guideOgImagePath(page.path, lang);
+      if (only && !only.has(relative.replace(/\\/g, '/'))) continue;
+
       const html = pictureFor(brand, eyebrow, title, 'T-ZERO ・ NINTH SENSE');
       const tmp = path.join(tmpdir(), 'tzero-og', `${path.basename(page.path, '.html')}-${lang}.html`);
       await writeFile(tmp, html, 'utf8');
 
-      const relative = guideOgImagePath(page.path, lang);
       const out = path.join(ROOT, relative);
       await run(chrome, [
         '--headless',

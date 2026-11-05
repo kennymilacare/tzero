@@ -114,6 +114,12 @@ ul, ol { padding-left: 0; list-style: none; }
 
 img, svg { display: block; max-width: 100%; height: auto; }
 
+/* A <picture> is only a way of offering the browser a choice of
+   file: it is not a box of its own, and it should not change the
+   way the picture inside it is laid out. Saying so keeps every
+   rule that was written for an <img> working unchanged. */
+picture { display: contents; }
+
 button {
   font: inherit;
   color: inherit;

@@ -1,7 +1,7 @@
 /* ===========================================================
    The checks that keep the buying guides honest.
 
-   Five guides, three languages each, fifteen pages. A guide is
+   Six guides, three languages each, eighteen pages. A guide is
    the part of the site that answers a question before anybody
    buys anything — so it has to be readable, it has to say the
    same thing in all three languages, and it has to be found.

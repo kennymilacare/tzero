@@ -1,7 +1,7 @@
 /* ===========================================================
    scripts/lib/guide-icons.mjs — the little pictures of the guides.
 
-   A list of five things to read is easier to scan when each of
+   A list of six things to read is easier to scan when each of
    them has a mark of its own. The mark says what the guide is
    about before a word is read: a ruler for the size chart, a
    droplet for the hyaluronic one.
@@ -27,6 +27,12 @@ export const GUIDE_ICONS = {
   size: [
     '<rect x="2.5" y="7.5" width="19" height="9" rx="2"/>',
     '<path d="M6.5 7.5v3M10.5 7.5v4.5M14.5 7.5v3M18.5 7.5v4.5"/>',
+  ],
+
+  /* 厚度 — the film seen edge on: two surfaces, and the gap between. */
+  thickness: [
+    '<path d="M3.5 9h17M3.5 15h17"/>',
+    '<path d="M8.5 9v6M15.5 9v6"/>',
   ],
 
   /* 材質 — the layers a condom is made of. */

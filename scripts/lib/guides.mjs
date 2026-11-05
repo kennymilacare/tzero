@@ -1,11 +1,12 @@
 /* ===========================================================
    scripts/lib/guides.mjs — the buying guides, in one place.
 
-   Five evergreen pages:
+   Six evergreen pages:
 
        guide-size.html         what size am I?
        guide-material.html     latex, polyurethane or polyisoprene?
        guide-texture.html      plain, ribbed, studded, wrinkled?
+       guide-thickness.html    0.01 mm, 0.03 mm, 0.04 mm — what differs?
        guide-first-time.html   buying one for the first time
        guide-hyaluronic.html   what hyaluronic acid actually does
 
@@ -22,11 +23,12 @@ import hyaluronic from './guides/hyaluronic.mjs';
 import material from './guides/material.mjs';
 import size from './guides/size.mjs';
 import texture from './guides/texture.mjs';
+import thickness from './guides/thickness.mjs';
 
 import { escapeAttr, escapeText } from './html.mjs';
 
 /** The guides, in the order they are listed on the pages. */
-export const GUIDES = [size, material, texture, firstTime, hyaluronic];
+export const GUIDES = [size, material, texture, thickness, firstTime, hyaluronic];
 
 /** The page each guide is written to. */
 export const GUIDE_PATHS = GUIDES.map((g) => g.path);
@@ -92,24 +94,24 @@ export const GUIDE_UI = {
   /* The page that lists every guide. */
   hubEyebrow: { zh: '選購指南', en: 'Buying guides', ja: '購入ガイド' },
   hubTitle: {
-    zh: 'T-ZERO 選購指南:五個買安全套之前最常問的問題',
-    en: 'T-ZERO buying guides: the five questions people ask before buying',
-    ja: 'T-ZERO 購入ガイド:購入前に多い5つの疑問',
+    zh: 'T-ZERO 選購指南:六個買安全套之前最常問的問題',
+    en: 'T-ZERO buying guides: the six questions people ask before buying',
+    ja: 'T-ZERO 購入ガイド:購入前に多い6つの疑問',
   },
   hubH1: {
-    zh: '買安全套之前,先看這五篇',
-    en: 'Five things to read before you buy a condom',
-    ja: 'コンドームを買う前に読んでおきたい5つのガイド',
+    zh: '買安全套之前,先看這六篇',
+    en: 'Six things to read before you buy a condom',
+    ja: 'コンドームを買う前に読んでおきたい6つのガイド',
   },
   hubLead: {
-    zh: '尺碼、材質、紋路、第一次買,以及潤滑到底有沒有用 — 最常被問到的五個問題,一次講清楚。',
-    en: 'Size, material, texture, buying one for the first time, and what the lubricant is actually doing — the five questions people ask most, answered properly.',
-    ja: 'サイズ、素材、テクスチャ、はじめての一本、そして潤滑剤が実際に何をしているのか。よく聞かれる五つの疑問に、ひとつずつ答えました。',
+    zh: '尺碼、材質、紋路、厚度、第一次買,以及潤滑到底有沒有用 — 最常被問到的六個問題,一次講清楚。',
+    en: 'Size, material, texture, thickness, buying one for the first time, and what the lubricant is actually doing — the six questions people ask most, answered properly.',
+    ja: 'サイズ、素材、テクスチャ、厚さ、はじめての一本、そして潤滑剤が実際に何をしているのか。よく聞かれる六つの疑問に、ひとつずつ答えました。',
   },
   hubDescription: {
-    zh: 'T-ZERO 選購指南:安全套尺碼、材質、紋路、第一次購買同潤滑效果,五篇指南一次解答。',
-    en: 'T-ZERO buying guides: condom size, material, texture, buying for the first time and what the lubricant does — five guides, answered properly.',
-    ja: 'T-ZERO 購入ガイド。サイズ、素材、テクスチャ、はじめての一本、そして潤滑剤について、五つの疑問に答えました。',
+    zh: 'T-ZERO 選購指南:安全套尺碼、材質、紋路、厚度、第一次購買、玻尿酸潤滑效果,六篇指南一次解答,新手選購前必讀。',
+    en: 'T-ZERO buying guides: condom size, material, texture, thickness, buying for the first time and what the lubricant does — six guides, answered properly.',
+    ja: 'T-ZERO 購入ガイド。サイズ、素材、テクスチャ、厚さ、はじめての一本、そして潤滑剤について、六つの疑問に答えました。',
   },
   hubCount: { zh: '篇指南', en: 'guides', ja: '本のガイド' },
   hubCta: { zh: '看全部產品', en: 'See all products', ja: 'すべての製品を見る' },

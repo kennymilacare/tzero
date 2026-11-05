@@ -23,6 +23,7 @@
    =========================================================== */
 
 import { products, productUrl } from '../../assets/js/data.js';
+import { photoPicture, SIZES } from '../../assets/js/photos.js';
 import { escapeAttr, escapeText } from './html.mjs';
 import { iconSvg } from './guide-icons.mjs';
 import { GUIDES, GUIDE_HUB, GUIDE_UI, guideByPath, guideOgImageUrl } from './guides.mjs';
@@ -40,12 +41,26 @@ import { t } from './langpage.mjs';
  * The text is escaped first, so that a stray & or < in a guide
  * cannot break the page.
  */
+
+/**
+ * The shops the products are sold through.
+ *
+ * A link to a shop that stocks the product is a commercial link,
+ * and saying so is both honest and what a search engine expects:
+ * rel="sponsored" tells it the link is there because the site sells
+ * the product, not because it is the best link on the page.
+ */
+const RETAILERS = /^(https?:)?\/\/(www\.)?(hktvmall\.com|watsons\.com\.hk)(\/|$)/i;
+
 export function inline(text) {
   const escaped = escapeText(String(text ?? ''));
   return escaped
     .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
     .replace(/\[([^\]]+)\]\(([^)\s]+)\)/g,
-      (_m, label, href) => `<a href="${href.replace(/"/g, '%22')}">${label}</a>`);
+      (_m, label, href) => {
+        const rel = RETAILERS.test(href) ? ' rel="sponsored noopener"' : '';
+        return `<a href="${href.replace(/"/g, '%22')}"${rel}>${label}</a>`;
+      });
 }
 
 /**
@@ -207,7 +222,12 @@ ${crumbs}
           <p class="guide__lead">${inline(pick(guide.lead, lang))}</p>
           <div class="guide__meta">
             <figure class="guide__figure">
-              <img src="${escapeAttr(guide.image)}" alt="${escapeAttr(`${brand} ${short}`)}" width="${guide.imageWidth || 600}" height="${guide.imageHeight || 600}" loading="lazy" decoding="async">
+              ${photoPicture(guide.image, {
+                alt: escapeAttr(`${brand} ${short}`),
+                width: guide.imageWidth || 1200,
+                height: guide.imageHeight || 1200,
+                sizes: SIZES.thumb,
+              })}
             </figure>
             <p class="guide__updated"><span>${escapeText(GUIDE_UI.updated[lang])}</span> <time datetime="${escapeAttr(modified)}">${escapeText(modified)}</time></p>
           </div>

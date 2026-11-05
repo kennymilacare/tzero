@@ -57,6 +57,21 @@ export const guides = [
     },
   },
   {
+    slug: "thickness",
+    url: "guide-thickness.html",
+    image: "assets/images/products/tzero-ultra-thin.jpg",
+    title: {
+      zh: "厚度比較",
+      en: "Thickness",
+      ja: "薄さの比較",
+    },
+    desc: {
+      zh: "0.01、0.03、0.04 毫米之間的分別。",
+      en: "What 0.01, 0.03 and 0.04 mm actually change.",
+      ja: "0.01mmと0.03mmと0.04mmの違い。",
+    },
+  },
+  {
     slug: "first-time",
     url: "guide-first-time.html",
     image: "assets/images/products/tzero-ultra-thin.jpg",

@@ -32,13 +32,13 @@
    Run:  node scripts/gen-product-pages.mjs
    =========================================================== */
 
-import { readFile, writeFile } from 'node:fs/promises';
+import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 
 import { products, productUrl } from '../assets/js/data.js';
 import { translatePage } from './lib/langpage.mjs';
 import { buildProductPage } from './lib/product-page.mjs';
-import { loadSite, ROOT } from './lib/site.mjs';
+import { loadSite, ROOT, writeIfChanged } from './lib/site.mjs';
 
 const TEMPLATE = path.join(ROOT, 'product.html');
 
@@ -67,8 +67,11 @@ async function main() {
       path: file,
     });
 
-    await writeFile(path.join(ROOT, file), html, 'utf8');
-    console.log(`[gen-product-pages] wrote ${file}`);
+    /* Only written when the words have changed — a file that is
+       the same keeps its time on disk, and the sitemap reads that
+       time to say when the page was last changed. */
+    const changed = await writeIfChanged(file, html);
+    console.log(`[gen-product-pages] ${changed ? 'wrote' : 'unchanged'} ${file}`);
   }
   console.log(`[gen-product-pages] ${products.length} product page(s) written.`);
 }

@@ -36,7 +36,7 @@
    Run: node scripts/gen-lang-pages.mjs
    =========================================================== */
 
-import { readFile, writeFile, mkdir } from 'node:fs/promises';
+import { readFile, mkdir } from 'node:fs/promises';
 import path from 'node:path';
 
 import { faqs, i18n, products, productUrl } from '../assets/js/data.js';
@@ -44,7 +44,7 @@ import { buildProductPage, withCatalogue } from './lib/product-page.mjs';
 import { localiseGraph, plainGraph, t, translatePage } from './lib/langpage.mjs';
 import { faqBlock } from './lib/seo.mjs';
 import { LANGS, PAGES } from './lib/langs.mjs';
-import { loadSite, ROOT } from './lib/site.mjs';
+import { loadSite, ROOT, writeIfChanged } from './lib/site.mjs';
 import { applyTerms, loadTerms } from './lib/terms.mjs';
 
 const TEMPLATE = path.join(ROOT, 'product.html');
@@ -181,9 +181,9 @@ async function main() {
       const out = fileFor(lang, page.path);
       const full = path.join(ROOT, out);
       await mkdir(path.dirname(full), { recursive: true });
-      await writeFile(full, withEol(raw, html), 'utf8');
+      const changed = await writeIfChanged(full, withEol(raw, html));
       written++;
-      console.log(`[gen-lang-pages] wrote ${out}`);
+      console.log(`[gen-lang-pages] ${changed ? 'wrote' : 'unchanged'} ${out}`);
     }
   }
 

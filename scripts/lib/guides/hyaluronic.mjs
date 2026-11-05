@@ -47,7 +47,7 @@ export default {
   },
   description: {
     zh: '玻尿酸(透明質酸、Sodium Hyaluronate)是什麼?本文說明它在安全套潤滑液中的真正作用:保水、減少乾澀,以及它不會做的事。附潤滑液種類比較表。',
-    en: 'What is hyaluronic acid (Sodium Hyaluronate) in a condom lubricant? What it actually does — holds water, keeps things from drying out — and what it does not do. With a comparison of the different kinds of lubricant.',
+    en: 'What hyaluronic acid (Sodium Hyaluronate) does in a condom lubricant: it holds water and slows drying. What it cannot do, and how lubricant types compare.',
     ja: '透明質酸（玻尿酸ナトリウム）の成分。保水して乾きを防ぐ効果、そして効果のないこと。潤滑剤の種類ごとの比較表つき。',
   },
   lead: {

@@ -12,6 +12,7 @@
 
 import { getLang, t } from './i18n.js?v=9';
 import { assetUrl } from './paths.js?v=2';
+import { photoCopy, photoSrcset, PHOTO_VERSION, SIZES } from './photos.js?v=1';
 
 /* The feed lives in the site, not in the page's own folder — the
    English and Japanese pages are one folder down. */
@@ -146,12 +147,28 @@ function buildCard(post) {
   media.setAttribute('aria-label', title);
 
   if (post.image) {
+    /* The photograph comes in three sizes and in WebP as well as
+       JPEG, so a phone takes the small copy. The elements are built
+       one by one rather than written out as a string, because the
+       words come from a post and are not ours to trust. */
+    const picture = document.createElement('picture');
+    const source = document.createElement('source');
+    source.type = 'image/webp';
+    source.srcset = photoSrcset(assetUrl(post.image), 'webp');
+    source.sizes = SIZES.news;
+
     const img = document.createElement('img');
-    img.src = assetUrl(post.image);
+    img.src = `${photoCopy(assetUrl(post.image), 1200, 'jpg')}?v=${PHOTO_VERSION}`;
+    img.srcset = photoSrcset(assetUrl(post.image), 'jpg');
+    img.sizes = SIZES.news;
     img.alt = title;
+    img.width = 1200;
+    img.height = 1200;
     img.loading = 'lazy';
     img.decoding = 'async';
-    media.appendChild(img);
+
+    picture.append(source, img);
+    media.appendChild(picture);
   } else {
     // No photo — the media panel still needs to look deliberate.
     media.classList.add('news-card__media--empty');

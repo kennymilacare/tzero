@@ -29,12 +29,11 @@
    Run: node scripts/update-sitemap.mjs
    =========================================================== */
 
-import { writeFile } from 'node:fs/promises';
 import path from 'node:path';
 
 import { pageUrl } from './lib/langs.mjs';
 import { sitemapFor } from './lib/sitemap.mjs';
-import { loadSite, ROOT } from './lib/site.mjs';
+import { loadSite, ROOT, writeIfChanged } from './lib/site.mjs';
 
 const SITEMAP = path.join(ROOT, 'sitemap.xml');
 
@@ -46,9 +45,9 @@ async function main() {
   }
 
   const { text, list } = await sitemapFor(site.url);
-  await writeFile(SITEMAP, text, 'utf8');
+  const changed = await writeIfChanged(SITEMAP, text);
 
-  console.log(`[update-sitemap] wrote sitemap.xml — ${list.length} URL(s).`);
+  console.log(`[update-sitemap] ${changed ? 'wrote' : 'unchanged'} sitemap.xml — ${list.length} URL(s).`);
   for (const entry of list) {
     console.log(`[update-sitemap]   ${entry.lastmod}  ${pageUrl(site.url, entry.lang, entry.path)}`);
   }

@@ -26,7 +26,7 @@
    Run: node scripts/gen-guide-pages.mjs
    =========================================================== */
 
-import { readFile, writeFile, mkdir } from 'node:fs/promises';
+import { readFile, mkdir } from 'node:fs/promises';
 import path from 'node:path';
 
 import { i18n } from '../assets/js/data.js';
@@ -36,7 +36,7 @@ import { escapeText } from './lib/html.mjs';
 import { translatePage } from './lib/langpage.mjs';
 import { LANGS } from './lib/langs.mjs';
 import { changedOn } from './lib/sitemap.mjs';
-import { loadSite, ROOT } from './lib/site.mjs';
+import { loadSite, ROOT, writeIfChanged } from './lib/site.mjs';
 
 const TEMPLATE = path.join(ROOT, 'product.html');
 const INDEX = path.join(ROOT, 'assets/js/guides.js');
@@ -208,8 +208,8 @@ async function write(pagePath, lang, html, raw, note) {
   const out = fileFor(lang, pagePath);
   const full = path.join(ROOT, out);
   await mkdir(path.dirname(full), { recursive: true });
-  await writeFile(full, withEol(raw, html), 'utf8');
-  console.log(`[gen-guide-pages] wrote ${out}`);
+  const changed = await writeIfChanged(full, withEol(raw, html));
+  console.log(`[gen-guide-pages] ${changed ? 'wrote' : 'unchanged'} ${out}`);
 }
 
 async function main() {
@@ -303,8 +303,8 @@ async function main() {
 
   console.log(`[gen-guide-pages] ${written} page(s) written.`);
 
-  await writeFile(INDEX, searchIndex(), 'utf8');
-  console.log('[gen-guide-pages] wrote assets/js/guides.js');
+  const indexChanged = await writeIfChanged(INDEX, searchIndex());
+  console.log(`[gen-guide-pages] ${indexChanged ? 'wrote' : 'unchanged'} assets/js/guides.js`);
 }
 
 main().catch((err) => {

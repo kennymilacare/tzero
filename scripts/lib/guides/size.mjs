@@ -51,7 +51,7 @@ export default {
   description: {
     zh: '安全套尺碼表:說明「闊度」(mm) 對應的周長,量度一次即可確定適合 S、M、L 抑或 XL。附常見尺碼對照表及 T-ZERO 第九感 4 款建議。',
     en: 'Condom size chart: what the nominal width in mm means, the common S/M/L/XL widths, and how to measure your own erect circumference in a minute.',
-    ja: 'コンドームのサイズ表:幅(mm)と周長の関係、主なサイズの目安、1分でできる自分の測り方。',
+    ja: 'コンドームのサイズ表:幅(mm)と周長の関係、S/M/L/XLの目安、1分でできる自分の測り方と、T-ZERO各モデルの選択肢。',
   },
   lead: {
     zh: '盒上印有的「闊度」,是一盒安全套最重要的數字。它其實是勃起時周長的一半:闊度 52 mm,相當於約 10.4 厘米的周長。看清楚這個數字,便不需要靠估計。',

@@ -24,13 +24,13 @@
    static copy as well as the live one.
    =========================================================== */
 
-import { readFile, writeFile } from 'node:fs/promises';
+import { readFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
 import { curatedPosts, sortByDate } from './lib/feed.mjs';
-import { loadSite, usernameOf, ROOT } from './lib/site.mjs';
+import { loadSite, usernameOf, ROOT, writeIfChanged } from './lib/site.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const DATA_FILE = path.join(ROOT, 'assets', 'data', 'news.json');
@@ -192,7 +192,7 @@ export async function syncNewsJsonLd() {
   if (!posts.length) {
     console.warn('[sync-news-jsonld] no posts in the feed — the news list was left as it is.');
     if (text !== raw.replace(/\r\n/g, '\n')) {
-      await writeFile(DATA_JS, eol === '\r\n' ? text.replace(/\n/g, '\r\n') : text, 'utf8');
+      await writeIfChanged(DATA_JS, eol === '\r\n' ? text.replace(/\n/g, '\r\n') : text);
       console.log('[sync-news-jsonld] fixed the itemListOrder spelling in data.js');
     }
     return { posts: 0, source, changed: false };
@@ -210,7 +210,7 @@ export async function syncNewsJsonLd() {
 
   const out = eol === '\r\n' ? text.replace(/\n/g, '\r\n') : text;
   const changed = out !== raw;
-  if (changed) await writeFile(DATA_JS, out, 'utf8');
+  if (changed) await writeIfChanged(DATA_JS, out);
 
   return { posts: posts.length, source, changed };
 }

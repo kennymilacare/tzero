@@ -22,6 +22,7 @@
    =========================================================== */
 
 import { i18n } from '../../assets/js/data.js';
+import { photoPicture, SIZES } from '../../assets/js/photos.js';
 import { productTitle, productDescription, productKeywords } from '../../assets/js/product-copy.js';
 import { escapeAttr, escapeText, fillByAttr, replaceLinks } from './html.mjs';
 import { GUIDES, GUIDE_UI } from './guides.mjs';
@@ -119,7 +120,11 @@ export function catalogueHtml(all, lang, productUrl) {
                 <div class="card-product__badges">
                   ${p.popular ? `<span class="badge badge--accent">${escapeText(t(lang, 'product.card.popular'))}</span>` : ''}
                 </div>
-                <img class="product-image" src="${p.image}" alt="${escapeText(field(p, 'image_alt', lang) || field(p, 'name', lang))}" loading="lazy" decoding="async">
+                ${photoPicture(p.image, {
+                  className: 'product-image',
+                  alt: escapeAttr(field(p, 'image_alt', lang) || field(p, 'name', lang)),
+                  sizes: SIZES.card,
+                })}
               </div>
               <div class="card-product__brand">${escapeText(p.brand.toUpperCase())}</div>
               <h3 class="card-product__name">${escapeText(field(p, 'name', lang))}</h3>
@@ -184,7 +189,11 @@ export function relatedHtml(p, all, lang, productUrl) {
                 <div class="card-product__badges">
                   ${x.popular ? `<span class="badge badge--accent">${escapeText(t(lang, 'product.card.popular'))}</span>` : ''}
                 </div>
-                <img class="product-image" src="${x.image}" alt="${escapeText(field(x, 'image_alt', lang) || field(x, 'name', lang))}" loading="lazy" decoding="async">
+                ${photoPicture(x.image, {
+                  className: 'product-image',
+                  alt: escapeAttr(field(x, 'image_alt', lang) || field(x, 'name', lang)),
+                  sizes: SIZES.card,
+                })}
               </div>
               <div class="card-product__brand">${escapeText(x.brand.toUpperCase())}</div>
               <h3 class="card-product__name">${escapeText(field(x, 'name', lang))}</h3>
@@ -240,13 +249,47 @@ export function productJsonLd(p, siteUrl, page, lang, productUrl) {
   };
   const orgRef = { '@id': `${siteUrl}#org` };
 
+  /* The picture, named with its size.
+     The original is the one that is marked up: it is the biggest,
+     and the structured data is what a search engine reads when it
+     decides whether a picture is good enough to show. The smaller
+     copies are what the page itself asks a browser for. */
+  const picture = `${siteUrl}${p.image.replace(/^\//, '')}`;
+
+  /* The thickness, when the product states one. It is on the page
+     already, in the specification table, so putting it here makes
+     the two agree — and a search result can show it without the
+     visitor having to open the page. */
+  const extra = [];
+  if (p.thickness_mm) {
+    extra.push({
+      '@type': 'PropertyValue',
+      name: t(lang, 'product.card.thickness'),
+      value: `${p.thickness_mm} mm`,
+    });
+  }
+
   const product = {
     '@type': 'Product',
     '@id': `${page}#product`,
     name: field(p, 'name', lang),
     alternateName,
-    description: field(p, 'description', lang),
-    image: [`${siteUrl}${p.image.replace(/^\//, '')}`],
+    /* The same words the meta description says, so the two agree.
+       The long description the page shows is for the reader; this
+       is for the search result. */
+    description: productDescription(p, lang),
+    image: [
+      {
+        '@type': 'ImageObject',
+        url: picture,
+        contentUrl: picture,
+        width: p.imageWidth || 1200,
+        height: p.imageHeight || 1200,
+        caption: field(p, 'name', lang),
+      },
+    ],
+    material: p.material,
+    ...(extra.length ? { additionalProperty: extra } : {}),
     sku: p.id,
     url: page,
     brand: { '@id': `${siteUrl}#brand` },
@@ -374,7 +417,13 @@ export function buildProductPage(template, p, all, {
 
   html = fill(html,
     '<div class="product-detail__image" data-image></div>',
-    `<div class="product-detail__image" data-image><img class="product-image" src="${p.image}" alt="${escapeText(field(p, 'image_alt', lang) || field(p, 'name', lang))}" width="600" height="600" fetchpriority="high" decoding="async"></div>`,
+    `<div class="product-detail__image" data-image>${photoPicture(p.image, {
+      className: 'product-image',
+      alt: escapeAttr(field(p, 'image_alt', lang) || field(p, 'name', lang)),
+      sizes: SIZES.detail,
+      loading: 'eager',
+      fetchpriority: 'high',
+    })}</div>`,
     'the product image');
 
   html = fill(html,
@@ -395,8 +444,8 @@ export function buildProductPage(template, p, all, {
     'the price');
 
   html = fill(html,
-    `<a href="#" target="_blank" rel="noopener"`,
-    `<a href="${escapeText(p.hktv_url)}" target="_blank" rel="noopener"`, 'the buy link');
+    `<a href="#" target="_blank" rel="sponsored noopener"`,
+    `<a href="${escapeText(p.hktv_url)}" target="_blank" rel="sponsored noopener"`, 'the buy link');
 
   html = fill(html,
     '<div class="product-detail__specs" data-specs></div>',

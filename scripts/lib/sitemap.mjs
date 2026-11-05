@@ -12,6 +12,8 @@
    =========================================================== */
 
 import { execFile } from 'node:child_process';
+import { stat } from 'node:fs/promises';
+import path from 'node:path';
 import { promisify } from 'node:util';
 
 import { imagesFor } from './images.mjs';
@@ -31,6 +33,30 @@ function escapeXml(text) {
     .replace(/'/g, '&apos;');
 }
 
+/** A moment, as a full ISO 8601 timestamp with the local offset. */
+function localStamp(date) {
+  const offset = -date.getTimezoneOffset();
+  const sign = offset >= 0 ? '+' : '-';
+  const hours = String(Math.floor(Math.abs(offset) / 60)).padStart(2, '0');
+  const minutes = String(Math.abs(offset) % 60).padStart(2, '0');
+  return `${date.toISOString().replace(/\.\d{3}Z$/, '')}${sign}${hours}:${minutes}`;
+}
+
+/** When a file was last written, for a file git cannot date.
+
+    A page that has never been committed has no git date. Its time
+    on disk is the next best answer — and because the generators do
+    not rewrite a file whose words have not changed, that time stays
+    the same from one run to the next. */
+async function writtenAt(file) {
+  try {
+    const { mtime } = await stat(path.join(ROOT, file));
+    return localStamp(mtime);
+  } catch (e) {
+    return null;
+  }
+}
+
 /** When a file was last changed, according to git — a full ISO 8601
     timestamp, with the offset.
 
@@ -41,10 +67,11 @@ export async function changedAt(file) {
   try {
     const { stdout } = await run('git', ['log', '-1', '--format=%cI', '--', file], { cwd: ROOT });
     const stamp = stdout.trim();
-    return /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}[+-]\d{2}:\d{2}$/.test(stamp) ? stamp : null;
+    if (/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}[+-]\d{2}:\d{2}$/.test(stamp)) return stamp;
   } catch (e) {
-    return null;
+    /* No git, or no history — the time on disk is the answer. */
   }
+  return writtenAt(file);
 }
 
 /** The day a file was last changed, according to git. This is what a

@@ -46,7 +46,7 @@ export default {
   },
   description: {
     zh: '安全套材質比較:天然乳膠、PU(聚氨酯)、PI(聚異戊烯)有什麼分別?哪些適合乳膠過敏者?油性潤滑液會如何損壞乳膠?一頁看完。',
-    en: 'Latex vs PU vs PI condoms explained: the difference between natural rubber, polyurethane and polyisoprene, who should avoid latex, and why oil-based lubricant ruins a latex condom.',
+    en: 'Latex vs PU vs PI condoms: how natural rubber, polyurethane and polyisoprene differ, who should avoid latex, and why oil-based lubricant ruins a latex condom.',
     ja: 'ラテックス・PU・PI・コンドームの違いを解説。天然ゴム过身者、オイル系潤滑剤がラテックスを壊す理由まで。',
   },
   lead: {

@@ -6,6 +6,7 @@
 import { brands, productUrl } from './data.js?v=28';
 import { getLang as realGetLang, pickByLang, t } from './i18n.js?v=9';
 import { assetUrl } from './paths.js?v=2';
+import { photoPicture, SIZES } from './photos.js?v=1';
 
 const W = 200;
 const H = 280;
@@ -126,7 +127,14 @@ export function productMediaHTML(product, large = false) {
   if (product.image) {
     const altKey = `image_alt_${lang}`;
     const alt = product[altKey] || product.image_alt_zh || pickByLang(product, 'name');
-    return `<img class="product-image" src="${assetUrl(product.image)}" alt="${escapeXml(alt)}" loading="lazy" decoding="async">`;
+    /* The picture comes in three sizes and in WebP as well as JPEG,
+       so a phone takes the small copy and a desktop the large one.
+       See photos.js. */
+    return photoPicture(assetUrl(product.image), {
+      className: 'product-image',
+      alt: escapeXml(alt),
+      sizes: large ? SIZES.detail : SIZES.card,
+    });
   }
   return productSVG(product, lang, large);
 }
