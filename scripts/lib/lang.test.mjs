@@ -78,6 +78,73 @@ test('the English and Japanese pages have nothing left for the browser to do', a
   }
 });
 
+/* A tag left open across the close of another tag cannot be written
+   into. The builder matches tags by name, so a <span> that is still
+   open when a </div> arrives is dropped — and its words never reach
+   the file. Nine labels of the comparison table on the home page
+   were written that way, and the English and Japanese pages shipped
+   with the table unlabelled.
+
+   Every element that waits for a word must therefore be closed
+   properly, and must already carry the word: a crawler that does not
+   run JavaScript sees the file, and only the file. */
+const VOID_TAGS = new Set([
+  'area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input',
+  'link', 'meta', 'param', 'source', 'track', 'wbr',
+]);
+
+test('every word that waits for JavaScript is closed properly and already in the file', async () => {
+  for (const page of PAGES) {
+    const file = pageFile('zh', page.path);
+    const html = await readPage(file);
+    const tags = scan(html);
+    const spans = elements(html, tags);
+
+    for (const tag of tags) {
+      if (tag.closing) continue;
+      const attrs = attrsOf(tag);
+      const key = attrs['data-i18n'];
+      if (!key) continue;
+      if (VOID_TAGS.has(tag.name)) continue;
+      if (attrs['data-i18n-attr']) continue;   /* the word goes in an attribute */
+
+      const span = spans.get(tag.start);
+      assert.ok(span,
+        `${file}: <${tag.name} data-i18n="${key}"> is not closed properly, ` +
+        `so its words cannot be written into the English and Japanese pages`);
+
+      const text = html.slice(span.contentStart, span.contentEnd)
+        .replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+      assert.ok(text,
+        `${file}: <${tag.name} data-i18n="${key}"> has no words in the file, ` +
+        `so a crawler that does not run JavaScript sees an empty element`);
+    }
+  }
+});
+
+/* The comparison table on the home page is the kind of content that
+   earns a featured snippet — but only if it says what its columns
+   and rows are. */
+const COMPARE_LABELS = {
+  zh: ['玻尿酸', '矽油', '普通水性', '甘油基底',
+       '持久潤滑', '親膚度', '易清洗', '不反乾', '敏感適用'],
+  en: ['Hyaluronic acid', 'Silicone', 'Water-based', 'Glycerin-based',
+       'Long-lasting lubrication', 'Skin friendliness', 'Easy to wash off',
+       'Does not dry out', 'Suits sensitive skin'],
+  ja: ['ヒアルロン酸', 'シリコーン', '一般水性', 'グリセリン系',
+       '持続的な潤滑', '肌への優しさ', '洗い流しやすさ', '乾きにくい', '敏感肌にも向き'],
+};
+
+test('the comparison table on the home page says what its columns and rows are', async () => {
+  for (const lang of LANGS) {
+    const html = await readPage(pageFile(lang, 'index.html'));
+    for (const label of COMPARE_LABELS[lang]) {
+      assert.ok(html.includes(label),
+        `${lang}/index.html: the comparison table is missing "${label}"`);
+    }
+  }
+});
+
 /* ---------- the words ---------- */
 
 /* A word that only exists in one language, and the word it
