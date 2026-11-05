@@ -236,7 +236,7 @@ export function productJsonLd(p, siteUrl, page, lang, productUrl) {
     '@id': `${siteUrl}#brand`,
     name: brand,
     url: siteUrl,
-    logo: `${siteUrl}assets/images/icons/android-chrome-512.png`,
+    logo: `${siteUrl}assets/images/brand/t-zero-logo.png`,
   };
   const orgRef = { '@id': `${siteUrl}#org` };
 

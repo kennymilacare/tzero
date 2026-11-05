@@ -155,7 +155,14 @@ export function replaceBlock(text, lang, block) {
 
     const region = text.slice(at, endAt);
     if (region.includes(`"name": ${q(lang.home)}`)) {
-      return text.slice(0, at) + block + text.slice(endAt + BLOCK_END.length);
+      /* The whole line is replaced, not just what follows the
+         indentation. The block carries its own four spaces, so
+         keeping the old indentation as well pushed the line four
+         spaces further to the right every time the script ran — the
+         key sat 88 spaces in by November, while the keys beside it
+         sat four. */
+      const lineStart = text.lastIndexOf('\n', at) + 1;
+      return text.slice(0, lineStart) + block + text.slice(endAt + BLOCK_END.length);
     }
     from = endAt + BLOCK_END.length;
   }

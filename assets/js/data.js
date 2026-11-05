@@ -535,7 +535,7 @@ export const i18n = {
         { "@type": "LocalBusiness", "@id": "https://www.tzero-jp.com/#org",
           "name": "T-ZERO 第九感", "alternateName": "T-ZERO NINTH SENSE · 玻尿酸安全套",
           "url": "https://www.tzero-jp.com/",
-          "logo": "https://www.tzero-jp.com/assets/images/icons/android-chrome-512.png",
+          "logo": "https://www.tzero-jp.com/assets/images/brand/t-zero-logo.png",
           "image": "https://www.tzero-jp.com/assets/images/og-image.png",
           "telephone": "+852-6897-1473", "email": "info@tzero-jp.com",
           "priceRange": "HK$98", "currenciesAccepted": "HKD",
@@ -583,7 +583,7 @@ export const i18n = {
       ]
     }),
 
-                                                                                'seo.jsonld.news': JSON.stringify({
+    'seo.jsonld.news': JSON.stringify({
       "@context": "https://schema.org",
       "@graph": [
         { "@type": "BreadcrumbList", "itemListElement": [
@@ -940,7 +940,7 @@ export const i18n = {
         { "@type": "LocalBusiness", "@id": "https://www.tzero-jp.com/#org",
           "name": "T-ZERO NINTH SENSE", "alternateName": "T-ZERO 第九感 · Hyaluronic Condom",
           "url": "https://www.tzero-jp.com/",
-          "logo": "https://www.tzero-jp.com/assets/images/icons/android-chrome-512.png",
+          "logo": "https://www.tzero-jp.com/assets/images/brand/t-zero-logo.png",
           "image": "https://www.tzero-jp.com/assets/images/og-image.png",
           "telephone": "+852-6897-1473", "email": "info@tzero-jp.com",
           "priceRange": "HK$98", "currenciesAccepted": "HKD",
@@ -988,7 +988,7 @@ export const i18n = {
       ]
     }),
 
-                                                                                'seo.jsonld.news': JSON.stringify({
+    'seo.jsonld.news': JSON.stringify({
       "@context": "https://schema.org",
       "@graph": [
         { "@type": "BreadcrumbList", "itemListElement": [
@@ -1363,7 +1363,7 @@ export const i18n = {
         { "@type": "LocalBusiness", "@id": "https://www.tzero-jp.com/#org",
           "name": "T-ZERO 第九感", "alternateName": "T-ZERO NINTH SENSE · ヒアルロン酸コンドーム",
           "url": "https://www.tzero-jp.com/",
-          "logo": "https://www.tzero-jp.com/assets/images/icons/android-chrome-512.png",
+          "logo": "https://www.tzero-jp.com/assets/images/brand/t-zero-logo.png",
           "image": "https://www.tzero-jp.com/assets/images/og-image.png",
           "telephone": "+852-6897-1473", "email": "info@tzero-jp.com",
           "priceRange": "HK$98", "currenciesAccepted": "HKD",
@@ -1411,7 +1411,7 @@ export const i18n = {
       ]
     }),
 
-                                                                                'seo.jsonld.news': JSON.stringify({
+    'seo.jsonld.news': JSON.stringify({
       "@context": "https://schema.org",
       "@graph": [
         { "@type": "BreadcrumbList", "itemListElement": [

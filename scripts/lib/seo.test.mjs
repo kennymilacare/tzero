@@ -103,6 +103,21 @@ test('the business is described with an address and opening hours', () => {
   }
 });
 
+/* The logo Google shows beside the brand in its results. It used to
+   point at the browser icon — a 512-pixel favicon of the same
+   picture — which is not a logo. The brand logo is a square
+   wordmark, 1182 pixels on a side, and that is the one Google asks
+   for. */
+const BRAND_LOGO = `${SITE}/assets/images/brand/t-zero-logo.png`;
+
+test('the business is shown with the brand logo', () => {
+  for (const lang of LANGS) {
+    const graph = JSON.parse(i18n[lang]['seo.jsonld.home'])['@graph'];
+    const shop = graph.find((n) => n['@type'] === 'LocalBusiness');
+    assert.equal(shop.logo, BRAND_LOGO, `${lang}: the business logo is not the brand logo`);
+  }
+});
+
 /* ---------- the news ---------- */
 
 test('the news list uses the term schema.org defines', () => {
@@ -230,6 +245,7 @@ test('the product pages point at the site\'s own brand and business', async () =
       assert.ok(brand, `${page}: the brand is pointed at but never defined`);
       assert.equal(brand['@id'], `${SITE}/#brand`);
       assert.ok(brand.name, `${page}: the brand has no name`);
+      assert.equal(brand.logo, BRAND_LOGO, `${page}: the brand logo is not the brand logo`);
     }
   }
 });
