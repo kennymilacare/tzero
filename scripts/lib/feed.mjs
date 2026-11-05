@@ -18,6 +18,12 @@ export const EXCERPT_MAX = 110;
  * Uses the first non-empty line, minus emoji and a leading hashtag.
  * Returns '' when there is nothing usable — the frontend then falls
  * back to the generic "Latest Facebook post" label.
+ *
+ * What comes out is the post's own words, not the site's. The site's
+ * copy — written Chinese, in the site's voice — is written by hand in
+ * assets/data/manual.json and takes the place of this whenever it is
+ * there. That is why this is left in the voice the post was posted in:
+ * it is the post's headline, the same as the caption underneath it.
  */
 export function deriveTitle(message) {
   if (!message) return '';

@@ -154,18 +154,32 @@ test('the news list describes the posts the site shows', async () => {
 /* The news card shows a title and a summary the site wrote itself,
    so they are written Chinese like the rest of the site. The
    caption underneath them — the "message" — is the post as it was
-   published, and it stays in the voice it was posted in. */
+   published, and it stays in the voice it was posted in.
+
+   That copy is written by hand, and it lives in assets/data/manual.json.
+   A post nobody has written a headline for falls back to the headline
+   the post itself carries — those are the post's words, the same as
+   the caption, so they are left alone. */
 test('the Chinese of a news card is written Chinese, not Cantonese speech', async () => {
-  const feed = JSON.parse(await readFile(path.join(ROOT, 'assets', 'data', 'news.json'), 'utf8'));
+  const manual = JSON.parse(await readFile(path.join(ROOT, 'assets', 'data', 'manual.json'), 'utf8'));
   const local = JSON.parse(await readFile(path.join(ROOT, 'assets', 'data', 'news.local.json'), 'utf8'));
+  const feed = JSON.parse(await readFile(path.join(ROOT, 'assets', 'data', 'news.json'), 'utf8'));
 
   const written = [];
+  /* The copy a person wrote for a post. */
+  for (const entry of manual.posts || []) {
+    written.push([`manual.json ${entry.url} title_zh`, entry.title_zh]);
+    written.push([`manual.json ${entry.url} excerpt_zh`, entry.excerpt_zh]);
+  }
+  /* The brand's own cards, which the site wrote from the start. */
   for (const post of feed.posts) {
+    if (post.id.startsWith('manual-')) continue;
     written.push([`news.json ${post.id} title`, post.title]);
     written.push([`news.json ${post.id} excerpt`, post.excerpt]);
   }
+  /* The mirror of the hand-written copy, which is what a sync reads. */
   for (const [id, override] of Object.entries(local.posts || {})) {
-    if (!override) continue;
+    if (!override || id.startsWith('manual-')) continue;
     written.push([`news.local.json ${id} title_zh`, override.title_zh]);
     written.push([`news.local.json ${id} excerpt_zh`, override.excerpt_zh]);
   }
@@ -174,6 +188,32 @@ test('the Chinese of a news card is written Chinese, not Cantonese speech', asyn
     for (const [spoken, instead] of SPOKEN) {
       assert.ok(!String(text ?? '').includes(spoken),
         `${where}: "${spoken}" is Cantonese speech — write "${instead}" instead. In: ${text}`);
+    }
+  }
+});
+
+/* The card has to show the copy that was written by hand. When the
+   hand-written copy was put in the wrong file, running the script
+   again quietly put the spoken version back — the page looked fine
+   until the next sync ran. These two files have to agree. */
+test('a news card shows the copy that was written by hand', async () => {
+  const manual = JSON.parse(await readFile(path.join(ROOT, 'assets', 'data', 'manual.json'), 'utf8'));
+  const feed = JSON.parse(await readFile(path.join(ROOT, 'assets', 'data', 'news.json'), 'utf8'));
+
+  const source = new Map();
+  for (const entry of manual.posts || []) source.set(entry.url, entry);
+
+  for (const post of feed.posts) {
+    if (!post.id.startsWith('manual-')) continue;
+    const entry = source.get(post.permalink);
+    assert.ok(entry, `news.json ${post.id}: no post with this link in manual.json`);
+    if (entry.title_zh) {
+      assert.equal(post.title, entry.title_zh,
+        `news.json ${post.id}: the headline is not the one written by hand`);
+    }
+    if (entry.excerpt_zh) {
+      assert.equal(post.excerpt, entry.excerpt_zh,
+        `news.json ${post.id}: the summary is not the one written by hand`);
     }
   }
 });
