@@ -31,22 +31,36 @@ function escapeXml(text) {
     .replace(/'/g, '&apos;');
 }
 
-/** The day a file was last changed, according to git. */
-export async function changedOn(file) {
+/** When a file was last changed, according to git — a full ISO 8601
+    timestamp, with the offset.
+
+    Bing asks for one: the day on its own is valid, but too coarse to
+    schedule a recrawl with, and Bing reads the sitemap to decide what
+    to crawl next. */
+export async function changedAt(file) {
   try {
-    const { stdout } = await run('git', ['log', '-1', '--format=%cs', '--', file], { cwd: ROOT });
-    const date = stdout.trim();
-    return /^\d{4}-\d{2}-\d{2}$/.test(date) ? date : null;
+    const { stdout } = await run('git', ['log', '-1', '--format=%cI', '--', file], { cwd: ROOT });
+    const stamp = stdout.trim();
+    return /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}[+-]\d{2}:\d{2}$/.test(stamp) ? stamp : null;
   } catch (e) {
     return null;
   }
 }
 
-/** The newest of several dates — or today, if git cannot say. */
+/** The day a file was last changed, according to git. This is what a
+    reader is shown, so it is a day and not a moment. */
+export async function changedOn(file) {
+  const stamp = await changedAt(file);
+  return stamp ? stamp.slice(0, 10) : null;
+}
+
+/** The newest of several timestamps — or now, if git cannot say. */
 export async function lastmodOf(files) {
-  const dates = (await Promise.all(files.map(changedOn))).filter(Boolean);
-  if (!dates.length) return new Date().toISOString().slice(0, 10);
-  return dates.sort().pop();
+  const stamps = (await Promise.all(files.map(changedAt))).filter(Boolean);
+  if (!stamps.length) return new Date().toISOString().replace(/\.\d{3}Z$/, '+00:00');
+  /* The offset is whatever the commit was made in, so the stamps are
+     compared as instants and not as text. */
+  return stamps.sort((a, b) => Date.parse(a) - Date.parse(b)).pop();
 }
 
 /** The sitemap, as text. */

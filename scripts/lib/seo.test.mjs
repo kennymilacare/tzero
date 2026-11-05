@@ -465,7 +465,12 @@ test('every page in the sitemap says when it last changed', async () => {
   const dates = [...xml.matchAll(/<lastmod>([^<]+)<\/lastmod>/g)].map((m) => m[1]);
   assert.ok(dates.length, 'the sitemap has no lastmod');
   for (const date of dates) {
-    assert.match(date, /^\d{4}-\d{2}-\d{2}$/, `lastmod is not a date: ${date}`);
+    /* Bing asks for a full ISO 8601 timestamp — the day on its own
+       is valid, but too coarse to schedule a recrawl with. */
+    assert.match(date, /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}[+-]\d{2}:\d{2}$/,
+      `lastmod is not a full timestamp: ${date}`);
+    assert.ok(!Number.isNaN(Date.parse(date)), `lastmod is not a real time: ${date}`);
+    assert.ok(Date.parse(date) <= Date.now() + 60_000, `lastmod is in the future: ${date}`);
   }
 });
 
