@@ -94,19 +94,9 @@ export const GUIDE_UI = {
   /* The page that lists every guide. */
   hubEyebrow: { zh: '選購指南', en: 'Buying guides', ja: '購入ガイド' },
   hubTitle: {
-    zh: '【安全套選購指南】買安全套前必看, 解決你的所有避孕疑惑',
+    zh: '【安全套選購指南】買安全套前必看, 解決你的避孕疑惑',
     en: 'Condom buying guide: what to read before you buy',
     ja: '【コンドーム購入ガイド】購入前に知っておきたい疑問をすべて解説',
-  },
-  hubH1: {
-    zh: '買安全套之前,先看這六篇',
-    en: 'Six things to read before you buy a condom',
-    ja: 'コンドームを買う前に読んでおきたい6つのガイド',
-  },
-  hubLead: {
-    zh: '尺碼、材質、紋路、厚度、第一次買,以及潤滑到底有沒有用 — 最常被問到的六個問題,一次講清楚。',
-    en: 'Size, material, texture, thickness, buying one for the first time, and what the lubricant is actually doing — the six questions people ask most, answered properly.',
-    ja: 'サイズ、素材、テクスチャ、厚さ、はじめての一本、そして潤滑剤が実際に何をしているのか。よく聞かれる六つの疑問に、ひとつずつ答えました。',
   },
   hubDescription: {
     zh: '從安全套尺寸闊度量度、乳膠與PU材質比較、超薄厚度選擇到玻尿酸潤滑液的防乾功效，香港 T-ZERO 團隊為您一次解答常見疑問。',
@@ -115,6 +105,20 @@ export const GUIDE_UI = {
   },
   hubCount: { zh: '篇指南', en: 'guides', ja: '本のガイド' },
 };
+
+/* The heading on the page is the title of the tab, and the paragraph
+   under it is the description of the page — the same words, in the
+   same three languages.
+
+   It used to be a different set: the title said why the page was
+   worth opening, while the heading above the fold said something
+   else entirely ("six things to read before you buy"). A reader never
+   sees the title — only a crawler does — so the half of the writing
+   that people actually read was the half nobody had rewritten. The
+   heading and the lead are now the title and the description, so that
+   the words on the page are the words that were written for it. */
+GUIDE_UI.hubH1 = GUIDE_UI.hubTitle;
+GUIDE_UI.hubLead = GUIDE_UI.hubDescription;
 
 /**
  * The guides, as a list of links in the footer of every page.

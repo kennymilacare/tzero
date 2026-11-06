@@ -981,11 +981,14 @@
 .guide__icon--item { width: 0.95em; height: 0.95em; vertical-align: -0.1em; }
 .guide__icon--pill { width: 1em; height: 1em; vertical-align: -0.12em; margin-right: 0.35em; }
 
+/* The lead is as wide as the heading above it. A paragraph that
+   stops two thirds of the way across the page, while the heading
+   beside it runs the whole way, leaves a hole on the right and
+   breaks the line where there was nothing to break it. */
 .guide__lead {
   font-size: var(--fs-md);
   line-height: 1.75;
   color: var(--ink-soft);
-  max-width: 760px;
 }
 
 .guide__meta {
@@ -1060,7 +1063,7 @@
 /* The writing itself — one column, top to bottom. A guide is read,
    not scanned: the answer is usually a paragraph, and a paragraph
    cut in half and put beside a heading is harder to read. */
-.guide__prose { max-width: 760px; margin-inline: auto; }
+.guide__prose { margin-inline: 0; }
 
 .guide__section { margin-bottom: var(--space-7); }
 
@@ -1156,7 +1159,7 @@
 .guide__table tbody tr:nth-child(even) { background: rgba(238, 245, 251, 0.55); }
 
 /* The questions */
-.guide__faq { max-width: 760px; margin-inline: auto; margin-top: var(--space-7); }
+.guide__faq { margin-inline: 0; margin-top: var(--space-7); }
 
 .guide__faq h2,
 .guide__related h2,
@@ -1205,7 +1208,7 @@
 
 /* The links out */
 .guide__related,
-.guide__all { max-width: 760px; margin-inline: auto; margin-top: var(--space-7); }
+.guide__all { margin-inline: 0; margin-top: var(--space-7); }
 
 .guide__related ul,
 .guide__all ul {
@@ -1282,10 +1285,19 @@
 
 /* One column, top to bottom, like the guides themselves. A list
    of things to read is a list — five boxes side by side would be
-   five things to squint at. */
+   five things to squint at.
+
+   It sits on the left, under the heading, and runs the whole width
+   of the content. The heading and the paragraph above it are both on
+   the left edge of the content, and a list floating in the middle of
+   the page underneath them reads as a mistake: the eye goes to the
+   heading, down to the list, and finds the two are not lined up. And
+   a list of six one-line entries does not need a narrow column — the
+   width was the only thing standing between it and the right-hand
+   edge of the page. The guides themselves read the same way — the
+   heading on the left, the text under it on the left. */
 .guide-hub {
-  max-width: 760px;
-  margin-inline: auto;
+  margin-inline: 0;
   margin-bottom: var(--space-7);
 }
 
