@@ -57,9 +57,9 @@ IMAGES = os.path.join(ROOT, "assets", "images")
 FOLDERS = ("products", "news")
 
 # One photograph outside those folders is on a page: the picture the
-# home page opens with. The other pictures in couples/ are not on any
-# page — they are spare stock, and copies of them would only make
-# the repository heavier.
+# home page opens with. It is the only photograph left in couples/ —
+# the stock pictures that used to sit beside it were never on a page
+# and were removed on 2026-11-06.
 EXTRA = ("couples/hero-product-studded.jpg",)
 
 # The widths the pages use. A phone is 390 pixels across, a card is

@@ -5,7 +5,7 @@
   "description": "T-ZERO 第九感 — a static site. No build step, no dependencies.",
   "type": "module",
   "scripts": {
-    "test": "node --test scripts/lib/feed.test.mjs scripts/lib/site.test.mjs scripts/lib/siteurl.test.mjs scripts/lib/ig.test.mjs scripts/lib/seo.test.mjs scripts/lib/lang.test.mjs scripts/lib/guide.test.mjs scripts/lib/images.test.mjs scripts/lib/japanese.test.mjs scripts/lib/submit.test.mjs scripts/sync.test.mjs scripts/sync-news-jsonld.test.mjs scripts/manual-post.test.mjs",
+    "test": "node --test scripts/lib/feed.test.mjs scripts/lib/site.test.mjs scripts/lib/siteurl.test.mjs scripts/lib/ig.test.mjs scripts/lib/seo.test.mjs scripts/lib/lang.test.mjs scripts/lib/guide.test.mjs scripts/lib/images.test.mjs scripts/lib/japanese.test.mjs scripts/lib/notfound.test.mjs scripts/lib/submit.test.mjs scripts/sync.test.mjs scripts/sync-news-jsonld.test.mjs scripts/manual-post.test.mjs",
     "gen:products": "node scripts/gen-product-pages.mjs",
     "gen:faq": "node scripts/gen-faq-html.mjs",
     "gen:jsonld": "node scripts/gen-jsonld.mjs",

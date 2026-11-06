@@ -3,6 +3,51 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- This page is served for a URL that does not exist. The browser
+       therefore takes that URL as the base of every relative link on
+       the page — and every one of them would point at another missing
+       page: the stylesheet, the logo, the menu, all of it. This puts
+       the base back where the files really are. -->
+  <base href="/">
+
+  <script>
+    /* A page that is missing under /en/ or /ja/ belongs to that
+       language: the visitor was reading the site in it, and the
+       language switcher on every other page works that way. Say so
+       before anything else loads, so the words are in that language
+       and the links lead back into it.
+
+       The base moves with the language, so the links on this page
+       ("products.html", "guides.html") point into /en/ or /ja/. The
+       files this page loads are named from the root instead, because
+       they are the same files in every language. */
+    (function () {
+      var m = location.pathname.match(/^\/(en|ja)(?:\/|$)/);
+      var lang = m ? m[1] : 'zh';
+      var el = document.documentElement;
+      el.setAttribute('data-lang', lang);
+      el.setAttribute('lang', lang === 'ja' ? 'ja-JP' : (lang === 'en' ? 'en' : 'zh-HK'));
+
+      var base = document.querySelector('base');
+      if (base && lang !== 'zh') base.setAttribute('href', '/' + lang + '/');
+
+      /* The language button leads to the home page of the next
+         language. There is no same page to lead to — this page is the
+         one that is missing. */
+      var NEXT = { zh: 'en', en: 'ja', ja: 'zh' };
+      var HOME = { zh: '/', en: '/en/', ja: '/ja/' };
+      var TAG = { zh: 'zh-HK', en: 'en', ja: 'ja-JP' };
+      document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('[data-lang-toggle]').forEach(function (toggle) {
+          toggle.setAttribute('href', HOME[NEXT[lang]]);
+          toggle.setAttribute('hreflang', TAG[NEXT[lang]]);
+          toggle.setAttribute('lang', TAG[NEXT[lang]]);
+        });
+      });
+    })();
+  </script>
+
   <title>找不到此頁 · T-ZERO 第九感</title>
   <meta name="description" content="抱歉,您要找的內容不存在或已被移除。返回 T-ZERO 第九感 首頁。">
   <meta name="robots" content="noindex,follow">
@@ -28,19 +73,19 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="assets/css/base.css?v=5">
-  <link rel="stylesheet" href="assets/css/layout.css?v=37">
-  <link rel="stylesheet" href="assets/css/components.css?v=5">
-  <link rel="stylesheet" href="assets/css/pages.css?v=26">
+  <link rel="stylesheet" href="/assets/css/base.css?v=5">
+  <link rel="stylesheet" href="/assets/css/layout.css?v=37">
+  <link rel="stylesheet" href="/assets/css/components.css?v=5">
+  <link rel="stylesheet" href="/assets/css/pages.css?v=26">
 
-  <script src="assets/js/splash.js?v=5" defer></script>
+  <script src="/assets/js/splash.js?v=5" defer></script>
 
-  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/icons/favicon-32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="assets/images/icons/favicon-16.png">
-  <link rel="icon" type="image/png" sizes="48x48" href="assets/images/icons/favicon-48.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="assets/images/icons/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="192x192" href="assets/images/icons/android-chrome-192.png">
-  <link rel="icon" type="image/png" sizes="512x512" href="assets/images/icons/android-chrome-512.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/icons/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/icons/favicon-16.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="/assets/images/icons/favicon-48.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/icons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/images/icons/android-chrome-192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="/assets/images/icons/android-chrome-512.png">
 </head>
 <body>
 
@@ -55,7 +100,7 @@
   <header class="site-header">
     <div class="container site-header__inner">
       <a href="index.html" class="brand" aria-label="T-ZERO 第九感" data-i18n-aria="seo.brand.name">
-        <img src="assets/images/brand/t-zero-logo.png" alt="T-ZERO 第九感" data-i18n-attr="alt" data-i18n="seo.brand.name" class="brand__logo" width="32" height="32">
+        <img src="/assets/images/brand/t-zero-logo.png" alt="T-ZERO 第九感" data-i18n-attr="alt" data-i18n="seo.brand.name" class="brand__logo" width="32" height="32">
       </a>
       <nav class="nav" id="site-nav" aria-label="主選單" data-i18n-aria="a11y.menu">
         <a href="index.html" class="nav__link" data-i18n="nav.home">首頁</a>
@@ -72,7 +117,7 @@
             <line x1="21" y1="21" x2="16.65" y2="16.65"/>
           </svg>
         </button>
-        <button class="lang-toggle" data-lang-toggle aria-label="Switch language">EN</button>
+        <a class="lang-toggle" href="/en/" hreflang="en" lang="en" data-lang-toggle aria-label="Switch language" title="Switch language">EN</a>
         <a href="https://www.hktvmall.com" target="_blank" rel="sponsored noopener"
            class="btn btn--primary btn--sm hidden-mobile" data-i18n="nav.cta">前往 HKTVmall</a>
         <button class="menu-toggle" type="button" data-menu-toggle aria-expanded="false" aria-controls="site-nav" aria-label="開啟選單" data-i18n-aria="a11y.menuToggle">
@@ -86,32 +131,32 @@
   <div class="top-banner top-banner--carousel" data-carousel>
     <a class="top-banner__link" href="products.html" aria-label="瀏覽 T-ZERO 全系列產品" data-i18n-aria="a11y.browse">
       <img class="top-banner__img is-active"
-           src="assets/images/banners/carousel/9-1600.jpg?v=2"
-           srcset="assets/images/banners/carousel/9-800.jpg?v=2 800w, assets/images/banners/carousel/9-1600.jpg?v=2 1600w" sizes="100vw"
+           src="/assets/images/banners/carousel/9-1600.jpg?v=2"
+           srcset="/assets/images/banners/carousel/9-800.jpg?v=2 800w, /assets/images/banners/carousel/9-1600.jpg?v=2 1600w" sizes="100vw"
            alt="T-ZERO 第九感 — 玻尿酸安全套 (1/4)" data-i18n-attr="alt" data-i18n="a11y.banner.studded"
            width="1600" height="592"
            loading="eager" decoding="async"
            fetchpriority="high"
            data-carousel-slide>
       <img class="top-banner__img"
-           src="assets/images/banners/carousel/Tzero_website_banner-1600.jpg?v=2"
-           srcset="assets/images/banners/carousel/Tzero_website_banner-800.jpg?v=2 800w, assets/images/banners/carousel/Tzero_website_banner-1600.jpg?v=2 1600w" sizes="100vw"
+           src="/assets/images/banners/carousel/Tzero_website_banner-1600.jpg?v=2"
+           srcset="/assets/images/banners/carousel/Tzero_website_banner-800.jpg?v=2 800w, /assets/images/banners/carousel/Tzero_website_banner-1600.jpg?v=2 1600w" sizes="100vw"
            alt="T-ZERO 第九感 — 玻尿酸滋潤 · 水份充足 (2/4)" data-i18n-attr="alt" data-i18n="a11y.banner.extraLub"
            width="1600" height="592"
            loading="lazy" decoding="async"
            fetchpriority="low"
            data-carousel-slide>
       <img class="top-banner__img"
-           src="assets/images/banners/carousel/11-1600.jpg?v=2"
-           srcset="assets/images/banners/carousel/11-800.jpg?v=2 800w, assets/images/banners/carousel/11-1600.jpg?v=2 1600w" sizes="100vw"
+           src="/assets/images/banners/carousel/11-1600.jpg?v=2"
+           srcset="/assets/images/banners/carousel/11-800.jpg?v=2 800w, /assets/images/banners/carousel/11-1600.jpg?v=2 1600w" sizes="100vw"
            alt="T-ZERO 第九感 — 玻尿酸安全套 (3/4)" data-i18n-attr="alt" data-i18n="a11y.banner.extended"
            width="1600" height="592"
            loading="lazy" decoding="async"
            fetchpriority="low"
            data-carousel-slide>
       <img class="top-banner__img"
-           src="assets/images/banners/carousel/7-1600.jpg?v=2"
-           srcset="assets/images/banners/carousel/7-800.jpg?v=2 800w, assets/images/banners/carousel/7-1600.jpg?v=2 1600w" sizes="100vw"
+           src="/assets/images/banners/carousel/7-1600.jpg?v=2"
+           srcset="/assets/images/banners/carousel/7-800.jpg?v=2 800w, /assets/images/banners/carousel/7-1600.jpg?v=2 1600w" sizes="100vw"
            alt="T-ZERO 第九感 — 玻尿酸安全套 (4/4)" data-i18n-attr="alt" data-i18n="a11y.banner.ultraThin"
            width="1600" height="592"
            loading="lazy" decoding="async"
@@ -164,7 +209,7 @@
             <li><a href="products.html" data-i18n="footer.link.products">全部產品</a></li>
             <li class="footer__stockist">
               <a class="footer__stockist-link" href="https://www.watsons.com.hk" target="_blank" rel="sponsored noopener">
-                <img class="footer__stockist-logo" src="assets/images/brand/watsons-logo.png"
+                <img class="footer__stockist-logo" src="/assets/images/brand/watsons-logo.png"
                      alt="Watsons 屈臣氏" width="1280" height="281" loading="lazy" decoding="async"
                      data-i18n-attr="alt" data-i18n="footer.watsons.alt">
                 <span data-i18n="footer.watsons">全線屈臣氏有售</span>
@@ -248,7 +293,7 @@
     </div>
   </footer>
 
-  <script src="assets/js/carousel.js?v=5" defer></script>
-  <script type="module" src="assets/js/main.js?v=15"></script>
+  <script src="/assets/js/carousel.js?v=5" defer></script>
+  <script type="module" src="/assets/js/main.js?v=15"></script>
 </body>
 </html>
