@@ -54,7 +54,7 @@ export default {
     ja: 'コンドームのサイズ表:幅(mm)と周長の関係、S/M/L/XLの目安、1分でできる自分の測り方と、T-ZERO各モデルの選択肢。',
   },
   lead: {
-    zh: '盒上印有的「闊度」,是一盒安全套最重要的數字。它其實是勃起時周長的一半:闊度 52 mm,相當於約 10.4 厘米的周長。看清楚這個數字,便不需要靠估計。',
+    zh: '盒上印有的「闊度」,是一盒安全套最重要的數字。它其實是勃起時周長的一半:闊度 52 mm,相當於約 10.4 公分的周長。看清楚這個數字,便不需要靠估計。',
     en: 'The nominal width on the box is the one number that decides whether a condom fits. It is half your erect circumference, so a width of 52 mm means a circumference of about 10.4 cm. Read that one number and there is nothing left to guess.',
     ja: '箱に書かれた「幅」が、コンドームが合うかどうかを決める数字です。勃起時の周長の半分で、幅52mmなら周長は約10.4cmになります。',
   },
@@ -63,38 +63,38 @@ export default {
     {
       id: 'measure',
       h2: {
-        zh: '第一步:量度一次便知道',
-        en: 'First: measure yourself, once',
-        ja: 'まず一度、測る',
+        zh: '第一步：如何準確測量安全套闊度？',
+        en: 'First: how to measure your width accurately',
+        ja: 'まず、幅の正確な測り方',
       },
       blocks: [
         {
           t: 'p',
           text: {
-            zh: '準備一條柔軟的量度帶(或一條紙和一支筆),在完全勃起的狀態下,量度陰莖最根部、也就是最粗的一圈。貼着皮膚,但不要勒緊——勒緊會量得偏小。',
-            en: 'Take a soft measuring tape, or a strip of paper and a pen. While fully erect, measure around the base of the penis, where it is widest. Let the tape rest against the skin without squeezing it, because squeezing gives you a smaller number than the real one.',
-            ja: '柔らかなテープ、または紙とペンを用意します。完全に勃起した状態で、ペニスの根元、つまり最も太い部分を測ります。肌に沿着当てるだけにして、締めつけないでください。小さく測れてしまいます。',
+            zh: '準備一條軟尺（或一條紙帶與筆），在充血勃起狀態下，測量局部最豐滿（最粗）的一圈周長。讓軟尺輕貼肌膚即可，切勿刻意勒緊，以免數據偏小。',
+            en: 'Take a soft measuring tape, or a strip of paper and a pen. While fully erect, measure the circumference around the fullest, widest part. Let the tape rest against the skin without squeezing it, because squeezing gives you a smaller number than the real one.',
+            ja: '柔らかなテープ、または紙とペンを用意します。完全に勃起した状態で、最も太い部分の周長を測ります。肌に沿着当てるだけにして、締めつけないでください。小さく測れてしまいます。',
           },
         },
         {
           t: 'p',
           text: {
-            zh: '量到的周長(厘米)除以二,就是你的闊度(毫米)。例如量到 10.5 厘米,闊度便是 52.5 mm,對應盒上標示「52 ± 2 mm」的尺碼。',
-            en: 'Divide the circumference in centimetres by two and you have your width in millimetres. A circumference of 10.5 cm gives a width of 52.5 mm, so look for the size marked "52 ± 2 mm".',
-            ja: '測った周長（cm）を2で割ると、幅（mm）になります。周長10.5cmなら幅52.5mmなので、「52 ± 2 mm」と書かれたサイズを選びます。',
+            zh: '將測量得到的「周長（公分）」除以二，即為適合您的「安全套闊度（毫米 / mm）」。舉例來說：若測得周長為 10.5 公分，除以二後的闊度為 52.5 mm，即可完美對應外盒標示「52 ± 2 mm」的標準亞洲尺碼。',
+            en: 'Divide the circumference you measured in centimetres by two and you have the width that will fit you, in millimetres. A circumference of 10.5 cm gives a width of 52.5 mm, which matches the "52 ± 2 mm" standard Asian size on the box.',
+            ja: '測った周長（cm）を2で割ると、あなたに合う幅（mm）になります。周長10.5cmなら幅は52.5mm、箱に書かれた「52 ± 2 mm」の標準アジアサイズにちょうど合います。',
           },
         },
         {
           t: 'note',
           title: {
-            zh: '如何量度而不會尷尬',
-            en: 'How to measure without it being awkward',
-            ja: '気兼ねなく測るには',
+            zh: '💡 輕鬆測量的小貼士',
+            en: '💡 Tips for an easy measurement',
+            ja: '💡 簡単な測量のコツ',
           },
           text: {
-            zh: '在自己家裏、沐浴後拿着軟尺量度即可,沒有人會看到。量度不需要按壓任何部位,也不會有任何不適。一年量一次便足夠。',
-            en: 'Do it at home, after a shower, with a soft tape. Nobody sees it, nothing has to be pressed or squeezed, and it is not uncomfortable. Once a year is enough.',
-            ja: '自宅で、シャワーの後に測れば誰でも見ません。押さえたり力を加えたりする必要はなく、不快感もありません。年に一度で十分です。',
+            zh: '建議可在單獨居家或沐浴後進行，過程簡單且完全隱密。測量時順其自然即可，無須按壓或過度施力。男性身形與尺寸可能隨時間有輕微變化，建議每隔一段時間定期微調確認即可。',
+            en: 'Do it at home on your own, or after a shower — it is simple and entirely private. Let the measurement happen on its own; there is no need to press or to apply force. Body shape and size can change slightly over time, so it is worth re-checking every so often and adjusting as needed.',
+            ja: '一人で自宅、あるいはシャワーの後に行えば、簡単な操作で、完全にプライベートです。力を込めず、自然なまま測ってください。体型やサイズが少しずつ変わることがありますので、ときどき測り直して微調整するとよいです。',
           },
         },
       ],
@@ -235,9 +235,9 @@ export default {
         {
           t: 'p',
           text: {
-            zh: '四款均有售於[屈臣氏](https://www.watsons.com.hk)及 [HKTVmall](https://www.hktvmall.com)。若不確定應選哪個尺碼,可直接 [WhatsApp 查詢我們](https://wa.me/85268971473),或先買一盒 3 隻裝試用。',
-            en: 'All four are available at [Watsons](https://www.watsons.com.hk) and [HKTVmall](https://www.hktvmall.com). If you are unsure of your size, [message us on WhatsApp](https://wa.me/85268971473), or start with a box of three and try.',
-            ja: '4種類とも[Watsons](https://www.watsons.com.hk)と[HKTVmall](https://www.hktvmall.com)で販売しています。サイズが分からない場合は[WhatsApp](https://wa.me/85268971473)で相談いただくか、まずは3個入りの箱をお試しください。',
+            zh: '四款均有售於[屈臣氏](https://www.watsons.com.hk)及 [HKTVmall](https://www.hktvmall.com)。如有疑問歡迎 [WhatsApp 查詢](https://wa.me/85268971473)。',
+            en: 'All four are available at [Watsons](https://www.watsons.com.hk) and [HKTVmall](https://www.hktvmall.com). If you have any questions, [message us on WhatsApp](https://wa.me/85268971473).',
+            ja: '4種類とも[Watsons](https://www.watsons.com.hk)と[HKTVmall](https://www.hktvmall.com)で販売しています。ご不明な点は[WhatsApp](https://wa.me/85268971473)でお問い合わせください。',
           },
         },
       ],
@@ -252,7 +252,7 @@ export default {
         ja: '箱の「52±2 mm」とは何のこと？',
       },
       a: {
-        zh: '「52 mm」是闊度,「±2 mm」是容差,實際上可能是 50 至 54 mm。闊度 = 勃起時周長 ÷ 2,因此 52 mm 對應約 10.4 厘米的周長。',
+        zh: '「52 mm」是闊度,「±2 mm」是容差,實際上可能是 50 至 54 mm。闊度 = 勃起時周長 ÷ 2,因此 52 mm 對應約 10.4 公分的周長。',
         en: '52 mm is the nominal width, and ±2 mm is the tolerance, so the real width may be anywhere from 50 to 54 mm. Width is half the erect circumference, so 52 mm means a circumference of roughly 10.4 cm.',
         ja: '「52mm」が公称幅、「±2mm」が公差で、実際の幅は50〜54mmです。幅は勃起時の周長を2で割った値なので、52mmなら周長は約10.4cmになります。',
       },
