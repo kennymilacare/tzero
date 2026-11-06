@@ -1536,6 +1536,12 @@ html[lang="en"] .about-stats li {
 
 .footer__item a:hover { color: var(--ink); }
 
+/* A phone number split across two lines is a number nobody can dial.
+   The label in front of it ("WhatsApp ·") is allowed to wrap away;
+   the number itself is not. */
+.footer__item a[href^="https://wa.me/"],
+.contact-block__link { white-space: nowrap; }
+
 /* The opening-hours line is a long sentence rather than a short link, so it
    wraps under the clock instead of sitting as a vertically centred block. */
 .footer__item--hours {
