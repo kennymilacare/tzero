@@ -3,6 +3,23 @@
    and UI translations (Traditional Chinese + English).
    =========================================================== */
 
+/* ---------- The company ----------
+   Who the site belongs to. The name is written once here and read
+   from this place by the contact page and by the structured data,
+   so the two can never disagree about the legal owner of the site.
+
+   The business registration number is deliberately not here. The
+   owner asked that it not be published, and the structured data is
+   served to every visitor — a number in it is published whether or
+   not a reader ever sees it rendered. So it stays on the Business
+   Registration Certificate and nowhere else.
+
+   Do not add it back. A check in seo.test.mjs fails the build if a
+   number of that shape ever reaches a page. */
+export const COMPANY = {
+  legalName: 'Milan Pacific Asia Limited',
+};
+
 export const brands = [
   {
     id: 'tzero',
@@ -550,7 +567,7 @@ export const i18n = {
     'contact.form.error_required': '請填寫所有必填欄目。',
     'contact.form.error_email': '請輸入有效的電郵地址。',
     'contact.distributor': '港澳地區總代理',
-    'contact.distributor.name': 'Milan Pacific Asis Limited',
+    'contact.distributor.name': COMPANY.legalName,
     'contact.address': '地址',
     'contact.address.local': '九龍觀塘173號申新大廈5樓',
     'contact.address.roman': '5/F, D.J. Building, No.173 Hoi Bun Road, Kwun Tong, Kowloon',
@@ -572,6 +589,7 @@ export const i18n = {
       "@graph": [
         { "@type": "LocalBusiness", "@id": "https://www.tzero-jp.com/#org",
           "name": "T-ZERO 第九感", "alternateName": "T-ZERO NINTH SENSE · 玻尿酸安全套",
+          "legalName": COMPANY.legalName,
           "url": "https://www.tzero-jp.com/",
           "logo": "https://www.tzero-jp.com/assets/images/brand/t-zero-logo.png",
           "image": "https://www.tzero-jp.com/assets/images/og-image.png",
@@ -961,7 +979,7 @@ export const i18n = {
     'contact.form.error_required': 'Please fill in all required fields.',
     'contact.form.error_email': 'Please enter a valid email address.',
     'contact.distributor': 'HK & Macau Distributor',
-    'contact.distributor.name': 'Milan Pacific Asis Limited',
+    'contact.distributor.name': COMPANY.legalName,
     'contact.address': 'Address',
     'contact.address.local': '5/F, D.J. Building, No.173 Hoi Bun Road, Kwun Tong, Kowloon',
     'contact.address.roman': 'Hong Kong',
@@ -983,6 +1001,7 @@ export const i18n = {
       "@graph": [
         { "@type": "LocalBusiness", "@id": "https://www.tzero-jp.com/#org",
           "name": "T-ZERO NINTH SENSE", "alternateName": "T-ZERO 第九感 · Hyaluronic Condom",
+          "legalName": COMPANY.legalName,
           "url": "https://www.tzero-jp.com/",
           "logo": "https://www.tzero-jp.com/assets/images/brand/t-zero-logo.png",
           "image": "https://www.tzero-jp.com/assets/images/og-image.png",
@@ -1374,7 +1393,7 @@ export const i18n = {
     'contact.form.error_required': '必須項目をご記入ください。',
     'contact.form.error_email': '有効なメールアドレスをご入力ください。',
     'contact.distributor': '香港・マカオ総代理店',
-    'contact.distributor.name': 'Milan Pacific Asis Limited',
+    'contact.distributor.name': COMPANY.legalName,
     'contact.address': '住所',
     'contact.address.local': '九龍観塘173号 D.J.ビル 5階',
     'contact.address.roman': '香港',
@@ -1412,6 +1431,7 @@ export const i18n = {
       "@graph": [
         { "@type": "LocalBusiness", "@id": "https://www.tzero-jp.com/#org",
           "name": "T-ZERO 第九感", "alternateName": "T-ZERO NINTH SENSE · ヒアルロン酸コンドーム",
+          "legalName": COMPANY.legalName,
           "url": "https://www.tzero-jp.com/",
           "logo": "https://www.tzero-jp.com/assets/images/brand/t-zero-logo.png",
           "image": "https://www.tzero-jp.com/assets/images/og-image.png",

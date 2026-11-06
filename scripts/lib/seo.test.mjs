@@ -16,7 +16,7 @@ import assert from 'node:assert/strict';
 import { access, readFile, readdir } from 'node:fs/promises';
 import path from 'node:path';
 
-import { products, productUrl, faqs, i18n } from '../../assets/js/data.js';
+import { products, productUrl, faqs, i18n, COMPANY } from '../../assets/js/data.js';
 import { faqBlock, faqPageNode } from './seo.mjs';
 import { GUIDES, GUIDE_HUB, guideOgImagePath } from './guides.mjs';
 import { LANGS, PAGES, pageUrl } from './langs.mjs';
@@ -115,6 +115,86 @@ test('the business is shown with the brand logo', () => {
     const graph = JSON.parse(i18n[lang]['seo.jsonld.home'])['@graph'];
     const shop = graph.find((n) => n['@type'] === 'LocalBusiness');
     assert.equal(shop.logo, BRAND_LOGO, `${lang}: the business logo is not the brand logo`);
+  }
+});
+
+/* The company behind the site. It used to be written out three
+   times — once in each language block — and one of those three had a
+   letter wrong in it, so the site said "Milan Pacific Asis Limited"
+   to a visitor and to a crawler alike. It is written once now, and
+   these checks make sure the page and the structured data keep
+   saying the same thing about who owns the site.
+
+   The business registration number is on the certificate and is not
+   published anywhere — see the check at the end of this file. */
+test('the business is named by the company that owns it', () => {
+  assert.ok(COMPANY.legalName, 'the company has no name');
+  assert.match(COMPANY.legalName, /Limited|Ltd|Inc/i,
+    `the company name does not look like a registered company: ${COMPANY.legalName}`);
+
+  for (const lang of LANGS) {
+    const graph = JSON.parse(i18n[lang]['seo.jsonld.home'])['@graph'];
+    const shop = graph.find((n) => n['@type'] === 'LocalBusiness');
+
+    assert.equal(shop.legalName, COMPANY.legalName, `${lang}: the business is not named`);
+    assert.equal(i18n[lang]['contact.distributor.name'], COMPANY.legalName,
+      `${lang}: the contact page names a different company`);
+  }
+});
+
+/* The name has to be on the page as well, not only in the markup a
+   crawler reads — a reader looking for the company behind the site
+   has to be able to find it. */
+test('the contact page names the company', async () => {
+  for (const lang of LANGS) {
+    const file = lang === 'zh' ? 'contact.html' : `${lang}/contact.html`;
+    const html = await readPage(file);
+    assert.ok(html.includes(COMPANY.legalName),
+      `${file}: the company name is not on the page`);
+  }
+});
+
+/* The business registration number is not published. Not on a page,
+   not in the structured data, not in the markup a crawler reads — the
+   structured data is served to every visitor, so a number in it is
+   published whether or not it is ever rendered.
+
+   The check cannot look for the number itself, because writing it
+   here would publish it. So it looks for the shape of one instead:
+   eight digits, three digits, two digits — which is how a Hong Kong
+   business registration number is written. If anything of that shape
+   ever reaches a page, the build fails.
+
+   The files the browser downloads are checked too, not only the
+   pages: a number in data.js is published just as surely as one in
+   a page. */
+const BR_NUMBER_SHAPE = /\d{8}-\d{3}-\d{2}/;
+
+/* Everything under assets/ is something the browser can download. */
+async function publishedAssets() {
+  const out = [];
+  const walk = async (dir, prefix) => {
+    for (const entry of await readdir(path.join(ROOT, dir), { withFileTypes: true })) {
+      const rel = prefix ? `${prefix}/${entry.name}` : entry.name;
+      if (entry.isDirectory()) await walk(`${dir}/${entry.name}`, rel);
+      else if (/\.(js|json|css|html)$/.test(entry.name)) out.push(`assets/${rel}`);
+    }
+  };
+  await walk('assets', '');
+  return out;
+}
+
+test('no business registration number is published', async () => {
+  for (const file of await sitePages()) {
+    const html = await readPage(file);
+    assert.ok(!BR_NUMBER_SHAPE.test(html),
+      `${file}: something that looks like a business registration number is published`);
+  }
+
+  for (const file of await publishedAssets()) {
+    const body = await readFile(path.join(ROOT, file), 'utf8');
+    assert.ok(!BR_NUMBER_SHAPE.test(body),
+      `${file}: something that looks like a business registration number is published`);
   }
 });
 
