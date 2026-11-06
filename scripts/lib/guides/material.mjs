@@ -35,24 +35,24 @@ export default {
     ja: '購入ガイド · 素材',
   },
   h1: {
-    zh: '乳膠、PU、PI:安全套有什麼不同?',
-    en: 'Latex, PU, PI: what is actually different between them',
-    ja: 'ラテックス、PU、PI:何が違うのか',
+    zh: '【安全套材質比較】乳膠 vs PU 分別在哪？',
+    en: 'Condom material comparison: latex vs PU, and what the difference is',
+    ja: '【コンドームの素材比較】ラテックス vs PUの違いは？',
   },
   title: {
-    zh: '乳膠 vs PU vs PI 安全套 · 材質比較 · 過敏 · 潤滑液 · T-ZERO 第九感',
-    en: 'Latex vs PU vs PI Condoms · Material Guide · Allergy · Lubricants · T-ZERO NINTH SENSE',
-    ja: 'ラテックス・PU・PI コンドーム比較 · 素材ガイド · アレルギー · 潤滑剤 · T-ZERO 第九感',
+    zh: '【安全套材質比較】乳膠 vs PU 分別在哪？',
+    en: 'Condom material comparison: latex vs PU, and what the difference is',
+    ja: '【コンドームの素材比較】ラテックス vs PUの違いは？',
   },
   description: {
-    zh: '安全套材質比較:天然乳膠、PU(聚氨酯)、PI(聚異戊烯)有什麼分別?哪些適合乳膠過敏者?油性潤滑液會如何損壞乳膠?一頁看完。',
-    en: 'Latex vs PU vs PI condoms: how natural rubber, polyurethane and polyisoprene differ, who should avoid latex, and why oil-based lubricant ruins a latex condom.',
-    ja: 'ラテックス・PU・PI・コンドームの違いを解説。天然ゴム过身者、オイル系潤滑剤がラテックスを壊す理由まで。',
+    zh: '從彈性與傳熱挑選最適合你的親密防護',
+    en: 'Pick the material that suits you — compared by elasticity and by how well it carries heat.',
+    ja: '伸縮性と熱の伝わり方から、自分に合ったものを選びましょう。',
   },
   lead: {
-    zh: '盒上印有「乳膠」兩個字,很多人便不再細看。但如果你對乳膠敏感,或者想知道為何有些安全套貴上一倍,答案就在這兩個字裏。',
-    en: 'Most people read "latex" on the box and stop there. But if you react to latex, or you have wondered why one condom costs twice another, the answer is in that word.',
-    ja: '「ラテックス」と書かれた箱を、大部分の人はそこで読み終えます。しかしラテックスに反応する場合や、値段差の理由が知りたい場合は、その2文字に答えがあります。',
+    zh: '從彈性與傳熱挑選最適合你的親密防護',
+    en: 'Pick the material that suits you — compared by elasticity and by how well it carries heat.',
+    ja: '伸縮性と熱の伝わり方から、自分に合ったものを選びましょう。',
   },
 
   sections: [
@@ -67,9 +67,9 @@ export default {
         {
           t: 'p',
           text: {
-            zh: '安全套的薄膜主要有三種。天然乳膠佔全球用量九成以上;PU 與 PI 的存在,是為了解決兩個問題:乳膠過敏,以及傳熱。',
-            en: 'Condom films come in three main kinds. Natural rubber latex accounts for more than nine out of every ten condoms sold. PU and PI exist to solve two problems: latex allergy, and heat transfer.',
-            ja: 'コンドームの膜は主に3種類です。天然ゴムラテックスが世界全体の9割以上を占めます。PUとPIは、ラテックスアレルギーと熱伝導という2つの問題のために存在しています。',
+            zh: '安全套的薄膜主要有三種。天然乳膠佔全球用量九成以上;PU 與 PI 的存在,是為了解決乳膠過敏,以及讓追求更極速傳熱的人多一個選擇。',
+            en: 'Condom films come in three main kinds. Natural rubber latex accounts for more than nine out of every ten condoms sold. PU and PI exist for two reasons: latex allergy, and giving people who want faster heat transfer a choice.',
+            ja: 'コンドームの膜は主に3種類です。天然ゴムラテックスが世界全体の9割以上を占めます。PUとPIが存在するのは、ラテックスアレルギーと、さらに速い熱伝導を好む人のための選択肢からです。',
           },
         },
         {
@@ -78,6 +78,7 @@ export default {
             { zh: '材質', en: 'Material', ja: '素材' },
             { zh: '伸展度', en: 'Stretch', ja: '伸び' },
             { zh: '傳熱', en: 'Heat', ja: '熱の伝わり' },
+            { zh: '親密包裹感', en: 'Fit and feel', ja: '密着感' },
             { zh: '含乳膠蛋白', en: 'Latex protein', ja: 'ラテックス蛋白' },
             { zh: '一般價位', en: 'Price', ja: '価格' },
             { zh: '適合哪些人', en: 'Who it suits', ja: '向いている人' },
@@ -89,8 +90,17 @@ export default {
                 en: 'Natural rubber latex',
                 ja: '天然ゴムラテックス',
               },
-              { zh: '最高,最貼身', en: 'Highest, closest fit', ja: '最も伸び、密着' },
-              { zh: '中等', en: 'Moderate', ja: '普通' },
+              {
+                zh: '極高,完美包裹不滑落',
+                en: 'Very high — wraps perfectly and will not slip',
+                ja: '非常に高い。ぴったりと包み、ずれ落ちない',
+              },
+              { zh: '自然體溫傳導', en: 'Natural body heat', ja: '体温を自然に伝導' },
+              {
+                zh: '如第二層肌膚般服貼柔軟',
+                en: 'Soft and close, like a second skin',
+                ja: '第二の肌のように柔らかく密着',
+              },
               { zh: '有', en: 'Yes', ja: 'あり' },
               { zh: '最低', en: 'Lowest', ja: '最も安い' },
               {
@@ -105,8 +115,13 @@ export default {
                 en: 'PU (polyurethane)',
                 ja: 'PU（ポリウレタン）',
               },
-              { zh: '中等,彈性較低', en: 'Moderate, less elastic', ja: '普通、伸びがやや劣る' },
-              { zh: '最好', en: 'Best', ja: '最も良い' },
+              {
+                zh: '中等,彈性較低,容易有異物感或鬆脫',
+                en: 'Moderate, less elastic — it can feel odd or work loose',
+                ja: '普通。伸びがやや足りず、違和感やずれ落ちが出やすい',
+              },
+              { zh: '極速傳熱', en: 'Very fast heat transfer', ja: '熱が非常に速く伝わる' },
+              { zh: '偏硬,形狀固定', en: 'Firmer, and it keeps its shape', ja: 'やや硬く、形を保つ' },
               { zh: '沒有', en: 'No', ja: 'なし' },
               { zh: '較貴', en: 'Higher', ja: 'やや高い' },
               {
@@ -123,40 +138,37 @@ export default {
               },
               { zh: '高,與乳膠十分接近', en: 'High, close to latex', ja: '高い、ラテックスに近い' },
               { zh: '良好', en: 'Good', ja: '良い' },
+              {
+                zh: '接近乳膠的柔軟度',
+                en: 'Close to the softness of latex',
+                ja: 'ラテックスに近い柔らかさ',
+              },
               { zh: '沒有', en: 'No', ja: 'なし' },
               { zh: '最貴', en: 'Highest', ja: '最も高い' },
               {
                 zh: '乳膠過敏,但希望保留乳膠的觸感',
                 en: 'Latex allergy, but you want the feel of latex',
-                ja: 'アレルギーだが、ラテックスの感触を残したい人',
+                ja: 'アレルギーだが、ラテックスらしい感触の人',
               },
             ],
           ],
-        },
-        {
-          t: 'p',
-          text: {
-            zh: '另有第四種,稱為 TPE(熱塑性彈性體),價格便宜、不含乳膠,但觸感與伸展性均較遜色,通常用於入門或旅行裝。',
-            en: 'There is a fourth: TPE, thermoplastic elastomer. It is cheap and latex-free, but the feel and the stretch are not as good, so it usually turns up in entry-level or travel packs.',
-            ja: '4つ目にTPE（熱可塑性弾性体）があります。安価でラテックスは含みませんが、感触と伸びは劣り、エントリーモデルや旅行用に使われます。',
-          },
         },
       ],
     },
     {
       id: 'allergy',
       h2: {
-        zh: '乳膠過敏:如何判斷自己是否屬於此類',
-        en: 'Latex allergy: how to tell if you have it',
-        ja: 'ラテックスアレルギー:自分が該当するか',
+        zh: '如何選擇適合自己的材質？',
+        en: 'How to choose the material that suits you',
+        ja: '自分に合った素材の選び方',
       },
       blocks: [
         {
           t: 'p',
           text: {
-            zh: '乳膠過敏是對乳膠蛋白的即時免疫反應,通常在接觸後數分鐘至一小時內出現。症狀可以是紅痕、痕癢、腫脹;少數人會出現氣促,或面部、喉嚨腫脹。在一般人群中,即時型乳膠過敏的比例約為 1 至 3 個百分比,不同族群與地區之間會有差異。',
-            en: 'Latex allergy is an immediate immune reaction to the proteins in latex, usually starting minutes to an hour after contact. It shows as redness, itching and swelling; some people get wheeze, or swelling of the face or throat. In the general population, immediate latex allergy affects roughly one to three per cent, and it varies by group and by region.',
-            ja: 'ラテックスアレルギーは、ラテックスに含まれる蛋白質に対する即時型免疫反応で、通常は接触から数分〜1時間以内に現れます。赤み、瘙痒、腫れが主で、息苦しさや顔・喉の腫れを起こす場合もあります。一般人群中での即時型ラテックスアレルギーは約1〜3％で、集団や地域によって差があります。',
+            zh: '在醫學統計中，真正對天然乳膠產生嚴重免疫反應的人群比例極低（僅約 1% 至 3%）。許多人誤以為自己對乳膠「過敏」，其實往往是因為使用了傳統安全套中添加的化學添加劑、劣質香精，或是黏膩難清洗的工業矽油，因而導致私密肌膚出現紅痕或乾澀不適。如果您過去曾有不適經驗，不妨先確認是否為潤滑成分所致。若屬於極少數已被醫生確診為乳膠過敏的體質，則建議選用 PU 材質。',
+            en: 'In the medical statistics the proportion of people who have a severe immune reaction to natural latex is very small — around one to three per cent. Many people think they are "allergic" to latex when what actually happened is the additives, the cheap fragrance or the clingy industrial silicone oil in an ordinary condom, which leaves the skin down there red, dry and uncomfortable. If you have had that experience before, it is worth checking first whether the lubricant was the cause. If you are one of the very few whose doctor has confirmed a latex allergy, then PU is the material to choose.',
+            ja: '医学的な統計では、天然ラテックスに重い免疫反応を示す人の割合はきわめて小さく、1〜3％にとどまります。大部分の人が「ラテックスアレルギーだと思っていますが、実際には一般的なコンドームに含まれる化学的な添加剤、質の低い香料、洗い流しにくい工業用シリコンオイルが刺激になって、敏感肌に赤みや乾燥の不快感が生じているだけの場合があります。過去に不快感があった経験があれば、まずは潤滑成分が原因かどうかを確認してみてください。医師にラテックスアレルギーと診断された、ごく限られた患者さんには、PU素材を選ぶことをおすすめします。',
           },
         },
         {
@@ -272,12 +284,32 @@ export default {
       },
       blocks: [
         {
-          t: 'p',
-          text: {
-            zh: 'T-ZERO 第九感全線採用天然乳膠薄膜,按日本工藝製造,每一片均通過電子檢漏測試後才出廠。潤滑液含玻尿酸,以水性為基礎,均勻塗佈在同一片上,因此無須另外添加潤滑液。',
-            en: 'Every T-ZERO NINTH SENSE condom uses a natural rubber latex film, made to Japanese standards, and every single one is electronically tested for holes before it leaves the factory. The lubricant contains hyaluronic acid and is water-based, and it is spread evenly over the film, so there is nothing to add.',
-            ja: 'T-ZERO 第九感は全シリーズ天然ゴムラテックスの膜を使用し、日本の技術基準で製造しています。1枚ずつ電子的な漏れ検査を通して出荷しています。潤滑剤はヒアルロン酸を含む水ベースで、膜に均一に塗布されるため、別途追加する必要はありません。',
+          t: 'note',
+          title: {
+            zh: '💡 為什麼 T-ZERO 第九感堅持選用「日本工藝天然乳膠」？',
+            en: '💡 Why T-ZERO NINTH SENSE insists on natural latex, made to Japanese standards',
+            ja: '💡 なぜT-ZERO 第九感は「日本の工芸による天然ラテックス」を選ぶのか',
           },
+          text: {
+            zh: '市面上許多產品為了追求噱頭而採用無彈性的硬質 PU 塑料薄膜。然而，T-ZERO 團隊深知，一場完美的親密體驗，「貼合的延展性」與「持久的水潤度」才是關鍵。',
+            en: 'Plenty of products reach for a hard, inelastic PU plastic film, because it makes a louder claim on the box. The T-ZERO team knows that a good experience comes down to two things: how well the film stretches to fit you, and how long the moisture lasts.',
+            ja: '話題性のために、伸びのない硬いPUのプラスチックフィルムを使う商品が多くあります。しかしT-ZEROのチームは、完璧な親密な時間には「体にフィットする伸び」と「長く続くうるおい」が本質だと知っています。',
+          },
+        },
+        {
+          t: 'ul',
+          items: [
+            {
+              zh: '**拋棄塑料感，回歸真觸感：** PU 材質本質上是塑料膜，缺乏彈性，容易在過程中產生異物感與摩擦不適。T-ZERO 堅持採用頂級天然乳膠，具備無可比擬的極高伸展度，能隨著您的身形完美延伸包裹，自然不拘束。',
+              en: '**Leaving the plastic feel behind, and coming back to a real touch:** PU is, at heart, a plastic film. It has little stretch, so it can leave you feeling that something is there, and it rubs. T-ZERO uses top-grade natural latex instead, with an elasticity nothing else comes close to — it stretches and wraps to your shape, so it never feels restrictive.',
+              ja: '**プラスチックの感触を捨て、本物の触感へ:** PUは本質的にプラスチックフィルムで、伸びに乏しく、使う間に違和感や摩擦の不快感が生じやすくなります。T-ZEROは最高級の天然ラテックスを用います。その伸びは比類がなく、身体に合わせてぴたりと包み、窮屈さを感じさせません。',
+            },
+            {
+              zh: '**玻尿酸配方，徹底告別傳統乳膠痛點：** 許多人討厭乳膠安全套，是因為無法忍受傳統矽油的難聞氣味與洗不掉的黏膩感。T-ZERO 揚棄化學矽油，日本工藝製程中完美淡化橡膠氣味，並注入護膚級玻尿酸水性潤滑液。水潤清爽、長效鎖水不反乾，事後清水一沖即淨，將乳膠的舒適度提升至全新境界。',
+              en: '**Hyaluronic acid, and the end of the usual complaints about latex:** People who dislike latex condoms usually cannot stand the smell of traditional silicone oil, or the sticky film it leaves behind that will not wash off. T-ZERO leaves chemical silicone oil out; the Japanese process takes the rubber smell away almost entirely, and the lubricant is water-based with skin-care-grade hyaluronic acid in it. Light and fresh, long-lasting without drying out, and it rinses away with plain water afterwards — which takes the comfort of latex to a new level.',
+              ja: '**ヒアルロン酸配合で、従来のラテックスへの不満も解消:** ラテックスコンドームが嫌だという人の多くは、従来のシリコンオイルの匂いと、洗っても取れないべたつきが原因です。T-ZEROは化学的なシリコンオイルを使わず、日本の製造工程でゴム臭みをほぼ消し、肌にやさしい玻尿酸入りの水性潤滑剤を入れています。清爽で、持続しても乾かず、事後は水でさっと洗い流せます。ラテックスの快適さを一段引き上げます。',
+            },
+          ],
         },
         {
           t: 'p',

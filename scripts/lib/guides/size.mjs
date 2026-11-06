@@ -247,7 +247,7 @@ export default {
   faq: [
     {
       q: {
-        zh: '盒上寫着「52±2 mm」,究竟是什么意思?',
+        zh: '盒上寫着「52±2 mm」,究竟是什麼意思?',
         en: 'What does "52±2 mm" on the box actually mean?',
         ja: '箱の「52±2 mm」とは何のこと？',
       },
@@ -264,9 +264,9 @@ export default {
         ja: '測るのが難しいので、身長から推測できますか？',
       },
       a: {
-        zh: '不準確。身高與陰莖尺寸的關聯很弱,靠身高估算的尺碼通常都會出錯。使用上述方法,一條軟尺、一分鐘,準確得多。',
-        en: 'Not reliably. Height and penile size are only weakly related, so a height-based estimate is usually wrong. The tape takes a minute and is far more accurate.',
-        ja: '正確ではありません。身長とペニスのサイズには明確な相関がありません。テープなら1分で、より正確に選べます。',
+        zh: '不準確。身高與陰莖尺寸沒有直接關聯,靠身高估算的尺碼通常都會出錯。使用上述方法,一條軟尺,一分鐘,準確得多。',
+        en: 'Not reliably. Height and penile size are not directly related, so a height-based estimate is usually wrong. Using the method above — a tape, a minute — is far more accurate.',
+        ja: '正確ではありません。身長とペニスのサイズには直接的な関係がないため、身長から推測したサイズは外れがちです。上の方法なら、テープ1本で1分、より正確に選べます。',
       },
     },
     {
@@ -276,9 +276,9 @@ export default {
         ja: '大きいサイズの方が安全ですか？',
       },
       a: {
-        zh: '不會。所有正廠安全套都必須通過 ISO 4071 國際標準,包括爆破壓力、拉力伸長,以及每一片的電子測試。闊度不影響安全性,尺碼只是為了戴得舒適和不易滑出。',
-        en: 'No. Every genuine condom has to pass ISO 4071, which covers burst pressure, tensile strength and an electrical test on every single condom. Width has nothing to do with safety; it is about comfort and staying on.',
-        ja: 'いいえ。本物のコンドームはすべてISO 4071を満たす必要があり、破裂圧、引張強度、1個ごとの電気的検査が含まれます。幅は安全性とは無関係で、快適さとずれ防止のための尺寸です。',
+        zh: '不會。所有正廠安全套都必須通過國際標準,包括爆破壓力,拉力伸長,以及每一片的電子測試。闊度不影響安全性,尺碼只是為了戴得舒適和不易滑出。',
+        en: 'No. Every genuine condom must pass international standards, which cover burst pressure, tensile strength and an electrical test on every single condom. Width has nothing to do with safety; the size is about comfort and staying on.',
+        ja: 'いいえ。本物のコンドームはすべて国際基準を満たす必要があり、破裂圧、引張強度、1枚ごとの電気的検査が含まれます。幅は安全性には影響せず、サイズは装着の快適さと、ずれ落ちしないことのためにあります。',
       },
     },
   ],

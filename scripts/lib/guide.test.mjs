@@ -92,6 +92,41 @@ function textsOf(guide, lang) {
   return out.filter((s) => s && s.trim());
 }
 
+/** The copy a reader reads down the page, in the order they meet
+    it: the heading, the paragraph under it, the sections, the
+    questions.
+
+    The title in the tab and the description under the search result
+    are not on the page, and the owner has them say the same words as
+    the heading and the lead on purpose — so they are left out of the
+    walk down the page. */
+function visibleTextsOf(guide, lang) {
+  const out = [];
+  const push = (field) => {
+    if (field == null) return;
+    if (typeof field === 'string') { out.push(field); return; }
+    const v = field[lang];
+    if (typeof v === 'string') out.push(v);
+  };
+
+  push(guide.h1);
+  push(guide.lead);
+
+  for (const section of guide.sections) {
+    push(section.h2);
+    for (const block of section.blocks) {
+      push(block.text); push(block.title);
+      (block.items || []).forEach(push);
+      (block.head || []).forEach(push);
+      (block.rows || []).forEach((row) => row.forEach(push));
+    }
+  }
+
+  for (const item of guide.faq) { push(item.q); push(item.a); }
+
+  return out.filter((s) => s && s.trim());
+}
+
 /** The FAQ node in a page's structured data. */
 function faqNode(html) {
   for (const m of html.matchAll(/<script type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g)) {
@@ -194,7 +229,7 @@ test('no guide says the same word twice in the same place', () => {
      the same sentence in a row. It reads as a mistake. */
   for (const guide of GUIDES) {
     for (const lang of LANGS) {
-      const sentences = textsOf(guide, lang);
+      const sentences = visibleTextsOf(guide, lang);
       for (let i = 1; i < sentences.length; i++) {
         assert.notEqual(sentences[i], sentences[i - 1],
           `${lang}/${guide.path}: the same sentence appears twice in a row`);

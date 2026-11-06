@@ -1140,12 +1140,19 @@
 
 .guide__table th,
 .guide__table td {
-  padding: var(--space-3) var(--space-4);
+  padding: var(--space-3) 0.75rem;
   text-align: left;
   vertical-align: top;
   border-bottom: 1px solid var(--border);
   color: var(--ink-soft);
   line-height: 1.6;
+  /* Chinese breaks between any two characters, so a cell can split a
+     phrase in half — 自然體溫傳 / 導. keep-all holds the phrase
+     together and lets it break at the punctuation instead. The
+     break-word is the safety valve for a word too long for its
+     column; it only ever fires when there is no other choice. */
+  word-break: keep-all;
+  overflow-wrap: break-word;
 }
 
 .guide__table th {
