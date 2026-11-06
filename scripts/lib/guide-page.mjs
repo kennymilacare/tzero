@@ -309,10 +309,6 @@ ${crumbs}
         <div class="guide-hub">
 ${items}
         </div>
-
-        <p class="guide-hub__cta">
-          <a class="btn btn--primary" href="products.html">${escapeText(GUIDE_UI.hubCta[lang])}</a>
-        </p>
       </div>
     </section>
   </main>`;

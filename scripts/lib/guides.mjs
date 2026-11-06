@@ -94,9 +94,9 @@ export const GUIDE_UI = {
   /* The page that lists every guide. */
   hubEyebrow: { zh: '選購指南', en: 'Buying guides', ja: '購入ガイド' },
   hubTitle: {
-    zh: 'T-ZERO 選購指南:六個買安全套之前最常問的問題',
-    en: 'T-ZERO buying guides: the six questions people ask before buying',
-    ja: 'T-ZERO 購入ガイド:購入前に多い6つの疑問',
+    zh: '【安全套選購指南】買安全套前必看, 解決你的所有避孕疑惑',
+    en: 'Condom buying guide: what to read before you buy',
+    ja: '【コンドーム購入ガイド】購入前に知っておきたい疑問をすべて解説',
   },
   hubH1: {
     zh: '買安全套之前,先看這六篇',
@@ -109,12 +109,11 @@ export const GUIDE_UI = {
     ja: 'サイズ、素材、テクスチャ、厚さ、はじめての一本、そして潤滑剤が実際に何をしているのか。よく聞かれる六つの疑問に、ひとつずつ答えました。',
   },
   hubDescription: {
-    zh: 'T-ZERO 選購指南:安全套尺碼、材質、紋路、厚度、第一次購買、玻尿酸潤滑效果,六篇指南一次解答,新手選購前必讀。',
-    en: 'T-ZERO buying guides: condom size, material, texture, thickness, buying for the first time and what the lubricant does — six guides, answered properly.',
-    ja: 'T-ZERO 購入ガイド。サイズ、素材、テクスチャ、厚さ、はじめての一本、そして潤滑剤について、六つの疑問に答えました。',
+    zh: '從安全套尺寸闊度量度、乳膠與PU材質比較、超薄厚度選擇到玻尿酸潤滑液的防乾功效，香港 T-ZERO 團隊為您一次解答常見疑問。',
+    en: 'From measuring the width of a condom to comparing latex with PU, choosing how thin to go, and what the hyaluronic lubricant does about dryness — the Hong Kong T-ZERO team answers the questions people ask most, in one place.',
+    ja: 'サイズを測る方法からラテックスとPUの素材の違い、極薄の選び方、ヒアルロテン酸の潤滑効果まで。香港のT-ZEROチームがよくある質問を一気に解説します。',
   },
   hubCount: { zh: '篇指南', en: 'guides', ja: '本のガイド' },
-  hubCta: { zh: '看全部產品', en: 'See all products', ja: 'すべての製品を見る' },
 };
 
 /**
