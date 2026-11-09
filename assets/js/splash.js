@@ -192,7 +192,7 @@ console.log('[splash] script loaded, version v4');
            width="110" height="110"
            decoding="async">
       <h1 class="splash__title">T-ZERO 第九感</h1>
-      <p class="splash__tagline">玻尿酸安全套 ・ 日本品牌</p>
+      <p class="splash__tagline">玻尿酸安全套 · 日本品牌</p>
       <p class="splash__hint">點擊任何位置即可略過</p>
     </div>
     <button class="splash__skip" type="button" aria-label="略過開場動畫">略過 ▸</button>

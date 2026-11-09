@@ -94,7 +94,7 @@ export const GUIDE_UI = {
   /* The page that lists every guide. */
   hubEyebrow: { zh: '選購指南', en: 'Buying guides', ja: '購入ガイド' },
   hubTitle: {
-    zh: '【安全套選購指南】買安全套前必看, 解決你的避孕疑惑',
+    zh: '【安全套選購指南】買安全套前必看，解決你的避孕疑惑',
     en: 'Condom buying guide: what to read before you buy',
     ja: '【コンドーム購入ガイド】購入前に知っておきたい疑問をすべて解説',
   },

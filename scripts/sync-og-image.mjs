@@ -20,7 +20,7 @@ import path from 'node:path';
 import { loadSite, ROOT } from './lib/site.mjs';
 
 const IMAGE = 'assets/images/og-image.png';
-const ALT = 'T-ZERO 第九感 — 日本玻尿酸安全套,即日送貨,保密包裝';
+const ALT = 'T-ZERO 第九感 — 日本玻尿酸安全套品牌，24小時落單。';
 const INDENT = '  ';
 
 /** The og:image line plus the size and type the platforms want. */

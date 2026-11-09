@@ -114,6 +114,9 @@ export function specsHtml(p, lang) {
  * filters work), but the words are there before anything runs.
  */
 export function catalogueHtml(all, lang, productUrl) {
+  /* The colon that follows a label. The Chinese and the Japanese one
+     are full-width; the English one is not. */
+  const colon = lang === 'en' ? ':' : '：';
   return all.map((p) => `
             <a class="card-product" href="${productUrl(p.id)}">
               <div class="card-product__media">
@@ -131,11 +134,11 @@ export function catalogueHtml(all, lang, productUrl) {
               <p class="card-product__sub">${escapeText(field(p, 'subtitle', lang))}</p>
               <div class="card-product__specs">
                 <span class="card-product__spec">
-                  ${escapeText(t(lang, 'product.card.material'))}:
+                  ${escapeText(t(lang, 'product.card.material'))}${colon}
                   <strong>${escapeText(p.material)}</strong>
                 </span>
                 ${p.thickness_mm ? `<span class="card-product__spec">
-                  ${escapeText(t(lang, 'product.card.thickness'))}:
+                  ${escapeText(t(lang, 'product.card.thickness'))}${colon}
                   <strong>${p.thickness_mm} mm</strong>
                 </span>` : ''}
               </div>

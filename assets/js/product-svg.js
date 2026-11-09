@@ -116,6 +116,12 @@ function truncate(s, n) {
 
 function getLangSafe() { try { return realGetLang(); } catch { return 'zh'; } }
 
+/* The colon that follows a label. The Chinese and the Japanese one
+   are full-width; the English one is not. */
+function labelColon(lang) {
+  return lang === 'en' ? ':' : '：';
+}
+
 /**
  * Render the product image (real photo) if the product has one,
  * otherwise fall back to the inline SVG mockup.
@@ -154,11 +160,11 @@ export function productCardHTML(product) {
       <p class="card-product__sub">${pickByLang(product, 'subtitle')}</p>
       <div class="card-product__specs">
         <span class="card-product__spec">
-          <span data-i18n="product.card.material">物料</span>:
+          <span data-i18n="product.card.material">物料</span>${labelColon(lang)}
           <strong>${product.material}</strong>
         </span>
         ${product.thickness_mm ? `<span class="card-product__spec">
-          <span data-i18n="product.card.thickness">厚度</span>:
+          <span data-i18n="product.card.thickness">厚度</span>${labelColon(lang)}
           <strong>${product.thickness_mm} mm</strong>
         </span>` : ''}
       </div>

@@ -25,7 +25,7 @@ export default {
     ja: '素材の比較',
   },
   blurb: {
-    zh: '乳膠、PU、PI 有什麼分別,以及如何配合潤滑液。',
+    zh: '乳膠、PU、PI 有什麼分別，以及如何配合潤滑液。',
     en: 'Latex, PU and PI, and which lubricant to use.',
     ja: 'ラテックス、PU、PIの違いと、潤滑剤の選び方。',
   },
@@ -67,7 +67,7 @@ export default {
         {
           t: 'p',
           text: {
-            zh: '安全套的薄膜主要有三種。天然乳膠佔全球用量九成以上;PU 與 PI 的存在,是為了解決乳膠過敏,以及讓追求更極速傳熱的人多一個選擇。',
+            zh: '安全套的薄膜主要有三種。天然乳膠佔全球用量九成以上；PU 與 PI 的存在，是為了解決乳膠過敏，以及讓追求更極速傳熱的人多一個選擇。',
             en: 'Condom films come in three main kinds. Natural rubber latex accounts for more than nine out of every ten condoms sold. PU and PI exist for two reasons: latex allergy, and giving people who want faster heat transfer a choice.',
             ja: 'コンドームの膜は主に3種類です。天然ゴムラテックスが世界全体の9割以上を占めます。PUとPIが存在するのは、ラテックスアレルギーと、さらに速い熱伝導を好む人のための選択肢からです。',
           },
@@ -86,12 +86,12 @@ export default {
           rows: [
             [
               {
-                zh: '天然乳膠 (natural rubber latex)',
+                zh: '天然乳膠（natural rubber latex）',
                 en: 'Natural rubber latex',
                 ja: '天然ゴムラテックス',
               },
               {
-                zh: '極高,完美包裹不滑落',
+                zh: '極高，完美包裹不滑落',
                 en: 'Very high — wraps perfectly and will not slip',
                 ja: '非常に高い。ぴったりと包み、ずれ落ちない',
               },
@@ -111,32 +111,32 @@ export default {
             ],
             [
               {
-                zh: 'PU 聚氨酯 (polyurethane)',
+                zh: 'PU 聚氨酯（polyurethane）',
                 en: 'PU (polyurethane)',
                 ja: 'PU（ポリウレタン）',
               },
               {
-                zh: '中等,彈性較低,容易有異物感或鬆脫',
+                zh: '中等，彈性較低，容易有異物感或鬆脫',
                 en: 'Moderate, less elastic — it can feel odd or work loose',
                 ja: '普通。伸びがやや足りず、違和感やずれ落ちが出やすい',
               },
               { zh: '極速傳熱', en: 'Very fast heat transfer', ja: '熱が非常に速く伝わる' },
-              { zh: '偏硬,形狀固定', en: 'Firmer, and it keeps its shape', ja: 'やや硬く、形を保つ' },
+              { zh: '偏硬，形狀固定', en: 'Firmer, and it keeps its shape', ja: 'やや硬く、形を保つ' },
               { zh: '沒有', en: 'No', ja: 'なし' },
               { zh: '較貴', en: 'Higher', ja: 'やや高い' },
               {
-                zh: '乳膠過敏,或希望感受較多體溫',
+                zh: '乳膠過敏，或希望感受較多體溫',
                 en: 'Latex allergy, or you want more warmth',
                 ja: 'ラテックスアレルギー、体温を感じたい人',
               },
             ],
             [
               {
-                zh: 'PI 聚異戊烯 (polyisoprene)',
+                zh: 'PI 聚異戊烯（polyisoprene）',
                 en: 'PI (polyisoprene)',
                 ja: 'PI（ポリイソプレン）',
               },
-              { zh: '高,與乳膠十分接近', en: 'High, close to latex', ja: '高い、ラテックスに近い' },
+              { zh: '高，與乳膠十分接近', en: 'High, close to latex', ja: '高い、ラテックスに近い' },
               { zh: '良好', en: 'Good', ja: '良い' },
               {
                 zh: '接近乳膠的柔軟度',
@@ -146,7 +146,7 @@ export default {
               { zh: '沒有', en: 'No', ja: 'なし' },
               { zh: '最貴', en: 'Highest', ja: '最も高い' },
               {
-                zh: '乳膠過敏,但希望保留乳膠的觸感',
+                zh: '乳膠過敏，但希望保留乳膠的觸感',
                 en: 'Latex allergy, but you want the feel of latex',
                 ja: 'アレルギーだが、ラテックスらしい感触の人',
               },
@@ -179,7 +179,7 @@ export default {
             ja: '「ラテックスフリー」は必ず乳テックスなしを意味しない',
           },
           text: {
-            zh: '部分標榜 non-latex 的產品採用羊腸膜製造,羊腸膜同樣含有天然乳膠蛋白。真正的判斷方法是查看成分表:找 "polyurethane" 或 "polyisoprene",並確認沒有 "natural rubber latex"。',
+            zh: '部分標榜 non-latex 的產品採用羊腸膜製造，羊腸膜同樣含有天然乳膠蛋白。真正的判斷方法是查看成分表：找 "polyurethane" 或 "polyisoprene"，並確認沒有 "natural rubber latex"。',
             en: 'Some products labelled non-latex are made from lamb membrane, and lamb membrane carries the same latex proteins. The real test is the ingredient list: look for "polyurethane" or "polyisoprene", and confirm that "natural rubber latex" is absent.',
             ja: '「non-latex」とある商品には、羊腸膜を使ったものがあります。羊腸膜にも天然ラテックス蛋白質が含まれます。確実な判断は成分表示です。「polyurethane」または「polyisoprene」とあり、「natural rubber latex」がないことを確認してください。',
           },
@@ -189,15 +189,15 @@ export default {
     {
       id: 'lube',
       h2: {
-        zh: '潤滑液:安全套最常見的「失效」原因',
+        zh: '潤滑液：安全套最常見的「失效」原因',
         en: 'Lubricants: the most common way a condom fails',
-        ja: '潤滑剤: コンドームが最も壊れやすい理由',
+        ja: '潤滑剤：コンドームが最も壊れやすい理由',
       },
       blocks: [
         {
           t: 'p',
           text: {
-            zh: '安全套破裂的原因,通常不是質地不良,而是潤滑液不合適。乳膠與大部分 PU 遇油會膨脹、變得脆弱,一拉就斷,而且斷裂之時未必能即時察覺。',
+            zh: '安全套破裂的原因，通常不是質地不良，而是潤滑液不合適。乳膠與大部分 PU 遇油會膨脹、變得脆弱，一拉就斷，而且斷裂之時未必能即時察覺。',
             en: 'When a condom tears, the film is usually not at fault; the lubricant is. Latex, and most polyurethane, swell and weaken when they meet oil. The condom then tears under a pull that it would easily have survived when dry.',
             ja: 'コンドームが破れるとき、原因は通常フィルムではなく潤滑剤です。ラテックスと多くのPUは油に触れると膨潤して弱くなり、乾いていれば耐えられる力で破れます。',
           },
@@ -206,21 +206,21 @@ export default {
           t: 'ul',
           items: [
             {
-              zh: '**安全**:水性(water-based)與矽性(silicone-based)潤滑液。',
+              zh: '**安全**：水性（water-based）與矽性（silicone-based）潤滑液。',
               en: '**Safe:** water-based and silicone-based lubricants.',
-              ja: '**安全:** 水ベースとシリコンベースの潤滑剤。',
+              ja: '**安全：** 水ベースとシリコンベースの潤滑剤。',
             },
             {
-              zh: '**不安全**:椰子油、橄欖油、凡士林(petroleum jelly)、BB 油、潤膚露、髮油。',
+              zh: '**不安全**：椰子油、橄欖油、凡士林（petroleum jelly）、BB 油、潤膚露、髮油。',
               en: '**Not safe:** coconut oil, olive oil, petroleum jelly, baby oil, body lotion, hair oil.',
-              ja: '**危険:** ココナッツオイル、オリーブオイル、ベビーオイル、ボディローション、ヘアオイル、そして石油系（ペトロールタムなど）。',
+              ja: '**危険：** ココナッツオイル、オリーブオイル、ベビーオイル、ボディローション、ヘアオイル、そして石油系（ペトロールタムなど）。',
             },
           ],
         },
         {
           t: 'p',
           text: {
-            zh: '大部分安全套本身已有潤滑液,無須再添加。如果確實需要添加,選擇水性或矽性即不會出事。包裝背面通常印有建議使用的種類。',
+            zh: '大部分安全套本身已有潤滑液，無須再添加。如果確實需要添加，選擇水性或矽性即不會出事。包裝背面通常印有建議使用的種類。',
             en: 'Most condoms come with lubricant already on them and need nothing added. If you do add more, a water-based or silicone-based product is the safe choice. The back of the pack usually tells you which one the manufacturer recommends.',
             ja: 'ほとんどのコンドームには最初から潤滑剤が付いています。追加する場合も、水ベースかシリコンベースなら問題ありません。箱の裏に推奨する潤滑剤が書かれています。',
           },
@@ -233,7 +233,7 @@ export default {
             ja: 'PUコンドームの場合',
           },
           text: {
-            zh: '部分矽性潤滑液會令 PU 變得更脆,包裝上會註明建議使用水性。部分品牌會直接印上「請使用水性潤滑液」。查看包裝是最快的方法。',
+            zh: '部分矽性潤滑液會令 PU 變得更脆，包裝上會註明建議使用水性。部分品牌會直接印上「請使用水性潤滑液」。查看包裝是最快的方法。',
             en: 'Some silicone-based lubricants make polyurethane brittle, and the pack says to use a water-based one instead. Some brands print "use with water-based lubricant" outright. Reading the pack is the quickest answer.',
             ja: '一部のシリコンベース潤滑剤はPUを脆くします。箱には水ベースの併用を推奨しているものもあり、箱を読むのが確実です。',
           },
@@ -243,7 +243,7 @@ export default {
     {
       id: 'storage',
       h2: {
-        zh: '如何存放,才不會過早老化',
+        zh: '如何存放，才不會過早老化',
         en: 'How to store it so it does not age early',
         ja: '劣化しない保存方法',
       },
@@ -252,7 +252,7 @@ export default {
           t: 'ul',
           items: [
             {
-              zh: '存放於陰涼乾爽之處,不要長期放置於車內、窗邊,或陽光直接照射的位置。',
+              zh: '存放於陰涼乾爽之處，不要長期放置於車內、窗邊，或陽光直接照射的位置。',
               en: 'Keep it somewhere cool and dry, and not in a car, a window ledge, or anywhere the sun reaches it.',
               ja: '涼しく乾燥した場所に保管し、車内や窓際、日が当たる場所は避けてください。',
             },
@@ -262,12 +262,12 @@ export default {
               ja: '財布に長く入れないでください。体温と摩擦でラテックスは早く劣化します。',
             },
             {
-              zh: '看清有效期,過期後便不應再使用,即使未曾開封亦然。',
+              zh: '看清有效期，過期後便不應再使用，即使未曾開封亦然。',
               en: 'Check the expiry date. After it, do not use the condom, even if the pack is unopened.',
               ja: '有効期限を確認してください。切れていれば、開封していないものでも使いません。',
             },
             {
-              zh: '不宜一次購買太多。安全套不會因存放而更耐,反而愈新鮮愈好。',
+              zh: '不宜一次購買太多。安全套不會因存放而更耐，反而愈新鮮愈好。',
               en: 'Do not buy too many at once. Condoms do not keep better with age; fresher is better.',
               ja: '一度に多く買いすぎないでください。保存しても長くはなりません。新しいものを選んでください。',
             },
@@ -302,19 +302,19 @@ export default {
             {
               zh: '**拋棄塑料感，回歸真觸感：** PU 材質本質上是塑料膜，缺乏彈性，容易在過程中產生異物感與摩擦不適。T-ZERO 堅持採用頂級天然乳膠，具備無可比擬的極高伸展度，能隨著您的身形完美延伸包裹，自然不拘束。',
               en: '**Leaving the plastic feel behind, and coming back to a real touch:** PU is, at heart, a plastic film. It has little stretch, so it can leave you feeling that something is there, and it rubs. T-ZERO uses top-grade natural latex instead, with an elasticity nothing else comes close to — it stretches and wraps to your shape, so it never feels restrictive.',
-              ja: '**プラスチックの感触を捨て、本物の触感へ:** PUは本質的にプラスチックフィルムで、伸びに乏しく、使う間に違和感や摩擦の不快感が生じやすくなります。T-ZEROは最高級の天然ラテックスを用います。その伸びは比類がなく、身体に合わせてぴたりと包み、窮屈さを感じさせません。',
+              ja: '**プラスチックの感触を捨て、本物の触感へ：** PUは本質的にプラスチックフィルムで、伸びに乏しく、使う間に違和感や摩擦の不快感が生じやすくなります。T-ZEROは最高級の天然ラテックスを用います。その伸びは比類がなく、身体に合わせてぴたりと包み、窮屈さを感じさせません。',
             },
             {
               zh: '**玻尿酸配方，徹底告別傳統乳膠痛點：** 許多人討厭乳膠安全套，是因為無法忍受傳統矽油的難聞氣味與洗不掉的黏膩感。T-ZERO 揚棄化學矽油，日本工藝製程中完美淡化橡膠氣味，並注入護膚級玻尿酸水性潤滑液。水潤清爽、長效鎖水不反乾，事後清水一沖即淨，將乳膠的舒適度提升至全新境界。',
               en: '**Hyaluronic acid, and the end of the usual complaints about latex:** People who dislike latex condoms usually cannot stand the smell of traditional silicone oil, or the sticky film it leaves behind that will not wash off. T-ZERO leaves chemical silicone oil out; the Japanese process takes the rubber smell away almost entirely, and the lubricant is water-based with skin-care-grade hyaluronic acid in it. Light and fresh, long-lasting without drying out, and it rinses away with plain water afterwards — which takes the comfort of latex to a new level.',
-              ja: '**ヒアルロン酸配合で、従来のラテックスへの不満も解消:** ラテックスコンドームが嫌だという人の多くは、従来のシリコンオイルの匂いと、洗っても取れないべたつきが原因です。T-ZEROは化学的なシリコンオイルを使わず、日本の製造工程でゴム臭みをほぼ消し、肌にやさしい玻尿酸入りの水性潤滑剤を入れています。清爽で、持続しても乾かず、事後は水でさっと洗い流せます。ラテックスの快適さを一段引き上げます。',
+              ja: '**ヒアルロン酸配合で、従来のラテックスへの不満も解消：** ラテックスコンドームが嫌だという人の多くは、従来のシリコンオイルの匂いと、洗っても取れないべたつきが原因です。T-ZEROは化学的なシリコンオイルを使わず、日本の製造工程でゴム臭みをほぼ消し、肌にやさしい玻尿酸入りの水性潤滑剤を入れています。清爽で、持続しても乾かず、事後は水でさっと洗い流せます。ラテックスの快適さを一段引き上げます。',
             },
           ],
         },
         {
           t: 'p',
           text: {
-            zh: '如想進一步了解保濕成分的作用,可閱讀[玻尿酸究竟是什麼](guide-hyaluronic.html);如想了解不同紋路的分別,可閱讀[紋路種類](guide-texture.html)。',
+            zh: '如想進一步了解保濕成分的作用，可閱讀[玻尿酸究竟是什麼](guide-hyaluronic.html)；如想了解不同紋路的分別，可閱讀[紋路種類](guide-texture.html)。',
             en: 'To know what the hyaluronic acid in the lubricant actually does, read [what hyaluronic acid really is](guide-hyaluronic.html). To see how the finishes differ, read [the texture guide](guide-texture.html).',
             ja: '潤滑剤中のヒアルロン酸がどんな働きをするかは[ヒアルロン酸とは](guide-hyaluronic.html)を、テクスチャーの違いは[テクスチャーの種類](guide-texture.html)をご覧ください。',
           },
@@ -326,36 +326,36 @@ export default {
   faq: [
     {
       q: {
-        zh: '「latex-free」是否一定不會過敏?',
+        zh: '「latex-free」是否一定不會過敏？',
         en: 'Does "latex-free" guarantee no allergy?',
         ja: '「ラテックスフリー」なら必ずアレルギーにならない？',
       },
       a: {
-        zh: '不一定。部分品牌的 non-latex 產品仍然使用天然橡膠(例如羊腸膜),同樣含有乳膠蛋白。查看成分表最為可靠:確認有 "polyurethane" 或 "polyisoprene",而且沒有 "natural rubber latex"。',
+        zh: '不一定。部分品牌的 non-latex 產品仍然使用天然橡膠（例如羊腸膜），同樣含有乳膠蛋白。查看成分表最為可靠：確認有 "polyurethane" 或 "polyisoprene"，而且沒有 "natural rubber latex"。',
         en: 'Not necessarily. Some non-latex products are still made from natural rubber, such as lamb membrane, and they carry the same proteins. The ingredient list is the reliable answer: look for "polyurethane" or "polyisoprene", and confirm that "natural rubber latex" is absent.',
         ja: '必ずしもそうではありません。「non-latex」とある商品でも天然ゴム（羊腸膜など）由来のものはあり、同じ蛋白質を含みます。成分表示が確実です。「polyurethane」か「polyisoprene」があり、「natural rubber latex」がないことを確認してください。',
       },
     },
     {
       q: {
-        zh: '油性潤滑液是否一定不安全?',
+        zh: '油性潤滑液是否一定不安全？',
         en: 'Is oil-based lubricant always unsafe?',
         ja: 'オイルベース潤滑剤は必ず危険？',
       },
       a: {
-        zh: '對乳膠與大部分 PU 安全套而言,是。油會令乳膠膨脹、容易撕裂。若你慣常使用椰子油或凡士林,改用水性或矽性即可解決。',
+        zh: '對乳膠與大部分 PU 安全套而言，是。油會令乳膠膨脹、容易撕裂。若你慣常使用椰子油或凡士林，改用水性或矽性即可解決。',
         en: 'With latex and with most PU condoms, yes. Oil makes latex swell and tear easily. If you normally use coconut oil or petroleum jelly, switching to a water-based or silicone-based product solves it.',
         ja: 'ラテックスと多くのPUではそうです。油はラテックスを膨潤させ、破れやすくします。ココナッツオイルやペトロールタムを使っているなら、水ベースやシリコンベースに替えるだけで解決します。',
       },
     },
     {
       q: {
-        zh: '我對乳膠敏感,應該怎麼做?',
+        zh: '我對乳膠敏感，應該怎麼做？',
         en: 'What should I do if I react to latex?',
         ja: 'ラテックスに反応する場合、どうすれば？',
       },
       a: {
-        zh: '紅疹、痕癢、腫脹多數在接觸後短時間內出現,改用 PU 或 PI 通常已經足夠。但如果有氣促,或面部、喉嚨腫脹,便不要只更換材質,應立即求醫。',
+        zh: '紅疹、痕癢、腫脹多數在接觸後短時間內出現，改用 PU 或 PI 通常已經足夠。但如果有氣促，或面部、喉嚨腫脹，便不要只更換材質，應立即求醫。',
         en: 'Redness, itching and swelling usually appear shortly after contact, and switching to PU or PI is usually enough. But if you wheeze, or your face or throat swells, that is not a material problem to solve on your own — get medical help straight away.',
         ja: '赤み、瘙痒、腫れは通常すぐ現れ、PUやPIに切り替えれば解決します。ただし息苦しさや顔・喉の腫れがある場合は、素材だけの問題ではありません。すぐに医療機関へ相談してください。',
       },

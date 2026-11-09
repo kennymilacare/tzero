@@ -21,7 +21,7 @@ export const guides = [
       ja: "サイズ表",
     },
     desc: {
-      zh: "闊度對照表,以及量度自己的方法。",
+      zh: "闊度對照表，以及量度自己的方法。",
       en: "The width table, and how to measure yourself.",
       ja: "幅の表と、測り方の説明。",
     },
@@ -36,7 +36,7 @@ export const guides = [
       ja: "素材の比較",
     },
     desc: {
-      zh: "乳膠、PU、PI 有什麼分別,以及如何配合潤滑液。",
+      zh: "乳膠、PU、PI 有什麼分別，以及如何配合潤滑液。",
       en: "Latex, PU and PI, and which lubricant to use.",
       ja: "ラテックス、PU、PIの違いと、潤滑剤の選び方。",
     },
@@ -81,7 +81,7 @@ export const guides = [
       ja: "初めての選び方",
     },
     desc: {
-      zh: "第一次購買安全套,應該選擇哪一款、買多少隻。",
+      zh: "第一次購買安全套，應該選擇哪一款、買多少隻。",
       en: "Which one to pick the first time, and how many to buy.",
       ja: "はじめて買うときの選び方と、入数の目安。",
     },
@@ -96,7 +96,7 @@ export const guides = [
       ja: "玻尿酸とは",
     },
     desc: {
-      zh: "玻尿酸是什麼,以及它在安全套中的作用。",
+      zh: "玻尿酸是什麼，以及它在安全套中的作用。",
       en: "What it is, and what it does inside a condom.",
       ja: "何で、何をしているのか。",
     },

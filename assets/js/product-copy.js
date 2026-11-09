@@ -75,9 +75,9 @@ export function productDescription(product, lang = 'zh') {
 /* The words people search for. Search engines ignore this tag, but
    it costs nothing to have it say the right thing. */
 const KEYWORDS = {
-  zh: { brand: '第九感', common: ['玻尿酸安全套', '安全套', 'condom', 'hyaluronic', '香港', '24小時落單', '保密包裝'] },
-  en: { brand: 'NINTH SENSE', common: ['hyaluronic condom', 'condom', 'hyaluronic', 'Hong Kong', '24-hour ordering', 'discreet packaging'] },
-  ja: { brand: '第九感', common: ['ハイアロンコンドーム', 'コンドーム', 'hyaluronic', '香港', '24時間受付', '簡易包装'] },
+  zh: { brand: '第九感', common: ['玻尿酸安全套', '安全套', 'condom', 'hyaluronic', '香港', '24小時落單'] },
+  en: { brand: 'NINTH SENSE', common: ['hyaluronic condom', 'condom', 'hyaluronic', 'Hong Kong', '24-hour ordering'] },
+  ja: { brand: '第九感', common: ['ハイアロンコンドーム', 'コンドーム', 'hyaluronic', '香港', '24時間受付'] },
 };
 
 /** The keywords of a product page. */

@@ -2,7 +2,7 @@
   "_note": "The legal page, in three languages. The Chinese page is the original; the English and Japanese ones are written from it. The generator puts the right language's words into terms.html, en/terms.html and ja/terms.html — see scripts/lib/terms.mjs.",
   "zh": {
     "h1": "細則與條款",
-    "lead": "T-ZERO 第九感 重視每一位顧客的私隱與權益。本頁載列我們處理個人資料的政策,以及使用本網站與購買產品的條款。",
+    "lead": "T-ZERO 第九感 重視每一位顧客的私隱與權益。本頁載列我們處理個人資料的政策，以及使用本網站與購買產品的條款。",
     "meta": [
       {
         "label": "生效日期",
@@ -10,7 +10,7 @@
       },
       {
         "label": "負責方",
-        "value": "Milan Pacific Asia Limited(港澳地區總代理)"
+        "value": "Milan Pacific Asia Limited（港澳地區總代理）"
       },
       {
         "label": "聯絡",
@@ -24,7 +24,7 @@
       },
       {
         "tag": "p",
-        "html": "我們一貫的方針是保障顧客及瀏覽本網站人士所提交的個人資料。請詳細閱讀以下政策,以便明確了解我們如何處理閣下的個人資料。我們保留以在網站上公佈修正本的形式不時更改此政策的權利。"
+        "html": "我們一貫的方針是保障顧客及瀏覽本網站人士所提交的個人資料。請詳細閱讀以下政策，以便明確了解我們如何處理閣下的個人資料。我們保留以在網站上公佈修正本的形式不時更改此政策的權利。"
       },
       {
         "tag": "h3",
@@ -32,7 +32,7 @@
       },
       {
         "tag": "p",
-        "html": "為保障顧客提交的資料,我們及公司職員會嚴格遵照《中華人民共和國香港特別行政區個人資料(私隱)條例》(香港法例第 486 章)所訂的守則和規定,務求盡力達到保護個人資料的認可標準。"
+        "html": "為保障顧客提交的資料，我們及公司職員會嚴格遵照《中華人民共和國香港特別行政區個人資料（私隱）條例》（香港法例第 486 章）所訂的守則和規定，務求盡力達到保護個人資料的認可標準。"
       },
       {
         "tag": "h3",
@@ -40,15 +40,15 @@
       },
       {
         "tag": "p",
-        "html": "當閣下在本網站訂購產品或聯絡我們時,我們會收集閣下一些資料,包括<strong>姓名、聯絡電話、電郵地址、送貨地址及訂單備註</strong>,以便處理訂單及提供更高效率的售後服務。此外,我們會保存閣下對產品的喜好和購買紀錄,使我們能夠更了解閣下的需要,提升閣下的購物體驗,並能向閣下提供最新的產品、服務及推廣活動消息。"
+        "html": "當閣下在本網站訂購產品或聯絡我們時，我們會收集閣下一些資料，包括<strong>姓名、聯絡電話、電郵地址、送貨地址及訂單備註</strong>，以便處理訂單及提供更高效率的售後服務。此外，我們會保存閣下對產品的喜好和購買紀錄，使我們能夠更了解閣下的需要，提升閣下的購物體驗，並能向閣下提供最新的產品、服務及推廣活動消息。"
       },
       {
         "tag": "p",
-        "html": "我們或會不時向閣下收集匿名統計及瀏覽數據,並監測網站的使用及流量模式,目的為改善網站的設計、產品及網上的服務。在這方面,我們或需以總量統計為基準及不揭露閣下身份的情況下,與廣告客戶或推廣合夥人共用閣下的資料作為市場推廣用途。<strong>未經閣下許可,我們絕不會公開所提供的個人資料。閣下於任何時間均有權不同意個人資料被披露。</strong>"
+        "html": "我們或會不時向閣下收集匿名統計及瀏覽數據，並監測網站的使用及流量模式，目的為改善網站的設計、產品及網上的服務。在這方面，我們或需以總量統計為基準及不揭露閣下身份的情況下，與廣告客戶或推廣合夥人共用閣下的資料作為市場推廣用途。<strong>未經閣下許可，我們絕不會公開所提供的個人資料。閣下於任何時間均有權不同意個人資料被披露。</strong>"
       },
       {
         "tag": "p",
-        "html": "如閣下不願意個人資料被收集,請不要向我們提交。如閣下已提供相關資訊後希望從記錄中刪除,請電郵至 <a href=\"mailto:info@tzero-jp.com\">info@tzero-jp.com</a>,我們會於 7 個工作天內為閣下處理。"
+        "html": "如閣下不願意個人資料被收集，請不要向我們提交。如閣下已提供相關資訊後希望從記錄中刪除，請電郵至 <a href=\"mailto:info@tzero-jp.com\">info@tzero-jp.com</a>，我們會於 7 個工作天內為閣下處理。"
       },
       {
         "tag": "h3",
@@ -56,7 +56,7 @@
       },
       {
         "tag": "p",
-        "html": "假如閣下決定於公開渠道(如社交媒體、評論區)披露個人資料,請小心謹慎。任何以自願形式被公開的資料將成為公眾資訊,閣下可能會收到未經由本網站其他訪客傳送的訊息。至於密碼及賬戶資料的保密乃閣下的責任;若閣下自願披露個人資料及未能保障密碼和賬戶資料,我們概不負責任何損失。"
+        "html": "假如閣下決定於公開渠道（如社交媒體、評論區）披露個人資料，請小心謹慎。任何以自願形式被公開的資料將成為公眾資訊，閣下可能會收到未經由本網站其他訪客傳送的訊息。至於密碼及賬戶資料的保密乃閣下的責任；若閣下自願披露個人資料及未能保障密碼和賬戶資料，我們概不負責任何損失。"
       },
       {
         "tag": "h3",
@@ -64,13 +64,13 @@
       },
       {
         "tag": "p",
-        "html": "我們或不時透過電郵或 WhatsApp 通知閣下關於最新產品、服務、推廣活動等,或其他我們認為合適的資訊。閣下可於任何時間內要求停止接收此類訊息,方法包括:"
+        "html": "我們或不時透過電郵或 WhatsApp 通知閣下關於最新產品、服務、推廣活動等，或其他我們認為合適的資訊。閣下可於任何時間內要求停止接收此類訊息，方法包括："
       },
       {
         "tag": "ul",
         "items": [
-          "點選任何推廣電郵底部的「取消訂閱」連結;",
-          "回覆訊息並輸入「STOP」或「取消」;",
+          "點選任何推廣電郵底部的「取消訂閱」連結；",
+          "回覆訊息並輸入「STOP」或「取消」；",
           "電郵至 <a href=\"mailto:info@tzero-jp.com\">info@tzero-jp.com</a> 提出要求。"
         ]
       },
@@ -80,14 +80,14 @@
       },
       {
         "tag": "p",
-        "html": "如閣下對我們的私隱權政策有任何疑問,請以下列方式聯絡我們:"
+        "html": "如閣下對我們的私隱權政策有任何疑問，請以下列方式聯絡我們："
       },
       {
         "tag": "ul",
         "items": [
-          "電郵:<a href=\"mailto:info@tzero-jp.com\">info@tzero-jp.com</a>",
-          "WhatsApp / 電話:+852 6897 1473",
-          "聯絡表:<a href=\"contact.html\">www.tzero-jp.com/contact</a>"
+          "電郵：<a href=\"mailto:info@tzero-jp.com\">info@tzero-jp.com</a>",
+          "WhatsApp / 電話：+852 6897 1473",
+          "聯絡表：<a href=\"contact.html\">www.tzero-jp.com/contact</a>"
         ]
       },
       {
@@ -100,7 +100,7 @@
       },
       {
         "tag": "p",
-        "html": "T-ZERO 第九感 透過本網站(<a href=\"index.html\">www.tzero-jp.com</a>)及授權零售伙伴(包括 HKTVmall)銷售玻尿酸安全套及相關親密護理產品。所有產品均適合 18 歲或以上人士使用。閣下於本網站下單,即代表聲明閣下已年滿 18 歲。"
+        "html": "T-ZERO 第九感 透過本網站（<a href=\"index.html\">www.tzero-jp.com</a>）及授權零售伙伴（包括 HKTVmall）銷售玻尿酸安全套及相關親密護理產品。所有產品均適合 18 歲或以上人士使用。閣下於本網站下單，即代表聲明閣下已年滿 18 歲。"
       },
       {
         "tag": "h3",
@@ -109,9 +109,9 @@
       {
         "tag": "ul",
         "items": [
-          "所有產品售完即止,並以最終確認付款時的庫存為準。",
-          "價格以港幣 (HK$) 結算,並已包含相關稅項。",
-          "付款方式因銷售平台而異,請於落單時向相關平台查詢。",
+          "所有產品售完即止，並以最終確認付款時的庫存為準。",
+          "價格以港幣（HK$）結算，並已包含相關稅項。",
+          "付款方式因銷售平台而異，請於落單時向相關平台查詢。",
           "閣下須確保所提供的付款資料真實、正確及屬於閣下本人。"
         ]
       },
@@ -124,8 +124,7 @@
         "items": [
           "香港本地訂單一般於 <strong>1–2 個工作天</strong>內送達。",
           "離島及偏遠地區或需額外 1–2 個工作天。",
-          "所有包裹以全啞面黑色紙盒包裝,<strong>包裝上絕無任何品牌或產品名稱字樣</strong>,以保障閣下的私隱。",
-          "運費將於結帳頁面顯示,並按推廣活動作相應調整。"
+          "運費將於結帳頁面顯示，並按推廣活動作相應調整。"
         ]
       },
       {
@@ -134,7 +133,7 @@
       },
       {
         "tag": "p",
-        "html": "基於衛生理由,<strong>所有產品一經拆封恕不退換</strong>。如收貨時發現包裝破損、漏氣或與訂單不符,請於收貨後 <strong>7 天內</strong>電郵至 <a href=\"mailto:info@tzero-jp.com\">info@tzero-jp.com</a> 並附上訂單編號及相片,客服會於 24 小時內回覆及安排補發或退款。"
+        "html": "基於衛生理由，<strong>所有產品一經拆封恕不退換</strong>。如收貨時發現包裝破損、漏氣或與訂單不符，請於收貨後 <strong>7 天內</strong>電郵至 <a href=\"mailto:info@tzero-jp.com\">info@tzero-jp.com</a> 並附上訂單編號及相片，客服會於 24 小時內回覆及安排補發或退款。"
       },
       {
         "tag": "h3",
@@ -142,7 +141,7 @@
       },
       {
         "tag": "p",
-        "html": "本網站所有內容(包括但不限於文字、圖片、商標、設計、產品圖像及程式碼)均屬 T-ZERO 第九感 或其授權方所有,未經事先書面許可,不得轉載、複製、修改或作任何商業用途。"
+        "html": "本網站所有內容（包括但不限於文字、圖片、商標、設計、產品圖像及程式碼）均屬 T-ZERO 第九感 或其授權方所有，未經事先書面許可，不得轉載、複製、修改或作任何商業用途。"
       },
       {
         "tag": "h3",
@@ -150,7 +149,7 @@
       },
       {
         "tag": "p",
-        "html": "T-ZERO 第九感 致力確保本網站資訊的準確性與可用性,但不就因網站暫停、資料傳輸錯誤或不可抗力因素所造成的任何損失承擔責任。本網站所載之產品功效描述僅供參考,實際體驗因人而異。"
+        "html": "T-ZERO 第九感 致力確保本網站資訊的準確性與可用性，但不就因網站暫停、資料傳輸錯誤或不可抗力因素所造成的任何損失承擔責任。本網站所載之產品功效描述僅供參考，實際體驗因人而異。"
       },
       {
         "tag": "h3",
@@ -158,7 +157,7 @@
       },
       {
         "tag": "p",
-        "html": "T-ZERO 第九感 保留不時修改本細則與條款的權利,修改後的版本將於本頁面發佈,並自發佈日起生效。如閣下於修改後繼續使用本網站或購買我們的產品,即代表接受修訂後的條款。"
+        "html": "T-ZERO 第九感 保留不時修改本細則與條款的權利，修改後的版本將於本頁面發佈，並自發佈日起生效。如閣下於修改後繼續使用本網站或購買我們的產品，即代表接受修訂後的條款。"
       },
       {
         "tag": "h3",
@@ -166,7 +165,7 @@
       },
       {
         "tag": "p",
-        "html": "本條款及細則根據中華人民共和國香港特別行政區法律詮釋及執行。如有任何爭議,雙方同意以香港法院為唯一管轄法院。"
+        "html": "本條款及細則根據中華人民共和國香港特別行政區法律詮釋及執行。如有任何爭議，雙方同意以香港法院為唯一管轄法院。"
       },
       {
         "tag": "h3",
@@ -174,20 +173,20 @@
       },
       {
         "tag": "p",
-        "html": "如對本細則與條款或任何訂單存有疑問,歡迎隨時聯絡我們:"
+        "html": "如對本細則與條款或任何訂單存有疑問，歡迎隨時聯絡我們："
       },
       {
         "tag": "ul",
         "items": [
-          "電郵:<a href=\"mailto:info@tzero-jp.com\">info@tzero-jp.com</a>",
-          "WhatsApp / 電話:+852 6897 1473",
-          "聯絡表:<a href=\"contact.html\">www.tzero-jp.com/contact</a>"
+          "電郵：<a href=\"mailto:info@tzero-jp.com\">info@tzero-jp.com</a>",
+          "WhatsApp / 電話：+852 6897 1473",
+          "聯絡表：<a href=\"contact.html\">www.tzero-jp.com/contact</a>"
         ]
       },
       {
         "tag": "p",
         "class": "muted",
-        "html": "© 2026 T-ZERO 第九感. 版權所有。 ・ 本頁面同時為私隱政策與使用條款之綜合版本。"
+        "html": "© 2026 T-ZERO 第九感。版權所有。 · 本頁面同時為私隱政策與使用條款之綜合版本。"
       }
     ]
   },
@@ -315,7 +314,6 @@
         "items": [
           "Local Hong Kong orders are usually delivered within <strong>1–2 working days</strong>.",
           "Outlying islands and remote areas may take an extra 1–2 working days.",
-          "Every parcel is packed in a plain matt black box with <strong>no brand or product name printed on it whatsoever</strong>, so that your privacy is protected.",
           "Delivery charges are shown at checkout and may be adjusted for promotions."
         ]
       },
@@ -378,7 +376,7 @@
       {
         "tag": "p",
         "class": "muted",
-        "html": "© 2026 T-ZERO NINTH SENSE. All rights reserved. ・ This page is a combined version of our privacy policy and our terms of use."
+        "html": "© 2026 T-ZERO NINTH SENSE. All rights reserved. · This page is a combined version of our privacy policy and our terms of use."
       }
     ]
   },
@@ -467,9 +465,9 @@
       {
         "tag": "ul",
         "items": [
-          "メール: <a href=\"mailto:info@tzero-jp.com\">info@tzero-jp.com</a>",
-          "WhatsApp / 電話: +852 6897 1473",
-          "お問い合わせフォーム: <a href=\"contact.html\">www.tzero-jp.com/contact</a>"
+          "メール：<a href=\"mailto:info@tzero-jp.com\">info@tzero-jp.com</a>",
+          "WhatsApp / 電話：+852 6897 1473",
+          "お問い合わせフォーム：<a href=\"contact.html\">www.tzero-jp.com/contact</a>"
         ]
       },
       {
@@ -506,7 +504,6 @@
         "items": [
           "香港でのご注文は通常<strong>1〜2営業日</strong>でお届けします。",
           "離島および遠隔地域には追加で1〜2営業日いただく場合があります。",
-          "すべてのお荷物は無地の黒い箱で梱包し、<strong>箱にブランド名や商品名は一切記載しておりません</strong>。お客様のプライバシーを守るためです。",
           "配送料はレジ画面に表示され、キャンペーンに応じて変更となる場合があります。"
         ]
       },
@@ -561,15 +558,15 @@
       {
         "tag": "ul",
         "items": [
-          "メール: <a href=\"mailto:info@tzero-jp.com\">info@tzero-jp.com</a>",
-          "WhatsApp / 電話: +852 6897 1473",
-          "お問い合わせフォーム: <a href=\"contact.html\">www.tzero-jp.com/contact</a>"
+          "メール：<a href=\"mailto:info@tzero-jp.com\">info@tzero-jp.com</a>",
+          "WhatsApp / 電話：+852 6897 1473",
+          "お問い合わせフォーム：<a href=\"contact.html\">www.tzero-jp.com/contact</a>"
         ]
       },
       {
         "tag": "p",
         "class": "muted",
-        "html": "© 2026 T-ZERO 第九感. All rights reserved. ・ 本ページはプライバシーポリシーと利用規約をまとめたものです。"
+        "html": "© 2026 T-ZERO 第九感。All rights reserved. · 本ページはプライバシーポリシーと利用規約をまとめたものです。"
       }
     ]
   }
