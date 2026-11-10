@@ -81,9 +81,9 @@ export const guides = [
       ja: "初めての選び方",
     },
     desc: {
-      zh: "第一次購買安全套，應該選擇哪一款、買多少隻。",
-      en: "Which one to pick the first time, and how many to buy.",
-      ja: "はじめて買うときの選び方と、入数の目安。",
+      zh: "第一次購買安全套，應該選擇哪一款。",
+      en: "Which one to pick the first time.",
+      ja: "はじめて買うときの選び方。",
     },
   },
   {
