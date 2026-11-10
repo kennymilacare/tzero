@@ -145,7 +145,15 @@ function faqNode(html) {
 
 /* ---------- the shape of a guide ---------- */
 
-test('every guide has a heading, some writing, a table and three questions', () => {
+/* Every guide has a table, because a table is the quickest way into
+   a guide. The one exception is the first-time guide: the owner took
+   out the table of pack sizes — three, six, twelve — and what is left
+   is a set of decisions rather than a comparison. The exception is
+   named here so that it stays deliberate, and so that a guide losing
+   its table by accident still fails. */
+const NO_TABLE = new Set(['first-time']);
+
+test('every guide has a heading, some writing and three questions', () => {
   for (const guide of GUIDES) {
     assert.ok(guide.h1 && guide.h1.zh, `${guide.slug}: no heading`);
     assert.ok(guide.lead && guide.lead.zh, `${guide.slug}: no lead paragraph`);
@@ -154,7 +162,9 @@ test('every guide has a heading, some writing, a table and three questions', () 
 
     const blocks = guide.sections.flatMap((s) => s.blocks);
     assert.ok(blocks.some((b) => b.t === 'p'), `${guide.slug}: no writing`);
-    assert.ok(blocks.some((b) => b.t === 'table'), `${guide.slug}: no table`);
+    if (!NO_TABLE.has(guide.slug)) {
+      assert.ok(blocks.some((b) => b.t === 'table'), `${guide.slug}: no table`);
+    }
 
     const ids = guide.sections.map((s) => s.id);
     assert.equal(new Set(ids).size, ids.length, `${guide.slug}: two sections share an id`);

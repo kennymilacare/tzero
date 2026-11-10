@@ -3,8 +3,7 @@
 
    The first time is the one time nobody wants to make a
    decision. This is the short version: what actually matters,
-   how many to buy, what to look at on the shelf, and what to
-   do the first time you open one.
+   and what to do the first time you open one.
 
    The Chinese is written Chinese — the way a shop would put
    it on a shelf, not the way it is spoken.
@@ -26,9 +25,9 @@ export default {
     ja: '初めての選び方',
   },
   blurb: {
-    zh: '第一次購買安全套，應該選擇哪一款、買多少隻。',
-    en: 'Which one to pick the first time, and how many to buy.',
-    ja: 'はじめて買うときの選び方と、入数の目安。',
+    zh: '第一次購買安全套，應該選擇哪一款。',
+    en: 'Which one to pick the first time.',
+    ja: 'はじめて買うときの選び方。',
   },
   eyebrow: {
     zh: '選購指南 · 第一次',
@@ -37,18 +36,18 @@ export default {
   },
   h1: {
     zh: '第一次買安全套：不必研究太多，看這幾項便可以',
-    en: 'Buying a condom for the first time: four things and nothing else',
-    ja: 'はじめてから押さえるべきは4つのことだけ。',
+    en: 'Buying a condom for the first time: what actually matters',
+    ja: 'はじめて買うときの要点だけ。',
   },
   title: {
-    zh: '第一次買安全套的選擇 · 新手選購指南 · 尺碼與包裝 · T-ZERO 第九感',
-    en: 'First Time Buying Condoms · A Beginner\'s Guide · Size, Packaging, Fit · T-ZERO NINTH SENSE',
-    ja: 'はじめて選ぶときの注意点 · 初心者ガイド · サイズと包装 · T-ZERO 第九感',
+    zh: '第一次買安全套的選擇 · 新手選購指南 · 尺碼與材質 · T-ZERO 第九感',
+    en: 'First Time Buying Condoms · A Beginner\'s Guide · Size, Material, Fit · T-ZERO NINTH SENSE',
+    ja: 'はじめて選ぶときの注意点 · 初心者ガイド · サイズと素材 · T-ZERO 第九感',
   },
   description: {
-    zh: '第一次購買安全套應該怎樣選？新手只需要弄清楚尺碼、材質與包裝三項。本文說明應選擇哪一款、購買多少隻、購買前要查看什麼，以及第一次如何佩戴。',
-    en: 'First time buying condoms? Here is the short version: which type to pick, how many to buy, what to check on the shelf, and how to put one on the first time.',
-    ja: 'はじめて選ぶときの基準は3つ。最初に選ぶ種類、入数の目安、店頭で確認する項目、そしてはじめての着け方まで、順番に整理します。',
+    zh: '第一次購買安全套應該怎樣選？新手只需要弄清楚尺碼、材質與感覺三項。本文說明應選擇哪一款，以及第一次如何佩戴。',
+    en: 'First time buying condoms? Here is the short version: which type to pick, and how to put one on the first time.',
+    ja: 'はじめて選ぶときの基準は3つ。最初に選ぶ種類、そしてはじめての着け方まで、順番に整理します。',
   },
   lead: {
     zh: '第一次購買，大部分人會研究得太久，然後愈看愈亂。其實真正要決定的只有三件事：尺碼是否合適、能否接受材質、想要什麼感覺。弄清楚這三項，第一次便不會買錯。',
@@ -101,116 +100,6 @@ export default {
             en: 'Texture, warmth, colour, scent — all of that can wait. The job of the first box is only this: get the size right, make sure the material is fine, and check that it is comfortable to wear. Once those three are settled, any texture you add from here is a bonus and carries no risk.',
             ja: 'テクスチャー、温感、色、香り — それらは後で構いません。最初の1箱の仕事は3つだけ。サイズを合わせ、素材に問題がないことを確かめ、装着が快適かを確認する。ここまでわかれば、以降テクスチャーを足すのは割増しでリスクなし。',
           },
-        },
-      ],
-    },
-    {
-      id: 'howmany',
-      h2: {
-        zh: '買多少：視乎把握程度',
-        en: 'How many to buy: it depends how sure you are',
-        ja: '何個入りにするか：自信の度合いで',
-      },
-      blocks: [
-        {
-          t: 'p',
-          text: {
-            zh: '第一次購買最常見的錯誤，不是買錯款式，而是買得太多——買了十幾隻，三個月也用不完，結果實際用到的那幾隻已經過了有效期。',
-            en: 'The most common mistake on the first time is not the wrong type. It is buying too many: a dozen condoms that take three months to use up means the ones you actually reach for have already passed their date.',
-            ja: 'はじめてもっとも起こしやすい失敗は、種類を間違えたことではなく量を買いすぎたこと。10個入りを3か月かけて使うなら、実際に使う分もすでに期限切れになります。',
-          },
-        },
-        {
-          t: 'table',
-          head: [
-            { zh: '包裝', en: 'Pack', ja: 'パック' },
-            { zh: '適合哪些情況', en: 'Good for', ja: '向いている場面' },
-            { zh: '建議', en: 'Advice', ja: 'おすすめ' },
-          ],
-          rows: [
-            [
-              { zh: '3 隻裝', en: 'A pack of 3', ja: '3個入り' },
-              {
-                zh: '第一次購買，尚未肯定尺碼是否合適',
-                en: 'Your first buy, and you are not sure of your size',
-                ja: 'はじめてで、サイズがまだはっきりしない',
-              },
-              {
-                zh: '最穩妥，不怕過期',
-                en: 'The safe choice — nothing goes to waste',
-                ja: 'もっとも無駄のない選択',
-              },
-            ],
-            [
-              { zh: '6 隻裝', en: 'A pack of 6', ja: '6個入り' },
-              {
-                zh: '已經量度過，大概知道自己的尺碼',
-                en: 'You have measured, so you know roughly what fits',
-                ja: '測ったことがあり、サイズの見当は立っている',
-              },
-              {
-                zh: '最平衡的選擇',
-                en: 'The balanced choice',
-                ja: 'もっともバランスの取れた選択',
-              },
-            ],
-            [
-              { zh: '12 隻裝或以上', en: 'A pack of 12 or more', ja: '12個以上' },
-              {
-                zh: '定期使用，或已經知道自己需要什麼',
-                en: 'You use them regularly, or you already know what you want',
-                ja: 'よく使うか、もう何がいいかが分かっている',
-              },
-              {
-                zh: '最划算，但記得查看有效期',
-                en: 'The best value — just check the date',
-                ja: 'もっとも割安。ただし有効期限を確認',
-              },
-            ],
-          ],
-        },
-        {
-          t: 'note',
-          title: {
-            zh: '過了有效期的安全套，即使未曾開封也不應再使用',
-            en: 'After the expiry date, do not use it — even unopened',
-            ja: '有効期限切れは、開封前でも使わない',
-          },
-          text: {
-            zh: '有效期是包裝上印有的日期，並非「由生產日期起計五年」那樣計算。乳膠會隨時間硬化、變脆，過期之後即使外觀完好，爆破壓力也已不達標。因此不要因為「不想浪費」而留下過期的安全套。',
-            en: 'The expiry date is the date printed on the pack, not a five-year count from somewhere else. Latex hardens and becomes brittle with time, so a condom past its date can look perfect and still fail the burst pressure test. Do not keep a condom past its date just to avoid waste.',
-            ja: '有効期限は箱に印刷された日付そのものです。ラテックスは時間とともに硬化して劣化します。期限切れでも外観は問題なくても、破裂圧の基準を満たさなくなっています。「捨てるのが惜しい」という理由で、期限切れを残すのは避けてください。',
-          },
-        },
-      ],
-    },
-    {
-      id: 'shelf',
-      h2: {
-        zh: '在架上如何選擇：三個細節',
-        en: 'At the shelf: three small things',
-        ja: '店頭で選ぶとき：3つの細部',
-      },
-      blocks: [
-        {
-          t: 'ul',
-          items: [
-            {
-              zh: '**有沒有 ISO 4071 標示。** 這是國際安全套標準，包括爆破壓力、拉力伸長，以及每一片的電子測漏。沒有標示的產品，無論如何都不應該購買。',
-              en: '**Look for the ISO 4071 mark.** That is the international condom standard, covering burst pressure, tensile strength and an electronic hole test on every single condom. If it is not marked, it should not be on the shelf in the first place.',
-              ja: '**ISO 4071の表示があるか。**国際的なコンドームの規格で、破裂圧、引張強度、1枚ごとの電気的検査が含まれます。表示のないものは店頭にあるべきではありません。',
-            },
-            {
-              zh: '**有效期還有多久。** 不是看包裝是否美觀，而是看最後一日。',
-              en: '**How long is left on the expiry date.** Not whether the pack looks good — the last date on it.',
-              ja: '**有効期限がどれくらい残っているか。**パッケージの美しさではなく、印刷された最終日を見ます。',
-            },
-            {
-              zh: '**包裝有沒有破損或變形。** 鋁箔包裝如果皺成一團，某些位置凹陷，可能已經漏氣或受潮，不應購買。',
-              en: '**Whether the pack is damaged or misshapen.** A foil wrapper that is crumpled or dented may have lost its seal, or taken on moisture. Leave it.',
-              ja: '**パッケージに傷や変形がないか。**アルミ包装が皺しているか凹んでいる場合、封が切れているか湿気を含んでいる可能性があります。',
-            },
-          ],
         },
       ],
     },
