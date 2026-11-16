@@ -127,8 +127,12 @@ def main():
     apply = "--apply" in sys.argv
 
     # --apply takes the exact files to create. Nothing outside that
-    # list is touched, and a file that already exists is left alone:
-    # this only ever adds a copy, it never replaces one.
+    # list is touched. A copy that is already there is left alone —
+    # unless the photograph it was made from is newer, which means
+    # the photograph was fetched again and the copy is out of date.
+    # A reel's picture was once taken from another post's, and the
+    # old copy stayed on the page until the number that tells a
+    # browser the picture changed was bumped.
     wanted = [w for w in sys.argv[1:] if not w.startswith("--")]
     allowed = {os.path.normcase(os.path.abspath(w)) for w in wanted} if wanted else None
 
@@ -201,7 +205,7 @@ def main():
                     if allowed is not None:
                         if os.path.normcase(os.path.abspath(target)) not in allowed:
                             continue
-                    if os.path.exists(target):
+                    if os.path.exists(target) and os.path.getmtime(target) >= os.path.getmtime(path):
                         print("  skipped %s (already there)" % rel(target))
                         continue
                     _size, data = writer(im, width)

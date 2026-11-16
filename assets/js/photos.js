@@ -29,7 +29,7 @@
    the repository, so the site can be published without a browser
    to draw them.
 
-   Run: import { photoPicture } from './photos.js?v=1';
+   Run: import { photoPicture } from './photos.js?v=2';
    =========================================================== */
 
 /** The widths every photograph is made in. */
@@ -39,9 +39,12 @@ export const PHOTO_WIDTHS = [320, 640, 1200];
  * The number in the file name of the copies.
  *
  * When a photograph is re-encoded the name stays the same, so the
- * number is what tells a browser the picture has changed.
+ * number is what tells a browser the picture has changed. Bump it
+ * whenever a photograph is replaced — a post whose picture was
+ * fetched again keeps its name, and the copy on the page would
+ * otherwise stay the old one.
  */
-export const PHOTO_VERSION = 1;
+export const PHOTO_VERSION = 2;
 
 /**
  * Where the photographs live.

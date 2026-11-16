@@ -6,7 +6,7 @@
 import { brands, productUrl } from './data.js?v=29';
 import { getLang as realGetLang, pickByLang, t } from './i18n.js?v=10';
 import { assetUrl } from './paths.js?v=2';
-import { photoPicture, SIZES } from './photos.js?v=1';
+import { photoPicture, SIZES } from './photos.js?v=2';
 
 const W = 200;
 const H = 280;

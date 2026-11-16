@@ -3,7 +3,7 @@
    =========================================================== */
 
 import { products, brands } from './data.js?v=29';
-import { productCardHTML } from './product-svg.js?v=11';
+import { productCardHTML } from './product-svg.js?v=12';
 import { t, initI18n } from './i18n.js?v=10';
 
 /* ---------- State ---------- */

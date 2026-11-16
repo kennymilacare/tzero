@@ -12,7 +12,7 @@
 
 import { getLang, t } from './i18n.js?v=10';
 import { assetUrl } from './paths.js?v=2';
-import { photoCopy, photoSrcset, PHOTO_VERSION, SIZES } from './photos.js?v=1';
+import { photoCopy, photoSrcset, PHOTO_VERSION, SIZES } from './photos.js?v=2';
 
 /* The feed lives in the site, not in the page's own folder — the
    English and Japanese pages are one folder down. */
