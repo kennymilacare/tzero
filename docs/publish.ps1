@@ -65,6 +65,13 @@ Step 'Write the structured data' { node scripts/gen-jsonld.mjs }
 Step 'Write the English and Japanese pages' { node scripts/gen-lang-pages.mjs }
 Step 'Write the buying guides'   { node scripts/gen-guide-pages.mjs }
 
+# The sitemap says the day each page last changed, and that day comes
+# from git. It is written once here so that the tests and the
+# idempotency check see a file that matches the generators, and once
+# more after the commit below, when the changed pages have a date of
+# their own.
+Step 'Write sitemap.xml' { node scripts/update-sitemap.mjs }
+
 # ---------- 3. test ----------
 
 Step 'Run the tests' { npm test }
@@ -76,12 +83,16 @@ Write-Host ''
 Write-Host '==> What is about to be committed' -ForegroundColor Cyan
 git status --short
 git add -A
+# The sitemap is left out of this commit: it is written again after the
+# commit, when the changed pages have a date of their own, and it is
+# committed on its own then.
+git reset -- sitemap.xml
 git diff --cached --stat
 
-Step 'Commit the Watsons links and the two new posts' {
-  git commit -m 'Buy at Watsons, and the two newest posts' `
+Step 'Commit the Watsons links and the new posts' {
+  git commit -m 'Buy at Watsons, and the newest posts' `
     -m 'The four product cards and product pages link to the Watsons product pages now instead of an HKTVmall search, and the button says where it goes: Watsons, in all three languages.' `
-    -m 'The feed gains the two newest Instagram posts (the Extended on 2026-11-13 and the Studded on 2026-11-11), with copy written for the site in Chinese and English, and each card button links to the Watsons page for that product.' `
+    -m 'The feed gains the newest Instagram posts, with copy written for the site in Chinese and English, and each card button links to the Watsons page for that product.' `
     -m 'Co-Authored-By: Claude Code <noreply@anthropic.com>'
 }
 
@@ -94,7 +105,7 @@ Step 'Commit the Watsons links and the two new posts' {
 Step 'Rewrite sitemap.xml with the new dates' { node scripts/update-sitemap.mjs }
 Step 'Commit the sitemap' {
   git add sitemap.xml
-  git commit -m 'Bring the sitemap dates up to the Watsons links' `
+  git commit -m 'Bring the sitemap dates up to the new posts and links' `
     -m 'Co-Authored-By: Claude Code <noreply@anthropic.com>'
 }
 Step 'Run the tests once more' { npm test }
@@ -135,6 +146,8 @@ function Check-Live {
 Write-Host ''
 Write-Host '==> Checking the live site' -ForegroundColor Cyan
 $allOk = $true
+if (-not (Check-Live 'https://www.tzero-jp.com/assets/data/news.json' 'DfyVYIBERL4' 'the newest post (11-16) is in the feed')) { $allOk = $false }
+if (-not (Check-Live 'https://www.tzero-jp.com/assets/data/news.json' 'BP_826323' 'the newest post links to its Watsons page')) { $allOk = $false }
 if (-not (Check-Live 'https://www.tzero-jp.com/assets/data/news.json' 'Dfqqzs9jWPL' 'the newest post (11-13) is in the feed')) { $allOk = $false }
 if (-not (Check-Live 'https://www.tzero-jp.com/assets/data/news.json' 'DfmDfrxgZ01' 'the second newest post (11-11) is in the feed')) { $allOk = $false }
 if (-not (Check-Live 'https://www.tzero-jp.com/assets/data/news.json' 'BP_826325' 'the newest post links to its Watsons page')) { $allOk = $false }
