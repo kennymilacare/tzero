@@ -3,8 +3,8 @@
    (no copyrighted brand imagery)
    =========================================================== */
 
-import { brands, productUrl } from './data.js?v=28';
-import { getLang as realGetLang, pickByLang, t } from './i18n.js?v=9';
+import { brands, productUrl } from './data.js?v=29';
+import { getLang as realGetLang, pickByLang, t } from './i18n.js?v=10';
 import { assetUrl } from './paths.js?v=2';
 import { photoPicture, SIZES } from './photos.js?v=1';
 
@@ -173,9 +173,9 @@ export function productCardHTML(product) {
           <span class="currency" data-i18n="product.card.from">HK$</span>${product.price_hkd}
         </span>
         <span class="btn btn--primary btn--sm"
-              data-hktv="${product.hktv_url}"
-              onclick="event.preventDefault();event.stopPropagation();window.open('${product.hktv_url}','_blank','noopener')">
-          <span data-i18n="product.card.buy">前往 HKTVmall</span>
+              data-buy-url="${product.buy_url}"
+              onclick="event.preventDefault();event.stopPropagation();window.open('${product.buy_url}','_blank','noopener')">
+          <span data-i18n="product.card.buy">${escapeXml(t('product.card.buy'))}</span>
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M7 17L17 7M7 7h10v10"/>

@@ -182,6 +182,11 @@ async function readPost(chrome, port, url, waitMs = 8000) {
           const images = [...new Set([...document.querySelectorAll('img')]
             .filter((i) => i.naturalWidth > 300)
             .map((i) => i.currentSrc || i.src))];
+          /* The post's own picture, as the page states it in its
+             metadata. When Instagram hides a post, the pictures drawn
+             on the page belong to other posts — this is the one that
+             belongs to this post. */
+          const ogImage = (document.querySelector('meta[property="og:image"]') || {}).content || '';
           /* The account name lives on a link to the profile. The first
              instagram.com link on the page is often the logo, so look
              for one whose text is a bare handle. */
@@ -190,7 +195,7 @@ async function readPost(chrome, port, url, waitMs = 8000) {
             .find((a) => /^[A-Za-z0-9._]{2,30}$/.test(a.text)
                       && /instagram\\.com\\/[^/?#]+\\/?$/.test(a.href));
           return {
-            caption, images, hits, spans, gated,
+            caption, images, ogImage, hits, spans, gated,
             account: account ? account.text : '',
             page: b.replace(/\\s+/g, ' ').trim().slice(0, 300),
             imgCount: document.querySelectorAll('img').length,
@@ -710,22 +715,25 @@ async function main() {
       }
 
       let caption = String(post && post.caption || '').trim();
+      let apiImage = '';
 
-      /* Age-restricted posts: Instagram hides them from anonymous
-         visitors — the page shows a login wall and the embed says the
-         link is broken. The web API the site itself calls still
-         answers for a public post, so try that. */
-      if (!caption) {
-        console.warn(`[ig-fetch]   trying Instagram's web API…`);
-        const api = await readViaApi(chrome, port, shortcode);
-        if (api) {
-          caption = cleanCaption(api.caption, api.account);
-          post = post || { images: [], account: api.account };
-          if (!post.images) post.images = [];
-          if (api.image) post.images.unshift(api.image);
-          if (api.account && !post.account) post.account = api.account;
-          console.log(`[ig-fetch]   the API answered.`);
-        }
+      /* Instagram's own web endpoint answers for the post itself, so
+         the picture it returns is the post's own. The rendered pages
+         are for people and cannot be trusted with it: on a reel the
+         media is a video, and the first big picture drawn on the page
+         belongs to a different post — that is how the box of the long
+         one ended up on the card of the thin one. The endpoint also
+         answers for posts Instagram hides from anonymous visitors,
+         which the page only shows as a login wall. */
+      console.warn(`[ig-fetch]   asking Instagram's web API…`);
+      const api = await readViaApi(chrome, port, shortcode);
+      if (api) {
+        caption = caption || cleanCaption(api.caption, api.account);
+        post = post || { images: [], account: api.account };
+        if (!post.images) post.images = [];
+        if (api.account && !post.account) post.account = api.account;
+        apiImage = api.image || '';
+        console.log(`[ig-fetch]   the API answered.`);
       }
 
       if (!caption) {
@@ -753,18 +761,29 @@ async function main() {
       const title = deriveTitle(text);
       const excerpt = deriveExcerpt(text, title);
 
-      /* The card shows one image; take the first of the carousel. */
+      /* The card shows one picture; take the first of the carousel.
+
+         When Instagram hides a post, the page shows a login wall, and
+         the pictures drawn on that wall belong to other posts — one
+         of them put the box of the long one on the card of the thin
+         one. So on a hidden post only two pictures are used: the one
+         Instagram's own endpoint returned, and the one the page
+         states in its metadata. */
       let image = '';
-      if (post.images && post.images.length) {
+      const gallery = [];
+      if (apiImage) gallery.push(apiImage);
+      if (!(post && post.gated) && post && post.images) gallery.push(...post.images);
+      if (post && post.ogImage) gallery.push(post.ogImage);
+      if (gallery.length) {
         const name = `ig-${date}-${shortcode}`;
         let downloaded = false;
         try {
-          image = await downloadImage(post.images[0], name);
+          image = await downloadImage(gallery[0], name);
           downloaded = true;
           console.log(`[ig-fetch] saved ${image}`);
         } catch (e) {
           console.warn(`[ig-fetch] could not download the image (${e.message}); the card will link to it instead.`);
-          image = post.images[0];
+          image = gallery[0];
         }
 
         /* The pages show a photograph in three widths and in WebP, so

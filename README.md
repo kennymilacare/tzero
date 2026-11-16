@@ -147,7 +147,7 @@ Then visit <http://localhost:8080>.
 
 ## Adding / Editing Products
 
-All product data lives in [`assets/js/data.js`](assets/js/data.js). Each product has bilingual fields, an HKTVmall URL, brand ID, type, and dimensions. Adding a new product is a single object push to the `products` array — the homepage, catalog, and detail pages all pick it up automatically.
+All product data lives in [`assets/js/data.js`](assets/js/data.js). Each product has bilingual fields, a Watsons URL, brand ID, type, and dimensions. Adding a new product is a single object push to the `products` array — the homepage, catalog, and detail pages all pick it up automatically.
 
 ```js
 {
@@ -156,7 +156,7 @@ All product data lives in [`assets/js/data.js`](assets/js/data.js). Each product
   name_zh: '岡本 0.01 水性聚氨酯',
   name_en: 'Okamoto 0.01 Hydro PU',
   price_hkd: 98,
-  hktv_url: 'https://www.hktvmall.com/...',
+  buy_url: 'https://www.watsons.com.hk/zh-hk/.../p/BP_826323',
   type: 'ultra-thin',   // ultra-thin | classic | textured | functional | sized
   popular: true,
 }

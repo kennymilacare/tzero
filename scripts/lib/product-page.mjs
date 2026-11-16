@@ -147,8 +147,8 @@ export function catalogueHtml(all, lang, productUrl) {
                   <span class="currency">${escapeText(t(lang, 'product.card.from'))}</span>${p.price_hkd}
                 </span>
                 <span class="btn btn--primary btn--sm"
-                      data-hktv="${escapeAttr(p.hktv_url)}"
-                      onclick="event.preventDefault();event.stopPropagation();window.open('${escapeAttr(p.hktv_url)}','_blank','noopener')">
+                      data-buy-url="${escapeAttr(p.buy_url)}"
+                      onclick="event.preventDefault();event.stopPropagation();window.open('${escapeAttr(p.buy_url)}','_blank','noopener')">
                   ${escapeText(t(lang, 'product.card.buy'))}
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -299,7 +299,7 @@ export function productJsonLd(p, siteUrl, page, lang, productUrl) {
     publisher: orgRef,
     offers: {
       '@type': 'Offer',
-      url: p.hktv_url,
+      url: p.buy_url,
       priceCurrency: 'HKD',
       price: String(p.price_hkd),
       availability: 'https://schema.org/InStock',
@@ -448,7 +448,7 @@ export function buildProductPage(template, p, all, {
 
   html = fill(html,
     `<a href="#" target="_blank" rel="sponsored noopener"`,
-    `<a href="${escapeText(p.hktv_url)}" target="_blank" rel="sponsored noopener"`, 'the buy link');
+    `<a href="${escapeText(p.buy_url)}" target="_blank" rel="sponsored noopener"`, 'the buy link');
 
   html = fill(html,
     '<div class="product-detail__specs" data-specs></div>',
