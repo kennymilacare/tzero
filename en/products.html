@@ -117,6 +117,32 @@
   ]
 }
 </script>
+<!-- Event snippet for 離站點擊 to watsons conversion page.
+
+       The conversion is the click, not the visit — so the event is
+       fired when a visitor clicks a link to Watsons, whichever
+       language they are reading. Left in the page as it is, it would
+       fire on every visit and count them all as conversions.
+
+       gtag() is the one the Tag Manager snippet at the top of this
+       head defines, so the event goes into the same data layer the
+       container reads. -->
+  <script>
+    /* The capture phase, not the bubble: the buy button's own click
+       handler stops the event from travelling any further, so a
+       listener that waits for it never hears it. */
+    document.addEventListener('click', function (event) {
+      var el = event.target;
+      if (!el || !el.closest) return;
+      /* The buy button on the catalogue is not a link but a span
+         with the address in it; the one on a product's own page is
+         a link. Both are a click that goes to Watsons. */
+      var toWatsons = el.closest('a[href*="watsons.com.hk"]')
+                   || el.closest('[data-buy-url*="watsons.com.hk"]');
+      if (!toWatsons) return;
+      gtag('event', 'conversion', {'send_to': 'AW-18578218638/nIdmCKav5L0dEI695JpF'});
+    }, true);
+  </script>
 </head>
 <body>
 
