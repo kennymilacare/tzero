@@ -20,6 +20,7 @@ import { products, productUrl, faqs, i18n, COMPANY } from '../../assets/js/data.
 import { faqBlock, faqPageNode } from './seo.mjs';
 import { GUIDES, GUIDE_HUB, guideOgImagePath } from './guides.mjs';
 import { LANGS, PAGES, pageUrl } from './langs.mjs';
+import { POSTS_PER_PAGE } from './newspages.mjs';
 import { sitemapFor } from './sitemap.mjs';
 import { loadSite, ROOT } from './site.mjs';
 import { SPOKEN } from './spoken.mjs';
@@ -225,9 +226,87 @@ test('the news list describes the posts the site shows', async () => {
   const list = graph.find((n) => n['@type'] === 'ItemList');
   const urls = list.itemListElement.map((i) => i.url);
 
-  for (const post of feed.posts.slice(0, 8)) {
+  for (const post of feed.posts) {
     if (!post.permalink) continue;
     assert.ok(urls.includes(post.permalink), `the news list is missing ${post.permalink}`);
+  }
+});
+
+/* The news used to stop after the newest few posts: everything older
+   sat in the feed file, where no visitor could reach it. The feed is
+   now split over several addresses, and every post is on one of
+   them. */
+
+const SOCIAL = ['facebook', 'instagram'];
+
+test('every post in the feed is on one of the news pages', async () => {
+  const feed = JSON.parse(await readFile(path.join(ROOT, 'assets', 'data', 'news.json'), 'utf8'));
+  const social = feed.posts.filter((p) => SOCIAL.includes(String(p.source || '').toLowerCase()));
+  const pages = Math.max(1, Math.ceil(social.length / POSTS_PER_PAGE));
+
+  const shown = [];
+  for (let n = 1; n <= pages; n++) {
+    const file = n === 1 ? 'news.html' : `news-${n}.html`;
+    const html = await readPage(file);
+    const list = jsonLdOf(html)['@graph'].find((x) => x['@type'] === 'ItemList');
+    assert.ok(list, `${file}: no list of posts in the structured data`);
+    shown.push(...list.itemListElement.map((i) => i.url));
+  }
+
+  for (const post of social) {
+    if (!post.permalink) continue;
+    assert.ok(shown.includes(post.permalink), `no news page shows ${post.permalink}`);
+  }
+});
+
+test('each news page holds five posts, and says which page it is', async () => {
+  const feed = JSON.parse(await readFile(path.join(ROOT, 'assets', 'data', 'news.json'), 'utf8'));
+  const social = feed.posts.filter((p) => SOCIAL.includes(String(p.source || '').toLowerCase()));
+  const curated = feed.posts.filter((p) => !SOCIAL.includes(String(p.source || '').toLowerCase()));
+  const pages = Math.max(1, Math.ceil(social.length / POSTS_PER_PAGE));
+
+  for (let n = 1; n <= pages; n++) {
+    const file = n === 1 ? 'news.html' : `news-${n}.html`;
+    const html = await readPage(file);
+    const list = jsonLdOf(html)['@graph'].find((x) => x['@type'] === 'ItemList');
+    const expected = social.slice((n - 1) * POSTS_PER_PAGE, n * POSTS_PER_PAGE);
+    /* The hand-written brand cards ride along on the first page. */
+    const cards = n === 1 ? expected.length + curated.length : expected.length;
+
+    assert.equal(list.numberOfItems, cards,
+      `${file}: the list holds ${list.numberOfItems} cards, and should hold ${cards}`);
+    assert.match(html, new RegExp(`data-news-page="${n}"`),
+      `${file}: the page does not say which page of the news it is`);
+    assert.match(html, new RegExp(`data-news-limit="${POSTS_PER_PAGE}"`),
+      `${file}: the page does not say how many posts it holds`);
+  }
+});
+
+test('the news pages link to each other', async () => {
+  const feed = JSON.parse(await readFile(path.join(ROOT, 'assets', 'data', 'news.json'), 'utf8'));
+  const social = feed.posts.filter((p) => SOCIAL.includes(String(p.source || '').toLowerCase()));
+  const pages = Math.max(1, Math.ceil(social.length / POSTS_PER_PAGE));
+  const files = Array.from({ length: pages }, (_, i) => (i === 0 ? 'news.html' : `news-${i + 1}.html`));
+
+  for (const lang of LANGS) {
+    for (let n = 1; n <= pages; n++) {
+      const file = files[n - 1];
+      const prefix = lang === 'zh' ? '' : `${lang}/`;
+      const html = await readPage(`${prefix}${file}`);
+
+      /* The page it is on, and the links to the others. */
+      const current = html.match(/<span class="news-pager__number is-current" aria-current="page">(\d+)<\/span>/);
+      assert.ok(current, `${prefix}${file}: the pager does not say which page it is`);
+      assert.equal(current[1], String(n), `${prefix}${file}: the pager says it is page ${current[1]}`);
+
+      const links = [...html.matchAll(/<a class="news-pager__number" href="([^"]+)">/g)].map((m) => m[1]);
+      assert.deepEqual(links, files.filter((_, i) => i !== n - 1),
+        `${prefix}${file}: the pager does not link to every other page of the news`);
+
+      for (const link of links) {
+        await access(path.join(ROOT, prefix, link));
+      }
+    }
   }
 });
 

@@ -42,8 +42,13 @@ import path from 'node:path';
 import { faqs, i18n, products, productUrl } from '../assets/js/data.js';
 import { buildProductPage, withCatalogue } from './lib/product-page.mjs';
 import { localiseGraph, plainGraph, t, translatePage } from './lib/langpage.mjs';
+import { withoutAttrs } from './lib/html.mjs';
 import { faqBlock } from './lib/seo.mjs';
 import { LANGS, PAGES } from './lib/langs.mjs';
+import {
+  feedPosts, newsGraphFor, newsPageNumber, newsPagePaths,
+  pageSuffix, pagerMarkup, postsForPage,
+} from './lib/newspages.mjs';
 import { loadSite, ROOT, writeIfChanged } from './lib/site.mjs';
 import { applyTerms, loadTerms } from './lib/terms.mjs';
 
@@ -102,12 +107,59 @@ function withEol(raw, text) {
   return raw.includes('\r\n') ? text.replace(/\n/g, '\r\n') : text;
 }
 
+/**
+ * What makes one news page its own page: which handful of posts it
+ * shows, the links to the pages either side of it, and — so that no
+ * two of them say exactly the same thing — which page of the news it
+ * is.
+ */
+function newsPageHtml(html, { lang, page, total, paths }) {
+  let out = html;
+
+  /* Which page this is. The script that draws the cards reads it. */
+  out = out.replace(/data-news-page="\d+"/, `data-news-page="${page}"`);
+
+  /* The hand-written brand cards ride along on the first page, so
+     the pages after it do not claim them. */
+  if (page > 1) out = out.replace(/\s*data-news-keep-curated/, '');
+
+  /* The links to the pages either side, and the numbers. */
+  const pager = pagerMarkup(lang, page, total, paths);
+  out = out.replace(
+    /(<!--\s*NEWS PAGER:START\s*-->)([\s\S]*?)(<!--\s*NEWS PAGER:END\s*-->)/,
+    (m, start, _middle, end) => `${start}\n${pager}\n${end}`,
+  );
+
+  /* Which page of the news this is — in the title, in the
+     description, and in the heading the page shows. */
+  const suffix = pageSuffix(lang, page, total);
+  if (suffix) {
+    out = out.replace(/<title>([\s\S]*?)<\/title>/, (m, text) => `<title>${text}${suffix}</title>`);
+    out = out.replace(
+      /(<meta name="description" content=")([^"]*)(")/,
+      (m, open, text, close) => `${open}${text}${suffix}${close}`,
+    );
+    /* The heading's words are swapped in by the browser when the
+       page loads, and that would wipe the suffix away. So the marker
+       goes with it — the words are already in the file. */
+    out = out.replace(
+      /(<h1[^>]*>)([\s\S]*?)(<\/h1>)/,
+      (m, open, text, close) => `${withoutAttrs(open, ['data-i18n'])}${text}${suffix}${close}`,
+    );
+  }
+
+  return out;
+}
+
 async function main() {
   const site = await loadSite();
   if (!site.url) throw new Error('[gen-lang-pages] assets/data/site.json has no "url"');
 
   const terms = await loadTerms();
   const template = (await readFile(TEMPLATE, 'utf8')).replace(/\r\n/g, '\n');
+  /* The posts the feed holds, and the pages they are split over. */
+  const feed = feedPosts();
+  const newsPaths = newsPagePaths(feed);
   let written = 0;
 
   for (const page of PAGES) {
@@ -118,13 +170,17 @@ async function main() {
        the menu, the footer and the guide pages all agree about it. */
     if (kind === 'guide' || kind === 'guides') continue;
     const isProduct = kind === 'product';
+    const isNews = kind === 'news';
     const product = isProduct ? products.find((p) => productUrl(p.id) === page.path) : null;
 
     /* The Chinese page this one is made from. */
     let source = template;
     let raw = template;
     if (!isProduct) {
-      const file = path.join(ROOT, page.path || 'index.html');
+      /* Every news page is made from news.html — the first page is
+         the source, and the ones after it are the same page with
+         another handful of posts on it. */
+      const file = path.join(ROOT, isNews ? 'news.html' : (page.path || 'index.html'));
       raw = await readFile(file, 'utf8');
       source = raw.replace(/\r\n/g, '\n');
     }
@@ -139,6 +195,10 @@ async function main() {
          Details". The other pages take theirs from the word list. */
       const title = isZh || isProduct ? null : i18n[lang][`seo.og.title.${kind}`];
       const description = isZh || isProduct ? null : i18n[lang][`seo.og.desc.${kind}`];
+
+      /* Which page of the news this is, and the posts it shows. */
+      const newsNumber = isNews ? newsPageNumber(page.path) : 0;
+      const newsPosts = isNews ? postsForPage(feed, newsNumber) : [];
 
       let html = source;
       if (isProduct) {
@@ -167,11 +227,25 @@ async function main() {
         path: page.path,
         title,
         description,
-        jsonLd: isZh ? null : graphFor(lang, kind, site.url, page.path, title, description),
+        /* The news pages carry their own list of the posts they
+           show — the whole feed would describe a page that is not
+           there. Every language's block is written here, so that the
+           three versions of a page agree. */
+        jsonLd: isNews
+          ? localiseGraph(
+              newsGraphFor({ siteUrl: site.url, lang, pagePath: page.path, posts: newsPosts }),
+              site.url,
+              lang,
+            )
+          : (isZh ? null : graphFor(lang, kind, site.url, page.path, title, description)),
         faq: kind === 'home' ? faqBlock(faqs, lang, 'scripts/gen-lang-pages.mjs') : null,
         strip: !isZh,
         dropKeywords: !isZh && !isProduct,
       });
+
+      if (isNews) {
+        html = newsPageHtml(html, { lang, page: newsNumber, total: newsPaths.length, paths: newsPaths });
+      }
 
       /* The legal page is a long piece of writing rather than a
          set of labels, so it comes from its own file — once for

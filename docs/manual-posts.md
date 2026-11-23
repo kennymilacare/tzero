@@ -108,23 +108,41 @@ Instagram，所以唔會俾呢個 filter 篩走。
 
 | 頁面 | 而家 | 改點樣 |
 |---|---|---|
-| `news.html` | `4` | 改 `data-news-limit="4"` 個數字 |
+| `news.html` | `5` | 改 `data-news-limit="5"` 個數字 |
 | `index.html` | `1` | 改 `data-news-limit="1"` 個數字 |
 
-**超出去嘅貼文唔會冇咗** —— 全部仲喺 `manual.json` 同 `news.local.json` 度，
-只係頁面淨係顯示最新嗰幾張。想改顯示數量就撳 `data-news-limit` 個數字。
+### 較舊嘅貼文喺第二頁、第三頁
+
+貼文唔會喺第一頁之後就冇咗。`scripts/lib/newspages.mjs` 會睇住 feed 有幾多張貼文，
+然後自動開够咗嘅頁數：`news.html` 係最新嗰 5 張，`news-2.html` 係再之後 5 張，
+`news-3.html` 係最後嗰幾張 —— 三種語言都有自己嘅一份。
+
+| 檔案 | 顯示 |
+|---|---|
+| `news.html`、`en/news.html`、`ja/news.html` | 最新 5 張 |
+| `news-2.html` | 第 6–10 張 |
+| `news-3.html` | 第 11 張… |
+
+頁尾有上一頁／下一頁嘅連結，係 generator 寫入頁面嘅真連結，唔靠 JavaScript，
+所以爬蟲跟得到，遊客亦可以直接分享。每一頁都有自己嘅標題、description、
+canonical、hreflang，同埋自己嗰幾張貼文嘅 structured data。
+
+**加咗新貼文之後**，跑 `node scripts/manual-post.mjs` 再跑 generator chain，
+頁數就會自己跟住變 —— 唔使手動開新頁。
 
 ### 自訂卡片唔會俾新貼文推走
 
 `news.html` 個列表有 `data-news-keep-curated`：
 
 ```html
-<div class="container" data-news-list data-news-limit="4" data-news-source="instagram" data-news-keep-curated>
+<div class="container" data-news-list data-news-limit="5" data-news-page="1" data-news-source="instagram" data-news-keep-curated>
 ```
 
 有咗呢個 attribute，`data-news-limit` 就**淨係計社交貼文** —— 自訂卡片
 （例如「正式登陸 HKTVmall」）另外計，無論幾多新貼文都照顯示。
-即係話 `data-news-limit="4"` = 最多 4 張 IG 貼文 + 自訂卡片。
+即係話 `data-news-limit="5"` = 最多 5 張 IG 貼文 + 自訂卡片。
+
+自訂卡片只喺**第一頁**出現 —— 佢係版面唔係新聞，唔會跟住貼文落入第二頁。
 
 `index.html` 冇呢個 attribute，所以「最新動態」永遠淨係顯示 1 張。
 

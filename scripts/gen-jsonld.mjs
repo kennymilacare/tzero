@@ -38,10 +38,11 @@ import { loadSite, ROOT } from './lib/site.mjs';
    by the browser when the visitor switches. */
 const LANG = 'zh';
 
-/* The pages that carry structured data, and the key that holds it. */
+/* The pages that carry structured data, and the key that holds it.
+   The news pages are not here: each one lists the posts it shows,
+   so their blocks are written by the language generator instead. */
 const PAGES = [
   { file: 'index.html', key: 'seo.jsonld.home' },
-  { file: 'news.html', key: 'seo.jsonld.news' },
   { file: 'products.html', key: 'seo.jsonld.products' },
 ];
 

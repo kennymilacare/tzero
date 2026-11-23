@@ -630,7 +630,7 @@ export const i18n = {
           { "@type": "ListItem", "position": 2, "name": "最新動態", "item": "https://www.tzero-jp.com/news.html" }
         ] },
         { "@type": "ItemList", "name": "T-ZERO 第九感 最新動態",
-          "numberOfItems": 8,
+          "numberOfItems": 12,
           "itemListOrder": "https://schema.org/ItemListOrderDescending",
           "itemListElement": [
             { "@type": "ListItem", "position": 1, "datePublished": "2026-11-23", "url": "https://www.instagram.com/tzerojp/p/DgEbtBZj7B3/", "name": "加倍潤滑，讓整個過程更順暢" },
@@ -640,7 +640,11 @@ export const i18n = {
             { "@type": "ListItem", "position": 5, "datePublished": "2026-11-13", "url": "https://www.instagram.com/tzerojp/p/Dfqqzs9jWPL/", "name": "持久裝全新登場，時間由你決定" },
             { "@type": "ListItem", "position": 6, "datePublished": "2026-11-11", "url": "https://www.instagram.com/tzerojp/p/DfmDfrxgZ01/", "name": "顆粒裝全新登場，觸感全面升級" },
             { "@type": "ListItem", "position": 7, "datePublished": "2026-10-30", "url": "https://www.instagram.com/tzerojp/p/DfGkQzBAfF7/", "name": "選擇了『超潤滑』，為什麼仍然越用越乾？" },
-            { "@type": "ListItem", "position": 8, "datePublished": "2026-10-28", "url": "https://www.instagram.com/tzerojp/p/DfBe7FggRof/", "name": "今晚，換點不一樣" }
+            { "@type": "ListItem", "position": 8, "datePublished": "2026-10-28", "url": "https://www.instagram.com/tzerojp/p/DfBe7FggRof/", "name": "今晚，換點不一樣" },
+            { "@type": "ListItem", "position": 9, "datePublished": "2026-10-28", "url": "https://www.instagram.com/tzerojp/p/DfBi7XygZzA/", "name": "最合拍神隊友，今晚拒絕快槍手" },
+            { "@type": "ListItem", "position": 10, "datePublished": "2026-10-27", "url": "https://www.instagram.com/tzerojp/p/De_a7-Yks0Z/", "name": "上班已經夠累，想潤滑一點" },
+            { "@type": "ListItem", "position": 11, "datePublished": "2026-10-27", "url": "https://www.instagram.com/tzerojp/p/De_bTyXEsOn/", "name": "NEW｜靠近你，感覺可以再細膩一點" },
+            { "@type": "ListItem", "position": 12, "datePublished": "2026-09-15", "url": "https://www.hktvmall.com", "name": "正式登陸 HKTVmall" }
           ] }
       ]
     }),
@@ -1040,7 +1044,7 @@ export const i18n = {
           { "@type": "ListItem", "position": 2, "name": "Latest News", "item": "https://www.tzero-jp.com/news.html" }
         ] },
         { "@type": "ItemList", "name": "T-ZERO NINTH SENSE Updates",
-          "numberOfItems": 8,
+          "numberOfItems": 12,
           "itemListOrder": "https://schema.org/ItemListOrderDescending",
           "itemListElement": [
             { "@type": "ListItem", "position": 1, "datePublished": "2026-11-23", "url": "https://www.instagram.com/tzerojp/p/DgEbtBZj7B3/", "name": "Extra Lubricant — slick the whole way" },
@@ -1050,7 +1054,11 @@ export const i18n = {
             { "@type": "ListItem", "position": 5, "datePublished": "2026-11-13", "url": "https://www.instagram.com/tzerojp/p/Dfqqzs9jWPL/", "name": "The new Extended is here — you set the pace" },
             { "@type": "ListItem", "position": 6, "datePublished": "2026-11-11", "url": "https://www.instagram.com/tzerojp/p/DfmDfrxgZ01/", "name": "The new Studded is here — feel every point" },
             { "@type": "ListItem", "position": 7, "datePublished": "2026-10-30", "url": "https://www.instagram.com/tzerojp/p/DfGkQzBAfF7/", "name": "Why does \"ultra smooth\" still dry out?" },
-            { "@type": "ListItem", "position": 8, "datePublished": "2026-10-28", "url": "https://www.instagram.com/tzerojp/p/DfBe7FggRof/", "name": "Tonight, make it a little different" }
+            { "@type": "ListItem", "position": 8, "datePublished": "2026-10-28", "url": "https://www.instagram.com/tzerojp/p/DfBe7FggRof/", "name": "Tonight, make it a little different" },
+            { "@type": "ListItem", "position": 9, "datePublished": "2026-10-28", "url": "https://www.instagram.com/tzerojp/p/DfBi7XygZzA/", "name": "Play it long tonight — no rushing 😏" },
+            { "@type": "ListItem", "position": 10, "datePublished": "2026-10-27", "url": "https://www.instagram.com/tzerojp/p/De_a7-Yks0Z/", "name": "Tired after work? Make it a little more fun 💧" },
+            { "@type": "ListItem", "position": 11, "datePublished": "2026-10-27", "url": "https://www.instagram.com/tzerojp/p/De_bTyXEsOn/", "name": "Closer to you, a little more delicate ✨" },
+            { "@type": "ListItem", "position": 12, "datePublished": "2026-09-15", "url": "https://www.hktvmall.com", "name": "Now on HKTVmall" }
           ] }
       ]
     }),
@@ -1468,7 +1476,7 @@ export const i18n = {
           { "@type": "ListItem", "position": 2, "name": "最新ニュース", "item": "https://www.tzero-jp.com/news.html" }
         ] },
         { "@type": "ItemList", "name": "T-ZERO 第九感 最新情報",
-          "numberOfItems": 8,
+          "numberOfItems": 12,
           "itemListOrder": "https://schema.org/ItemListOrderDescending",
           "itemListElement": [
             { "@type": "ListItem", "position": 1, "datePublished": "2026-11-23", "url": "https://www.instagram.com/tzerojp/p/DgEbtBZj7B3/", "name": "加倍潤滑，讓整個過程更順暢" },
@@ -1478,7 +1486,11 @@ export const i18n = {
             { "@type": "ListItem", "position": 5, "datePublished": "2026-11-13", "url": "https://www.instagram.com/tzerojp/p/Dfqqzs9jWPL/", "name": "持久裝全新登場，時間由你決定" },
             { "@type": "ListItem", "position": 6, "datePublished": "2026-11-11", "url": "https://www.instagram.com/tzerojp/p/DfmDfrxgZ01/", "name": "顆粒裝全新登場，觸感全面升級" },
             { "@type": "ListItem", "position": 7, "datePublished": "2026-10-30", "url": "https://www.instagram.com/tzerojp/p/DfGkQzBAfF7/", "name": "選擇了『超潤滑』，為什麼仍然越用越乾？" },
-            { "@type": "ListItem", "position": 8, "datePublished": "2026-10-28", "url": "https://www.instagram.com/tzerojp/p/DfBe7FggRof/", "name": "今晚，換點不一樣" }
+            { "@type": "ListItem", "position": 8, "datePublished": "2026-10-28", "url": "https://www.instagram.com/tzerojp/p/DfBe7FggRof/", "name": "今晚，換點不一樣" },
+            { "@type": "ListItem", "position": 9, "datePublished": "2026-10-28", "url": "https://www.instagram.com/tzerojp/p/DfBi7XygZzA/", "name": "最合拍神隊友，今晚拒絕快槍手" },
+            { "@type": "ListItem", "position": 10, "datePublished": "2026-10-27", "url": "https://www.instagram.com/tzerojp/p/De_a7-Yks0Z/", "name": "上班已經夠累，想潤滑一點" },
+            { "@type": "ListItem", "position": 11, "datePublished": "2026-10-27", "url": "https://www.instagram.com/tzerojp/p/De_bTyXEsOn/", "name": "NEW｜靠近你，感覺可以再細膩一點" },
+            { "@type": "ListItem", "position": 12, "datePublished": "2026-09-15", "url": "https://www.hktvmall.com", "name": "HKTVmall に登場" }
           ] }
       ]
     }),

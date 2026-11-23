@@ -23,7 +23,7 @@
    visitor reads and the words a crawler reads are the same words.
    =========================================================== */
 
-import { i18n } from './data.js?v=29';
+import { i18n } from './data.js?v=30';
 
 const DEFAULT_LANG = 'zh';
 const SUPPORTED = ['zh', 'en', 'ja'];

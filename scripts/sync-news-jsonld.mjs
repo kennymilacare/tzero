@@ -37,9 +37,6 @@ const DATA_FILE = path.join(ROOT, 'assets', 'data', 'news.json');
 const LOCAL_FILE = path.join(ROOT, 'assets', 'data', 'news.local.json');
 const DATA_JS = path.join(ROOT, 'assets', 'js', 'data.js');
 
-/* The page shows at most this many posts — news.js has the same limit. */
-const MAX_POSTS = 8;
-
 /* The three copies of the block in data.js, one per language.
    `home` is the first breadcrumb — it is also how the script tells
    the three blocks apart, so it has to be the exact string used. */
@@ -60,6 +57,10 @@ const ORDER_DESC = 'https://schema.org/ItemListOrderDescending';
  * news.json is what the page reads, so it is the source of truth.
  * When it is empty (no posts have been synced yet) the hand-written
  * cards in news.local.json are used instead.
+ *
+ * The whole feed goes in, not just the newest few: the news pages
+ * are split over several addresses, and each one takes its own
+ * handful of posts out of this list.
  */
 export async function feedPosts() {
   if (existsSync(DATA_FILE)) {
@@ -67,7 +68,7 @@ export async function feedPosts() {
       const raw = JSON.parse(await readFile(DATA_FILE, 'utf8'));
       const posts = Array.isArray(raw.posts) ? raw.posts : [];
       if (posts.length) {
-        return { posts: sortByDate([...posts]).slice(0, MAX_POSTS), source: 'news.json' };
+        return { posts: sortByDate([...posts]), source: 'news.json' };
       }
     } catch (e) {
       console.warn(`[sync-news-jsonld] could not read news.json: ${e.message}`);
@@ -80,7 +81,7 @@ export async function feedPosts() {
       const site = await loadSite();
       const pageUrl = `https://www.facebook.com/${usernameOf(site.facebook)}`;
       const posts = curatedPosts(raw.posts || {}, pageUrl);
-      if (posts.length) return { posts: sortByDate(posts).slice(0, MAX_POSTS), source: 'news.local.json' };
+      if (posts.length) return { posts: sortByDate(posts), source: 'news.local.json' };
     } catch (e) {
       console.warn(`[sync-news-jsonld] could not read news.local.json: ${e.message}`);
     }

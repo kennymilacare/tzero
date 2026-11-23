@@ -10,14 +10,15 @@
    never innerHTML, because Instagram post text is not authored here.
    =========================================================== */
 
-import { getLang, t } from './i18n.js?v=10';
+import { getLang, t } from './i18n.js?v=11';
 import { assetUrl } from './paths.js?v=2';
-import { photoCopy, photoSrcset, PHOTO_VERSION, SIZES } from './photos.js?v=2';
+import { photoCopy, photoSrcset, isPhoto, PHOTO_VERSION, SIZES } from './photos.js?v=2';
 
 /* The feed lives in the site, not in the page's own folder — the
    English and Japanese pages are one folder down. */
 const DATA_URL = assetUrl('assets/data/news.json');
-const MAX_POSTS = 8;
+/* How many posts a page shows when the page does not say. */
+const DEFAULT_LIMIT = 8;
 const FALLBACK_PAGE_URL = 'https://www.facebook.com/Tzerohk';
 
 /**
@@ -87,14 +88,19 @@ function isCurated(post) {
  *   data-news-source="facebook,instagram"— both
  * With no attribute, everything is shown.
  *
- * data-news-limit caps the feed. A list that also carries
+ * data-news-limit is how many posts a page holds, and
+ * data-news-page is which page of them this is — the news is split
+ * over several addresses, and each one shows its own handful.
+ *
+ * A list that also carries
  *   data-news-keep-curated
  * keeps its curated brand cards however busy the feed gets, so a
  * hand-written launch card is never pushed off the page by a week of
  * posts.
  */
 function postsFor(list) {
-  const limit = Number(list.getAttribute('data-news-limit')) || MAX_POSTS;
+  const limit = Number(list.getAttribute('data-news-limit')) || DEFAULT_LIMIT;
+  const page = Number(list.getAttribute('data-news-page')) || 1;
   const wanted = (list.getAttribute('data-news-source') || '')
     .split(',')
     .map((s) => s.trim().toLowerCase())
@@ -108,20 +114,21 @@ function postsFor(list) {
       })
     : state.posts;
 
-  if (!list.hasAttribute('data-news-keep-curated')) {
-    return posts.slice(0, limit);
-  }
+  /* The social posts are split over the pages; the curated cards
+     are page furniture and ride along on the first one. */
+  const social = posts.filter((p) => !isCurated(p));
+  const curated = posts.filter(isCurated);
+  const start = (page - 1) * limit;
+  const slice = social.slice(start, start + limit);
 
-  /* The limit counts feed posts; curated cards ride along with them. */
-  let feedLeft = limit;
-  return posts.filter((p) => {
-    if (isCurated(p)) return true;
-    if (feedLeft > 0) {
-      feedLeft -= 1;
-      return true;
-    }
-    return false;
-  });
+  /* Nothing on this page — the curated cards are better than an
+     empty list. */
+  if (!slice.length) return curated;
+
+  /* The curated cards are on the first page, and nowhere else. */
+  if (page > 1) return slice;
+  if (!list.hasAttribute('data-news-keep-curated')) return slice;
+  return [...slice, ...curated];
 }
 
 /* ---------- render ---------- */
@@ -147,28 +154,41 @@ function buildCard(post) {
   media.setAttribute('aria-label', title);
 
   if (post.image) {
-    /* The photograph comes in three sizes and in WebP as well as
-       JPEG, so a phone takes the small copy. The elements are built
-       one by one rather than written out as a string, because the
-       words come from a post and are not ours to trust. */
-    const picture = document.createElement('picture');
-    const source = document.createElement('source');
-    source.type = 'image/webp';
-    source.srcset = photoSrcset(assetUrl(post.image), 'webp');
-    source.sizes = SIZES.news;
+    const src = assetUrl(post.image);
+    if (isPhoto(src)) {
+      /* The photograph comes in three sizes and in WebP as well as
+         JPEG, so a phone takes the small copy. The elements are
+         built one by one rather than written out as a string,
+         because the words come from a post and are not ours to
+         trust. */
+      const picture = document.createElement('picture');
+      const source = document.createElement('source');
+      source.type = 'image/webp';
+      source.srcset = photoSrcset(src, 'webp');
+      source.sizes = SIZES.news;
 
-    const img = document.createElement('img');
-    img.src = `${photoCopy(assetUrl(post.image), 1200, 'jpg')}?v=${PHOTO_VERSION}`;
-    img.srcset = photoSrcset(assetUrl(post.image), 'jpg');
-    img.sizes = SIZES.news;
-    img.alt = title;
-    img.width = 1200;
-    img.height = 1200;
-    img.loading = 'lazy';
-    img.decoding = 'async';
+      const img = document.createElement('img');
+      img.src = `${photoCopy(src, 1200, 'jpg')}?v=${PHOTO_VERSION}`;
+      img.srcset = photoSrcset(src, 'jpg');
+      img.sizes = SIZES.news;
+      img.alt = title;
+      img.width = 1200;
+      img.height = 1200;
+      img.loading = 'lazy';
+      img.decoding = 'async';
 
-    picture.append(source, img);
-    media.appendChild(picture);
+      picture.append(source, img);
+      media.appendChild(picture);
+    } else {
+      /* Not a photograph — a banner, say. It has no copies, so it
+         is used as it is. */
+      const img = document.createElement('img');
+      img.src = src;
+      img.alt = title;
+      img.loading = 'lazy';
+      img.decoding = 'async';
+      media.appendChild(img);
+    }
   } else {
     // No photo — the media panel still needs to look deliberate.
     media.classList.add('news-card__media--empty');
@@ -347,7 +367,9 @@ async function load() {
     if (!posts.length) throw new Error('no posts in feed file');
 
     state.pageUrl = (data.page && data.page.url) || FALLBACK_PAGE_URL;
-    state.posts = posts.filter((p) => p && !p.hidden).slice(0, MAX_POSTS);
+    /* The whole feed: each page of the news takes its own handful
+       of posts out of it. */
+    state.posts = posts.filter((p) => p && !p.hidden);
     state.loaded = true;
     render();
   } catch (e) {

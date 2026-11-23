@@ -34,7 +34,8 @@ Built with plain **HTML / CSS / JavaScript** — no build step, no framework, no
 ├── guide-hyaluronic.html  # Generated — what hyaluronic acid actually does
 ├── guides.html            # Generated — the list of all five guides, in the menu of every page
 ├── about.html             # About + brand values + brand story
-├── news.html              # Latest news (renders the Facebook feed)
+├── news.html              # Latest news (renders the Facebook feed) — page 1 of 5 posts
+├── news-2.html            # Generated — the news after that, five posts at a time
 ├── contact.html           # Contact form + cards + map placeholder
 ├── terms.html             # Privacy policy + terms
 ├── 404.html               # Not-found page
@@ -404,6 +405,20 @@ Instagram profile rather than the Facebook Page.
 container filters with `data-news-source` (`instagram`, `facebook`, or
 `facebook,instagram`); drop the attribute to show everything. Curated brand
 cards (HKTVmall) ignore the filter and always appear.
+
+### The news is split over several pages
+
+A page shows five posts. The rest of the feed is not left behind: the
+generators work out how many pages the feed needs and write them —
+`news.html`, `news-2.html`, `news-3.html` — in all three languages. Each
+page has its own address, its own title, its own canonical and hreflang, and
+its own list of the posts it shows in the structured data. The links between
+the pages are real links, written into the page by the generator, so they
+work without JavaScript and a crawler can follow them.
+
+`scripts/lib/newspages.mjs` is where the split is worked out. The number of
+pages follows the feed, so a new post that needs a fourth page gets one
+when the generators run.
 
 Manual posts are written back into `news.local.json`, so the two routes
 coexist: a post added by hand survives the automatic sync.

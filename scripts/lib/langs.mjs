@@ -17,11 +17,14 @@
    the one place that knows the rule; the generators, the sitemap
    writer and the tests all read it from here.
 
-   Pure — no filesystem, no network.
+   The one thing here that touches the disk is the news: how many
+   news pages there are depends on how many posts the feed holds, so
+   the feed is read to work that out. Nothing else here reads a file.
    =========================================================== */
 
 import { products, productUrl } from '../../assets/js/data.js';
 import { GUIDE_HUB, GUIDE_PATHS } from './guides.mjs';
+import { newsPagePaths } from './newspages.mjs';
 
 /* The three languages, in the order they cycle. */
 export const LANGS = ['zh', 'en', 'ja'];
@@ -55,7 +58,11 @@ export const PAGES = [
   { path: '', kind: 'home' },
   { path: 'products.html', kind: 'products' },
   ...products.map((p) => ({ path: productUrl(p.id), kind: 'product' })),
-  { path: 'news.html', kind: 'news' },
+  /* The news pages: one for every handful of posts the feed holds.
+     The first is news.html — the address the site has always had —
+     and the rest are news-2.html, news-3.html and so on. How many
+     there are depends on the feed, so it is worked out here. */
+  ...newsPagePaths().map((path) => ({ path, kind: 'news' })),
   { path: 'about.html', kind: 'about' },
   { path: 'contact.html', kind: 'contact' },
   { path: 'terms.html', kind: 'terms' },

@@ -907,6 +907,73 @@
   margin-top: var(--space-2);
 }
 
+/* ---------- The pages of the news ----------
+
+   The news is split over several addresses — news.html, news-2.html
+   and so on — and the links between them are written into the page
+   by the generator. They are real links, so they work without
+   JavaScript and a crawler can follow them. */
+.news-pager {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  margin-top: var(--space-6);
+}
+
+.news-pager__count {
+  width: 100%;
+  margin: 0 0 var(--space-2);
+  text-align: center;
+  font-size: var(--fs-sm);
+  color: var(--ink-soft);
+}
+
+.news-pager__numbers {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.news-pager__number,
+.news-pager__link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.5rem;
+  height: 2.5rem;
+  padding: 0 var(--space-3);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  background: var(--surface);
+  color: var(--ink);
+  font-size: var(--fs-sm);
+  text-decoration: none;
+  transition: border-color var(--d-base) var(--ease),
+              background var(--d-base) var(--ease);
+}
+
+.news-pager__number:hover,
+.news-pager__link:hover {
+  border-color: var(--primary);
+  background: var(--primary-soft);
+}
+
+.news-pager__number.is-current {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+  font-weight: 600;
+}
+
+/* The link to the page before the first, and to the page after the
+   last — there is none, so the space is kept and nothing is drawn. */
+.news-pager__link.is-disabled {
+  opacity: 0;
+  pointer-events: none;
+}
+
 /* ---------- Why T-ZERO (P2 / P3 / P4) ---------- */
 .why-grid {
   display: grid;
