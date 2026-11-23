@@ -460,7 +460,7 @@ async function login(chromePath, port) {
 
 /* ---------- images ---------- */
 
-async function downloadImage(url, filename) {
+async function fetchImage(url, filename) {
   const res = await fetch(url, {
     headers: {
       'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36',
@@ -480,6 +480,27 @@ async function downloadImage(url, filename) {
   const file = path.join(IMG_DIR, `${filename}.${ext}`);
   await writeFile(file, buf);
   return path.relative(ROOT, file).split(path.sep).join('/');
+}
+
+/**
+ * Fetch one picture, and ask again if the network hiccups.
+ *
+ * Instagram's picture server answers with a network error now and then
+ * — the picture is there, the same address works a moment later. On
+ * 2026-11-23 one post lost its picture that way, and the card was
+ * left with an address that is not a path at all.
+ */
+async function downloadImage(url, filename) {
+  let lastError = null;
+  for (let attempt = 1; attempt <= 3; attempt++) {
+    try {
+      return await fetchImage(url, filename);
+    } catch (e) {
+      lastError = e;
+      if (attempt < 3) await sleep(1500);
+    }
+  }
+  throw lastError;
 }
 
 /**
@@ -777,13 +798,27 @@ async function main() {
       if (gallery.length) {
         const name = `ig-${date}-${shortcode}`;
         let downloaded = false;
-        try {
-          image = await downloadImage(gallery[0], name);
-          downloaded = true;
-          console.log(`[ig-fetch] saved ${image}`);
-        } catch (e) {
-          console.warn(`[ig-fetch] could not download the image (${e.message}); the card will link to it instead.`);
-          image = gallery[0];
+        /* Each picture in turn: Instagram's own first, then the ones
+           the page drew. */
+        for (const candidate of gallery) {
+          try {
+            image = await downloadImage(candidate, name);
+            downloaded = true;
+            console.log(`[ig-fetch] saved ${image}`);
+            break;
+          } catch (e) {
+            console.warn(`[ig-fetch] could not download that picture (${e.message}).`);
+          }
+        }
+
+        if (!downloaded) {
+          /* No picture could be fetched. The post is still published
+             and still links to Instagram; the card simply has no
+             picture. A signed address from Instagram's picture server
+             is not kept: it is long, it expires, and it is not a path
+             the pages can use. */
+          image = '';
+          console.warn('[ig-fetch] no picture could be fetched; the card will have none.');
         }
 
         /* The pages show a photograph in three widths and in WebP, so

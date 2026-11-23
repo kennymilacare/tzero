@@ -633,14 +633,14 @@ export const i18n = {
           "numberOfItems": 8,
           "itemListOrder": "https://schema.org/ItemListOrderDescending",
           "itemListElement": [
-            { "@type": "ListItem", "position": 1, "datePublished": "2026-11-16", "url": "https://www.instagram.com/tzerojp/p/DfyVYIBERL4/", "name": "超薄近乎無感，水潤清爽不黏膩" },
-            { "@type": "ListItem", "position": 2, "datePublished": "2026-11-13", "url": "https://www.instagram.com/tzerojp/p/Dfqqzs9jWPL/", "name": "持久裝全新登場，時間由你決定" },
-            { "@type": "ListItem", "position": 3, "datePublished": "2026-11-11", "url": "https://www.instagram.com/tzerojp/p/DfmDfrxgZ01/", "name": "顆粒裝全新登場，觸感全面升級" },
-            { "@type": "ListItem", "position": 4, "datePublished": "2026-10-30", "url": "https://www.instagram.com/tzerojp/p/DfGkQzBAfF7/", "name": "選擇了『超潤滑』，為什麼仍然越用越乾？" },
-            { "@type": "ListItem", "position": 5, "datePublished": "2026-10-28", "url": "https://www.instagram.com/tzerojp/p/DfBe7FggRof/", "name": "今晚，換點不一樣" },
-            { "@type": "ListItem", "position": 6, "datePublished": "2026-10-28", "url": "https://www.instagram.com/tzerojp/p/DfBi7XygZzA/", "name": "最合拍神隊友，今晚拒絕快槍手" },
-            { "@type": "ListItem", "position": 7, "datePublished": "2026-10-27", "url": "https://www.instagram.com/tzerojp/p/De_a7-Yks0Z/", "name": "上班已經夠累，想潤滑一點" },
-            { "@type": "ListItem", "position": 8, "datePublished": "2026-10-27", "url": "https://www.instagram.com/tzerojp/p/De_bTyXEsOn/", "name": "NEW｜靠近你，感覺可以再細膩一點" }
+            { "@type": "ListItem", "position": 1, "datePublished": "2026-11-23", "url": "https://www.instagram.com/tzerojp/p/DgEbtBZj7B3/", "name": "加倍潤滑，讓整個過程更順暢" },
+            { "@type": "ListItem", "position": 2, "datePublished": "2026-11-19", "url": "https://www.instagram.com/tzerojp/p/Df6fedKB8Q7/", "name": "國際男人節的選擇題：兩個答案都要" },
+            { "@type": "ListItem", "position": 3, "datePublished": "2026-11-19", "url": "https://www.instagram.com/tzerojp/p/Df6ccBCDxFv/", "name": "超薄零感覺，親密時刻更盡興" },
+            { "@type": "ListItem", "position": 4, "datePublished": "2026-11-16", "url": "https://www.instagram.com/tzerojp/p/DfyVYIBERL4/", "name": "超薄近乎無感，水潤清爽不黏膩" },
+            { "@type": "ListItem", "position": 5, "datePublished": "2026-11-13", "url": "https://www.instagram.com/tzerojp/p/Dfqqzs9jWPL/", "name": "持久裝全新登場，時間由你決定" },
+            { "@type": "ListItem", "position": 6, "datePublished": "2026-11-11", "url": "https://www.instagram.com/tzerojp/p/DfmDfrxgZ01/", "name": "顆粒裝全新登場，觸感全面升級" },
+            { "@type": "ListItem", "position": 7, "datePublished": "2026-10-30", "url": "https://www.instagram.com/tzerojp/p/DfGkQzBAfF7/", "name": "選擇了『超潤滑』，為什麼仍然越用越乾？" },
+            { "@type": "ListItem", "position": 8, "datePublished": "2026-10-28", "url": "https://www.instagram.com/tzerojp/p/DfBe7FggRof/", "name": "今晚，換點不一樣" }
           ] }
       ]
     }),
@@ -1043,14 +1043,14 @@ export const i18n = {
           "numberOfItems": 8,
           "itemListOrder": "https://schema.org/ItemListOrderDescending",
           "itemListElement": [
-            { "@type": "ListItem", "position": 1, "datePublished": "2026-11-16", "url": "https://www.instagram.com/tzerojp/p/DfyVYIBERL4/", "name": "The Ultra-Thin — so light you forget it's there" },
-            { "@type": "ListItem", "position": 2, "datePublished": "2026-11-13", "url": "https://www.instagram.com/tzerojp/p/Dfqqzs9jWPL/", "name": "The new Extended is here — you set the pace" },
-            { "@type": "ListItem", "position": 3, "datePublished": "2026-11-11", "url": "https://www.instagram.com/tzerojp/p/DfmDfrxgZ01/", "name": "The new Studded is here — feel every point" },
-            { "@type": "ListItem", "position": 4, "datePublished": "2026-10-30", "url": "https://www.instagram.com/tzerojp/p/DfGkQzBAfF7/", "name": "Why does \"ultra smooth\" still dry out?" },
-            { "@type": "ListItem", "position": 5, "datePublished": "2026-10-28", "url": "https://www.instagram.com/tzerojp/p/DfBe7FggRof/", "name": "Tonight, make it a little different" },
-            { "@type": "ListItem", "position": 6, "datePublished": "2026-10-28", "url": "https://www.instagram.com/tzerojp/p/DfBi7XygZzA/", "name": "Play it long tonight — no rushing 😏" },
-            { "@type": "ListItem", "position": 7, "datePublished": "2026-10-27", "url": "https://www.instagram.com/tzerojp/p/De_a7-Yks0Z/", "name": "Tired after work? Make it a little more fun 💧" },
-            { "@type": "ListItem", "position": 8, "datePublished": "2026-10-27", "url": "https://www.instagram.com/tzerojp/p/De_bTyXEsOn/", "name": "Closer to you, a little more delicate ✨" }
+            { "@type": "ListItem", "position": 1, "datePublished": "2026-11-23", "url": "https://www.instagram.com/tzerojp/p/DgEbtBZj7B3/", "name": "Extra Lubricant — slick the whole way" },
+            { "@type": "ListItem", "position": 2, "datePublished": "2026-11-19", "url": "https://www.instagram.com/tzerojp/p/Df6fedKB8Q7/", "name": "A question for International Men's Day — why not both?" },
+            { "@type": "ListItem", "position": 3, "datePublished": "2026-11-19", "url": "https://www.instagram.com/tzerojp/p/Df6ccBCDxFv/", "name": "001 Ultra-Thin — close enough to feel like nothing" },
+            { "@type": "ListItem", "position": 4, "datePublished": "2026-11-16", "url": "https://www.instagram.com/tzerojp/p/DfyVYIBERL4/", "name": "The Ultra-Thin — so light you forget it's there" },
+            { "@type": "ListItem", "position": 5, "datePublished": "2026-11-13", "url": "https://www.instagram.com/tzerojp/p/Dfqqzs9jWPL/", "name": "The new Extended is here — you set the pace" },
+            { "@type": "ListItem", "position": 6, "datePublished": "2026-11-11", "url": "https://www.instagram.com/tzerojp/p/DfmDfrxgZ01/", "name": "The new Studded is here — feel every point" },
+            { "@type": "ListItem", "position": 7, "datePublished": "2026-10-30", "url": "https://www.instagram.com/tzerojp/p/DfGkQzBAfF7/", "name": "Why does \"ultra smooth\" still dry out?" },
+            { "@type": "ListItem", "position": 8, "datePublished": "2026-10-28", "url": "https://www.instagram.com/tzerojp/p/DfBe7FggRof/", "name": "Tonight, make it a little different" }
           ] }
       ]
     }),
@@ -1471,14 +1471,14 @@ export const i18n = {
           "numberOfItems": 8,
           "itemListOrder": "https://schema.org/ItemListOrderDescending",
           "itemListElement": [
-            { "@type": "ListItem", "position": 1, "datePublished": "2026-11-16", "url": "https://www.instagram.com/tzerojp/p/DfyVYIBERL4/", "name": "超薄近乎無感，水潤清爽不黏膩" },
-            { "@type": "ListItem", "position": 2, "datePublished": "2026-11-13", "url": "https://www.instagram.com/tzerojp/p/Dfqqzs9jWPL/", "name": "持久裝全新登場，時間由你決定" },
-            { "@type": "ListItem", "position": 3, "datePublished": "2026-11-11", "url": "https://www.instagram.com/tzerojp/p/DfmDfrxgZ01/", "name": "顆粒裝全新登場，觸感全面升級" },
-            { "@type": "ListItem", "position": 4, "datePublished": "2026-10-30", "url": "https://www.instagram.com/tzerojp/p/DfGkQzBAfF7/", "name": "選擇了『超潤滑』，為什麼仍然越用越乾？" },
-            { "@type": "ListItem", "position": 5, "datePublished": "2026-10-28", "url": "https://www.instagram.com/tzerojp/p/DfBe7FggRof/", "name": "今晚，換點不一樣" },
-            { "@type": "ListItem", "position": 6, "datePublished": "2026-10-28", "url": "https://www.instagram.com/tzerojp/p/DfBi7XygZzA/", "name": "最合拍神隊友，今晚拒絕快槍手" },
-            { "@type": "ListItem", "position": 7, "datePublished": "2026-10-27", "url": "https://www.instagram.com/tzerojp/p/De_a7-Yks0Z/", "name": "上班已經夠累，想潤滑一點" },
-            { "@type": "ListItem", "position": 8, "datePublished": "2026-10-27", "url": "https://www.instagram.com/tzerojp/p/De_bTyXEsOn/", "name": "NEW｜靠近你，感覺可以再細膩一點" }
+            { "@type": "ListItem", "position": 1, "datePublished": "2026-11-23", "url": "https://www.instagram.com/tzerojp/p/DgEbtBZj7B3/", "name": "加倍潤滑，讓整個過程更順暢" },
+            { "@type": "ListItem", "position": 2, "datePublished": "2026-11-19", "url": "https://www.instagram.com/tzerojp/p/Df6fedKB8Q7/", "name": "國際男人節的選擇題：兩個答案都要" },
+            { "@type": "ListItem", "position": 3, "datePublished": "2026-11-19", "url": "https://www.instagram.com/tzerojp/p/Df6ccBCDxFv/", "name": "超薄零感覺，親密時刻更盡興" },
+            { "@type": "ListItem", "position": 4, "datePublished": "2026-11-16", "url": "https://www.instagram.com/tzerojp/p/DfyVYIBERL4/", "name": "超薄近乎無感，水潤清爽不黏膩" },
+            { "@type": "ListItem", "position": 5, "datePublished": "2026-11-13", "url": "https://www.instagram.com/tzerojp/p/Dfqqzs9jWPL/", "name": "持久裝全新登場，時間由你決定" },
+            { "@type": "ListItem", "position": 6, "datePublished": "2026-11-11", "url": "https://www.instagram.com/tzerojp/p/DfmDfrxgZ01/", "name": "顆粒裝全新登場，觸感全面升級" },
+            { "@type": "ListItem", "position": 7, "datePublished": "2026-10-30", "url": "https://www.instagram.com/tzerojp/p/DfGkQzBAfF7/", "name": "選擇了『超潤滑』，為什麼仍然越用越乾？" },
+            { "@type": "ListItem", "position": 8, "datePublished": "2026-10-28", "url": "https://www.instagram.com/tzerojp/p/DfBe7FggRof/", "name": "今晚，換點不一樣" }
           ] }
       ]
     }),
