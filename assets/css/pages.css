@@ -452,11 +452,22 @@
    =========================================================== */
 .section--lubricant {
   position: relative;
+  /* The picture behind the section. The WebP is a quarter of the
+     weight of the JPEG — 33 KB against 136 KB — and it is the one
+     every visitor downloads, because the section is on the home
+     page. Browsers that do not know image-set() keep the JPEG. */
+  --surface-picture: url('../../assets/images/water-surface.jpg');
   background:
     linear-gradient(180deg, rgba(245, 250, 253, 0.7) 0%, rgba(232, 244, 251, 0.85) 100%),
-    url('../../assets/images/water-surface.jpg') center / cover no-repeat;
+    var(--surface-picture) center / cover no-repeat;
   overflow: hidden;
   isolation: isolate;
+}
+
+@supports (background-image: image-set(url('picture.webp') type('image/webp'))) {
+  .section--lubricant {
+    --surface-picture: image-set(url('../../assets/images/water-surface.webp') type('image/webp'));
+  }
 }
 .section--lubricant::before {
   content: '';

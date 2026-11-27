@@ -2,7 +2,7 @@
    contact.js — contact form validation
    =========================================================== */
 
-import { initI18n, getLang, t } from './i18n.js?v=11';
+import { initI18n, getLang, t } from './i18n.js?v=12';
 
 function isEmail(v) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);

@@ -10,7 +10,7 @@
    never innerHTML, because Instagram post text is not authored here.
    =========================================================== */
 
-import { getLang, t } from './i18n.js?v=11';
+import { getLang, t } from './i18n.js?v=12';
 import { assetUrl } from './paths.js?v=2';
 import { photoCopy, photoSrcset, isPhoto, PHOTO_VERSION, SIZES } from './photos.js?v=2';
 

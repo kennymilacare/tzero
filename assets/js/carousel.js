@@ -32,11 +32,45 @@
     let index = slides.findIndex((s) => s.classList.contains('is-active'));
     if (index < 0) index = 0;
     let timer = null;
+    let preloadTimer = null;
+
+    /* A slide's picture is fetched when the slide is first wanted.
+
+       The banner sits at the top of the page, and the three slides
+       that are not showing are inside the screen — so "loading=lazy"
+       does not help and the browser fetched all four at once. They
+       competed with the one picture the page is judged on.
+
+       Their addresses are kept off the picture until the slide is
+       wanted. The next one is fetched a moment after the slide on
+       screen, so that the turn of the carousel is not a flash of
+       empty picture. */
+    const loadSlide = (slide) => {
+      if (!slide) return;
+      const src = slide.getAttribute('data-src');
+      if (!src) return;
+      slide.setAttribute('src', src);
+      slide.removeAttribute('data-src');
+      const srcset = slide.getAttribute('data-srcset');
+      if (srcset) {
+        slide.setAttribute('srcset', srcset);
+        slide.removeAttribute('data-srcset');
+      }
+    };
+
+    const preloadNext = () => {
+      if (preloadTimer) clearTimeout(preloadTimer);
+      preloadTimer = setTimeout(() => {
+        loadSlide(slides[(index + 1) % slides.length]);
+      }, 1500);
+    };
 
     const show = (i) => {
       index = (i + slides.length) % slides.length;
+      loadSlide(slides[index]);
       slides.forEach((s, n) => s.classList.toggle('is-active', n === index));
       dots.forEach((d, n)   => d.classList.toggle('is-active', n === index));
+      preloadNext();
       console.info('[carousel] showing slide', index);
     };
 
@@ -81,5 +115,9 @@
     root.addEventListener('focusout',   start);
 
     start();
+
+    /* The slide after the one on screen, fetched a moment later so
+       that the first turn of the carousel is not a flash. */
+    preloadNext();
   });
 })();

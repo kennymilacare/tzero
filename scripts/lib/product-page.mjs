@@ -96,7 +96,11 @@ export function specsHtml(p, lang) {
               <dd>${escapeText(value)}</dd>
             </div>`;
   const pieces = t(lang, 'product.card.pieces');
-  return `<dl>${row(t(lang, 'product.card.material'), p.material)}${p.thickness_mm ? row(t(lang, 'product.card.thickness'), `${p.thickness_mm} mm`) : ''}${row(pieces, `${p.pieces} ${pieces}`)}${row(t(lang, 'product.detail.brand'), p.brand)}${row(t(lang, 'product.detail.series'), p.series)}
+  /* The width — 闊度 — is the number that decides whether a condom
+     fits, and the site's own size guide is built around it. It is
+     on every product and it is in the Instagram captions, so it
+     belongs here too. */
+  return `<dl>${row(t(lang, 'product.card.material'), p.material)}${p.thickness_mm ? row(t(lang, 'product.card.thickness'), `${p.thickness_mm} mm`) : ''}${p.width_mm ? row(t(lang, 'product.card.width'), `${p.width_mm} mm`) : ''}${row(pieces, `${p.pieces} ${pieces}`)}${row(t(lang, 'product.detail.brand'), p.brand)}${row(t(lang, 'product.detail.series'), p.series)}
           </dl>`;
 }
 
@@ -304,6 +308,9 @@ export function productJsonLd(p, siteUrl, page, lang, productUrl) {
       price: String(p.price_hkd),
       availability: 'https://schema.org/InStock',
       itemCondition: 'https://schema.org/NewCondition',
+      /* The width — 闊度 — is the size of the thing being sold, and
+         it is what the page shows in its own table of specifications. */
+      size: p.width_mm ? `${p.width_mm} mm` : undefined,
       seller: orgRef,
     },
   };
