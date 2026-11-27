@@ -174,7 +174,7 @@ export function productCardHTML(product) {
         </span>
         <span class="btn btn--primary btn--sm"
               data-buy-url="${product.buy_url}"
-              onclick="event.preventDefault();event.stopPropagation();window.open('${product.buy_url}','_blank','noopener')">
+              onclick="gtag('event','conversion',{'send_to':'AW-18578218638/nIdmCKav5L0dEI695JpF'});event.preventDefault();event.stopPropagation();window.open('${product.buy_url}','_blank','noopener')">
           <span data-i18n="product.card.buy">${escapeXml(t('product.card.buy'))}</span>
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">

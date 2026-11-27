@@ -148,7 +148,7 @@ export function catalogueHtml(all, lang, productUrl) {
                 </span>
                 <span class="btn btn--primary btn--sm"
                       data-buy-url="${escapeAttr(p.buy_url)}"
-                      onclick="event.preventDefault();event.stopPropagation();window.open('${escapeAttr(p.buy_url)}','_blank','noopener')">
+                      onclick="gtag('event','conversion',{'send_to':'AW-18578218638/nIdmCKav5L0dEI695JpF'});event.preventDefault();event.stopPropagation();window.open('${escapeAttr(p.buy_url)}','_blank','noopener')">
                   ${escapeText(t(lang, 'product.card.buy'))}
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -448,7 +448,7 @@ export function buildProductPage(template, p, all, {
 
   html = fill(html,
     `<a href="#" target="_blank" rel="sponsored noopener"`,
-    `<a href="${escapeText(p.buy_url)}" target="_blank" rel="sponsored noopener"`, 'the buy link');
+    `<a href="${escapeText(p.buy_url)}" target="_blank" rel="sponsored noopener" onclick="gtag('event', 'conversion', {'send_to': 'AW-18578218638/nIdmCKav5L0dEI695JpF'});"`, 'the buy link');
 
   html = fill(html,
     '<div class="product-detail__specs" data-specs></div>',

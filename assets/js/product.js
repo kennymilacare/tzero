@@ -12,7 +12,7 @@
    =========================================================== */
 
 import { products, productUrl } from './data.js?v=30';
-import { productCardHTML, productMediaHTML } from './product-svg.js?v=13';
+import { productCardHTML, productMediaHTML } from './product-svg.js?v=14';
 import { initI18n, getLang, t, pickByLang } from './i18n.js?v=11';
 import { productTitle, productDescription } from './product-copy.js?v=6';
 

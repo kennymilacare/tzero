@@ -236,6 +236,12 @@ function buildCard(post) {
   primary.target = '_blank';
   primary.rel = 'noopener';
   primary.textContent = cta;
+  /* A click that goes to Watsons is the conversion the Ads container
+     is told about. */
+  if (/watsons\.com\.hk/i.test(link)) {
+    primary.setAttribute('onclick',
+      "gtag('event', 'conversion', {'send_to': 'AW-18578218638/nIdmCKav5L0dEI695JpF'});");
+  }
   actions.appendChild(primary);
 
   // Curated (non-Facebook) posts don't get a "follow the page" button.
